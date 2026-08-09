@@ -3,56 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="css/style.css?v=2.3">
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1>Navarre Valdivieso</h1>
-      <p class="tagline">Dad • Builder • Lifelong Learner</p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-      </nav>
+  <!-- ========== LANDING ========== -->
+  <section id="landing" class="panel active">
+    <div class="landing-wrapper">
+      <div class="intro">
+        <h1 class="name">J. Navarre Valdivieso</h1>
+
+        <div class="construction-banner">
+          <span class="construction-text">
+            This website is under construction. Please excuse our mess!
+          </span>
+        </div>
+
+        <p class="bio">
+          Husband, father, and lifelong learner. Senior Scrum Master and Project Manager 
+          currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching, 
+          clear thinking, and building things that last.
+        </p>
+      </div>
+
+      <div class="photo-nav">
+        <a href="#personal" class="nav-link left" data-direction="left">
+          <span class="arrow">←</span>
+          <span class="label">Personal</span>
+        </a>
+
+        <img src="images/profilePics/navarre.jpg" alt="Navarre Valdivieso" class="profile-photo">
+
+        <a href="#passion" class="nav-link right" data-direction="right">
+          <span class="label">Passion</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <a href="#professional" class="nav-link bottom" data-direction="bottom">
+        <span class="arrow">↓</span>
+        <span class="label">Professional</span>
+      </a>
+
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
+          <img src="images/icons/linkedin.svg" alt="LinkedIn">
+        </a>
+        <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
+          <img src="images/icons/github.svg" alt="GitHub">
+        </a>
+        <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
+          <img src="images/icons/globe.svg" alt="Uintah Valley">
+        </a>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="about" class="container">
-      <h2>About</h2>
-      <p>Hi, I’m Navarre. I’m a husband, a hands-on dad, and someone who has spent the better part of a decade leading teams and delivering complex projects across fintech, healthcare, and blockchain.</p>
-      
-      <p>After years as a Senior Scrum Master and Project Manager, I made a deliberate shift toward education. I’m currently pursuing a Master’s in Secondary Social Studies Education and preparing to teach high school. The decision was driven by a long-standing pull toward teaching, a strong family legacy in education, and a desire for work that feels more aligned with who I am.</p>
-      
-      <p>I care about clear thinking, practical problem-solving, and building things that last — whether that’s high-performing teams, reliable systems, or a simple, well-made website. Outside of work you’ll usually find me spending time with my family, working on home projects, reading, or exploring Southern Utah.</p>
-    </section>
-
-    <section id="experience" class="container">
-      <h2>Experience</h2>
-      <p>More details coming soon. In the meantime, you can view my full work history on the resume page.</p>
-    </section>
-
-    <section id="resume" class="container">
-      <h2>Resume</h2>
-      <p><a href="resume/Navarre-Valdivieso-Resume.pdf" class="button" target="_blank">Download Resume (PDF)</a></p>
-    </section>
-
-    <section id="contact" class="container">
-      <h2>Contact</h2>
-      <p>Feel free to reach out.</p>
-      <!-- You can add email or links later -->
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© 2026 Navarre Valdivieso</p>
+  <!-- ========== PERSONAL ========== -->
+  <section id="personal" class="panel">
+    <div class="panel-inner">
+      <button class="back-btn">← Back</button>
+      <h1>Personal</h1>
+      <p>This is the Personal section. Family, values, and the things that matter most outside of work.</p>
     </div>
-  </footer>
+  </section>
 
+  <!-- ========== PASSION ========== -->
+  <section id="passion" class="panel">
+    <div class="panel-inner">
+      <button class="back-btn">← Back</button>
+      <h1>Passion</h1>
+      <p>This is the Passion section. Teaching, history, learning, NAS, Vanilla, Vidya, Photography, MTMU, shooting, 3d printing.</p>
+    </div>
+  </section>
+
+  <!-- ========== PROFESSIONAL ========== -->
+  <section id="professional" class="panel">
+    <button class="back-btn">← Back</button>
+
+    <div class="panel-inner professional-inner">
+      <h1>Professional & Educational Timeline</h1>
+      <p class="timeline-intro">
+        A timeline of my professional and educational journey.<br>
+        Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
+        Click an icon to see the highlights
+      </p>
+
+      <!-- Desktop horizontal timeline -->
+      <div class="timeline-wrapper desktop-only">
+        <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
+        <div class="timeline-container">
+          <div class="timeline-track" id="timeline-track"></div>
+        </div>
+        <button class="timeline-arrow right" aria-label="Scroll right">›</button>
+      </div>
+
+      <!-- Mobile vertical timeline -->
+      <div class="mobile-timeline" id="mobile-timeline"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <img src="" alt="" class="lightbox-image">
+  </div>
+
+  <script src="js/main.js?v=2.3"></script>
 </body>
 </html>
