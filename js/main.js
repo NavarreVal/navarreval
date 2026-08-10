@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "images/profilePics/navarre08.jpg",
       "images/profilePics/navarre09.jpg",
       "images/profilePics/navarre10.jpg",
-      "images/profilePics/navarre11.png"
+      "images/profilePics/navarre11.png",
+      "images/profilePics/navarre12.png"
     ];
   
     const recentPhotos = [];
