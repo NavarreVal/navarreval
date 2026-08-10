@@ -846,7 +846,9 @@ body {
 .action-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
+  min-width: 220px;          /* forces matching width */
   padding: 0.7rem 1.5rem;
   background: #1a1a1a;
   border: 1px solid #444;
@@ -869,12 +871,25 @@ body {
 .btn-icon {
   width: 18px;
   height: 18px;
-  filter: brightness(0) invert(1);   /* makes the LinkedIn icon white */
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
   transition: filter 0.25s ease;
 }
 
-.action-btn:hover .btn-icon {
-  filter: none;                     /* optional: shows original LinkedIn blue on hover */
+/* PDF icon turns red on hover */
+.action-btn:not(.linkedin-btn):hover .btn-icon {
+  filter: invert(27%) sepia(95%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(118%);
+}
+
+/* LinkedIn special hover */
+.linkedin-btn:hover {
+  border-color: #0a66c2;
+  background: #0a66c2;
+  color: #fff;
+}
+
+.linkedin-btn:hover .btn-icon {
+  filter: brightness(0) invert(1);
 }
 
 /* Lightbox */
@@ -908,6 +923,9 @@ body {
 /* ===== Mobile ===== */
 @media (max-width: 900px) { /* was 768px */
   body {
+    .gallery-prev,
+    .gallery-next {
+    display: none !important;
     overflow: auto;
   }
 
@@ -1009,4 +1027,12 @@ body {
   }
 }
 
+  .tooltip-gallery {
+    touch-action: pan-y;          /* allows vertical scroll but captures horizontal swipes */
+    user-select: none;
+  }
+
+  .gallery-image {
+    pointer-events: none;         /* prevents image drag interference on some phones */
+  }
 

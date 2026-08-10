@@ -436,6 +436,32 @@ document.addEventListener('DOMContentLoaded', () => {
         showImage((currentImage + 1) % event.images.length);
       });
     }
+
+    // Gallery swipe support (mobile)
+const gallery = detailTooltip.querySelector('.tooltip-gallery');
+if (gallery && event.images && event.images.length > 1) {
+  let startX = 0;
+  let endX = 0;
+
+  gallery.addEventListener('touchstart', (e) => {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  gallery.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].screenX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {          // minimum swipe distance
+      if (diff > 0) {
+        // swipe left → next image
+        showImage((currentImage + 1) % event.images.length);
+      } else {
+        // swipe right → previous image
+        showImage((currentImage - 1 + event.images.length) % event.images.length);
+      }
+    }
+  }, { passive: true });
+}
   
     // Click outside to close
     document.addEventListener('click', e => {
