@@ -630,27 +630,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========== Lightbox ==========
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox?.querySelector('.lightbox-image');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox?.querySelector('.lightbox-image');
 
-  if (lightbox && lightboxImg) {
-    document.addEventListener('click', e => {
-      if (e.target.classList.contains('gallery-image')) {
-        e.stopPropagation();
-        lightboxImg.src = e.target.src;
-        lightbox.classList.add('active');
-      }
-      if (e.target === lightbox) {
-        lightbox.classList.remove('active');
-        lightboxImg.src = '';
-      }
-    });
+if (lightbox && lightboxImg) {
+  // Open lightbox when tapping a gallery image
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('gallery-image')) {
+      e.stopPropagation();
+      lightboxImg.src = e.target.src;
+      lightbox.classList.add('active');
+    }
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  });
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        lightbox.classList.remove('active');
-        lightboxImg.src = '';
-      }
-    });
+  // Close with Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  });
+
+  // Swipe down to close (mobile)
+  let startY = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    startY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', (e) => {
+    const endY = e.changedTouches[0].screenY;
+    const diff = endY - startY;
+
+    // Swipe down more than 80px → close
+    if (diff > 80) {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  }, { passive: true });
+}
   }
-});
+);

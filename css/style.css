@@ -726,8 +726,8 @@ body {
   object-fit: cover;
   display: block;
   border-radius: 8px;
+  pointer-events: auto;
   cursor: zoom-in;
-  pointer-events: none;
 }
 
 .gallery-prev,
