@@ -710,6 +710,35 @@ body {
   line-height: 1.5;
 }
 
+/* Better looking lists inside tooltips */
+.timeline-tooltip .desc ul,
+.timeline-tooltip ul {
+  margin: 0.6rem 0 0.2rem 0.75rem;   /* added left margin */
+  padding-left: 1.4rem;
+  list-style: none !important;
+}
+
+.timeline-tooltip .desc ul li,
+.timeline-tooltip ul li {
+  position: relative;
+  margin-bottom: 0.10rem;
+  padding-left: 0.3rem;
+  color: #999;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  list-style: none !important;
+}
+
+.timeline-tooltip .desc ul li::before,
+.timeline-tooltip ul li::before {
+  content: "•";
+  position: absolute;
+  left: -1.15rem;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1em;
+}
+
 .tooltip-gallery {
   position: relative;
   margin-top: 0.9rem;

@@ -358,7 +358,7 @@ window.addEventListener('popstate', () => {
           title: "Bachelor of Science Business Management",
           role: "Degree",
           desc: "From the WGU.edu website: This program covers a wide range of career-relevant topics such as marketing, finance, human resources, operations, and strategy. You’ll learn how to analyze financial statements, create marketing plans, manage human resources effectively, and make strategic decisions that drive business success. Our program can help you stand out from the competition and achieve your goals.",
-          thumb: "images/timeline/wgu00.png",
+          thumb: "images/timeline/wgu00.jpg",
           images: ["images/timeline/wgu01.jpg"]
         }
       ]
