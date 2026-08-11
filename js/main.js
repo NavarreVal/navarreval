@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+
   // ========== Panel Navigation ==========
   const links = document.querySelectorAll('.nav-link');
   const backButtons = document.querySelectorAll('.back-btn');
@@ -41,6 +44,42 @@ document.addEventListener('DOMContentLoaded', () => {
   backButtons.forEach(btn => {
     btn.addEventListener('click', () => showPanel('landing', 'top'));
   });
+
+  // ========== History management for overlays (mobile back button) ==========
+let overlayHistoryPushed = false;
+
+function pushOverlayState() {
+  if (!overlayHistoryPushed) {
+    history.pushState({ overlay: true }, '');
+    overlayHistoryPushed = true;
+  }
+}
+
+function clearOverlayState() {
+  overlayHistoryPushed = false;
+}
+
+window.addEventListener('popstate', () => {
+  if (currentMode === 'detail' || currentMode === 'selection') {
+    // Close the open overlay instead of leaving the page
+    if (currentMode === 'detail') {
+      const events = getEventsForYear(currentYear);
+      if (events.length > 1) {
+        // Go back to the year selection panel
+        detailTooltip.classList.remove('visible', 'pinned');
+        openSelection(currentYear, null);
+        // Keep the history entry so another back closes the selection
+        pushOverlayState();
+      } else {
+        closeAll();
+        clearOverlayState();
+      }
+    } else {
+      closeAll();
+      clearOverlayState();
+    }
+  }
+});
 
   // ========== Profile photo cycling ==========
   const profilePhotos = [
@@ -206,16 +245,27 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       year: 2015,
-      yearThumb: "images/timeline/sahd00.jpg",
-      events: [{
-        id: "2015-sahd",
+      yearThumb: "images/timeline/201500.jpg",
+      events: [
+        {
+          id: "2015-sahd",
         label: "Stay at home Parent",
         title: "Dad!",
         role: "Work?",
         desc: "This was probably my favorite job I ever had. After a bout of health issues and other circumstances, I got to be home with my 2 year old son for a time, helping him through these formative years; learning to read, talk, and potty training. I miss this!",
         thumb: "images/timeline/sahd00.jpg",
         images: ["images/timeline/sahd01.jpg", "images/timeline/sahd02.jpg", "images/timeline/sahd03.jpg"]
-      }]
+        },
+        {
+          id: "2015-ccjs",
+        label: "Coding Campus",
+        title: "Certified JavaScript Angular Web Developer",
+        role: "Certification",
+        desc: "The coursework focused primarily on Angular.js full-stack web development with some Node.js. Classes included lecture and practice for the majority of the course and evolved into SCRUM style standups and product building. This course included job search training and monthly opportunities for networking with local companies, and instruction & practice for preparing to enter the work force. <br><br> Major areas of study included HTML, CSS, JavaScript, git, MongoDB, AngularJS, and NodeJS.",
+        thumb: "images/timeline/ccjs.png",
+        images: ["images/timeline/ccjs_Cert.jpg"]
+        }
+      ]
     },
     {
       year: 2016,
@@ -255,6 +305,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }]
     },
     {
+      year: 2018,
+      yearThumb: "images/timeline/CSM.png",
+      events: [{
+        id: "2018-csm",
+        label: "Scrum Alliance Certification",
+        title: "Certified Scrum Master",
+        role: "Certification",
+        desc: "As an introductory course, the CSM covers the scrum framework, including team accountabilities, events, and artifacts. Training included how to guide teams in applying scrum and in gaining a deeper understanding of the agile principles and values that are the foundation of this way of working. <br><br>The scrum master course equipped me with knowledge useful in virtually any job role, including widely applicable agile principles as well as the details of working on a scrum team.",
+        thumb: "images/timeline/CSM_Cert.jpg",
+        images: ["images/timeline/CSM_Cert.jpg"]
+      }]
+    },
+    {
       year: 2019,
       yearThumb: "images/timeline/ihc00.png",
       events: [{
@@ -268,6 +331,39 @@ document.addEventListener('DOMContentLoaded', () => {
       }]
     },
     {
+      year: 2020,
+      yearThumb: "images/timeline/tripleCert.jpg",
+      events: [
+        {
+          id: "2020-acsm",
+          label: "Scrum Alliance Certification",
+          title: "Advanced Certified Scrum Master",
+          role: "Certification",
+          desc: "This certification course elevated my skills and competencies as a Scrum Master. The training built on the foundational knowledge from the Certified ScrumMaster (CSM) training, and from my work experiences. Some areas of training included scrum accountability, practical tools, and new competencies to help elevate my abilities and value as a Senior Scrum Master.",
+          thumb: "images/timeline/A-CSM.png",
+          images: ["images/timeline/ACSM_Cert.jpg"]
+        },
+        {
+          id: "2020-cspo",
+          label: "Scrum Alliance Certification",
+          title: "Certified Scrum Product Owner",
+          role: "Certification",
+          desc: "In the CSPO course, learning objectives covered the framework, principles, and values that help make scrum work. We were trained in key skills and tools I needed to be effective; how to juggle multiple stakeholders' needs, get hands-on practice creating a product vision, and learning new ways to get to know our customers so that we'd be able to choose the right increment of value to bring to market next. <br><br>The course centered on mastering agile principles, fostering collaborative teamwork, and managing the product backlog.",
+          thumb: "images/timeline/CSPO.png",
+          images: ["images/timeline/CSPO_Cert.jpg"]
+        },
+        {
+          id: "2020-wgu",
+          label: "Western Governor's University",
+          title: "Bachelor of Science Business Management",
+          role: "Degree",
+          desc: "From the WGU.edu website: This program covers a wide range of career-relevant topics such as marketing, finance, human resources, operations, and strategy. You’ll learn how to analyze financial statements, create marketing plans, manage human resources effectively, and make strategic decisions that drive business success. Our program can help you stand out from the competition and achieve your goals.",
+          thumb: "images/timeline/wgu00.png",
+          images: ["images/timeline/wgu01.jpg"]
+        }
+      ]
+    },
+    {
       year: 2022,
       yearThumb: "images/timeline/gravity00.png",
       events: [{
@@ -278,6 +374,27 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: "This was a fully remote role. In my role at Gravity Payments, I led multiple teams and projects while implementing Agile methodologies to enhance efficiency. I participated in creating the Project Management Organization, which improved project delivery processes. My coaching efforts empowered Project Managers and Scrum Masters to adopt Agile practices effectively, contributing to a more collaborative work environment.",
         thumb: "images/timeline/gravity00.png",
         images: ["images/timeline/gravity01.jpg", "images/timeline/gravity02.jpg", "images/timeline/gravity03.jpg"]
+      }]
+    },
+    {
+      year: 2026,
+      yearThumb: "images/timeline/usbe00.jpg",
+      events: [{
+        id: "2026-usbe",
+        label: "Utah State Board of Education",
+        title: "Associate Educator License - Secondary Education",
+        role: "Certification",
+        desc: `The Associate Educator License (AEL) is for individuals who want to teach in Utah but have not yet completed an educator preparation program (EPP), either through a university or an alternate pathway. The AEL is valid for 3 years, cannot be renewed, and cannot be transferred to other states. This is a temporary, entry-level license to secure a teaching job while completing a preparation program.<br><br>
+    I have the following endorsements:
+    <ul>
+      <li>Social Studies Composite</li>
+      <li>Economics</li>
+      <li>Geography</li>
+      <li>History</li>
+      <li>Sociology</li>
+    </ul>`,
+        thumb: "images/timeline/usbe00.jpg",
+        images: []
       }]
     }
   ];
@@ -314,6 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentYear = year;
     currentMode = 'selection';
+    pushOverlayState();
 
     selectionPanel.innerHTML = `
       <div class="selection-header">
@@ -361,6 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openDetail(event, markElement = null, year = null) {
     currentMode = 'detail';
+    pushOverlayState();
     if (year) currentYear = year;
 
     detailTooltip.innerHTML = `
@@ -369,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="role">${event.role}</p>
       <p class="desc">${event.desc}</p>
       ${event.images && event.images.length ? `
-        <div class="tooltip-gallery">
+        <div class="tooltip-gallery" data-images='${JSON.stringify(event.images)}'>
           <img src="${event.images[0]}" alt="" class="gallery-image">
           ${event.images.length > 1 ? `
             <button class="gallery-prev">‹</button>
@@ -476,6 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
           openSelection(currentYear, null);
         } else {
           closeAll();
+          clearOverlayState();
         }
       }
     } else if (currentMode === 'selection') {
@@ -629,49 +749,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-    // ========== Lightbox ==========
+        // ========== Lightbox ==========
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox?.querySelector('.lightbox-image');
-  
+
     if (lightbox && lightboxImg) {
-      // Open lightbox when tapping a gallery image
+
+      // Open lightbox and remember the full set of images
       document.addEventListener('click', e => {
         if (e.target.classList.contains('gallery-image')) {
           e.stopPropagation();
-          lightboxImg.src = e.target.src;
+
+          // Find the current event’s images
+          // (we store them on the tooltip when it was opened)
+          const gallery = e.target.closest('.tooltip-gallery');
+          if (gallery && gallery.dataset.images) {
+            lightboxImages = JSON.parse(gallery.dataset.images);
+            lightboxIndex = lightboxImages.indexOf(e.target.src) >= 0
+              ? lightboxImages.indexOf(e.target.src)
+              : 0;
+          } else {
+            lightboxImages = [e.target.src];
+            lightboxIndex = 0;
+          }
+
+          lightboxImg.src = lightboxImages[lightboxIndex];
           lightbox.classList.add('active');
         }
+
+        // Click on the dark background closes it
         if (e.target === lightbox) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImages = [];
         }
       });
-  
-      // Close with Escape key
+
+      // Escape key closes
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImages = [];
         }
       });
-  
-      // Swipe down to close (mobile)
+
+      // Touch handling for the lightbox
+      let startX = 0;
       let startY = 0;
-  
+
       lightbox.addEventListener('touchstart', (e) => {
+        startX = e.changedTouches[0].screenX;
         startY = e.changedTouches[0].screenY;
       }, { passive: true });
-  
+
       lightbox.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].screenX;
         const endY = e.changedTouches[0].screenY;
-        const diff = endY - startY;
-  
-        // Swipe down more than 80px → close
-        if (diff > 80) {
+        const diffX = startX - endX;
+        const diffY = endY - startY;
+
+        // Swipe down → close
+        if (diffY > 80 && Math.abs(diffX) < 60) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImages = [];
+          return;
+        }
+
+        // Horizontal swipe → change image (only if multiple images)
+        if (lightboxImages.length > 1 && Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            // swipe left → next
+            lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+          } else {
+            // swipe right → previous
+            lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+          }
+          lightboxImg.src = lightboxImages[lightboxIndex];
         }
       }, { passive: true });
     }
-  
-  }); // end of DOMContentLoaded
+      
+      }); // end of DOMContentLoaded
