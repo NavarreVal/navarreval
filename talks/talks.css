@@ -257,9 +257,12 @@ h1 {
   background: #333;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
   h1 { font-size: 1.7rem; }
   .talk p { font-size: 1.02rem; }
+  }
 }
 
 .index-title {
@@ -316,7 +319,7 @@ h1 {
 
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem 1.4rem;
   margin: 1.6rem 0 2.4rem;
 }
@@ -353,4 +356,40 @@ h1 {
   font-size: 0.78rem;
   color: var(--muted);
   letter-spacing: 0.03em;
+}
+
+.index-disclaimer {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: -1.4rem 0 2.2rem;
+  line-height: 1.5;
+}
+
+.prompt {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-style: italic;
+  color: #3d4a63;
+  background: #efe8d6;
+  border-left: 3px solid var(--gold);
+  padding: 0.7rem 0.9rem;
+  margin: 1.1rem 0;
+}
+
+.note-inline {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.talk ul {
+  margin: 1rem 0 1.2rem 1.6rem;
+  padding-left: 1.1rem;
+}
+
+.talk li {
+  margin: 0.35rem 0;
+  padding-left: 0.2rem;
 }
