@@ -1,0 +1,356 @@
+:root {
+  --ink: #2c2c2c;
+  --muted: #6b6b6b;
+  --gold: #c9a227;
+  --rule: #e4e0d8;
+  --paper: #f7f4ee;
+  --white: #fffcf7;
+  --link: #365f91;
+  --cite: #2b6cff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Georgia", "Times New Roman", serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.75rem 1.25rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+.topbar a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.topbar a:hover {
+  text-decoration: underline;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.4rem 1.4rem 5rem;
+}
+
+.hero {
+  margin: 0 0 1.8rem;
+}
+
+.hero-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #ece7dc;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-placeholder {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #9a9488;
+  letter-spacing: 0.04em;
+}
+
+.hero figcaption {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.45rem;
+  line-height: 1.45;
+}
+
+.hero figcaption a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.hero figcaption a:hover {
+  text-decoration: underline;
+}
+
+.hero.full .hero-frame {
+  aspect-ratio: auto;
+  background: #ece7dc;
+}
+
+.hero.full .hero-frame img {
+  height: auto;
+  object-fit: contain;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 2.15rem;
+  line-height: 1.25;
+  margin-bottom: 0.55rem;
+}
+
+.byline {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 1.02rem;
+  margin-bottom: 0.35rem;
+}
+
+.kicker {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.1rem;
+}
+
+.summary {
+  font-style: italic;
+  color: #444;
+  font-size: 1.12rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.talk p {
+  margin-bottom: 1rem;
+  font-size: 1.08rem;
+}
+
+.talk h2 {
+  font-weight: 400;
+  font-size: 1.35rem;
+  margin: 2rem 0 0.8rem;
+}
+
+.talk blockquote {
+  margin: 1.2rem 0 1.2rem 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--gold);
+  color: #3a3a3a;
+  font-style: italic;
+}
+
+.talk ol {
+  margin: 0.8rem 0 1.2rem 1.3rem;
+}
+
+.talk ol li {
+  margin-bottom: 0.55rem;
+}
+
+.talk sup.cite {
+  font-size: 0.7em;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.talk sup.cite a {
+  color: var(--cite);
+  text-decoration: none;
+  padding: 0 0.12em;
+}
+
+.talk sup.cite a:hover {
+  color: #1557e0;
+  text-decoration: underline;
+}
+
+.notes {
+  margin-top: 2.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.notes h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+
+.notes ol {
+  padding-left: 1.2rem;
+}
+
+.notes li {
+  margin-bottom: 0.45rem;
+}
+
+.notes li:target {
+  background: #efe8d6;
+  outline: 1px solid #ddd4bf;
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+}
+
+.notes a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.notes a:hover {
+  text-decoration: underline;
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 2.4rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: var(--link);
+  text-decoration: none;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}
+
+.return-float {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  background: #1f1f1f;
+  color: #f4f0e6;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+  z-index: 50;
+}
+
+.return-float.visible {
+  display: inline-flex;
+}
+
+.return-float:hover {
+  background: #333;
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.7rem; }
+  .talk p { font-size: 1.02rem; }
+}
+
+.index-title {
+  font-weight: 400;
+  font-size: 2.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.index-lead {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2.2rem;
+}
+
+.year-block {
+  margin-bottom: 2.2rem;
+}
+
+.year-block h2 {
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.9rem;
+}
+
+.talk-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.85rem 0.2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.talk-link:hover .talk-title {
+  color: var(--link);
+}
+
+.talk-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+.talk-meta {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem 1.4rem;
+  margin: 1.6rem 0 2.4rem;
+}
+
+.collection-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.collection-card .thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  display: block;
+  background: #ece7dc;
+  transition: opacity 0.2s ease;
+}
+
+.collection-card:hover .thumb {
+  opacity: 0.88;
+}
+
+.collection-card .caption {
+  margin-top: 0.55rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.collection-card .caption-meta {
+  margin-top: 0.2rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
