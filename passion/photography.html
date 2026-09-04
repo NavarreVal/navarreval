@@ -109,6 +109,13 @@
       margin-bottom: 0;
     }
 
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+    }
+
     @media (max-width: 900px) {
       .photo-wall {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -240,13 +247,6 @@
     });
   </script>
 
-<script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
-
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
