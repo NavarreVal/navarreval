@@ -4,11 +4,30 @@
   justify-content: safe center;
 }
 
-#passion .back-btn,
-#personal .back-btn {
+#passion .back-btn {
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
+  z-index: 20;
+}
+
+#personal .back-btn {
+  position: absolute;
+  top: 1.25rem;
+  left: auto;
+  right: 1.25rem;
+  z-index: 20;
+}
+
+#professional .back-btn {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.15rem;
   z-index: 20;
 }
 
@@ -20,8 +39,6 @@
   }
 }
 
-/* page-enter leaves transform: translateX(0) on body, which turns
-   position:fixed into page-relative. Drop the transform after the slide. */
 body.page-enter-active {
   animation: page-enter-unlock 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
