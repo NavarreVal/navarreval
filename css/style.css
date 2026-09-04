@@ -1,1 +1,15 @@
-PLACEHOLDER_USE_FILE
+@import url("https://cdn.jsdelivr.net/gh/NavarreVal/navarreval@3de12f0490854897a168d090900eabc5536c153e/css/style.css");
+
+#passion.panel,
+#personal.panel {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#passion .back-btn,
+#personal .back-btn {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 20;
+}
