@@ -5,11 +5,17 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   background: #0d0d0d;
   color: #f0f0f0;
-  overflow: auto;
+  overflow-y: auto;
   min-height: 100vh;
 }
 
@@ -57,6 +63,7 @@ body {
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
   z-index: 1;
   background: #0d0d0d;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -222,6 +229,40 @@ body {
   color: var(--gold);
 }
 
+/* ===== Personal card ===== */
+.personal-card {
+  display: block;
+  max-width: 300px;
+  margin: 2rem auto 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.personal-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.personal-card-caption {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: #cfcfcf;
+  text-align: center;
+}
+
+.personal-card:hover img {
+  opacity: 0.92;
+}
+
+.personal-card:hover .personal-card-caption {
+  color: #e8c547;
+}
+
 /* ===== Social Links ===== */
 .social-links {
   display: flex;
@@ -263,6 +304,7 @@ body {
 /* ===== Professional Timeline (Desktop) ===== */
 #professional {
   position: relative;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -341,12 +383,10 @@ body {
   transition: filter 0.25s ease;
 }
 
-/* PDF icon turns red on hover */
 .action-btn:not(.linkedin-btn):hover .btn-icon {
   filter: invert(27%) sepia(95%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(118%);
 }
 
-/* LinkedIn special hover */
 .linkedin-btn:hover {
   border-color: #0a66c2;
   background: #0a66c2;
@@ -360,6 +400,7 @@ body {
 /* Timeline */
 .timeline-wrapper {
   width: 100%;
+  max-width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -369,7 +410,7 @@ body {
 .timeline-wrapper::before {
   content: "";
   position: absolute;
-  inset: -60px -30px;
+  inset: -60px 0;
   background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.18) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -379,6 +420,7 @@ body {
   position: relative;
   z-index: 1;
   flex: 1;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 250px 1rem;
@@ -710,10 +752,9 @@ body {
   line-height: 1.5;
 }
 
-/* Better looking lists inside tooltips */
 .timeline-tooltip .desc ul,
 .timeline-tooltip ul {
-  margin: 0.6rem 0 0.2rem 0.75rem;   /* added left margin */
+  margin: 0.6rem 0 0.2rem 0.75rem;
   padding-left: 1.4rem;
   list-style: none !important;
 }
@@ -928,17 +969,18 @@ body {
 /* ===== Mobile ===== */
 @media (max-width: 900px) {
   body {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     height: auto;
     min-height: 100vh;
   }
 
   .panel {
+    overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Landing */
   .landing-wrapper {
     padding: 1.5rem 1rem;
     justify-content: flex-start;
@@ -979,8 +1021,8 @@ body {
     margin-bottom: 2rem;
   }
 
-  /* Professional page */
   #professional {
+    overflow-x: hidden !important;
     overflow-y: auto !important;
   }
 
@@ -1011,7 +1053,6 @@ body {
     font-size: 0.9rem;
   }
 
-  /* Hide desktop timeline, show mobile */
   .desktop-only {
     display: none !important;
   }
@@ -1038,7 +1079,6 @@ body {
     max-width: 340px;
   }
 
-  /* Hide gallery arrows on mobile (swipe instead) */
   .gallery-prev,
   .gallery-next {
     display: none !important;
