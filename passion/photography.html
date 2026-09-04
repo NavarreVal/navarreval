@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photography | J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="../css/style.css?v=3.2">
+  <style>
+    html, body {
+      background: #0d0d0d;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+    .photo-page {
+      position: relative;
+      min-height: 100vh;
+      padding: 2.2rem 0 0;
+    }
+    .photo-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      padding: 0 1.5rem;
+      margin: 0 auto 1.6rem;
+      gap: 1rem;
+    }
+    .photo-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      font-weight: 500;
+      margin: 0;
+    }
+    .photo-top .stub-back { margin-bottom: 0; }
+    .photo-wall {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      max-width: none;
+      margin: 0;
+      width: 100%;
+    }
+
+    .photo-top .stub-back,
+    .photo-footer .stub-back {
+      text-decoration: none;
+    }
+
+    .photo-wall button {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #111;
+      border: 0;
+      padding: 0;
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+
+    .photo-wall img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: cover;
+      object-position: center;
+      margin: 0;
+      transition: transform 0.35s ease, opacity 0.25s ease;
+    }
+
+    .photo-wall button:hover img {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .photo-signature {
+      display: block;
+      width: 180px;
+      height: auto;
+      margin: 2.8rem auto 1.1rem;
+    }
+
+    .photo-signature {
+      mix-blend-mode: screen;
+      filter: invert(1);
+    }
+
+    .photo-note {
+      max-width: 520px;
+      margin: 2.6rem auto 0;
+      padding: 0 1.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #9a9a9a;
+    }
+
+    .photo-footer {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2.4rem 1.5rem 2.8rem;
+    }
+
+    .photo-footer .stub-back {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+      .photo-wall {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .photo-wall img { max-height: none; }
+    }
+
+    @media (max-width: 520px) {
+      .photo-wall {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+   <div class="photo-page" id="top">
+    <div class="photo-top">
+        <a class="back-btn stub-back" href="/#passion">← Return</a>
+      <h1>Photography</h1>
+      <span></span>
+    </div>
+    <div class="photo-wall" id="photo-wall"></div>
+  </div>
+
+  <p class="photo-note">
+    These are photographs I have taken over the years that I am proud of.
+    Some are technically good, some are compositionally good, and some are
+    only sentimentally good. All of them are good to me.
+  </p>
+
+  <img
+    class="photo-signature"
+    src="../assets/signature.png"
+    alt="Navarre"
+  >
+
+  <div class="photo-footer">
+    <a class="back-btn stub-back" href="/#passion">← Return</a>
+    <a class="back-btn stub-back" href="#top">↑ Top</a>
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <img src="" alt="" class="lightbox-image">
+  </div>
+
+  <script>
+        const photos = [
+      "../images/photography/marekStudy.jpg",
+      "../images/photography/greenRiver01.jpg",
+      "../images/photography/alyssaWhiteShirt.jpg",
+      "../images/photography/salsaHabanero.jpg",
+      "../images/photography/idyllsEndLosOsos.jpg",
+      "../images/photography/USUOldMain.jpg",
+      "../images/photography/gramaBabyBlackDragon.jpg",
+      "../images/photography/porterPilot.jpg",
+      "../images/photography/marekFuzzyHat.jpg",
+      "../images/photography/peruvianTestDish.jpg",
+      "../images/photography/vineyardGodRays.jpg",
+      "../images/photography/thanksgivingRenaissance.jpg",
+      "../images/photography/2021Marek.jpg",
+      "../images/photography/boysFight01.jpg",
+      "../images/photography/rFamilyPic.jpg",
+      "../images/photography/catalinaSunset.jpg",
+      "../images/photography/lakeLaughs.png",
+      "../images/photography/springvilleMountains.jpg",
+      "../images/photography/coffeCake.jpg",
+      "../images/photography/cacheStairs.JPG",
+      "../images/photography/jacen.jpg",
+      "../images/photography/boyLake.jpg",
+      "../images/photography/boyTux.jpg",
+      "../images/photography/bakcOfTimp.JPG",
+      "../images/photography/skullTree.JPG",
+      "../images/photography/gramaBaby.JPG",
+      "../images/photography/robinHoodMeal.jpg",
+      "../images/photography/mistedMountains.JPG",
+      "../images/photography/bAndM.jpg",
+      "../images/photography/elleVector.jpg",
+      "../images/photography/marlinGreenRiver.jpg",
+      "../images/photography/2014Marek.jpg",
+      "../images/photography/johyevening.jpg",
+      "../images/photography/potatoSalad.jpg",
+      "../images/photography/portrait_green_018859.jpg",
+      "../images/photography/hawaiiSunrise.jpg",
+      "../images/photography/silver_deer_bokeh.jpg",
+      "../images/photography/donPorterUtahLake.jpg",
+      "../images/photography/porterShields.jpg",
+      "../images/photography/chileVerde.jpg",
+      "../images/photography/marekShields.jpg",
+      "../images/photography/2019FallPics.jpg",
+      "../images/photography/2020FallPics.jpg",
+      "../images/photography/2021FallPics.jpg",
+      "../images/photography/eggs.jpg",
+    ];
+
+    const wall = document.getElementById("photo-wall");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector(".lightbox-image");
+    let current = 0;
+
+    photos.forEach((src, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "";
+      img.loading = "lazy";
+      btn.appendChild(img);
+      btn.addEventListener("click", () => openLightbox(i));
+      wall.appendChild(btn);
+    });
+
+    function openLightbox(index) {
+      current = index;
+      lightboxImg.src = photos[current];
+      lightbox.classList.add("active");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("active");
+      lightboxImg.src = "";
+    }
+
+    lightbox.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("active")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") openLightbox((current + 1) % photos.length);
+      if (e.key === "ArrowLeft") openLightbox((current - 1 + photos.length) % photos.length);
+    });
+  </script>
+
+<script>
+    document.documentElement.classList.add('page-slide');
+    document.body.classList.add('page-enter');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
+    });
+  </script>
+
+</body>
+</html>

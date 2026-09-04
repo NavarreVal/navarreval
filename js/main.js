@@ -81,6 +81,37 @@ window.addEventListener('popstate', () => {
   }
 });
 
+  // ========== Passion Poker Hands ==========
+  const handsWrap = document.querySelector('.passion-hands');
+  if (handsWrap) {
+    const hands = handsWrap.querySelectorAll('.hand');
+    function closeHands() {
+      hands.forEach(h => h.classList.remove('open'));
+      handsWrap.classList.remove('has-open');
+    }
+    hands.forEach(hand => {
+      hand.addEventListener('click', e => {
+        const card = e.target.closest('.playing-card');
+        if (hand.classList.contains('open') && card) {
+          e.preventDefault();
+          document.documentElement.classList.add('page-slide');
+          document.body.classList.add('page-exit');
+          setTimeout(() => {
+            window.location.href = card.getAttribute('href');
+          }, 520);
+          return;
+        }
+        e.preventDefault();
+        const alreadyOpen = hand.classList.contains('open');
+        closeHands();
+        if (!alreadyOpen) {
+          hand.classList.add('open');
+          handsWrap.classList.add('has-open');
+        }
+      });
+    });
+  }
+
   // ========== Profile photo cycling ==========
   const profilePhotos = [
     "images/profilePics/navarre.jpg",
@@ -95,7 +126,7 @@ window.addEventListener('popstate', () => {
     "images/profilePics/navarre09.jpg",
     "images/profilePics/navarre10.jpg",
     "images/profilePics/navarre11.png",
-    "images/profilePics/navarre12.png"
+    "images/profilePics/navarre12.jpg"
   ];
 
   const recentPhotos = [];

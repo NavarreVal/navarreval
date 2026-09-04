@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/style.css?v=3.3">
 </head>
 <body>
 
@@ -21,8 +21,8 @@
         </div>
 
         <p class="bio">
-          Husband, father, and lifelong learner. Senior Scrum Master and Project Manager 
-          currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching, 
+          Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
+          currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
           clear thinking, and building things that last.
         </p>
       </div>
@@ -81,10 +81,84 @@
 
   <!-- ========== PASSION ========== -->
   <section id="passion" class="panel">
-    <div class="panel-inner">
+    <div class="panel-inner passion-inner">
       <button class="back-btn">← Back</button>
       <h1>Passion</h1>
-      <p>This is the Passion section. Teaching, history, learning, NAS, Vanilla, Vidya, Photography, MTMU, shooting, 3d printing.</p>
+      <p class="passion-lead">Sometimes life deals you good hands. Click a hand to spread the cards. Click a card to open that page.</p>
+
+      <div class="passion-hands">
+        <div class="hand" data-hand="maker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="passion/3d-printing.html" style="--i: 0">
+              <img src="images/passion/3dPrinting_card.jpg" alt="">
+              <span>3D Printing</span>
+            </a>
+            <a class="playing-card" href="passion/vanilla.html" style="--i: 1">
+              <img src="images/passion/vanilla_card.jpg" alt="">
+              <span>Vanilla</span>
+            </a>
+            <a class="playing-card" href="passion/photography.html" style="--i: 2">
+              <img src="images/passion/photography_card.jpg" alt="">
+              <span>Photography</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Maker</button>
+        </div>
+
+        <div class="hand" data-hand="thinker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="passion/teaching.html" style="--i: 0">
+              <img src="images/passion/teaching_card.jpg" alt="">
+              <span>Teaching</span>
+            </a>
+            <a class="playing-card" href="passion/religious.html" style="--i: 1">
+              <img src="images/passion/religion_card.jpg" alt="">
+              <span>Religious</span>
+            </a>
+            <a class="playing-card" href="passion/reading.html" style="--i: 2">
+              <img src="images/passion/reading_card.jpg" alt="">
+              <span>Reading</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Thinker</button>
+        </div>
+
+        <div class="hand" data-hand="dabbler">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="passion/writing.html" style="--i: 0">
+              <img src="images/passion/writing_card.jpg" alt="">
+              <span>Writing</span>
+            </a>
+            <a class="playing-card" href="passion/nas.html" style="--i: 1">
+              <img src="images/passion/NAS_card.jpg" alt="">
+              <span>NAS</span>
+            </a>
+            <a class="playing-card" href="passion/web-design.html" style="--i: 2">
+              <img src="images/passion/webDesign_card.jpg" alt="">
+              <span>Web Design</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Dabbler</button>
+        </div>
+
+        <div class="hand" data-hand="doer">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="passion/tall-ships.html" style="--i: 0">
+              <img src="images/passion/tallships_card.jpg" alt="">
+              <span>Tall Ships</span>
+            </a>
+            <a class="playing-card" href="passion/shooting.html" style="--i: 1">
+              <img src="images/passion/shooting_card.jpg" alt="">
+              <span>Shooting</span>
+            </a>
+            <a class="playing-card" href="passion/video-games.html" style="--i: 2">
+              <img src="images/passion/videoGames_card.jpg" alt="">
+              <span>Video Games</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Do-er</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -105,14 +179,13 @@
           <img src="images/icons/pdf.svg" alt="PDF" class="btn-icon">
           Download Resume
         </a>
-      
+
         <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" class="action-btn linkedin-btn">
           <img src="images/icons/linkedin.svg" alt="LinkedIn" class="btn-icon">
           LinkedIn
         </a>
       </div>
 
-      <!-- Desktop horizontal timeline -->
       <div class="timeline-wrapper desktop-only">
         <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
         <div class="timeline-container">
@@ -121,16 +194,14 @@
         <button class="timeline-arrow right" aria-label="Scroll right">›</button>
       </div>
 
-      <!-- Mobile vertical timeline -->
       <div class="mobile-timeline" id="mobile-timeline"></div>
     </div>
   </section>
 
-  <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=3.0"></script>
+  <script src="js/main.js?v=3.3"></script>
 </body>
 </html>

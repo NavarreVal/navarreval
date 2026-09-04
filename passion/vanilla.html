@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla | J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="../css/style.css?v=3.1">
+</head>
+<body>
+  <section class="panel active" style="position: relative;">
+    <div class="panel-inner">
+      <a class="back-btn stub-back" href="/#passion">← Passion</a>
+      <h1>Vanilla</h1>
+      <p>This page is under construction.</p>
+    </div>
+  </section>
+
+  <script>
+    document.documentElement.classList.add('page-slide');
+    document.body.classList.add('page-enter');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
+    });
+  </script>
+
+</body>
+</html>
