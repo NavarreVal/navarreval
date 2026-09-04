@@ -19,3 +19,14 @@
     justify-content: flex-start;
   }
 }
+
+/* page-enter leaves transform: translateX(0) on body, which turns
+   position:fixed into page-relative. Drop the transform after the slide. */
+body.page-enter-active {
+  animation: page-enter-unlock 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes page-enter-unlock {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
