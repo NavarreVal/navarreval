@@ -1,7 +1,7 @@
 #passion.panel,
 #personal.panel {
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: safe center;
+  justify-content: safe center;
 }
 
 #passion .back-btn,
@@ -10,4 +10,12 @@
   top: 1.25rem;
   left: 1.25rem;
   z-index: 20;
+}
+
+@media (max-width: 900px) {
+  #passion.panel,
+  #personal.panel {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 }
