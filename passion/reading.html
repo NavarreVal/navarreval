@@ -4,24 +4,234 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reading | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <link rel="stylesheet" href="../css/style.css?v=3.3">
+  <style>
+    html, body {
+      background: #0d0d0d;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+    .read-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.2rem 1.5rem 4rem;
+    }
+    .read-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.4rem;
+      gap: 1rem;
+    }
+    .read-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      font-weight: 500;
+      margin: 0;
+    }
+    .read-top .stub-back,
+    .read-footer .stub-back { text-decoration: none; margin-bottom: 0; }
+    .shelf { margin-bottom: 3rem; }
+    .shelf h2 {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+      font-weight: 600;
+    }
+    .shelf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.4rem 1rem;
+    }
+    .book {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .book img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+    }
+    .book strong {
+      font-size: 0.84rem;
+      color: #eee;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+    .book span {
+      font-size: 0.75rem;
+      color: #888;
+      line-height: 1.35;
+    }
+    .shelf-status { color: #777; font-size: 0.9rem; }
+    .read-note {
+      max-width: 560px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #8a8a8a;
+    }
+    .read-note a { color: var(--gold); }
+    .read-footer {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2.2rem 0 0.4rem;
+    }
+    .shelf {
+      margin-bottom: 0;
+      padding: 1.6rem 0 2.2rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .shelf:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .shelf h2 {
+      margin-bottom: 1.3rem;
+    }
+    .shelf {
+      margin-bottom: 0;
+      padding: 1.6rem 1.2rem 2.2rem;
+      border-top: 1px solid #2a2a2a;
+      border-radius: 10px;
+      border-top-color: #4a3828;
+    }
+
+    .shelf:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .shelf:nth-of-type(odd) {
+      background: #14100c;
+    }
+
+    .shelf:nth-of-type(even) {
+      background: #1c1610;
+    }
+    
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
+  <div class="read-page" id="top">
+    <div class="read-top">
+      <a class="back-btn stub-back" href="/#passion">← Return</a>
       <h1>Reading</h1>
-      <p>This page is under construction.</p>
+      <span></span>
     </div>
-  </section>
+
+    <section class="shelf" data-shelf="currently-reading" data-count="10">
+        <h2>Currently reading</h2>
+        <p class="shelf-status">Loading…</p>
+        <div class="shelf-grid"></div>
+      </section>
+  
+      <section class="shelf" data-shelf="read" data-count="24">
+        <h2>Recently read</h2>
+        <p class="shelf-status">Loading…</p>
+        <div class="shelf-grid"></div>
+      </section>
+  
+      <section class="shelf" data-shelf="favorites" data-count="20">
+        <h2>Favorites</h2>
+        <p class="shelf-status">Loading…</p>
+        <div class="shelf-grid"></div>
+      </section>
+
+    <p class="read-note">
+      Shelves are pulled from
+      <a href="https://www.goodreads.com/user/show/12968726-navarre-valdivieso" target="_blank" rel="noopener">Goodreads</a>.
+      The official API is gone, so this uses the public RSS feed and can lag a day or two.
+    </p>
+
+    <div class="read-footer">
+      <a class="back-btn stub-back" href="/#passion">← Return</a>
+      <a class="back-btn stub-back" href="#top">↑ Top</a>
+    </div>
+  </div>
 
   <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
+    const USER_ID = "12968726";
+    const WORKER = "https://goodreads-shelves.navarreval.workers.dev";
+
+    function tagText(parent, name) {
+      const el = parent.getElementsByTagName(name)[0];
+      return el ? el.textContent.trim() : "";
+    }
+
+    function parseShelf(xml) {
+      return Array.from(xml.getElementsByTagName("item")).map(item => ({
+        title: tagText(item, "title"),
+        author: tagText(item, "author_name"),
+        image: tagText(item, "book_large_image_url")
+          || tagText(item, "book_medium_image_url")
+          || tagText(item, "book_image_url"),
+        link: tagText(item, "link"),
+        rating: tagText(item, "user_rating")
+      }));
+    }
+
+    async function loadShelf(section) {
+      const shelf = section.dataset.shelf;
+      const count = section.dataset.count || 20;
+      const status = section.querySelector(".shelf-status");
+      const grid = section.querySelector(".shelf-grid");
+      const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + count;
+
+      try {
+        const res = await fetch(feed);
+        if (!res.ok) throw new Error(res.status);
+        const xml = new DOMParser().parseFromString(await res.text(), "text/xml");
+        const books = parseShelf(xml);
+        status.remove();
+        if (!books.length) {
+          section.insertAdjacentHTML("beforeend", '<p class="shelf-status">Nothing on this shelf right now.</p>');
+          return;
+        }
+        books.forEach(book => {
+          const a = document.createElement("a");
+          a.className = "book";
+          a.href = book.link;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.innerHTML =
+            '<img src="' + book.image + '" alt="">' +
+            "<strong>" + book.title + "</strong>" +
+            "<span>" + book.author +
+            (book.rating && book.rating !== "0" ? " · " + "★".repeat(Number(book.rating)) : "") +
+            "</span>";
+          grid.appendChild(a);
+        });
+      } catch (err) {
+        status.innerHTML = 'Could not load this shelf. <a href="https://www.goodreads.com/review/list/' +
+          USER_ID + "?shelf=" + shelf + '" target="_blank" rel="noopener">Open on Goodreads</a>.';
+      }
+    }
+
+    document.querySelectorAll(".shelf").forEach(loadShelf);
+
+    document.documentElement.classList.add("page-slide");
+    document.body.classList.add("page-enter");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add("page-enter-active");
+      });
     });
   </script>
-
+ 
 </body>
 </html>
