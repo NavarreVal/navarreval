@@ -4,15 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>An Infinite Atonement | J. Navarre Valdivieso</title>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('navarre-talks-theme') === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="talks.css">
+  <script src="theme.js" defer></script>
 </head>
 <body>
   <div class="topbar">
-    <a href="/">J. Navarre Valdivieso</a>
-    &nbsp;›&nbsp;
-    <a href="/talks/">Talks</a>
-    &nbsp;›&nbsp;
-    <a href="/talks/an-infinite-atonement.html">An Infinite Atonement</a>
+    <div class="crumbs">
+      <a href="/">J. Navarre Valdivieso</a>
+      &nbsp;›&nbsp;
+      <a href="/talks/">Talks</a>
+      &nbsp;›&nbsp;
+      <a href="/talks/an-infinite-atonement.html">An Infinite Atonement</a>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+      <span class="theme-icon" aria-hidden="true"></span>
+    </button>
   </div>
 
   <article class="wrap">
@@ -24,7 +39,7 @@
         >
       </div>
       <figcaption>
-        Image credit to be added.
+        Image generated with Grok.
       </figcaption>
     </figure>
 
@@ -306,6 +321,18 @@
         <li id="n40"><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/19?lang=eng&amp;id=p16-p19#p16" target="_blank" rel="noopener">Doctrine and Covenants 19:16–19</a>.</li>
       </ol>
     </section>
+
+    <a
+    class="invite-card"
+    href="https://www.churchofjesuschrist.org/welcome/what-do-latter-day-saints-believe?lang=eng"
+    target="_blank"
+    rel="noopener"
+  >
+    <img
+      src="../images/talks/learn_for_yourself.jpg"
+      alt="Learn for yourself. ComeUntoChrist.org"
+    >
+  </a>
 
     <a class="home-link" href="/talks/">← Back to talks</a>
   </article>
