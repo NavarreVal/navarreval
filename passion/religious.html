@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Religious | J. Navarre Valdivieso</title>
-  <meta name="description" content="A personal faith page by Navarre Valdivieso: discipleship, a bridge to talks and teaching, and links to official Church resources. Not an official Church page.">
+  <meta name="description" content="Personal faith page by Navarre Valdivieso: Jesus Christ and His Atonement, the Mérida Mexico Mission, and answers that point to official Church teaching. Not an official Church page.">
   <link rel="canonical" href="https://navarreval.com/passion/religious.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="J. Navarre Valdivieso">
   <meta property="og:url" content="https://navarreval.com/passion/religious.html">
   <meta property="og:title" content="Religious | J. Navarre Valdivieso">
-  <meta property="og:description" content="A personal faith page by Navarre Valdivieso: discipleship, a bridge to talks and teaching, and links to official Church resources. Not an official Church page.">
+  <meta property="og:description" content="Personal faith page by Navarre Valdivieso: Jesus Christ and His Atonement, the Mérida Mexico Mission, and answers that point to official Church teaching. Not an official Church page.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Religious | J. Navarre Valdivieso">
-  <meta name="twitter:description" content="A personal faith page by Navarre Valdivieso: discipleship, a bridge to talks and teaching, and links to official Church resources. Not an official Church page.">
+  <meta name="twitter:description" content="Personal faith page by Navarre Valdivieso: Jesus Christ and His Atonement, the Mérida Mexico Mission, and answers that point to official Church teaching. Not an official Church page.">
   <link rel="stylesheet" href="../css/style.css?v=3.3">
   <style>
     html, body {
@@ -85,14 +85,6 @@
       font-weight: 600;
     }
 
-    .faith-draft {
-      display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 1rem;
-    }
     .faith-prose {
       font-family: Georgia, "Times New Roman", serif;
     }
@@ -104,6 +96,18 @@
     }
     .faith-prose p:last-child {
       margin-bottom: 0;
+    }
+    .faith-prose a,
+    .learn-more a,
+    .next-list a,
+    .faith-note a {
+      color: var(--gold);
+    }
+    .faith-prose a:hover,
+    .learn-more a:hover,
+    .next-list a:hover,
+    .faith-note a:hover {
+      text-decoration: underline;
     }
 
     .faith-quiet {
@@ -142,40 +146,8 @@
       line-height: 1.4;
     }
 
-    .mission-coming {
-      color: #b8b0a4;
-      font-size: 0.92rem;
-      margin-bottom: 1rem;
-    }
-    .mission-fields {
-      display: grid;
-      gap: 0;
-    }
-    .mission-row {
-      display: grid;
-      grid-template-columns: 7.2rem 1fr;
-      gap: 0.8rem;
-      align-items: baseline;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid #2a2a2a;
-    }
-    .mission-row:last-child {
-      border-bottom: 0;
-    }
-    .mission-label {
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-    .mission-ready {
-      color: #666;
-      font-size: 0.9rem;
-      font-style: italic;
-    }
-
-    .talks-cta {
+    .talks-cta,
+    .official-cta {
       display: block;
       text-decoration: none;
       color: inherit;
@@ -185,11 +157,13 @@
       border-radius: 10px;
       transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .talks-cta:hover {
+    .talks-cta:hover,
+    .official-cta:hover {
       border-color: var(--gold);
       background: #16110c;
     }
-    .talks-cta strong {
+    .talks-cta strong,
+    .official-cta strong {
       display: block;
       color: #f0f0f0;
       letter-spacing: 0.14em;
@@ -197,13 +171,14 @@
       font-size: 0.95rem;
       font-weight: 600;
     }
-    .talks-cta p {
+    .talks-cta p,
+    .official-cta p {
       color: #9a9a9a;
       margin-top: 0.65rem;
       font-size: 0.92rem;
       line-height: 1.55;
     }
-    .talks-cta .cta-go {
+    .cta-go {
       display: inline-block;
       color: var(--gold);
       margin-top: 0.95rem;
@@ -211,32 +186,53 @@
       letter-spacing: 0.06em;
     }
 
-    .resource-list {
+    .cta-pair {
+      display: grid;
+      gap: 0.85rem;
+    }
+    .who-cta {
+      margin-top: 1.2rem;
+    }
+    .next-follow {
+      margin-top: 1.1rem;
+    }
+
+    .faq-item {
+      padding: 1.15rem 0;
+      border-top: 1px solid #2a2a2a;
+    }
+    .faq-item:first-of-type {
+      border-top: 0;
+      padding-top: 0.2rem;
+    }
+    .faq-item h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f0f0f0;
+      margin: 0 0 0.7rem;
+      line-height: 1.4;
+    }
+    .learn-more {
+      margin-top: 0.85rem;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #888;
+    }
+
+    .next-list {
       list-style: none;
       margin: 0;
       padding: 0;
     }
-    .resource-list li {
+    .next-list li {
       padding: 0.75rem 0;
       border-bottom: 1px solid #2a2a2a;
+      color: #9a9a9a;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
-    .resource-list li:last-child {
+    .next-list li:last-child {
       border-bottom: 0;
-    }
-    .resource-list a {
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 1rem;
-    }
-    .resource-list a:hover {
-      text-decoration: underline;
-    }
-    .resource-note {
-      display: block;
-      color: #777;
-      font-size: 0.82rem;
-      margin-top: 0.22rem;
-      line-height: 1.45;
     }
 
     .not-this {
@@ -253,9 +249,6 @@
       font-size: 0.84rem;
       line-height: 1.6;
       color: #8a8a8a;
-    }
-    .faith-note a {
-      color: var(--gold);
     }
     .faith-footer {
       display: flex;
@@ -275,10 +268,6 @@
       }
       .photo-slots {
         grid-template-columns: 1fr;
-      }
-      .mission-row {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
       }
       .faith-section {
         padding-left: 0.9rem;
@@ -304,13 +293,32 @@
       No official Church logos or trademarks are used on this site.
     </aside>
 
-    <section class="faith-section" aria-labelledby="belief-heading">
-      <h2 id="belief-heading">A word of belief</h2>
-      <p class="faith-draft">Draft personal copy — not institutional teaching</p>
+    <section class="faith-section" aria-labelledby="christ-heading">
+      <h2 id="christ-heading">Jesus is the Christ</h2>
       <div class="faith-prose">
-        <p>I am a disciple of Jesus Christ. I try to hear Him in scripture, keep His commandments, and let His grace do the slow work of changing me. That is the center of my faith, and the reason this page exists.</p>
-        <p>I trust the restored gospel of Jesus Christ: that God still speaks, that priesthood authority was restored, and that His Church is on the earth again. I belong to it as a Latter-day Saint. What I write here is my own attempt to live that faith.</p>
-        <p>These words are personal. They are not a lesson manual, and they are not a substitute for the scriptures or for the living voice of the Church.</p>
+        <p>Jesus Christ is the center of my faith. I believe He is the Eternal Son of the Father — that He lived, taught, suffered, died, and rose again, and that His infinite Atonement heals, saves, and changes us. Everything else I teach or write about faith is an appendage to that message.</p>
+        <p>If you want my own voice on scripture, covenants, and discipleship, start with my <a href="/talks/">Talks</a>. If you want official teaching from The Church of Jesus Christ of Latter-day Saints, go to <a href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">ChurchofJesusChrist.org</a>.</p>
+      </div>
+    </section>
+
+    <section class="faith-section" aria-labelledby="who-heading">
+      <h2 id="who-heading">Who I am</h2>
+      <div class="faith-prose">
+        <p>I am a member of The Church of Jesus Christ of Latter-day Saints. I try to live a Christ-centered life — repentance when I fall short, covenants that bind me to Him, and ordinary discipleship at home and in my congregation. I like teaching and giving talks; the Plan of Salvation and the Atonement of Jesus Christ are themes I return to again and again.</p>
+      </div>
+      <a class="talks-cta who-cta" href="/talks/">
+        <strong>Talks</strong>
+        <p>My beliefs, in my words — personal study and messages, not an official curriculum.</p>
+        <span class="cta-go">Read my talks →</span>
+      </a>
+    </section>
+
+    <section class="faith-section" aria-labelledby="mission-heading">
+      <h2 id="mission-heading">Mission — Mérida Mexico Mission</h2>
+      <div class="faith-prose">
+        <p>From May 18, 2005 to May 18, 2007 I served as a full-time missionary in the <strong>Mérida Mexico Mission</strong>, on the Yucatán Peninsula. I learned <strong>Yucatec Maya</strong> first, then <strong>Spanish</strong> — languages that live side by side in many homes and plazas across the peninsula.</p>
+        <p>Much of my time was away from the Caribbean tourist corridor. Mérida sits inland, and I also served in smaller interior communities in Yucatán state — places like <strong>Tzucacab</strong>, a southern municipio roughly 145 kilometers from Mérida, near towns such as Peto and Tekax. Life there is agricultural and community-centered: plaza, family compounds, milpa and pasture, tropical heat, and a limestone country without rivers, where wells and cenotes are how water is found.</p>
+        <p>Everyday Yucatec food is built on tortillas and beans, brightened by sour orange and achiote — cochinita pibil, panuchos and salbutes, Monday frijol con puerco, evening marquesitas in the plaza, and tropical fruit in the heat. Those years taught me to love people, to listen across language and culture, and to invite others to come unto Christ.</p>
       </div>
     </section>
 
@@ -320,83 +328,116 @@
       <div class="photo-slots">
         <figure class="photo-slot">
           <div class="photo-slot-frame" role="img" aria-label="Photo coming">Photo coming</div>
-          <figcaption>Mission photograph</figcaption>
+          <figcaption>Mérida Mexico Mission</figcaption>
         </figure>
         <figure class="photo-slot">
           <div class="photo-slot-frame" role="img" aria-label="Photo coming">Photo coming</div>
-          <figcaption>Scripture study</figcaption>
+          <figcaption>Interior Yucatán / Tzucacab</figcaption>
         </figure>
         <figure class="photo-slot">
           <div class="photo-slot-frame" role="img" aria-label="Photo coming">Photo coming</div>
-          <figcaption>Teaching</figcaption>
+          <figcaption>Language and people</figcaption>
         </figure>
         <figure class="photo-slot">
           <div class="photo-slot-frame" role="img" aria-label="Photo coming">Photo coming</div>
-          <figcaption>Faith and family</figcaption>
+          <figcaption>Faith and teaching</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="faith-section" aria-labelledby="mission-heading">
-      <h2 id="mission-heading">Mission</h2>
-      <p class="faith-quiet">Assignment facts belong here when they are written down — not guessed.</p>
-      <p class="mission-coming">Mission details coming.</p>
-      <dl class="mission-fields">
-        <div class="mission-row">
-          <dt class="mission-label">Name</dt>
-          <dd class="mission-ready">Ready</dd>
+    <section class="faith-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Questions you might have</h2>
+      <p class="faith-quiet">Short answers in my own words, pointing to official Church pages. I am not an official spokesman for The Church of Jesus Christ of Latter-day Saints.</p>
+
+      <article class="faq-item">
+        <h3>Who is Jesus Christ — and what did He do for us?</h3>
+        <div class="faith-prose">
+          <p>Jesus Christ is the Son of God, our Savior and Redeemer. He lived a perfect life, taught His gospel, suffered and died for our sins, and rose again. Because of His Atonement — His suffering in Gethsemane and on the cross, and His Resurrection — we can be forgiven as we repent, healed, and live again. That is the heart of my faith.</p>
         </div>
-        <div class="mission-row">
-          <dt class="mission-label">Place</dt>
-          <dd class="mission-ready">Ready</dd>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/welcome/savior-jesus-christ?lang=eng" target="_blank" rel="noopener">The Savior, Jesus Christ</a>
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Are Latter-day Saints Christians?</h3>
+        <div class="faith-prose">
+          <p>Yes. Members of The Church of Jesus Christ of Latter-day Saints believe Jesus Christ is the Son of God and the Savior of the world, and we strive to follow Him. The Church teaches that it is a restoration of the Church Jesus established — Christian, though not Catholic or Protestant. Where our beliefs differ from other Christians, I point you to the Church’s own explanations rather than argue them here.</p>
         </div>
-        <div class="mission-row">
-          <dt class="mission-label">Years</dt>
-          <dd class="mission-ready">Ready</dd>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/welcome/common-questions?lang=eng" target="_blank" rel="noopener">Common questions</a>
+          ·
+          <a href="https://newsroom.churchofjesuschrist.org/article/frequently-asked-questions" target="_blank" rel="noopener">Newsroom FAQ</a>
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>What is the purpose of life — and what happens after we die?</h3>
+        <div class="faith-prose">
+          <p>We believe we lived with God as spirits before birth; earth life is a time to learn, grow, and choose; and after death our spirits continue. Because of Jesus Christ, all will be resurrected. His grace helps us repent and become more like Him, with hope of living with God and our families forever. Death is not the end.</p>
         </div>
-        <div class="mission-row">
-          <dt class="mission-label">Language</dt>
-          <dd class="mission-ready">Ready</dd>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/welcome/god-plan-happiness?lang=eng" target="_blank" rel="noopener">God’s plan of happiness</a>
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Do you believe in the Bible? What is the Book of Mormon?</h3>
+        <div class="faith-prose">
+          <p>Yes — we revere the Bible as the word of God. The Book of Mormon is another testament of Jesus Christ: a scriptural record that testifies of Him and, together with the Bible, witnesses of God’s plan. It is meant to reinforce and expand our witness of Christ, not replace the Bible.</p>
         </div>
-        <div class="mission-row">
-          <dt class="mission-label">Notes</dt>
-          <dd class="mission-ready">Ready</dd>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/welcome/bible-book-of-mormon-word-of-god?lang=eng" target="_blank" rel="noopener">The Bible and the Book of Mormon</a>
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Would I be welcome at church? What are Sundays like?</h3>
+        <div class="faith-prose">
+          <p>Yes — everyone is invited. Sunday worship usually includes sacrament meeting (hymns, prayers, short messages by members, and the sacrament — bread and water in remembrance of Jesus’s sacrifice) and a second hour of classes. You don’t have to speak, donate, or already believe everything to visit.</p>
         </div>
-      </dl>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
+        </p>
+      </article>
+
+      <article class="faq-item">
+        <h3>How can I learn more?</h3>
+        <div class="faith-prose">
+          <p>For official teaching and personal questions, the Church invites you to explore <a href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">ChurchofJesusChrist.org</a> or meet with missionaries — no pressure beyond honest curiosity. For <em>my</em> voice on scripture and discipleship, read my <a href="/talks/">talks</a>.</p>
+        </div>
+        <p class="learn-more">
+          Learn more:
+          <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
+          ·
+          <a href="/talks/">Talks</a>
+        </p>
+      </article>
     </section>
 
-    <section class="faith-section" aria-labelledby="talks-heading">
-      <h2 id="talks-heading">Talks &amp; teaching</h2>
-      <a class="talks-cta" href="/talks/">
-        <strong>Talks</strong>
-        <p>Personal study and messages made public for sharing — not an official curriculum. Most were reconstructed from notes.</p>
-        <span class="cta-go">Open the Talks library →</span>
-      </a>
-    </section>
-
-    <section class="faith-section" aria-labelledby="resources-heading">
-      <h2 id="resources-heading">Resources</h2>
-      <p class="faith-quiet">Official teaching and study live with the Church. These links go there.</p>
-      <ul class="resource-list">
+    <section class="faith-section" aria-labelledby="next-heading">
+      <h2 id="next-heading">Where to go next</h2>
+      <div class="cta-pair">
+        <a class="talks-cta" href="/talks/">
+          <strong>Talks</strong>
+          <p>My beliefs, in my words.</p>
+          <span class="cta-go">Open the Talks library →</span>
+        </a>
+        <a class="official-cta" href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">
+          <strong>Official teaching</strong>
+          <p>ChurchofJesusChrist.org — the Church’s own voice.</p>
+          <span class="cta-go">Visit the Church website →</span>
+        </a>
+      </div>
+      <ul class="next-list next-follow">
         <li>
-          <a href="https://www.churchofjesuschrist.org/?lang=eng" target="_blank" rel="noopener">Church home</a>
-          <span class="resource-note">The official website of the Church</span>
-        </li>
-        <li>
-          <a href="https://www.churchofjesuschrist.org/study/scriptures?lang=eng" target="_blank" rel="noopener">Scriptures</a>
-          <span class="resource-note">The Holy Bible, the Book of Mormon, and other scripture</span>
-        </li>
-        <li>
-          <a href="https://www.churchofjesuschrist.org/study/general-conference?lang=eng" target="_blank" rel="noopener">General Conference</a>
-          <span class="resource-note">Messages from living prophets and apostles</span>
-        </li>
-        <li>
-          <a href="https://www.churchofjesuschrist.org/study/come-follow-me?lang=eng" target="_blank" rel="noopener">Come, Follow Me</a>
-          <span class="resource-note">Home and Church study manuals</span>
-        </li>
-        <li>
+          Official welcome:
           <a href="https://www.churchofjesuschrist.org/welcome/what-do-latter-day-saints-believe?lang=eng" target="_blank" rel="noopener">What Latter-day Saints believe</a>
-          <span class="resource-note">A welcome from the Church</span>
         </li>
       </ul>
     </section>
