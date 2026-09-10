@@ -81,18 +81,31 @@
     }
 
     .faith-hero {
-      min-height: 60vh;
-      background: #9aa8ad;
+      position: relative;
+      height: 60vh;
+      min-height: 380px;
+      max-height: 720px;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 3rem 1.5rem;
-      position: relative;
+      background: #2a2f33;
+    }
+    .faith-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 72% 42%;
     }
     .faith-hero-inner {
-      max-width: 640px;
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
       color: #fff;
+      padding: 3rem 1.6rem 3rem 8%;
+      text-align: left;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
     }
     .faith-hero h1 {
       font-weight: 400;
@@ -106,19 +119,6 @@
       font-size: 1.05rem;
       letter-spacing: 0.02em;
       opacity: 0.92;
-    }
-    .faith-hero-slot {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 1rem;
-      pointer-events: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.72);
     }
 
     .faith-wrap {
@@ -202,24 +202,24 @@
 
     .band-photo {
       margin: 0;
+      min-height: 0;
       height: 100%;
-      min-height: 100%;
-    }
-    .band-photo-frame {
-      height: 100%;
-      min-height: 320px;
+      overflow: hidden;
+      position: relative;
       background: #d5d0c8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.2rem;
-      color: #6a655c;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      line-height: 1.45;
-      border: 1.5px dashed #b7b1a6;
     }
+    .band-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .band-photo-jesus img { object-position: 52% 22%; }
+    .band-photo-sealing img { object-position: center 42%; }
+    .band-photo-mission img { object-position: center 62%; }
+    .band-photo-faq img { object-position: top; }
 
     .faq-block h2 {
       font-family: Georgia, "Times New Roman", serif;
@@ -235,16 +235,35 @@
       margin-bottom: 1.4rem;
     }
     .faq-item {
-      padding: 1.2rem 0;
+      padding: 0;
       border-top: 1px solid var(--faith-rule);
     }
-    .faq-item h3 {
+    .faq-item summary {
       font-family: Georgia, "Times New Roman", serif;
       font-weight: 400;
       font-size: 1.18rem;
       color: var(--faith-ink);
-      margin: 0 0 0.7rem;
       line-height: 1.4;
+      padding: 1.1rem 1.8rem 1.1rem 0;
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 1.1rem;
+      color: var(--faith-muted);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after { content: "\2212"; }
+    .faq-item summary:hover { color: var(--faith-link); }
+    .faq-body {
+      padding: 0 0 1.2rem;
     }
     .faq-item p {
       font-family: Georgia, "Times New Roman", serif;
@@ -367,7 +386,7 @@
       }
       .band-copy { order: 1; }
       .band-photo { order: 2; }
-      .band-photo-frame {
+      .band-photo {
         min-height: 240px;
       }
       .next-ctas {
@@ -392,11 +411,15 @@
   </header>
 
   <section class="faith-hero" aria-label="Hero">
+    <img
+      class="faith-hero-img"
+      src="../images/religious/hero_jesus_teaching.jpg"
+      alt="Jesus teaching his disciples by lamplight"
+    >
     <div class="faith-hero-inner">
       <h1>Religious</h1>
       <p>A personal expression of faith</p>
     </div>
-    <div class="faith-hero-slot">Hero photo coming</div>
   </section>
 
   <div class="faith-wrap">
@@ -416,8 +439,8 @@
       <p>Jesus Christ is the center of my faith. I believe He is the Eternal Son of the Father — that He lived, taught, suffered, died, and rose again, and that His infinite Atonement heals, saves, and changes us. Everything else I teach or write about faith is an appendage to that message.</p>
       <p>If you want my own voice on scripture, covenants, and discipleship, start with my <a href="/talks/">Talks</a>. If you want official teaching from The Church of Jesus Christ of Latter-day Saints, go to <a href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">ChurchofJesusChrist.org</a>.</p>
     </div>
-    <figure class="band-photo">
-      <div class="band-photo-frame" role="img" aria-label="Photo coming — Jesus is the Christ">Photo coming — Jesus is the Christ</div>
+    <figure class="band-photo band-photo-jesus">
+      <img src="../images/religious/jesus_master.jpg" alt="Jesus Christ seated beneath a tree">
     </figure>
   </section>
 
@@ -427,8 +450,8 @@
       <p>I am a member of The Church of Jesus Christ of Latter-day Saints. I try to live a Christ-centered life — repentance when I fall short, covenants that bind me to Him, and ordinary discipleship at home and in my congregation. I like teaching and giving talks; the Plan of Salvation and the Atonement of Jesus Christ are themes I return to again and again.</p>
       <a class="read-talks" href="/talks/">Read my talks →</a>
     </div>
-    <figure class="band-photo">
-      <div class="band-photo-frame" role="img" aria-label="Photo coming — Who I am">Photo coming — Who I am</div>
+    <figure class="band-photo band-photo-sealing">
+      <img src="../images/religious/sealing.jpg" alt="A family standing together outside a temple">
     </figure>
   </section>
 
@@ -439,8 +462,8 @@
       <p>Much of my time was away from the Caribbean tourist corridor. Mérida sits inland, and I also served in smaller interior communities in Yucatán state — places like <strong>Tzucacab</strong>, a southern municipio roughly 145 kilometers from Mérida, near towns such as Peto and Tekax. Life there is agricultural and community-centered: plaza, family compounds, milpa and pasture, tropical heat, and a limestone country without rivers, where wells and cenotes are how water is found.</p>
       <p>Everyday Yucatec food is built on tortillas and beans, brightened by sour orange and achiote — cochinita pibil, panuchos and salbutes, Monday frijol con puerco, evening marquesitas in the plaza, and tropical fruit in the heat. Those years taught me to love people, to listen across language and culture, and to invite others to come unto Christ.</p>
     </div>
-    <figure class="band-photo">
-      <div class="band-photo-frame" role="img" aria-label="Photo coming — Mérida Mexico Mission">Photo coming — Mérida Mexico Mission</div>
+    <figure class="band-photo band-photo-mission">
+      <img src="../images/religious/mission_p1000465.jpg" alt="A missionary and a friend with a wooden headboard in Yucatán">
     </figure>
   </section>
 
@@ -449,70 +472,82 @@
       <h2 id="faq-intro-heading">Questions you might have</h2>
       <p>Short answers in my own words, pointing to official Church pages. I am not an official spokesman for The Church of Jesus Christ of Latter-day Saints.</p>
     </div>
-    <figure class="band-photo">
-      <div class="band-photo-frame" role="img" aria-label="Photo coming — Questions you might have">Photo coming — Questions you might have</div>
+    <figure class="band-photo band-photo-faq">
+      <img src="../images/religious/johysundown.jpg" alt="Equestrian statues silhouetted at sundown">
     </figure>
   </section>
 
   <div class="faith-wrap tail">
     <section class="faq-block" aria-label="Questions and answers">
-      <article class="faq-item">
-        <h3>Who is Jesus Christ — and what did He do for us?</h3>
-        <p>Jesus Christ is the Son of God, our Savior and Redeemer. He lived a perfect life, taught His gospel, suffered and died for our sins, and rose again. Because of His Atonement — His suffering in Gethsemane and on the cross, and His Resurrection — we can be forgiven as we repent, healed, and live again. That is the heart of my faith.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/welcome/savior-jesus-christ?lang=eng" target="_blank" rel="noopener">The Savior, Jesus Christ</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>Who is Jesus Christ — and what did He do for us?</summary>
+        <div class="faq-body">
+          <p>Jesus Christ is the Son of God, our Savior and Redeemer. He lived a perfect life, taught His gospel, suffered and died for our sins, and rose again. Because of His Atonement — His suffering in Gethsemane and on the cross, and His Resurrection — we can be forgiven as we repent, healed, and live again. That is the heart of my faith.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/welcome/savior-jesus-christ?lang=eng" target="_blank" rel="noopener">The Savior, Jesus Christ</a>
+          </p>
+        </div>
+      </details>
 
-      <article class="faq-item">
-        <h3>Are Latter-day Saints Christians?</h3>
-        <p>Yes. Members of The Church of Jesus Christ of Latter-day Saints believe Jesus Christ is the Son of God and the Savior of the world, and we strive to follow Him. The Church teaches that it is a restoration of the Church Jesus established — Christian, though not Catholic or Protestant. Where our beliefs differ from other Christians, I point you to the Church’s own explanations rather than argue them here.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/welcome/common-questions?lang=eng" target="_blank" rel="noopener">Common questions</a>
-          ·
-          <a href="https://newsroom.churchofjesuschrist.org/article/frequently-asked-questions" target="_blank" rel="noopener">Newsroom FAQ</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>Are Latter-day Saints Christians?</summary>
+        <div class="faq-body">
+          <p>Yes. Members of The Church of Jesus Christ of Latter-day Saints believe Jesus Christ is the Son of God and the Savior of the world, and we strive to follow Him. The Church teaches that it is a restoration of the Church Jesus established — Christian, though not Catholic or Protestant. Where our beliefs differ from other Christians, I point you to the Church’s own explanations rather than argue them here.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/welcome/common-questions?lang=eng" target="_blank" rel="noopener">Common questions</a>
+            ·
+            <a href="https://newsroom.churchofjesuschrist.org/article/frequently-asked-questions" target="_blank" rel="noopener">Newsroom FAQ</a>
+          </p>
+        </div>
+      </details>
 
-      <article class="faq-item">
-        <h3>What is the purpose of life — and what happens after we die?</h3>
-        <p>We believe we lived with God as spirits before birth; earth life is a time to learn, grow, and choose; and after death our spirits continue. Because of Jesus Christ, all will be resurrected. His grace helps us repent and become more like Him, with hope of living with God and our families forever. Death is not the end.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/welcome/god-plan-happiness?lang=eng" target="_blank" rel="noopener">God’s plan of happiness</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>What is the purpose of life — and what happens after we die?</summary>
+        <div class="faq-body">
+          <p>We believe we lived with God as spirits before birth; earth life is a time to learn, grow, and choose; and after death our spirits continue. Because of Jesus Christ, all will be resurrected. His grace helps us repent and become more like Him, with hope of living with God and our families forever. Death is not the end.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/welcome/god-plan-happiness?lang=eng" target="_blank" rel="noopener">God’s plan of happiness</a>
+          </p>
+        </div>
+      </details>
 
-      <article class="faq-item">
-        <h3>Do you believe in the Bible? What is the Book of Mormon?</h3>
-        <p>Yes — we revere the Bible as the word of God. The Book of Mormon is another testament of Jesus Christ: a scriptural record that testifies of Him and, together with the Bible, witnesses of God’s plan. It is meant to reinforce and expand our witness of Christ, not replace the Bible.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/welcome/bible-book-of-mormon-word-of-god?lang=eng" target="_blank" rel="noopener">The Bible and the Book of Mormon</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>Do you believe in the Bible? What is the Book of Mormon?</summary>
+        <div class="faq-body">
+          <p>Yes — we revere the Bible as the word of God. The Book of Mormon is another testament of Jesus Christ: a scriptural record that testifies of Him and, together with the Bible, witnesses of God’s plan. It is meant to reinforce and expand our witness of Christ, not replace the Bible.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/welcome/bible-book-of-mormon-word-of-god?lang=eng" target="_blank" rel="noopener">The Bible and the Book of Mormon</a>
+          </p>
+        </div>
+      </details>
 
-      <article class="faq-item">
-        <h3>Would I be welcome at church? What are Sundays like?</h3>
-        <p>Yes — everyone is invited. Sunday worship usually includes sacrament meeting (hymns, prayers, short messages by members, and the sacrament — bread and water in remembrance of Jesus’s sacrifice) and a second hour of classes. You don’t have to speak, donate, or already believe everything to visit.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>Would I be welcome at church? What are Sundays like?</summary>
+        <div class="faq-body">
+          <p>Yes — everyone is invited. Sunday worship usually includes sacrament meeting (hymns, prayers, short messages by members, and the sacrament — bread and water in remembrance of Jesus’s sacrifice) and a second hour of classes. You don’t have to speak, donate, or already believe everything to visit.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
+          </p>
+        </div>
+      </details>
 
-      <article class="faq-item">
-        <h3>How can I learn more?</h3>
-        <p>For official teaching and personal questions, the Church invites you to explore <a href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">ChurchofJesusChrist.org</a> or meet with missionaries — no pressure beyond honest curiosity. For <em>my</em> voice on scripture and discipleship, read my <a href="/talks/">talks</a>.</p>
-        <p class="learn-more">
-          Learn more:
-          <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
-          ·
-          <a href="/talks/">Talks</a>
-        </p>
-      </article>
+      <details class="faq-item">
+        <summary>How can I learn more?</summary>
+        <div class="faq-body">
+          <p>For official teaching and personal questions, the Church invites you to explore <a href="https://www.churchofjesuschrist.org/" target="_blank" rel="noopener">ChurchofJesusChrist.org</a> or meet with missionaries — no pressure beyond honest curiosity. For <em>my</em> voice on scripture and discipleship, read my <a href="/talks/">talks</a>.</p>
+          <p class="learn-more">
+            Learn more:
+            <a href="https://www.churchofjesuschrist.org/comeuntochrist" target="_blank" rel="noopener">Come unto Christ</a>
+            ·
+            <a href="/talks/">Talks</a>
+          </p>
+        </div>
+      </details>
     </section>
 
     <section class="next-block" aria-labelledby="next-heading">
