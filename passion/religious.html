@@ -98,14 +98,31 @@
       object-fit: cover;
       object-position: 72% 42%;
     }
+    /* Church-home-style left scrim: darkens only the title side so the photo stays visible. */
+    .faith-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 10, 14, 0.74) 0%,
+        rgba(8, 10, 14, 0.5) 28%,
+        rgba(8, 10, 14, 0.18) 50%,
+        rgba(8, 10, 14, 0) 68%
+      );
+    }
     .faith-hero-inner {
       position: relative;
-      z-index: 1;
-      max-width: 520px;
+      z-index: 2;
+      max-width: 34rem;
       color: #fff;
-      padding: 3rem 1.6rem 3rem 8%;
+      padding: 2.4rem 1.8rem 2.4rem 8%;
       text-align: left;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+      text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.85),
+        0 2px 16px rgba(0, 0, 0, 0.55);
     }
     .faith-hero h1 {
       font-weight: 400;
@@ -118,7 +135,7 @@
       margin: 0;
       font-size: 1.05rem;
       letter-spacing: 0.02em;
-      opacity: 0.92;
+      color: #fff;
     }
 
     .faith-wrap {
@@ -219,7 +236,13 @@
     .band-photo-jesus img { object-position: 52% 22%; }
     .band-photo-sealing img { object-position: center 42%; }
     .band-photo-mission img { object-position: center 62%; }
-    .band-photo-faq img { object-position: top; }
+    /* Short FAQ copy used to squash this 4:3 landscape; size the cell to the photo instead. */
+    .band-photo-faq {
+      height: auto;
+      min-height: 22rem;
+      aspect-ratio: 4 / 3;
+    }
+    .band-photo-faq img { object-position: center 36%; }
 
     .faq-block h2 {
       font-family: Georgia, "Times New Roman", serif;
@@ -338,14 +361,6 @@
       border-radius: 6px;
       background: #ece7dc;
     }
-    .personal-card-caption {
-      display: block;
-      margin-top: 0.7rem;
-      font-size: 0.92rem;
-      line-height: 1.4;
-      color: #3a3a3a;
-      text-align: center;
-    }
     .personal-card:hover img,
     .invite-card:hover img {
       opacity: 0.92;
@@ -367,6 +382,19 @@
     }
 
     @media (max-width: 800px) {
+      .faith-hero::before {
+        background: linear-gradient(
+          105deg,
+          rgba(8, 10, 14, 0.8) 0%,
+          rgba(8, 10, 14, 0.55) 40%,
+          rgba(8, 10, 14, 0.2) 64%,
+          rgba(8, 10, 14, 0) 82%
+        );
+      }
+      .faith-hero-inner {
+        padding: 2.2rem 1.4rem 2.2rem 1.35rem;
+        max-width: 26rem;
+      }
       .band {
         grid-template-columns: 1fr;
       }
@@ -380,6 +408,9 @@
       .band-photo { order: 2; }
       .band-photo {
         min-height: 240px;
+      }
+      .band-photo-faq {
+        min-height: 18rem;
       }
       .next-ctas {
         grid-template-columns: 1fr;
@@ -548,8 +579,7 @@
         <div class="next-cta">
           <p class="next-label">My Talks (personal)</p>
           <a class="personal-card" href="/talks/">
-            <img src="../images/religious/my_talks_cta.jpg" alt="Navarre and his son at a meetinghouse">
-            <span class="personal-card-caption">Religious talks and essays written and given by Navarre</span>
+            <img src="../images/religious/my_talks_cta.jpg" alt="Father and son at a meetinghouse">
           </a>
         </div>
         <div class="next-cta">
