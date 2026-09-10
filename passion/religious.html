@@ -317,18 +317,26 @@
       margin: 0 0 0.9rem;
     }
 
-    .personal-card {
+    .personal-card,
+    .invite-card {
       display: block;
-      max-width: 300px;
+      width: 100%;
+      max-width: 280px;
       margin: 0 auto;
       text-decoration: none;
       color: inherit;
     }
-    .personal-card img {
+    .personal-card img,
+    .invite-card img {
       width: 100%;
+      aspect-ratio: 885 / 1280;
       height: auto;
+      object-fit: cover;
+      object-position: center top;
       display: block;
       border: 1px solid var(--faith-rule);
+      border-radius: 6px;
+      background: #ece7dc;
     }
     .personal-card-caption {
       display: block;
@@ -338,23 +346,7 @@
       color: #3a3a3a;
       text-align: center;
     }
-    .personal-card:hover img {
-      opacity: 0.92;
-    }
-
-    .invite-card {
-      display: block;
-      width: min(280px, 100%);
-      margin: 0 auto;
-      text-decoration: none;
-    }
-    .invite-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 6px;
-      border: 1px solid var(--faith-rule);
-    }
+    .personal-card:hover img,
     .invite-card:hover img {
       opacity: 0.92;
     }
@@ -556,7 +548,7 @@
         <div class="next-cta">
           <p class="next-label">My Talks (personal)</p>
           <a class="personal-card" href="/talks/">
-            <img src="../images/personal/salvation_christ_only.jpeg" alt="Salvation is only in and through the name of Christ. Mosiah 3:17">
+            <img src="../images/religious/my_talks_cta.jpg" alt="Navarre and his son at a meetinghouse">
             <span class="personal-card-caption">Religious talks and essays written and given by Navarre</span>
           </a>
         </div>
