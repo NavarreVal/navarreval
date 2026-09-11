@@ -454,3 +454,30 @@ h1 {
 .invite-card:hover img {
   opacity: 0.92;
 }
+
+.site-credit {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem 1.15rem 1.1rem;
+  text-align: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+
+.site-credit a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.site-credit a:hover,
+.site-credit a:focus-visible {
+  color: var(--link-hover);
+  text-decoration: underline;
+}

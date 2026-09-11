@@ -1,5 +1,45 @@
 @import url("https://cdn.jsdelivr.net/gh/NavarreVal/navarreval@3de12f0490854897a168d090900eabc5536c153e/css/style.css");
 
+/* Site-wide credit — inherited by any page that loads this sheet + js/site-credit.js */
+.site-credit {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 1.15rem 0.75rem;
+  text-align: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  color: #8a8a8a;
+  background: #0d0d0d;
+  border-top: 1px solid rgba(201, 162, 39, 0.22);
+}
+
+.site-credit a {
+  color: var(--gold, #c9a227);
+  text-decoration: none;
+}
+
+.site-credit a:hover,
+.site-credit a:focus-visible {
+  color: #e4c56a;
+  text-decoration: underline;
+}
+
+.site-credit--chrome {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+body:has(.site-credit--chrome) .panel {
+  padding-bottom: 2.6rem;
+}
+
 #passion.panel,
 #personal.panel {
   align-items: flex-start;

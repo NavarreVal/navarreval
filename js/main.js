@@ -902,5 +902,17 @@ window.addEventListener('popstate', () => {
         }
       }, { passive: true });
     }
-      
+
+  // Site-wide credit (also provided by js/site-credit.js for other pages)
+  if (!document.querySelector(".site-credit")) {
+    const credit = document.createElement("footer");
+    credit.className = "site-credit site-credit--chrome";
+    credit.setAttribute("role", "contentinfo");
+    credit.innerHTML =
+      'Built by <a href="/">Navarre</a> and The ' +
+      '<a href="https://x.ai/bot" target="_blank" rel="noopener">Grok Bot</a> ' +
+      "crew of the SS Argus - Gad Kyrath XO";
+    document.body.appendChild(credit);
+  }
+
       }); // end of DOMContentLoaded
