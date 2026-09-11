@@ -42,7 +42,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 48% 22%;
+      object-position: 50% 72%;
     }
 
     .wd-media::after {
@@ -111,7 +111,7 @@
       line-height: 1.75;
       color: #c8c8c8;
       margin: 0 0 1.25rem;
-      max-width: 38rem;
+      max-width: 40rem;
     }
 
     .wd-lead {
@@ -130,6 +130,76 @@
 
     .wd-content section:first-of-type h2 {
       margin-top: 0;
+    }
+
+    /* andycc-style project rows: thumb LEFT, title + bullets RIGHT (not inverted). */
+    .wd-projects {
+      max-width: 42rem;
+      margin: 0.4rem 0 0.6rem;
+    }
+
+    .wd-project {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      margin: 1.55rem 0;
+    }
+
+    .wd-project-thumb {
+      flex: 0 0 100px;
+      width: 100px;
+      height: 100px;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      overflow: hidden;
+    }
+
+    .wd-project-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .wd-project-body {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .wd-project h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #f0f0f0;
+    }
+
+    .wd-project h3 a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      text-decoration-thickness: 1px;
+    }
+
+    .wd-project h3 a:hover,
+    .wd-project h3 a:focus-visible {
+      color: var(--gold);
+    }
+
+    .wd-project ul {
+      margin: 0;
+      padding: 0 0 0 1.1rem;
+    }
+
+    .wd-project li {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #b8b8b8;
+      margin: 0 0 0.35rem;
+    }
+
+    .wd-project li:last-child {
+      margin-bottom: 0;
     }
 
     .wd-links {
@@ -184,6 +254,17 @@
         min-height: auto;
         padding: 1.6rem 1.4rem 2.4rem;
       }
+
+      .wd-project {
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .wd-project-thumb {
+        flex-basis: 72px;
+        width: 72px;
+        height: 72px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -199,9 +280,9 @@
       <div class="wd-media">
         <img
           src="../images/passion/web-design/workstation-hero.jpg"
-          alt="Three-monitor web development workstation"
-          width="354"
-          height="528"
+          alt="Three-monitor workstation with code and browsers open"
+          width="2000"
+          height="1500"
         >
       </div>
 
@@ -221,9 +302,60 @@
           <p>Frameworks are fine when the problem needs them. A lot of personal-site work does not. I care about clear structure, CSS that does not fight itself, and small pieces of JS only where the page earns it. When something needs live data, I reach for a Worker at the edge instead of dragging a whole app framework along for the ride.</p>
         </section>
 
-        <section>
-          <h2>On this site</h2>
-          <p>NavarreVal.com is the lab and the portfolio. Passion pages, talk layouts, card UI experiments, and a couple of Cloudflare Workers (shelves for Reading and Video Games) all live here. The point is not stack fashion — it is shipping pages that feel deliberate and stay maintainable.</p>
+        <section class="wd-projects" aria-labelledby="wd-projects-heading">
+          <h2 id="wd-projects-heading">Projects</h2>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/navarreval.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://navarreval.com/" target="_blank" rel="noopener">NavarreVal.com</a></h3>
+              <ul>
+                <li>Personal site: static HTML, CSS, and JavaScript on Cloudflare Pages</li>
+                <li>Passion pages and edge Workers for live Reading and Video Games shelves</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/uintahvalley.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></h3>
+              <ul>
+                <li>Utah kitchen shop site for the vanilla extract line</li>
+                <li>Product and story pages</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/mealsthatmadeus.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://mealsthatmadeus.com/" target="_blank" rel="noopener">MealsThatMadeUs.com</a></h3>
+              <ul>
+                <li>Food and memory site</li>
+                <li>Companion to the fleet’s Galley lane</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/milesbroadband.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://milesbroadband.com/#/" target="_blank" rel="noopener">Miles Broadband</a></h3>
+              <ul>
+                <li>Broadband provider site work</li>
+                <li>Plans, coverage, and contact for a local fiber shop</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section>
