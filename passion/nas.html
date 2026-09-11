@@ -139,12 +139,16 @@
       gap: 0.85rem 0.75rem;
     }
     .nas-stack-row {
-      display: block;
+      display: grid;
+      grid-template-columns: minmax(7rem, 1fr) minmax(12rem, 1.35fr) minmax(7rem, 1fr);
+      gap: 1rem 1.2rem;
+      align-items: center;
       margin: 0 0 1.6rem;
     }
     .nas-stack-row .nas-figure--product {
-      max-width: 16.5rem;
-      margin: 0 auto;
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
     }
 
     .nas-page ul {
@@ -161,6 +165,11 @@
 
     .nas-page li:last-child {
       margin-bottom: 0;
+    }
+
+    .nas-stack-row .nas-logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 0.75rem;
     }
 
     .nas-page .nas-logo-grid {
@@ -271,7 +280,28 @@
 
       <p>I built and run a home media server for my family, a small Network Attached Storage (NAS) that stores our movies and shows and streams them to every TV and phone in the house. Getting it set up meant learning storage, networking, containers, and security the hard way: RAID disks, remote access without opening the house to the internet, Docker services that stay healthy, and locking down what we don’t need. It’s a hobby that doubles as real systems-admin practice.</p>
 
-      <div class="nas-hero-flank">
+            <figure class="nas-figure--left">
+        <img
+          src="../images/passion/nas/nas01-donut-cube.jpg"
+          alt="A surreal white NAS cube wired to a ring of colorful donuts"
+        >
+      </figure>
+
+<h2>Origin story</h2>
+      <p>We got tired of renting movies from a big streaming service, and getting charged for increasingly sub-par offerings and service. Plus, it was annoying that we sometimes had the physical copies of many movies, but it was frequently impossible to tell where it was actually streaming, if at all! We went back to physical media for a bit until I learned more about home media servers. We started with just ripping movies to thumb drives, then an old laptop served as a server, then we got serious and built a NAS. Old DVDs can be bought for so little these days, that it’s pretty easy to get our hands on the media we want on our server, rip it, compress it, and upload it to be watched by the family.</p>
+
+      <figure class="nas-figure--right">
+        <img
+          src="../images/passion/nas/nas04-retro-donuts.jpg"
+          alt="Retro computer and server tower wired to colorful donuts"
+          loading="lazy"
+        >
+      </figure>
+
+      <h2>Stack</h2>
+      <p>I designed and maintain a household NAS that holds our media library and streams it through Jellyfin to phones, TVs, and living-room devices. Under the hood it’s an Asustor box with RAID storage, Docker containers managed in Portainer, Tailscale for private remote access, and a Cloudflare tunnel for use where needed. Keeping this running includes the boring but important work of health checks, certificates, and security hardening.</p>
+
+                  <div class="nas-stack-row">
         <ul class="nas-logo-grid" aria-label="Stack logos left">
           <li>
             <img src="../images/passion/nas/icons/jellyfin.svg" alt="">
@@ -290,10 +320,11 @@
             <span>Docker</span>
           </li>
         </ul>
-        <figure class="nas-figure--left">
+        <figure class="nas-figure--product">
           <img
-            src="../images/passion/nas/nas01-donut-cube.jpg"
-            alt="A surreal white NAS cube wired to a ring of colorful donuts"
+            src="../images/passion/nas/nas03-asustor.jpg"
+            alt="An Asustor 4-bay network attached storage box"
+            loading="lazy"
           >
         </figure>
         <ul class="nas-logo-grid" aria-label="Stack logos right">
@@ -310,34 +341,10 @@
             <span>Linux</span>
           </li>
           <li>
-            <img src="../images/passion/nas/icons/nginx.svg" alt="">
-            <span>NGINX</span>
+            <img src="../images/passion/nas/icons/ez-share.svg" alt="">
+            <span>EZ Share</span>
           </li>
         </ul>
-      </div>
-
-      <h2>Origin story</h2>
-      <p>We got tired of renting movies from a big streaming service, and getting charged for increasingly sub-par offerings and service. Plus, it was annoying that we sometimes had the physical copies of many movies, but it was frequently impossible to tell where it was actually streaming, if at all! We went back to physical media for a bit until I learned more about home media servers. We started with just ripping movies to thumb drives, then an old laptop served as a server, then we got serious and built a NAS. Old DVDs can be bought for so little these days, that it’s pretty easy to get our hands on the media we want on our server, rip it, compress it, and upload it to be watched by the family.</p>
-
-      <figure class="nas-figure--right">
-        <img
-          src="../images/passion/nas/nas04-retro-donuts.jpg"
-          alt="Retro computer and server tower wired to colorful donuts"
-          loading="lazy"
-        >
-      </figure>
-
-      <h2>Medium / stack</h2>
-      <p>I designed and maintain a household NAS that holds our media library and streams it through Jellyfin to phones, TVs, and living-room devices. Under the hood it’s an Asustor box with RAID storage, Docker containers managed in Portainer, Tailscale for private remote access, and a Cloudflare tunnel for use where needed. Keeping this running includes the boring but important work of health checks, certificates, and security hardening.</p>
-
-            <div class="nas-stack-row">
-        <figure class="nas-figure--product">
-          <img
-            src="../images/passion/nas/nas03-asustor.jpg"
-            alt="An Asustor 4-bay network attached storage box"
-            loading="lazy"
-          >
-        </figure>
       </div><p>What started as “can we watch our own stuff?” turned into hands-on practice in:</p>
       <ul>
         <li>Systems administration — installing, updating, and babysitting always-on services</li>
