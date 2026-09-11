@@ -4,24 +4,196 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vanilla | J. Navarre Valdivieso</title>
+  <meta name="description" content="I’m serious about Vanilla Extract. I don’t know why, but it’s important to me.">
   <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <style>
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .vanilla-page {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 3.2rem;
+    }
+
+    .vanilla-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .vanilla-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .vanilla-top .stub-back,
+    .vanilla-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .vanilla-page p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.25rem;
+    }
+
+    .vanilla-page p a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.05em;
+    }
+
+    .vanilla-page p a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .vanilla-page figure {
+      margin: 0 0 1.6rem;
+    }
+
+    .vanilla-page img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+    }
+
+    .figure-narrow {
+      max-width: 20rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logo-cta {
+      display: block;
+      width: min(11.5rem, 70%);
+      margin: 1.8rem auto 0.4rem;
+    }
+
+    .logo-cta img {
+      width: 100%;
+      height: auto;
+      background: transparent;
+      border: 0;
+    }
+
+    .logo-cta:hover img,
+    .logo-cta:focus-visible img {
+      opacity: 0.88;
+    }
+
+    .vanilla-footer {
+      display: flex;
+      justify-content: flex-start;
+      padding: 2rem 0 0.2rem;
+    }
+
+    @media (max-width: 520px) {
+      .vanilla-page {
+        padding: 1.6rem 1.1rem 2.6rem;
+      }
+
+      .vanilla-top {
+        flex-wrap: wrap;
+      }
+
+      .figure-narrow {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
+  <article class="vanilla-page" id="top">
+    <div class="vanilla-top">
       <a class="back-btn stub-back" href="/#passion">← Passion</a>
       <h1>Vanilla</h1>
-      <p>This page is under construction.</p>
+      <span></span>
     </div>
-  </section>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
+    <p>I’m serious about Vanilla Extract. I don’t know why, but it’s important to me. If the label says “Water” your extract is watered down. If the label has more than 2 ingredients (vanilla beans and alcohol) you’re being fed a sub-par product.</p>
 
+    <figure>
+      <img
+        src="../images/passion/vanilla/hero-vanilla-beans-bottle.jpg"
+        alt="A bottle of vanilla extract with two vanilla beans on a wooden table"
+      >
+    </figure>
+
+    <p>This has become a hobby and side hustle for me. Each type of bean is different, and its provenance has an effect on the flavor, strength, and tone of the vanilla extract itself. I prefer Madagascar beans, they’re smooth and creamy, not too sweet. They impart just the right amount of that good vanilla flavor and aroma for my process.</p>
+
+    <figure>
+      <img
+        src="../images/passion/vanilla/stock-beans.jpg"
+        alt="Five whole vanilla beans"
+        loading="lazy"
+      >
+    </figure>
+
+    <figure>
+      <img
+        src="../images/passion/vanilla/bottle-hero-white-label.jpg"
+        alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
+        loading="lazy"
+      >
+    </figure>
+
+    <p>Our beans are more concentrated per jar, and are aged for a set period of time, so we don't bottle too soon. While most people split the beans, we cut them by hand because I have found that it allows the flavorings to be extracted more evenly across the aging period, giving the extractives and vanilla time to get to know each other and really blend. Extract is mostly waiting and patience provides a superior result.</p>
+
+    <figure class="figure-narrow">
+      <img
+        src="../images/passion/vanilla/beans-jar.jpg"
+        alt="Mason jar with vanilla beans standing inside"
+        loading="lazy"
+      >
+    </figure>
+
+    <figure class="figure-narrow">
+      <img
+        src="../images/passion/vanilla/beans-chopped.jpg"
+        alt="Vanilla beans cut by hand into short pieces"
+        loading="lazy"
+      >
+    </figure>
+
+    <figure>
+      <img
+        src="../images/passion/vanilla/jars-aging.jpg"
+        alt="Mason jars of vanilla extract aging on a table"
+        loading="lazy"
+      >
+    </figure>
+
+    <p>If you want some vanilla (and if I have any available) you can get some at <a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></p>
+
+    <a class="logo-cta" href="https://uintahvalley.com/" target="_blank" rel="noopener">
+      <img
+        src="../images/passion/vanilla/logo-cta.svg"
+        alt="Uintah Valley — get vanilla"
+      >
+    </a>
+
+    <div class="vanilla-footer">
+      <a class="back-btn stub-back" href="/#passion">← Passion</a>
+    </div>
+  </article>
+
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
