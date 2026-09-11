@@ -6,7 +6,7 @@
     credit.className = "site-credit";
     credit.setAttribute("role", "contentinfo");
     credit.innerHTML =
-      'Built by <a href="/">Navarre</a> and The ' +
+      'Built by <a href="https://navarreval.com/">Navarre</a> and The ' +
       '<a href="https://x.ai/bot" target="_blank" rel="noopener">Grok Bot</a> ' +
       "crew of the SS Argus - Gad Kyrath XO";
 
