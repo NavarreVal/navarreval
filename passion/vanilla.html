@@ -3,25 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vanilla | J. Navarre Valdivieso</title>
+  <title>Making Vanilla Extract | J. Navarre Valdivieso</title>
+  <meta name="description" content="A short note on a kitchen hobby: Madagascar beans, alcohol, mason jars, and time in the basement.">
   <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <style>
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .vanilla-page {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: 2.2rem 1.4rem 3.2rem;
+    }
+
+    .vanilla-top {
+      margin-bottom: 2.4rem;
+    }
+
+    .vanilla-top .stub-back,
+    .vanilla-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .vanilla-page h1 {
+      font-size: clamp(1.7rem, 4vw, 2.15rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+      margin: 0 0 0.85rem;
+      line-height: 1.25;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #b8b8b8;
+      margin: 0 0 2.6rem;
+    }
+
+    .vanilla-page section {
+      margin-bottom: 2.8rem;
+    }
+
+    .vanilla-page h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #f0f0f0;
+      margin: 0 0 0.75rem;
+    }
+
+    .vanilla-page p {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.1rem;
+    }
+
+    .vanilla-page figure {
+      margin: 1.25rem 0 0;
+    }
+
+    .vanilla-page figure + figure {
+      margin-top: 1.1rem;
+    }
+
+    .vanilla-page img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+    }
+
+    .figure-narrow {
+      max-width: 20rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .figure-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 1.1rem;
+    }
+
+    .figure-pair figure {
+      margin: 0;
+    }
+
+    .cta {
+      margin-top: 1.6rem;
+    }
+
+    .cta a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.08em;
+    }
+
+    .cta a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    .vanilla-footer {
+      display: flex;
+      justify-content: flex-start;
+      padding: 1.2rem 0 0.2rem;
+    }
+
+    @media (max-width: 520px) {
+      .vanilla-page {
+        padding: 1.6rem 1.1rem 2.6rem;
+      }
+
+      .figure-narrow {
+        max-width: 100%;
+      }
+
+      .figure-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
+  <article class="vanilla-page" id="top">
+    <div class="vanilla-top">
       <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>Vanilla</h1>
-      <p>This page is under construction.</p>
     </div>
-  </section>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
+    <h1>Making Vanilla Extract</h1>
+    <p class="lead">A short note on a kitchen hobby: Madagascar beans, alcohol, mason jars, and time in the basement.</p>
 
+    <section>
+      <h2>The beans</h2>
+      <p>I started with about two pounds of Madagascar vanilla beans — the kind usually described as creamy, smooth, and sweet. They arrived sticky enough to cling to everything they touched. We split them into mason jars for aging, roughly twenty beans to a jar.</p>
+      <figure class="figure-narrow">
+        <img
+          src="../images/passion/vanilla/beans.jpg"
+          alt="Bag of Madagascar vanilla beans, about two pounds"
+        >
+      </figure>
+      <figure class="figure-narrow">
+        <img
+          src="../images/passion/vanilla/jar-beans.jpg"
+          alt="Mason jar with vanilla beans, about twenty to a jar"
+        >
+      </figure>
+    </section>
+
+    <section>
+      <h2>Cut by hand</h2>
+      <p>Once the jars were set, I cut the beans down by hand so the batch kept a handmade feel. A blender would have been faster. The beans are tough; the knife work is slow on purpose.</p>
+      <figure class="figure-narrow">
+        <img
+          src="../images/passion/vanilla/beans-chopped.jpg"
+          alt="Vanilla beans cut by hand into short pieces"
+          loading="lazy"
+        >
+      </figure>
+    </section>
+
+    <section>
+      <h2>Into the jars</h2>
+      <p>We are making three different kinds of vanilla. Each small bottle of alcohol (about 1.75 oz) filled two quart mason jars, with only a little room to spare once the beans took up space.</p>
+      <figure>
+        <img
+          src="../images/passion/vanilla/jars-prep.jpg"
+          alt="Mason jars of vanilla beans beside a cutting board and knife"
+          loading="lazy"
+        >
+      </figure>
+      <div class="figure-pair">
+        <figure>
+          <img
+            src="../images/passion/vanilla/extract-spiced-rum.jpg"
+            alt="Amber mason jar of aging vanilla extract"
+            loading="lazy"
+          >
+        </figure>
+        <figure>
+          <img
+            src="../images/passion/vanilla/extract-whiskey.jpg"
+            alt="Mason jar of aging vanilla extract with beans at the bottom"
+            loading="lazy"
+          >
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Aging</h2>
+      <p>The jars live in the basement now, mellowing. At least once a week we go down and agitate them. Extract is mostly waiting — beans, spirit, and patience.</p>
+      <figure>
+        <img
+          src="../images/passion/vanilla/jars-aging.jpg"
+          alt="Mason jars of vanilla extract aging on a table"
+          loading="lazy"
+        >
+      </figure>
+    </section>
+
+    <section>
+      <h2>Why it matters</h2>
+      <p>This is a hobby, not a factory story. I am having a blast, and I look forward to sharing bottles when a batch is ready.</p>
+      <p class="cta">
+        <a href="https://uintahvalley.com/" target="_blank" rel="noopener">Visit Uintah Valley</a>
+      </p>
+    </section>
+
+    <div class="vanilla-footer">
+      <a class="back-btn stub-back" href="/#passion">← Passion</a>
+    </div>
+  </article>
+
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
