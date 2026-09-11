@@ -4,24 +4,370 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Design | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <meta name="description" content="Web design projects: NavarreVal, UintahValley, MealsThatMadeUs, and Miles Wireless — with the Grok Bot crew of the SS Argus.">
+  <link rel="stylesheet" href="../css/style.css?v=3.4">
+  <style>
+    :root { --gold: #c9a227; }
+
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .wd-page {
+      min-height: 100vh;
+    }
+
+    .wd-layout {
+      display: grid;
+      grid-template-columns: minmax(16rem, 44vw) minmax(20rem, 1fr);
+      align-items: stretch;
+      min-height: 100vh;
+    }
+
+    /* Main image LEFT / content RIGHT (CAPT). */
+    .wd-media {
+      position: relative;
+      align-self: stretch;
+      min-height: 100%;
+      height: auto;
+      overflow: hidden;
+      background: #111;
+      border-right: 1px solid rgba(201, 162, 39, 0.28);
+    }
+
+    .wd-media img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .wd-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        transparent 62%,
+        rgba(13, 13, 13, 0.18) 100%
+      );
+    }
+
+    .wd-content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #0d0d0d;
+      padding: 2rem 2.4rem 2.6rem;
+    }
+
+    .wd-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .wd-top .stub-back,
+    .wd-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .wd-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 0 0 0.7rem;
+    }
+
+    .wd-content h1 {
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #f4f4f4;
+      line-height: 1.15;
+      margin: 0 0 1.15rem;
+    }
+
+    .wd-rule {
+      width: 3.2rem;
+      height: 2px;
+      background: var(--gold);
+      border: 0;
+      margin: 0 0 1.6rem;
+    }
+
+    .wd-lead,
+    .wd-content section p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.25rem;
+      max-width: 40rem;
+    }
+
+    .wd-lead {
+      color: #d4d4d4;
+      margin-bottom: 2.1rem;
+    }
+
+    .wd-content h2 {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 2.1rem 0 0.85rem;
+    }
+
+    .wd-content section:first-of-type h2 {
+      margin-top: 0;
+    }
+
+    /* Mirrored andycc project rows: title + bullets LEFT, thumb RIGHT. */
+    .wd-projects {
+      max-width: 42rem;
+      margin: 0.4rem 0 0.6rem;
+    }
+
+    .wd-project {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 1.35rem;
+      margin: 1.55rem 0;
+    }
+
+    .wd-project-thumb {
+      flex: 0 0 100px;
+      width: 100px;
+      height: 100px;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      overflow: hidden;
+    }
+
+    .wd-project-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .wd-project-body {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .wd-project h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #f0f0f0;
+    }
+
+    .wd-project h3 a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      text-decoration-thickness: 1px;
+    }
+
+    .wd-project h3 a:hover,
+    .wd-project h3 a:focus-visible {
+      color: var(--gold);
+    }
+
+    .wd-project-body p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #b0b0b0;
+    }
+
+    
+
+    
+
+    .wd-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.1rem;
+      margin: 1.6rem 0 0;
+    }
+
+    .wd-links a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.05em;
+      font-size: 1.02rem;
+    }
+
+    .wd-links a:hover,
+    .wd-links a:focus-visible {
+      border-bottom-color: var(--gold);
+    }
+
+    .wd-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: auto;
+      padding-top: 2.6rem;
+    }
+
+    @media (max-width: 800px) {
+      .wd-layout {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .wd-media {
+        position: relative;
+        order: -1;
+        height: min(46vh, 28rem);
+        border-left: 0;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.28);
+      }
+
+      .wd-media::after {
+        background: linear-gradient(
+          180deg,
+          transparent 55%,
+          rgba(13, 13, 13, 0.35) 100%
+        );
+      }
+
+      .wd-content {
+        min-height: auto;
+        padding: 1.6rem 1.4rem 2.4rem;
+      }
+
+      .wd-project {
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .wd-project-thumb {
+        flex-basis: 72px;
+        width: 72px;
+        height: 72px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wd-media img {
+        transition: none;
+      }
+    }
+      .wd-github-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.6rem;
+      padding: 0.45rem 0.7rem;
+    }
+    .wd-github-btn img,
+    .wd-github-btn svg {
+      display: block;
+      width: 1.15rem;
+      height: 1.15rem;
+      filter: brightness(0) invert(0.92);
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>Web Design</h1>
-      <p>This page is under construction.</p>
+  <article class="wd-page" id="top">
+    <div class="wd-layout">
+      <div class="wd-media">
+        <img
+          src="../images/passion/web-design/workstation-hero.jpg"
+          alt="Three-monitor workstation with code and browsers open"
+          width="2000"
+          height="1500"
+        >
+      </div>
+      <div class="wd-content">
+        <div class="wd-top">
+          <a class="back-btn stub-back" href="/#passion">← Return</a>
+        </div>
+
+        <p class="wd-kicker">Passion</p>
+        <h1>Web Design</h1>
+        <hr class="wd-rule">
+
+        <section class="wd-projects" aria-labelledby="wd-projects-heading">
+          <h2 id="wd-projects-heading">Projects</h2>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/navarreval.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://navarreval.com/" target="_blank" rel="noopener">NavarreVal.com</a></h3>
+              <p>This is my personal site to showcase my career timeline, passions, and a little personal information to get to know me. I highly recommend checking out the Photography and Religious sections!</p>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/uintahvalley.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></h3>
+              <p>I’m serious about Vanilla Extract. I make and bottle my own extract, and sometimes I even sell it! This website was built as a sales portal.</p>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/mealsthatmadeus.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://mealsthatmadeus.com/" target="_blank" rel="noopener">MealsThatMadeUs.com</a></h3>
+              <p>My wife and I created this site as a way to document and share family recipes and stories. It's more for us and our family than for the world at large, but we're happy to share a little bit about us nonetheless!</p>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb">
+              <img src="../images/passion/web-design/milesbroadband.jpg" alt="" width="400" height="400">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://milesbroadband.com/#/" target="_blank" rel="noopener">Miles Wireless</a></h3>
+              <p>I built the Miles Wireless website in 2015 as one of my first design and development projects. It was soon after turned over to the business to manage. They've made changes over the years, but my original work is still largely present.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Practice</h2>
+          <p>I've designed and built these pages iteratively over the years. Most recently I've begun larger site changes and updates with the help of the Grok Bot crew of the SS Argus.</p>
+        </section>
+
+        <div class="wd-footer">
+          <a class="back-btn stub-back" href="/#passion">← Return</a>
+          <a class="back-btn stub-back wd-github-btn" href="https://github.com/NavarreVal/navarreval" target="_blank" rel="noopener" aria-label="GitHub"><img src="../images/icons/github.svg" alt="" width="20" height="20"></a>
+          <a class="back-btn stub-back" href="#top">↑ Top</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </article>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
-
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
