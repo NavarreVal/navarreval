@@ -35,27 +35,26 @@
     }
     .games-top .stub-back,
     .games-footer .stub-back { text-decoration: none; margin-bottom: 0; }
+    .games-copy {
+      max-width: 42rem;
+      width: 100%;
+      margin: 0 auto 1.6rem;
+      text-align: left;
+    }
     .games-intro,
     .games-lead {
-      max-width: 42rem;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 1.4rem;
+      margin: 0 0 1.4rem;
       text-align: left;
       font-size: 0.95rem;
       line-height: 1.6;
       color: #b0b0b0;
     }
-    .games-intro p,
-    .games-lead {
-      text-align: left;
-    }
     .games-intro p { margin: 0 0 1rem; }
     .games-intro p:last-child { margin-bottom: 0; }
     .games-specs {
-      width: 100%;
-      max-width: 42rem;
-      margin: 1.1rem auto 1.6rem;
+      width: auto;
+      max-width: 100%;
+      margin: 1.1rem 0 0;
       border-collapse: collapse;
       border: none;
       text-align: left;
@@ -95,7 +94,7 @@
       background: #111;
       border: 1px solid #2a2a2a;
     }
-    .games-lead { margin: 0 auto 1.6rem; text-align: left; }
+    .games-lead { margin: 0; text-align: left; }
     @media (max-width: 700px) {
       .games-photos { grid-template-columns: 1fr; }
     }
@@ -192,7 +191,8 @@
       <span></span>
     </div>
 
-    <div class="games-intro">
+    <div class="games-copy">
+<div class="games-intro">
       <p>I've been playing video games for as long as I can remember. One of my earliest memories is of playing video games (I believe the game was River City Ransom on the NES).  I now enjoy sharing that hobby with my kids, and using it as my outlet for when I need to shut off my brain!</p>
       <p>Most of my gaming these days is on PC. I've been building my own computers for at least 20 years! Here are my specs:</p>
     </div>
@@ -207,6 +207,7 @@
         <tr><th scope="row">Case</th><td>NZXT H7 Flow</td></tr>
       </tbody>
     </table>
+    </div>
 
     <div class="games-photos">
       <img src="../images/passion/video-games/pc-interior.jpg" alt="Interior of the NZXT H7 Flow with iCUE LCD" width="1600" height="1200">
