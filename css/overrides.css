@@ -235,6 +235,7 @@
 
 .playing-card.playing-card--foil .foil-glitter-mask {
   overflow: hidden;
+  mix-blend-mode: overlay;
   -webkit-mask-image: linear-gradient(#000 0 0), var(--secret-mask);
   mask-image: linear-gradient(#000 0 0), var(--secret-mask);
   -webkit-mask-size: auto, 145% 145%;
