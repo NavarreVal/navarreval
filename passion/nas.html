@@ -140,7 +140,7 @@
     }
     .nas-stack-row {
       display: grid;
-      grid-template-columns: minmax(7rem, 1fr) minmax(12rem, 1.35fr) minmax(7rem, 1fr);
+      grid-template-columns: minmax(9rem, 11.5rem) minmax(12rem, 1fr) minmax(9rem, 11.5rem);
       gap: 1rem 1.2rem;
       align-items: center;
       margin: 0 0 1.6rem;
@@ -167,18 +167,21 @@
       margin-bottom: 0;
     }
 
-    .nas-stack-row .nas-logo-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.85rem 0.75rem;
-    }
-
     .nas-page .nas-logo-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem 1.1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 0.75rem;
       list-style: none;
       margin: 0;
       padding: 0;
+      width: 100%;
+      max-width: 11rem;
+      justify-self: center;
+    }
+
+    .nas-stack-row .nas-logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 0.85rem 0.75rem;
     }
 
     .nas-page .nas-logo-grid li {
@@ -241,8 +244,8 @@
       .nas-hero-flank {
         grid-template-columns: 1fr;
       }
-      .nas-hero-flank .nas-logo-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+      .nas-stack-row .nas-logo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .nas-figure--product {
@@ -264,6 +267,23 @@
       .nas-logo-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+    }
+      .nas-skills {
+      max-width: 42rem;
+      width: 100%;
+      margin: 0 auto 1.4rem;
+      padding-left: 1.15rem;
+      text-align: left;
+      list-style-position: outside;
+    }
+    .nas-skills li {
+      text-align: left;
+    }
+      .nas-skills-lead {
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
     }
   </style>
 </head>
@@ -345,8 +365,8 @@
             <span>EZ Share</span>
           </li>
         </ul>
-      </div><p>What started as “can we watch our own stuff?” turned into hands-on practice in:</p>
-      <ul>
+      </div><p class="nas-skills-lead">What started as “can we watch our own stuff?” turned into hands-on practice in:</p>
+      <ul class="nas-skills">
         <li>Systems administration — installing, updating, and babysitting always-on services</li>
         <li>Storage &amp; reliability — RAID volumes, disk health, capacity planning</li>
         <li>Containers — Docker/Portainer stacks (media server, VPN mesh client, tunnel agent)</li>
