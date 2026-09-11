@@ -5,16 +5,16 @@
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 0.65rem 1.15rem 0.75rem;
+  padding: 0.7rem 1.15rem 0.85rem;
   text-align: center;
   font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.02em;
   line-height: 1.5;
-  color: #8a8a8a;
+  color: #b4b4b4;
   background: #0d0d0d;
-  border-top: 1px solid rgba(201, 162, 39, 0.22);
+  border-top: 1px solid rgba(201, 162, 39, 0.38);
 }
 
 .site-credit a {

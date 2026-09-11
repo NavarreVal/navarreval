@@ -462,9 +462,9 @@ h1 {
   padding: 0.85rem 1.15rem 1.1rem;
   text-align: center;
   font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.02em;
   line-height: 1.5;
   color: var(--muted);
   background: var(--paper);
