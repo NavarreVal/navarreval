@@ -27,14 +27,14 @@
       min-height: 100vh;
     }
 
-    /* Text LEFT / main image RIGHT — inverse of andycc.dev project/hero rows. */
+    /* Main image LEFT / content RIGHT (CAPT). */
     .wd-media {
       position: sticky;
       top: 0;
       height: 100vh;
       overflow: hidden;
       background: #111;
-      border-left: 1px solid rgba(201, 162, 39, 0.28);
+      border-right: 1px solid rgba(201, 162, 39, 0.28);
     }
 
     .wd-media img {
@@ -51,7 +51,7 @@
       inset: 0;
       pointer-events: none;
       background: linear-gradient(
-        270deg,
+        90deg,
         transparent 62%,
         rgba(13, 13, 13, 0.18) 100%
       );
@@ -141,7 +141,7 @@
     .wd-project {
       display: flex;
       align-items: center;
-      flex-direction: row-reverse;
+      flex-direction: row;
       gap: 1.35rem;
       margin: 1.55rem 0;
     }
@@ -187,21 +187,16 @@
       color: var(--gold);
     }
 
-    .wd-project ul {
+    .wd-project-body p {
       margin: 0;
-      padding: 0 0 0 1.1rem;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #b0b0b0;
     }
 
-    .wd-project li {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #b8b8b8;
-      margin: 0 0 0.35rem;
-    }
+    
 
-    .wd-project li:last-child {
-      margin-bottom: 0;
-    }
+    
 
     .wd-links {
       display: flex;
@@ -280,6 +275,14 @@
 <body>
   <article class="wd-page" id="top">
     <div class="wd-layout">
+      <div class="wd-media">
+        <img
+          src="../images/passion/web-design/workstation-hero.jpg"
+          alt="Three-monitor workstation with code and browsers open"
+          width="2000"
+          height="1500"
+        >
+      </div>
       <div class="wd-content">
         <div class="wd-top">
           <a class="back-btn stub-back" href="/#passion">← Return</a>
@@ -298,10 +301,7 @@
             </div>
             <div class="wd-project-body">
               <h3><a href="https://navarreval.com/" target="_blank" rel="noopener">NavarreVal.com</a></h3>
-              <ul>
-                <li>Personal site: static HTML, CSS, and JavaScript on Cloudflare Pages</li>
-                <li>Passion pages and edge Workers for live Reading and Video Games shelves</li>
-              </ul>
+              <p>Personal site: static HTML, CSS, and JavaScript on Cloudflare Pages. Passion pages and edge Workers for live Reading and Video Games shelves.</p>
             </div>
           </div>
 
@@ -311,10 +311,7 @@
             </div>
             <div class="wd-project-body">
               <h3><a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></h3>
-              <ul>
-                <li>Utah kitchen shop site for the vanilla extract line</li>
-                <li>Product and story pages</li>
-              </ul>
+              <p>Utah kitchen shop site for the vanilla extract line — product and story pages.</p>
             </div>
           </div>
 
@@ -324,10 +321,7 @@
             </div>
             <div class="wd-project-body">
               <h3><a href="https://mealsthatmadeus.com/" target="_blank" rel="noopener">MealsThatMadeUs.com</a></h3>
-              <ul>
-                <li>Food and memory site</li>
-                <li>Companion to the fleet’s Galley lane</li>
-              </ul>
+              <p>Food and memory site — companion to the fleet’s Galley lane.</p>
             </div>
           </div>
 
@@ -337,10 +331,7 @@
             </div>
             <div class="wd-project-body">
               <h3><a href="https://milesbroadband.com/#/" target="_blank" rel="noopener">Miles Wireless</a></h3>
-              <ul>
-                <li>I built the Miles Wireless website in 2015 as one of my first design and development projects.</li>
-                <li>It was soon after turned over to the business to manage. They've made changes over the years, but my original work is still largely present.</li>
-              </ul>
+              <p>I built the Miles Wireless website in 2015 as one of my first design and development projects. It was soon after turned over to the business to manage. They've made changes over the years, but my original work is still largely present.</p>
             </div>
           </div>
         </section>
@@ -358,15 +349,6 @@
           <a class="back-btn stub-back" href="https://github.com/NavarreVal/navarreval" target="_blank" rel="noopener">GitHub</a>
           <a class="back-btn stub-back" href="#top">↑ Top</a>
         </div>
-      </div>
-
-      <div class="wd-media">
-        <img
-          src="../images/passion/web-design/workstation-hero.jpg"
-          alt="Three-monitor workstation with code and browsers open"
-          width="2000"
-          height="1500"
-        >
       </div>
     </div>
   </article>
