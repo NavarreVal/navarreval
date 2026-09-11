@@ -4,24 +4,402 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NAS | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <meta name="description" content="I built and run a home media server for my family, a small Network Attached Storage (NAS) that stores our movies and shows and streams them to every TV and phone in the house.">
+  <link rel="stylesheet" href="../css/style.css?v=3.3">
+  <style>
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .nas-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        #0d0d0d
+        url("../images/passion/nas/nas02-space-donut.jpg")
+        center / cover no-repeat;
+    }
+
+    .nas-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 80% 70% at 50% 40%,
+          rgba(8, 8, 10, 0.42) 0%,
+          rgba(8, 8, 10, 0.62) 55%,
+          rgba(8, 8, 10, 0.78) 100%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(8, 8, 10, 0.35),
+          rgba(8, 8, 10, 0.72)
+        );
+    }
+
+    .nas-page {
+      position: relative;
+      z-index: 1;
+      width: min(70vw, 1100px);
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1.6rem 1.1rem 3.2rem;
+    }
+
+    .nas-panel {
+      background: rgba(13, 13, 13, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 2.2rem 1.6rem 2.4rem;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .nas-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .nas-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .nas-top .stub-back,
+    .nas-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .nas-page p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.25rem;
+    }
+
+    .nas-page h2 {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 2.1rem 0 0.85rem;
+    }
+
+    .nas-page figure {
+      margin: 0 0 1.6rem;
+    }
+
+    .nas-page img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+    }
+
+    .nas-figure--left,
+    .nas-figure--right {
+      width: 100%;
+    }
+
+    .nas-figure--product {
+      margin: 0;
+    }
+
+    .nas-hero-flank {
+      display: grid;
+      grid-template-columns: minmax(7rem, 1fr) minmax(12rem, 1.4fr) minmax(7rem, 1fr);
+      gap: 1rem 1.2rem;
+      align-items: center;
+      margin: 0 0 1.6rem;
+    }
+    .nas-hero-flank .nas-figure--left {
+      width: 100%;
+      margin: 0;
+      float: none;
+    }
+    .nas-hero-flank .nas-logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 0.75rem;
+    }
+    .nas-stack-row {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 0.55rem 0.75rem;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.6rem;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .nas-stack-row .nas-figure--product {
+      max-width: 11rem;
+      width: auto;
+      margin: 0;
+      justify-self: center;
+    }
+    .nas-stack-row .nas-figure--product img {
+      width: auto;
+      max-width: 100%;
+      max-height: 11.5rem;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .nas-page ul {
+      margin: 0 0 1.4rem;
+      padding: 0 0 0 1.15rem;
+    }
+
+    .nas-page li {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #c8c8c8;
+      margin: 0 0 0.65rem;
+    }
+
+    .nas-page li:last-child {
+      margin-bottom: 0;
+    }
+
+    .nas-page .nas-logo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem 0.55rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: max-content;
+      max-width: 9.5rem;
+      justify-self: stretch;
+    }
+
+    .nas-stack-row .nas-logo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 0.85rem 0.75rem;
+    }
+
+    .nas-page .nas-logo-grid li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.45rem;
+      margin: 0;
+      text-align: center;
+      font-size: 0.72rem;
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #b8b8b8;
+    }
+
+    .nas-page .nas-logo-grid img {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: transparent;
+      border: 0;
+      filter: none;
+    }
+
+    .nas-footer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 2rem 0 0.2rem;
+    }
+
+    @media (min-width: 640px) {
+      .nas-page {
+        padding: 2.2rem 0 3.4rem;
+      }
+
+      .nas-panel {
+        padding: 2.4rem 2.4rem 2.6rem;
+      }
+
+      .nas-figure--left {
+        width: 88%;
+        margin-right: auto;
+      }
+
+      .nas-figure--right {
+        width: 88%;
+        margin-left: auto;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nas-page {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nas-hero-flank {
+        grid-template-columns: 1fr;
+      }
+      .nas-stack-row .nas-logo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nas-figure--product {
+        max-width: 16.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nas-top {
+        flex-wrap: wrap;
+      }
+
+      .nas-figure--product {
+        max-width: 100%;
+      }
+
+      .nas-logo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+      .nas-skills {
+      max-width: 42rem;
+      width: 100%;
+      margin: 0 auto 1.4rem;
+      padding-left: 1.15rem;
+      text-align: left;
+      list-style-position: outside;
+    }
+    .nas-skills li {
+      text-align: left;
+    }
+      .nas-skills-lead {
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>NAS</h1>
-      <p>This page is under construction.</p>
+  <div class="nas-bg" aria-hidden="true"></div>
+
+  <article class="nas-page" id="top">
+    <div class="nas-panel">
+      <div class="nas-top">
+        <a class="back-btn stub-back" href="/#passion">← Return</a>
+        <h1>NAS</h1>
+        <span></span>
+      </div>
+
+      <p>I built and run a home media server for my family, a small Network Attached Storage (NAS) that stores our movies and shows and streams them to every TV and phone in the house. Getting it set up meant learning storage, networking, containers, and security the hard way: RAID disks, remote access without opening the house to the internet, Docker services that stay healthy, and locking down what we don’t need. It’s a hobby that doubles as real systems-admin practice.</p>
+
+            <figure class="nas-figure--left">
+        <img
+          src="../images/passion/nas/nas01-donut-cube.jpg"
+          alt="A surreal white NAS cube wired to a ring of colorful donuts"
+        >
+      </figure>
+
+<h2>Origin story</h2>
+      <p>We got tired of renting movies from a big streaming service, and getting charged for increasingly sub-par offerings and service. Plus, it was annoying that we sometimes had the physical copies of many movies, but it was frequently impossible to tell where it was actually streaming, if at all! We went back to physical media for a bit until I learned more about home media servers. We started with just ripping movies to thumb drives, then an old laptop served as a server, then we got serious and built a NAS. Old DVDs can be bought for so little these days, that it’s pretty easy to get our hands on the media we want on our server, rip it, compress it, and upload it to be watched by the family.</p>
+
+      <figure class="nas-figure--right">
+        <img
+          src="../images/passion/nas/nas04-retro-donuts.jpg"
+          alt="Retro computer and server tower wired to colorful donuts"
+          loading="lazy"
+        >
+      </figure>
+
+      <h2>Stack</h2>
+      <p>I designed and maintain a household NAS that holds our media library and streams it through Jellyfin to phones, TVs, and living-room devices. Under the hood it’s an Asustor box with RAID storage, Docker containers managed in Portainer, Tailscale for private remote access, and a Cloudflare tunnel for use where needed. Keeping this running includes the boring but important work of health checks, certificates, and security hardening.</p>
+
+                  <div class="nas-stack-row">
+        <ul class="nas-logo-grid" aria-label="Stack logos left">
+          <li>
+            <img src="../images/passion/nas/icons/jellyfin.svg" alt="">
+            <span>Jellyfin</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/asustor.svg" alt="">
+            <span>Asustor</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/cloudflare.svg" alt="">
+            <span>Cloudflare</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/docker.svg" alt="">
+            <span>Docker</span>
+          </li>
+        </ul>
+        <figure class="nas-figure--product">
+          <img
+            src="../images/passion/nas/nas03-asustor.jpg"
+            alt="An Asustor 4-bay network attached storage box"
+            loading="lazy"
+          >
+        </figure>
+        <ul class="nas-logo-grid" aria-label="Stack logos right">
+          <li>
+            <img src="../images/passion/nas/icons/portainer.svg" alt="">
+            <span>Portainer</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/tailscale.svg" alt="">
+            <span>Tailscale</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/linux.svg" alt="">
+            <span>Linux</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/ez-share.svg" alt="">
+            <span>EZ Share</span>
+          </li>
+        </ul>
+      </div><p class="nas-skills-lead">What started as “can we watch our own stuff?” turned into hands-on practice in:</p>
+      <ul class="nas-skills">
+        <li>Systems administration — installing, updating, and babysitting always-on services</li>
+        <li>Storage &amp; reliability — RAID volumes, disk health, capacity planning</li>
+        <li>Containers — Docker/Portainer stacks (media server, VPN mesh client, tunnel agent)</li>
+        <li>Networking &amp; zero-trust access — private mesh VPN, no port forwards</li>
+        <li>Security hygiene — shrinking attack surface, monitoring, and fixing misconfigured health checks</li>
+        <li>Troubleshooting — reading logs, isolating “looks down but isn’t,” and recovering cleanly</li>
+      </ul>
+
+      <h2>Looking ahead</h2>
+      <p>Eventually, we’d like to get to a point where our home server also acts as a replacement for a lot of our Google stuff, like Drive, Photos, etc. In the meantime, this is fun and interesting, and keeps me on my toes!</p>
+
+      <p>Since we use the NAS mainly for Jellyfin, we call it the Jelly DoNAS, hence the imagery. 🍩</p>
+
+      <div class="nas-footer">
+        <a class="back-btn stub-back" href="/#passion">← Return</a>
+        <a class="back-btn stub-back" href="#top">↑ Top</a>
+      </div>
     </div>
-  </section>
+  </article>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
-
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
