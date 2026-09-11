@@ -111,8 +111,6 @@ window.addEventListener('popstate', () => {
       });
     });
 
-    const reduceFoilMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
     handsWrap.querySelectorAll('.playing-card--foil').forEach(card => {
       let foilRaf = 0;
       let pendingFoil = null;
@@ -122,10 +120,6 @@ window.addEventListener('popstate', () => {
         card.style.setProperty('--my', y.toFixed(3));
         const fromCenter = Math.min(1, Math.hypot(x - 0.5, y - 0.5) * 2);
         card.style.setProperty('--from-center', fromCenter.toFixed(3));
-        if (!reduceFoilMotion.matches) {
-          card.style.setProperty('--tilt-x', ((0.5 - y) * 16).toFixed(2) + 'deg');
-          card.style.setProperty('--tilt-y', ((x - 0.5) * 18).toFixed(2) + 'deg');
-        }
       };
 
       const setFoilPos = (event) => {
@@ -152,8 +146,6 @@ window.addEventListener('popstate', () => {
         card.style.removeProperty('--mx');
         card.style.removeProperty('--my');
         card.style.removeProperty('--from-center');
-        card.style.removeProperty('--tilt-x');
-        card.style.removeProperty('--tilt-y');
       });
       card.addEventListener('pointerdown', () => card.classList.add('is-pressed'));
       card.addEventListener('pointerup', () => card.classList.remove('is-pressed'));
