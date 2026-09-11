@@ -3,25 +3,246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Design | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <title>Web Development | J. Navarre Valdivieso</title>
+  <meta name="description" content="I build for the web with a bias toward things I can read, own, and ship without a ceremony.">
+  <link rel="stylesheet" href="../css/style.css?v=3.4">
+  <style>
+    :root { --gold: #c9a227; }
+
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .wd-page {
+      min-height: 100vh;
+    }
+
+    .wd-layout {
+      display: grid;
+      grid-template-columns: minmax(16rem, 44vw) minmax(20rem, 1fr);
+      min-height: 100vh;
+    }
+
+    /* Full-height photo on the LEFT — inverse of andycc.dev (content left / photo right). */
+    .wd-media {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #111;
+      border-right: 1px solid rgba(201, 162, 39, 0.28);
+    }
+
+    .wd-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 48% 22%;
+    }
+
+    .wd-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        transparent 62%,
+        rgba(13, 13, 13, 0.18) 100%
+      );
+    }
+
+    .wd-content {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #0d0d0d;
+      padding: 2rem 2.4rem 2.6rem;
+    }
+
+    .wd-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .wd-top .stub-back,
+    .wd-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .wd-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 0 0 0.7rem;
+    }
+
+    .wd-content h1 {
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #f4f4f4;
+      line-height: 1.15;
+      margin: 0 0 1.15rem;
+    }
+
+    .wd-rule {
+      width: 3.2rem;
+      height: 2px;
+      background: var(--gold);
+      border: 0;
+      margin: 0 0 1.6rem;
+    }
+
+    .wd-lead,
+    .wd-content section p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.25rem;
+      max-width: 38rem;
+    }
+
+    .wd-lead {
+      color: #d4d4d4;
+      margin-bottom: 2.1rem;
+    }
+
+    .wd-content h2 {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 2.1rem 0 0.85rem;
+    }
+
+    .wd-content section:first-of-type h2 {
+      margin-top: 0;
+    }
+
+    .wd-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.1rem;
+      margin: 1.6rem 0 0;
+    }
+
+    .wd-links a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.05em;
+      font-size: 1.02rem;
+    }
+
+    .wd-links a:hover,
+    .wd-links a:focus-visible {
+      border-bottom-color: var(--gold);
+    }
+
+    .wd-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: auto;
+      padding-top: 2.6rem;
+    }
+
+    @media (max-width: 800px) {
+      .wd-layout {
+        display: block;
+      }
+
+      .wd-media {
+        position: relative;
+        height: min(46vh, 28rem);
+        border-right: 0;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.28);
+      }
+
+      .wd-media::after {
+        background: linear-gradient(
+          180deg,
+          transparent 55%,
+          rgba(13, 13, 13, 0.35) 100%
+        );
+      }
+
+      .wd-content {
+        min-height: auto;
+        padding: 1.6rem 1.4rem 2.4rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wd-media img {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>Web Design</h1>
-      <p>This page is under construction.</p>
+  <article class="wd-page" id="top">
+    <div class="wd-layout">
+      <div class="wd-media">
+        <img
+          src="../images/passion/webDesign_card.jpg"
+          alt="Collage of web and design work: a skillet dinner, the Uintah Valley mark, a neighborhood aerial, and interface icons"
+          width="354"
+          height="528"
+        >
+      </div>
+
+      <div class="wd-content">
+        <div class="wd-top">
+          <a class="back-btn stub-back" href="/#passion">← Return</a>
+        </div>
+
+        <p class="wd-kicker">Passion</p>
+        <h1>Web Development</h1>
+        <hr class="wd-rule">
+
+        <p class="wd-lead">I build for the web with a bias toward things I can read, own, and ship without a ceremony. Most of NavarreVal.com is static HTML, CSS, and JavaScript — checked into Git, deployed on Cloudflare Pages — because the page should load fast and stay under my control.</p>
+
+        <section>
+          <h2>Practice</h2>
+          <p>Frameworks are fine when the problem needs them. A lot of personal-site work does not. I care about clear structure, CSS that does not fight itself, and small pieces of JS only where the page earns it. When something needs live data, I reach for a Worker at the edge instead of dragging a whole app framework along for the ride.</p>
+        </section>
+
+        <section>
+          <h2>On this site</h2>
+          <p>NavarreVal.com is the lab and the portfolio. Passion pages, talk layouts, card UI experiments, and a couple of Cloudflare Workers (shelves for Reading and Video Games) all live here. The point is not stack fashion — it is shipping pages that feel deliberate and stay maintainable.</p>
+        </section>
+
+        <section>
+          <h2>Looking ahead</h2>
+          <p>I keep iterating this site as the work teaches me what to keep and what to cut. If you want to see how it is put together, the source is public on GitHub.</p>
+          <p class="wd-links">
+            <a href="https://github.com/NavarreVal/navarreval" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </section>
+
+        <div class="wd-footer">
+          <a class="back-btn stub-back" href="/#passion">← Return</a>
+          <a class="back-btn stub-back" href="https://github.com/NavarreVal/navarreval" target="_blank" rel="noopener">GitHub</a>
+          <a class="back-btn stub-back" href="#top">↑ Top</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </article>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
-
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
