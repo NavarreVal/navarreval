@@ -63,42 +63,14 @@
   initial-value: 0.35;
 }
 
-/* Secret Rare (Gold) — Photography + Religious only.
-   Inspired by poke-holo / Simey (https://poke-holo.simey.me/ Secret Rare Gold):
-   two overlay glitter layers sliding opposite, mutually exclusive foil/glitter
-   masks, pointer glare, 3D tilt. Procedural CSS — no copied TCG assets. */
+/* Secret Rare rim only — Photography + Religious.
+   Outer gold border / sheen stays; the photographic face is a normal card. */
 .playing-card.playing-card--foil {
   --mx: 0.5;
   --my: 0.5;
   --foil-spin: 0deg;
   --foil-glow: 1;
-  --foil-lift: 0px;
-  --tilt-x: 0deg;
-  --tilt-y: 0deg;
   --from-center: 0.35;
-  --glitter-shift: 58px;
-  --secret-mask:
-    radial-gradient(
-      ellipse 78% 60% at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-      #000 0%,
-      #000 20%,
-      transparent 48%
-    ),
-    repeating-linear-gradient(
-      calc(124deg + (var(--mx) - 0.5) * 36deg),
-      #000 0 7px,
-      transparent 7px 17px
-    );
-  --glitter-a:
-    radial-gradient(closest-side, #fffef6 0 58%, transparent 64%) 0 0 / 8px 8px,
-    radial-gradient(closest-side, #ffe566 0 42%, transparent 54%) 5px 6px / 12px 11px,
-    radial-gradient(closest-side, #fff 0 34%, transparent 48%) 10px 2px / 15px 14px,
-    radial-gradient(closest-side, #ffd54a 0 30%, transparent 46%) 2px 12px / 19px 17px;
-  --glitter-b:
-    radial-gradient(closest-side, #fff 0 52%, transparent 62%) 3px 4px / 10px 9px,
-    radial-gradient(closest-side, #fff3b0 0 38%, transparent 50%) 8px 1px / 14px 13px,
-    radial-gradient(closest-side, #ffcc33 0 32%, transparent 46%) 0 9px / 18px 16px,
-    radial-gradient(closest-side, #fff8dc 0 28%, transparent 44%) 11px 11px / 22px 20px;
   border-color: #f0d36a;
   background:
     radial-gradient(
@@ -141,11 +113,11 @@
   height: calc(100% - 12px);
 }
 
-.playing-card.playing-card--foil > span:not(.foil-layers) {
+.playing-card.playing-card--foil > span {
   z-index: 4;
 }
 
-/* Gold rim sheen — face layers handle the Secret Rare stamp. */
+/* Gold rim sheen — masked to the outer border only. */
 .playing-card.playing-card--foil::before {
   content: "";
   position: absolute;
@@ -184,116 +156,8 @@
   opacity: var(--foil-glow);
 }
 
-.playing-card.playing-card--foil .foil-layers {
-  position: absolute;
-  inset: 6px;
-  border-radius: 7px;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.playing-card.playing-card--foil .foil-layers > * {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.playing-card.playing-card--foil .foil-foil {
-  background:
-    linear-gradient(
-      calc(118deg + var(--mx) * 40deg),
-      #fff6c2 0%,
-      #ffd54a 28%,
-      #c9a227 52%,
-      #8a6d12 72%,
-      #ffe566 100%
-    ),
-    conic-gradient(
-      from calc((var(--mx) + var(--my)) * 180deg),
-      #fff8dc,
-      #ffd54a,
-      #d4af37,
-      #fff1a0,
-      #b8860b,
-      #ffe082,
-      #c9a227,
-      #fff8dc
-    );
-  background-blend-mode: overlay;
-  mix-blend-mode: overlay;
-  filter: saturate(1.75) contrast(1.25) brightness(1.12);
-  opacity: 0.92;
-  -webkit-mask-image: var(--secret-mask);
-  mask-image: var(--secret-mask);
-  -webkit-mask-size: 145% 145%;
-  mask-size: 145% 145%;
-  -webkit-mask-position: calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-  mask-position: calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-}
-
-.playing-card.playing-card--foil .foil-glitter-mask {
-  overflow: hidden;
-  mix-blend-mode: overlay;
-  -webkit-mask-image: linear-gradient(#000 0 0), var(--secret-mask);
-  mask-image: linear-gradient(#000 0 0), var(--secret-mask);
-  -webkit-mask-size: auto, 145% 145%;
-  mask-size: auto, 145% 145%;
-  -webkit-mask-position: center, calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-  mask-position: center, calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-  -webkit-mask-composite: xor, xor;
-  mask-composite: exclude, exclude;
-}
-
-.playing-card.playing-card--foil .foil-glitter {
-  inset: -40px;
-  mix-blend-mode: overlay;
-  filter: brightness(1.55) contrast(1.85) saturate(1.25);
-}
-
-.playing-card.playing-card--foil .foil-glitter--a {
-  background: var(--glitter-a);
-  transform: translate3d(
-    calc((var(--mx) - 0.5) * var(--glitter-shift)),
-    calc((var(--my) - 0.5) * var(--glitter-shift)),
-    0
-  );
-}
-
-.playing-card.playing-card--foil .foil-glitter--b {
-  background: var(--glitter-b);
-  transform: translate3d(
-    calc((0.5 - var(--mx)) * var(--glitter-shift)),
-    calc((0.5 - var(--my)) * var(--glitter-shift)),
-    0
-  );
-}
-
-.playing-card.playing-card--foil .foil-glare {
-  background: radial-gradient(
-    farthest-corner circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-    hsla(48, 100%, 94%, 0.95) 0%,
-    hsla(46, 95%, 72%, 0.5) 16%,
-    hsla(40, 70%, 45%, 0.14) 40%,
-    hsla(28, 25%, 8%, 0.22) 100%
-  );
-  mix-blend-mode: hard-light;
-  opacity: calc(0.5 + var(--from-center) * 0.5);
-}
-
-.hand.open .playing-card.playing-card--foil {
-  transform:
-    translateX(calc((var(--i) - (var(--n) - 1) / 2) * 180px))
-    translateY(var(--foil-lift))
-    perspective(720px)
-    rotateX(var(--tilt-x))
-    rotateY(var(--tilt-y));
-}
-
 .hand.open .playing-card.playing-card--foil:hover,
 .playing-card.playing-card--foil:focus-visible {
-  --foil-lift: -10px;
   border-color: #ffe9a0;
   box-shadow:
     0 16px 32px rgba(0, 0, 0, 0.55),
@@ -303,11 +167,6 @@
     0 0 50px 12px rgba(201, 162, 39, 0.55),
     0 0 78px 18px rgba(255, 196, 40, 0.28),
     inset 0 0 0 1px rgba(255, 255, 255, 0.62);
-}
-
-.hand.open .playing-card.playing-card--foil:hover .foil-foil,
-.playing-card.playing-card--foil:focus-visible .foil-foil {
-  filter: saturate(2) contrast(1.35) brightness(1.2);
 }
 
 .playing-card.playing-card--foil.is-pressed,
@@ -321,22 +180,6 @@
     0 0 58px 14px rgba(201, 162, 39, 0.62),
     0 0 86px 20px rgba(255, 220, 100, 0.32),
     inset 0 0 0 1px rgba(255, 255, 255, 0.75);
-}
-
-.playing-card.playing-card--foil.is-pressed .foil-foil,
-.playing-card.playing-card--foil:active .foil-foil {
-  filter: saturate(2.1) contrast(1.4) brightness(1.28);
-}
-
-@media (max-width: 900px) {
-  .hand.open .playing-card.playing-card--foil {
-    transform:
-      translateX(calc((var(--i) - (var(--n) - 1) / 2) * 135px))
-      translateY(var(--foil-lift))
-      perspective(720px)
-      rotateX(var(--tilt-x))
-      rotateY(var(--tilt-y));
-  }
 }
 
 @keyframes foil-idle {
@@ -356,8 +199,6 @@
   .playing-card.playing-card--foil,
   .playing-card.playing-card--foil.is-tracking {
     animation: none;
-    --tilt-x: 0deg;
-    --tilt-y: 0deg;
   }
 }
 
