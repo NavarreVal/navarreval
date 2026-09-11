@@ -14,12 +14,12 @@
   function current() {
     const saved = stored();
     if (saved === "light" || saved === "dark") return saved;
-    return root.getAttribute("data-theme") === "light" ? "light" : "dark";
+    return root.getAttribute("data-theme") === "dark" ? "dark" : "light";
   }
 
   function apply(theme) {
-    if (theme === "light") root.setAttribute("data-theme", "light");
-    else root.setAttribute("data-theme", "dark");
+    if (theme === "dark") root.setAttribute("data-theme", "dark");
+    else root.setAttribute("data-theme", "light");
     try {
       localStorage.setItem(KEY, theme);
     } catch (e) {}
