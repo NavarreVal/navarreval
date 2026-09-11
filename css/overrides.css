@@ -62,28 +62,26 @@
   --mx: 0.5;
   --my: 0.5;
   --foil-spin: 0deg;
-  --foil-glow: 0.9;
-  border-color: rgba(201, 162, 39, 0.62);
+  --foil-glow: 0.95;
+  border-color: rgba(196, 176, 120, 0.72);
   background:
     radial-gradient(
-      130px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(232, 232, 236, 0.42) 18%,
-      rgba(201, 162, 39, 0.22) 34%,
-      transparent 52%
+      140px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(236, 236, 240, 0.5) 16%,
+      rgba(201, 162, 39, 0.2) 32%,
+      transparent 50%
     ),
-    conic-gradient(
-      from calc(var(--foil-spin) + var(--mx) * 200deg),
-      #f4ead0 0deg,
-      #c9a227 38deg,
-      #8d8d93 78deg,
-      #f0f0f2 118deg,
-      #2f2f33 162deg,
-      #d4af37 208deg,
-      #e8e8ea 252deg,
-      #5a5a60 298deg,
-      #e6c56a 334deg,
-      #f4ead0 360deg
+    repeating-conic-gradient(
+      from calc(var(--foil-spin) + var(--mx) * 180deg),
+      #f8f4e8 0deg 10deg,
+      #c9a227 10deg 20deg,
+      #dcdce0 20deg 30deg,
+      #3a3a3e 30deg 38deg,
+      #e8c872 38deg 50deg,
+      #f3f3f5 50deg 60deg,
+      #2a2a2e 60deg 68deg,
+      #d4af37 68deg 80deg
     );
   box-shadow:
     0 12px 26px rgba(0, 0, 0, 0.5),
@@ -94,9 +92,9 @@
 }
 
 .playing-card.playing-card--foil img {
-  inset: 5px;
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
 }
 
 .playing-card.playing-card--foil::before {
@@ -106,26 +104,30 @@
   border-radius: inherit;
   pointer-events: none;
   z-index: 2;
-  padding: 5px;
+  padding: 6px;
   background:
     radial-gradient(
-      90px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-      rgba(255, 255, 255, 0.98) 0%,
-      rgba(236, 236, 240, 0.42) 20%,
-      rgba(212, 175, 55, 0.18) 38%,
-      transparent 56%
+      100px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+      #fff 0%,
+      rgba(244, 244, 246, 0.58) 14%,
+      rgba(212, 175, 55, 0.22) 32%,
+      transparent 52%
     ),
-    conic-gradient(
-      from calc(var(--foil-spin) + var(--my) * 160deg),
-      #fff8e7 0deg,
-      #c9a227 42deg,
-      #c8c8cc 88deg,
-      #2c2c30 136deg,
-      #e8c872 188deg,
-      #f4f4f5 236deg,
-      #4a4a50 286deg,
-      #d4af37 332deg,
-      #fff8e7 360deg
+    linear-gradient(
+      calc(115deg + var(--mx) * 50deg),
+      transparent 22%,
+      rgba(255, 255, 255, 0.72) 46%,
+      transparent 64%
+    ),
+    repeating-conic-gradient(
+      from calc(var(--foil-spin) + var(--my) * 140deg),
+      #fff8e8 0deg 8deg,
+      #c9a227 8deg 16deg,
+      #ececf0 16deg 24deg,
+      #2c2c30 24deg 30deg,
+      #e0b94a 30deg 40deg,
+      #f5f5f7 40deg 48deg,
+      #45454b 48deg 54deg
     );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -142,14 +144,15 @@
 .playing-card.playing-card--foil:focus-visible {
   --foil-glow: 1;
   animation-play-state: paused;
-  border-color: rgba(245, 230, 184, 0.95);
+  border-color: #f3e6b8;
   box-shadow:
     0 16px 32px rgba(0, 0, 0, 0.55),
-    0 0 8px rgba(255, 255, 255, 0.42),
-    0 0 18px rgba(232, 200, 110, 0.58),
-    0 0 36px rgba(201, 162, 39, 0.48),
-    0 0 58px rgba(198, 198, 204, 0.28),
-    inset 0 0 0 1px rgba(255, 248, 220, 0.58);
+    0 0 0 1px rgba(255, 248, 220, 0.45),
+    0 0 10px 2px rgba(255, 255, 255, 0.4),
+    0 0 22px 4px rgba(212, 175, 55, 0.55),
+    0 0 44px 10px rgba(201, 162, 39, 0.42),
+    0 0 70px 14px rgba(192, 192, 200, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 .playing-card.playing-card--foil.is-pressed,
@@ -158,10 +161,11 @@
   border-color: #fff6d8;
   box-shadow:
     0 12px 26px rgba(0, 0, 0, 0.5),
-    0 0 12px rgba(255, 255, 255, 0.58),
-    0 0 26px rgba(236, 210, 120, 0.75),
-    0 0 48px rgba(201, 162, 39, 0.58),
-    0 0 72px rgba(220, 220, 226, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 0 14px 3px rgba(255, 255, 255, 0.55),
+    0 0 28px 6px rgba(236, 210, 120, 0.72),
+    0 0 52px 12px rgba(201, 162, 39, 0.55),
+    0 0 80px 16px rgba(220, 220, 226, 0.3),
     inset 0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
