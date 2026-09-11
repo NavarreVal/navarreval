@@ -76,29 +76,36 @@
   --tilt-x: 0deg;
   --tilt-y: 0deg;
   --from-center: 0.35;
-  --glitter-shift: 58px;
+  --glitter-shift: 48px;
   --secret-mask:
     radial-gradient(
-      ellipse 78% 60% at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+      ellipse 72% 55% at calc(var(--mx) * 100%) calc(var(--my) * 100%),
       #000 0%,
-      #000 20%,
-      transparent 48%
+      #000 18%,
+      transparent 46%
     ),
-    repeating-linear-gradient(
-      calc(124deg + (var(--mx) - 0.5) * 36deg),
-      #000 0 7px,
-      transparent 7px 17px
+    radial-gradient(
+      ellipse 42% 36% at calc((1 - var(--mx)) * 92% + 4%) calc(var(--my) * 42% + 18%),
+      #000 0%,
+      #000 14%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle 26% at calc(var(--my) * 68% + 16%) calc((1 - var(--mx)) * 58% + 18%),
+      #000 0%,
+      #000 12%,
+      transparent 36%
     );
   --glitter-a:
-    radial-gradient(closest-side, #fffef6 0 58%, transparent 64%) 0 0 / 8px 8px,
-    radial-gradient(closest-side, #ffe566 0 42%, transparent 54%) 5px 6px / 12px 11px,
-    radial-gradient(closest-side, #fff 0 34%, transparent 48%) 10px 2px / 15px 14px,
-    radial-gradient(closest-side, #ffd54a 0 30%, transparent 46%) 2px 12px / 19px 17px;
+    radial-gradient(circle, #fffef2 0 0.7px, transparent 1.1px) 0 0 / 11px 12px,
+    radial-gradient(circle, #ffe566 0 0.55px, transparent 0.95px) 6px 8px / 15px 14px,
+    radial-gradient(circle, #fff 0 0.45px, transparent 0.85px) 3px 4px / 19px 17px,
+    radial-gradient(circle, #ffd54a 0 0.4px, transparent 0.8px) 9px 2px / 23px 21px;
   --glitter-b:
-    radial-gradient(closest-side, #fff 0 52%, transparent 62%) 3px 4px / 10px 9px,
-    radial-gradient(closest-side, #fff3b0 0 38%, transparent 50%) 8px 1px / 14px 13px,
-    radial-gradient(closest-side, #ffcc33 0 32%, transparent 46%) 0 9px / 18px 16px,
-    radial-gradient(closest-side, #fff8dc 0 28%, transparent 44%) 11px 11px / 22px 20px;
+    radial-gradient(circle, #fff 0 0.65px, transparent 1.05px) 4px 5px / 13px 12px,
+    radial-gradient(circle, #fff3b0 0 0.5px, transparent 0.9px) 1px 9px / 17px 16px,
+    radial-gradient(circle, #ffcc33 0 0.4px, transparent 0.8px) 8px 1px / 21px 19px,
+    radial-gradient(circle, #fff8dc 0 0.35px, transparent 0.75px) 11px 11px / 26px 24px;
   border-color: #f0d36a;
   background:
     radial-gradient(
@@ -193,6 +200,21 @@
   overflow: hidden;
 }
 
+.playing-card.playing-card--foil .foil-layers::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 236, 160, 0.2),
+    rgba(201, 162, 39, 0.1) 45%,
+    rgba(255, 213, 74, 0.16)
+  );
+  mix-blend-mode: overlay;
+}
+
 .playing-card.playing-card--foil .foil-layers > * {
   position: absolute;
   inset: 0;
@@ -204,11 +226,10 @@
   background:
     linear-gradient(
       calc(118deg + var(--mx) * 40deg),
-      #fff6c2 0%,
-      #ffd54a 28%,
-      #c9a227 52%,
-      #8a6d12 72%,
-      #ffe566 100%
+      rgba(255, 246, 194, 0.95) 0%,
+      rgba(255, 213, 74, 0.7) 32%,
+      rgba(201, 162, 39, 0.45) 58%,
+      rgba(255, 229, 102, 0.85) 100%
     ),
     conic-gradient(
       from calc((var(--mx) + var(--my)) * 180deg),
@@ -216,32 +237,31 @@
       #ffd54a,
       #d4af37,
       #fff1a0,
-      #b8860b,
-      #ffe082,
       #c9a227,
+      #ffe082,
       #fff8dc
     );
   background-blend-mode: overlay;
-  mix-blend-mode: overlay;
-  filter: saturate(1.75) contrast(1.25) brightness(1.12);
-  opacity: 0.92;
+  mix-blend-mode: color-dodge;
+  filter: saturate(1.55) contrast(1.15) brightness(1.08);
+  opacity: 0.62;
   -webkit-mask-image: var(--secret-mask);
   mask-image: var(--secret-mask);
-  -webkit-mask-size: 145% 145%;
-  mask-size: 145% 145%;
-  -webkit-mask-position: calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-  mask-position: calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
+  -webkit-mask-size: 160% 160%;
+  mask-size: 160% 160%;
+  -webkit-mask-position: calc(var(--mx) * 70% + 15%) calc(var(--my) * 70% + 15%);
+  mask-position: calc(var(--mx) * 70% + 15%) calc(var(--my) * 70% + 15%);
 }
 
 .playing-card.playing-card--foil .foil-glitter-mask {
   overflow: hidden;
-  mix-blend-mode: overlay;
+  mix-blend-mode: screen;
   -webkit-mask-image: linear-gradient(#000 0 0), var(--secret-mask);
   mask-image: linear-gradient(#000 0 0), var(--secret-mask);
-  -webkit-mask-size: auto, 145% 145%;
-  mask-size: auto, 145% 145%;
-  -webkit-mask-position: center, calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
-  mask-position: center, calc(var(--mx) * 80% + 10%) calc(var(--my) * 80% + 10%);
+  -webkit-mask-size: auto, 160% 160%;
+  mask-size: auto, 160% 160%;
+  -webkit-mask-position: center, calc(var(--mx) * 70% + 15%) calc(var(--my) * 70% + 15%);
+  mask-position: center, calc(var(--mx) * 70% + 15%) calc(var(--my) * 70% + 15%);
   -webkit-mask-composite: xor, xor;
   mask-composite: exclude, exclude;
 }
@@ -249,7 +269,7 @@
 .playing-card.playing-card--foil .foil-glitter {
   inset: -40px;
   mix-blend-mode: overlay;
-  filter: brightness(1.55) contrast(1.85) saturate(1.25);
+  filter: brightness(1.35) contrast(1.4) saturate(1.2);
 }
 
 .playing-card.playing-card--foil .foil-glitter--a {
@@ -273,13 +293,13 @@
 .playing-card.playing-card--foil .foil-glare {
   background: radial-gradient(
     farthest-corner circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
-    hsla(48, 100%, 94%, 0.95) 0%,
-    hsla(46, 95%, 72%, 0.5) 16%,
-    hsla(40, 70%, 45%, 0.14) 40%,
-    hsla(28, 25%, 8%, 0.22) 100%
+    hsla(48, 100%, 96%, 0.9) 0%,
+    hsla(46, 95%, 75%, 0.42) 18%,
+    hsla(42, 80%, 60%, 0.12) 36%,
+    transparent 58%
   );
-  mix-blend-mode: hard-light;
-  opacity: calc(0.5 + var(--from-center) * 0.5);
+  mix-blend-mode: overlay;
+  opacity: calc(0.45 + var(--from-center) * 0.45);
 }
 
 .hand.open .playing-card.playing-card--foil {
