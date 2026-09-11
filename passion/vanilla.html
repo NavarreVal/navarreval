@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Making Vanilla Extract | J. Navarre Valdivieso</title>
-  <meta name="description" content="A short note on a kitchen hobby: Madagascar beans, alcohol, mason jars, and time in the basement.">
+  <title>Vanilla | J. Navarre Valdivieso</title>
+  <meta name="description" content="I’m serious about Vanilla Extract. I don’t know why, but it’s important to me.">
   <link rel="stylesheet" href="../css/style.css?v=3.1">
   <style>
     html, body {
@@ -22,7 +22,20 @@
     }
 
     .vanilla-top {
-      margin-bottom: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .vanilla-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      font-weight: 500;
+      margin: 0;
     }
 
     .vanilla-top .stub-back,
@@ -31,47 +44,26 @@
       margin-bottom: 0;
     }
 
-    .vanilla-page h1 {
-      font-size: clamp(1.7rem, 4vw, 2.15rem);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--gold);
-      margin: 0 0 0.85rem;
-      line-height: 1.25;
-    }
-
-    .lead {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #b8b8b8;
-      margin: 0 0 2.6rem;
-    }
-
-    .vanilla-page section {
-      margin-bottom: 2.8rem;
-    }
-
-    .vanilla-page h2 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #f0f0f0;
-      margin: 0 0 0.75rem;
-    }
-
     .vanilla-page p {
-      font-size: 1.02rem;
+      font-size: 1.05rem;
       line-height: 1.75;
       color: #c8c8c8;
-      margin: 0 0 1.1rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .vanilla-page p a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.05em;
+    }
+
+    .vanilla-page p a:hover {
+      border-bottom-color: var(--gold);
     }
 
     .vanilla-page figure {
-      margin: 1.25rem 0 0;
-    }
-
-    .vanilla-page figure + figure {
-      margin-top: 1.1rem;
+      margin: 0 0 1.6rem;
     }
 
     .vanilla-page img {
@@ -88,36 +80,28 @@
       margin-right: auto;
     }
 
-    .figure-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.85rem;
-      margin-top: 1.1rem;
+    .logo-cta {
+      display: block;
+      width: min(11.5rem, 70%);
+      margin: 1.8rem auto 0.4rem;
     }
 
-    .figure-pair figure {
-      margin: 0;
+    .logo-cta img {
+      width: 100%;
+      height: auto;
+      background: transparent;
+      border: 0;
     }
 
-    .cta {
-      margin-top: 1.6rem;
-    }
-
-    .cta a {
-      color: var(--gold);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
-      padding-bottom: 0.08em;
-    }
-
-    .cta a:hover {
-      border-bottom-color: var(--gold);
+    .logo-cta:hover img,
+    .logo-cta:focus-visible img {
+      opacity: 0.88;
     }
 
     .vanilla-footer {
       display: flex;
       justify-content: flex-start;
-      padding: 1.2rem 0 0.2rem;
+      padding: 2rem 0 0.2rem;
     }
 
     @media (max-width: 520px) {
@@ -125,12 +109,12 @@
         padding: 1.6rem 1.1rem 2.6rem;
       }
 
-      .figure-narrow {
-        max-width: 100%;
+      .vanilla-top {
+        flex-wrap: wrap;
       }
 
-      .figure-pair {
-        grid-template-columns: 1fr;
+      .figure-narrow {
+        max-width: 100%;
       }
     }
   </style>
@@ -139,87 +123,71 @@
   <article class="vanilla-page" id="top">
     <div class="vanilla-top">
       <a class="back-btn stub-back" href="/#passion">← Passion</a>
+      <h1>Vanilla</h1>
+      <span></span>
     </div>
 
-    <h1>Making Vanilla Extract</h1>
-    <p class="lead">A short note on a kitchen hobby: Madagascar beans, alcohol, mason jars, and time in the basement.</p>
+    <p>I’m serious about Vanilla Extract. I don’t know why, but it’s important to me. If the label says “Water” your extract is watered down. If the label has more than 2 ingredients (vanilla beans and alcohol) you’re being fed a sub-par product.</p>
 
-    <section>
-      <h2>The beans</h2>
-      <p>I started with about two pounds of Madagascar vanilla beans — the kind usually described as creamy, smooth, and sweet. They arrived sticky enough to cling to everything they touched. We split them into mason jars for aging, roughly twenty beans to a jar.</p>
-      <figure class="figure-narrow">
-        <img
-          src="../images/passion/vanilla/beans.jpg"
-          alt="Bag of Madagascar vanilla beans, about two pounds"
-        >
-      </figure>
-      <figure class="figure-narrow">
-        <img
-          src="../images/passion/vanilla/jar-beans.jpg"
-          alt="Mason jar with vanilla beans, about twenty to a jar"
-        >
-      </figure>
-    </section>
+    <figure>
+      <img
+        src="../images/passion/vanilla/hero-vanilla-beans-bottle.jpg"
+        alt="A bottle of vanilla extract with two vanilla beans on a wooden table"
+      >
+    </figure>
 
-    <section>
-      <h2>Cut by hand</h2>
-      <p>Once the jars were set, I cut the beans down by hand so the batch kept a handmade feel. A blender would have been faster. The beans are tough; the knife work is slow on purpose.</p>
-      <figure class="figure-narrow">
-        <img
-          src="../images/passion/vanilla/beans-chopped.jpg"
-          alt="Vanilla beans cut by hand into short pieces"
-          loading="lazy"
-        >
-      </figure>
-    </section>
+    <p>This has become a hobby and side hustle for me. Each type of bean is different, and its provenance has an effect on the flavor, strength, and tone of the vanilla extract itself. I prefer Madagascar beans, they’re smooth and creamy, not too sweet. They impart just the right amount of that good vanilla flavor and aroma for my process.</p>
 
-    <section>
-      <h2>Into the jars</h2>
-      <p>We are making three different kinds of vanilla. Each small bottle of alcohol (about 1.75 oz) filled two quart mason jars, with only a little room to spare once the beans took up space.</p>
-      <figure>
-        <img
-          src="../images/passion/vanilla/jars-prep.jpg"
-          alt="Mason jars of vanilla beans beside a cutting board and knife"
-          loading="lazy"
-        >
-      </figure>
-      <div class="figure-pair">
-        <figure>
-          <img
-            src="../images/passion/vanilla/extract-spiced-rum.jpg"
-            alt="Amber mason jar of aging vanilla extract"
-            loading="lazy"
-          >
-        </figure>
-        <figure>
-          <img
-            src="../images/passion/vanilla/extract-whiskey.jpg"
-            alt="Mason jar of aging vanilla extract with beans at the bottom"
-            loading="lazy"
-          >
-        </figure>
-      </div>
-    </section>
+    <figure>
+      <img
+        src="../images/passion/vanilla/stock-beans.jpg"
+        alt="Five whole vanilla beans"
+        loading="lazy"
+      >
+    </figure>
 
-    <section>
-      <h2>Aging</h2>
-      <p>The jars live in the basement now, mellowing. At least once a week we go down and agitate them. Extract is mostly waiting — beans, spirit, and patience.</p>
-      <figure>
-        <img
-          src="../images/passion/vanilla/jars-aging.jpg"
-          alt="Mason jars of vanilla extract aging on a table"
-          loading="lazy"
-        >
-      </figure>
-    </section>
+    <figure>
+      <img
+        src="../images/passion/vanilla/bottle-hero-white-label.jpg"
+        alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
+        loading="lazy"
+      >
+    </figure>
 
-    <section>
-      <h2>Why it matters</h2>
-      <p>This is a hobby, not a factory story. I am having a blast, and I look forward to sharing bottles when a batch is ready.</p>
-      <p class="cta">
-        <a href="https://uintahvalley.com/" target="_blank" rel="noopener">Visit Uintah Valley</a>
-      </p>
-    </section>
+    <p>Our beans are more concentrated per jar, and are aged for a set period of time, so we don't bottle too soon. While most people split the beans, we cut them by hand because I have found that it allows the flavorings to be extracted more evenly across the aging period, giving the extractives and vanilla time to get to know each other and really blend. Extract is mostly waiting and patience provides a superior result.</p>
+
+    <figure class="figure-narrow">
+      <img
+        src="../images/passion/vanilla/beans-jar.jpg"
+        alt="Mason jar with vanilla beans standing inside"
+        loading="lazy"
+      >
+    </figure>
+
+    <figure class="figure-narrow">
+      <img
+        src="../images/passion/vanilla/beans-chopped.jpg"
+        alt="Vanilla beans cut by hand into short pieces"
+        loading="lazy"
+      >
+    </figure>
+
+    <figure>
+      <img
+        src="../images/passion/vanilla/jars-aging.jpg"
+        alt="Mason jars of vanilla extract aging on a table"
+        loading="lazy"
+      >
+    </figure>
+
+    <p>If you want some vanilla (and if I have any available) you can get some at <a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></p>
+
+    <a class="logo-cta" href="https://uintahvalley.com/" target="_blank" rel="noopener">
+      <img
+        src="../images/passion/vanilla/logo-cta.svg"
+        alt="Uintah Valley — get vanilla"
+      >
+    </a>
 
     <div class="vanilla-footer">
       <a class="back-btn stub-back" href="/#passion">← Passion</a>
