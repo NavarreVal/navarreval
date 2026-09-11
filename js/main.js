@@ -111,22 +111,49 @@ window.addEventListener('popstate', () => {
       });
     });
 
+    const reduceFoilMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     handsWrap.querySelectorAll('.playing-card--foil').forEach(card => {
+      let foilRaf = 0;
+      let pendingFoil = null;
+
+      const applyFoilPos = (x, y) => {
+        card.style.setProperty('--mx', x.toFixed(3));
+        card.style.setProperty('--my', y.toFixed(3));
+        const fromCenter = Math.min(1, Math.hypot(x - 0.5, y - 0.5) * 2);
+        card.style.setProperty('--from-center', fromCenter.toFixed(3));
+        if (!reduceFoilMotion.matches) {
+          card.style.setProperty('--tilt-x', ((0.5 - y) * 16).toFixed(2) + 'deg');
+          card.style.setProperty('--tilt-y', ((x - 0.5) * 18).toFixed(2) + 'deg');
+        }
+      };
+
       const setFoilPos = (event) => {
         const rect = card.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
-        const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-        const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
-        card.style.setProperty('--mx', x.toFixed(3));
-        card.style.setProperty('--my', y.toFixed(3));
+        pendingFoil = {
+          x: Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width)),
+          y: Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height))
+        };
+        if (foilRaf) return;
+        foilRaf = requestAnimationFrame(() => {
+          foilRaf = 0;
+          if (pendingFoil) applyFoilPos(pendingFoil.x, pendingFoil.y);
+        });
       };
 
-      card.addEventListener('pointerenter', setFoilPos);
+      card.addEventListener('pointerenter', (event) => {
+        card.classList.add('is-tracking');
+        setFoilPos(event);
+      });
       card.addEventListener('pointermove', setFoilPos, { passive: true });
       card.addEventListener('pointerleave', () => {
-        card.style.setProperty('--mx', '0.5');
-        card.style.setProperty('--my', '0.5');
-        card.classList.remove('is-pressed');
+        card.classList.remove('is-tracking', 'is-pressed');
+        card.style.removeProperty('--mx');
+        card.style.removeProperty('--my');
+        card.style.removeProperty('--from-center');
+        card.style.removeProperty('--tilt-x');
+        card.style.removeProperty('--tilt-y');
       });
       card.addEventListener('pointerdown', () => card.classList.add('is-pressed'));
       card.addEventListener('pointerup', () => card.classList.remove('is-pressed'));
