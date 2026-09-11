@@ -110,6 +110,28 @@ window.addEventListener('popstate', () => {
         }
       });
     });
+
+    handsWrap.querySelectorAll('.playing-card--foil').forEach(card => {
+      const setFoilPos = (event) => {
+        const rect = card.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+        const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+        card.style.setProperty('--mx', x.toFixed(3));
+        card.style.setProperty('--my', y.toFixed(3));
+      };
+
+      card.addEventListener('pointerenter', setFoilPos);
+      card.addEventListener('pointermove', setFoilPos, { passive: true });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--mx', '0.5');
+        card.style.setProperty('--my', '0.5');
+        card.classList.remove('is-pressed');
+      });
+      card.addEventListener('pointerdown', () => card.classList.add('is-pressed'));
+      card.addEventListener('pointerup', () => card.classList.remove('is-pressed'));
+      card.addEventListener('pointercancel', () => card.classList.remove('is-pressed'));
+    });
   }
 
   // ========== Profile photo cycling ==========
