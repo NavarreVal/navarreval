@@ -35,12 +35,52 @@
     }
     .games-top .stub-back,
     .games-footer .stub-back { text-decoration: none; margin-bottom: 0; }
+    .games-intro,
     .games-lead {
       max-width: 42rem;
-      margin: 0 0 2rem;
       font-size: 0.95rem;
       line-height: 1.6;
       color: #b0b0b0;
+    }
+    .games-intro { margin: 0 0 1.4rem; }
+    .games-intro p { margin: 0 0 1rem; }
+    .games-intro p:last-child { margin-bottom: 0; }
+    .games-specs {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 1rem;
+      row-gap: 0.4rem;
+      max-width: 42rem;
+      margin: 1.1rem 0 1.6rem;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .games-specs dt {
+      margin: 0;
+      color: #9aa8b2;
+      font-weight: 600;
+    }
+    .games-specs dt::after { content: ":"; }
+    .games-specs dd {
+      margin: 0;
+      color: #e6e6e6;
+    }
+    .games-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+    .games-photos img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #111;
+      border: 1px solid #2a2a2a;
+    }
+    .games-lead { margin: 0 0 1.6rem; }
+    @media (max-width: 700px) {
+      .games-photos { grid-template-columns: 1fr; }
     }
     .shelf {
       margin-bottom: 0;
@@ -135,8 +175,33 @@
       <span></span>
     </div>
 
+    <div class="games-intro">
+      <p>I've been playing video games for as long as I can remember. One of my earliest memories is of playing video games (I believe the game was River City Ransom on the NES).  I now enjoy sharing that hobby with my kids, and using it as my outlet for when I need to shut off my brain!</p>
+      <p>Most of my gaming these days is on PC. I've been building my own computers for at least 20 years! Here are my specs:</p>
+    </div>
+
+    <dl class="games-specs">
+      <dt>CPU</dt>
+      <dd>Intel Core i9-13900K</dd>
+      <dt>RAM</dt>
+      <dd>Corsair Vengeance 64 GB (5600 MT/s)</dd>
+      <dt>GPU</dt>
+      <dd>NVIDIA GeForce RTX 4090 24 GB</dd>
+      <dt>MoBo</dt>
+      <dd>Gigabyte Z790 UD AC</dd>
+      <dt>CPU Cooler</dt>
+      <dd>iCUE H150i ELITE LCD XT Display Liquid</dd>
+      <dt>Case</dt>
+      <dd>NZXT H7 Flow</dd>
+    </dl>
+
+    <div class="games-photos">
+      <img src="../images/passion/video-games/pc-interior.jpg" alt="Interior of the NZXT H7 Flow with iCUE LCD" width="1800" height="1350">
+      <img src="../images/passion/video-games/pc-side.jpg" alt="NZXT H7 Flow gaming PC on a table" width="1800" height="1350">
+    </div>
+
     <p class="games-lead">
-      A look at what I’ve been playing lately, and the games that have taken the most time over the years.
+      A look at what I’ve been playing lately, and the games that I've played most on Steam.
     </p>
 
     <section class="shelf" data-shelf="recent" data-count="12">
