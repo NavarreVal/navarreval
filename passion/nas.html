@@ -46,7 +46,8 @@
     .nas-page {
       position: relative;
       z-index: 1;
-      max-width: 40rem;
+      width: min(70vw, 1100px);
+      max-width: 100%;
       margin: 0 auto;
       padding: 1.6rem 1.1rem 3.2rem;
     }
@@ -118,9 +119,15 @@
     }
 
     .nas-figure--product {
-      max-width: 16.5rem;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0;
+    }
+
+    .nas-stack-row {
+      display: grid;
+      grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+      gap: 1.4rem 2rem;
+      align-items: center;
+      margin: 0 0 1.6rem;
     }
 
     .nas-page ul {
@@ -139,6 +146,38 @@
       margin-bottom: 0;
     }
 
+    .nas-page .nas-logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem 1.1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nas-page .nas-logo-grid li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.45rem;
+      margin: 0;
+      text-align: center;
+      font-size: 0.72rem;
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #b8b8b8;
+    }
+
+    .nas-page .nas-logo-grid img {
+      width: 2.35rem;
+      height: 2.35rem;
+      background: transparent;
+      border: 0;
+      filter: brightness(0) invert(0.92);
+    }
+
     .nas-footer {
       display: flex;
       justify-content: flex-start;
@@ -148,11 +187,11 @@
 
     @media (min-width: 640px) {
       .nas-page {
-        padding: 2.2rem 1.4rem 3.4rem;
+        padding: 2.2rem 0 3.4rem;
       }
 
       .nas-panel {
-        padding: 2.4rem 2rem 2.6rem;
+        padding: 2.4rem 2.4rem 2.6rem;
       }
 
       .nas-figure--left {
@@ -166,6 +205,24 @@
       }
     }
 
+    @media (max-width: 800px) {
+      .nas-page {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nas-stack-row {
+        grid-template-columns: 1fr;
+      }
+
+      .nas-figure--product {
+        max-width: 16.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
     @media (max-width: 520px) {
       .nas-top {
         flex-wrap: wrap;
@@ -173,6 +230,10 @@
 
       .nas-figure--product {
         max-width: 100%;
+      }
+
+      .nas-logo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -211,13 +272,41 @@
       <h2>Medium / stack</h2>
       <p>I designed and maintain a household NAS that holds our media library and streams it through Jellyfin to phones, TVs, and living-room devices. Under the hood it’s an Asustor box with RAID storage, Docker containers managed in Portainer, Tailscale for private remote access, and a Cloudflare tunnel for use where needed. Keeping this running includes the boring but important work of health checks, certificates, and security hardening.</p>
 
-      <figure class="nas-figure--product">
-        <img
-          src="../images/passion/nas/nas03-asustor.jpg"
-          alt="An Asustor 4-bay network attached storage box"
-          loading="lazy"
-        >
-      </figure>
+      <div class="nas-stack-row">
+        <figure class="nas-figure--product">
+          <img
+            src="../images/passion/nas/nas03-asustor.jpg"
+            alt="An Asustor 4-bay network attached storage box"
+            loading="lazy"
+          >
+        </figure>
+        <ul class="nas-logo-grid" aria-label="Stack">
+          <li>
+            <img src="../images/passion/nas/icons/jellyfin.svg" alt="">
+            <span>Jellyfin</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/asustor.svg" alt="">
+            <span>Asustor</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/cloudflare.svg" alt="">
+            <span>Cloudflare</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/docker.svg" alt="">
+            <span>Docker</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/portainer.svg" alt="">
+            <span>Portainer</span>
+          </li>
+          <li>
+            <img src="../images/passion/nas/icons/tailscale.svg" alt="">
+            <span>Tailscale</span>
+          </li>
+        </ul>
+      </div>
 
       <p>What started as “can we watch our own stuff?” turned into hands-on practice in:</p>
       <ul>
