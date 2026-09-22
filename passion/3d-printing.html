@@ -4,24 +4,603 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Printing | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <meta name="description" content="House, shop, and toy parts printed on a Bambu Lab P1S, plus the MakerWorld collections I actually pull from.">
+  <link rel="stylesheet" href="../css/style.css?v=3.4">
+  <style>
+    :root { --gold: #c9a227; }
+    html, body {
+      background: #0d0d0d;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+    .print-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.2rem 1.5rem 4rem;
+    }
+    .print-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.6rem;
+      gap: 1rem;
+    }
+    .print-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      font-weight: 500;
+      margin: 0;
+    }
+    .print-top .stub-back,
+    .print-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+    .print-copy {
+      max-width: 42rem;
+      width: 100%;
+      margin: 0 auto 1.6rem;
+      text-align: left;
+    }
+    .print-intro p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #b0b0b0;
+    }
+    .print-intro p:last-child { margin-bottom: 0; }
+    .print-page h2 {
+      font-size: 1.15rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 1rem;
+      font-weight: 600;
+    }
+    .print-specs {
+      width: auto;
+      max-width: 100%;
+      margin: 0.4rem 0 0;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .print-specs th,
+    .print-specs td {
+      border: none;
+      padding: 0.35rem 1rem 0.35rem 0;
+      vertical-align: top;
+      text-align: left;
+    }
+    .print-specs th {
+      color: #9aa8b2;
+      font-weight: 600;
+      white-space: nowrap;
+      width: 1%;
+    }
+    .print-specs td {
+      color: #e6e6e6;
+      font-weight: 400;
+    }
+    .print-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.4rem 0 2rem;
+    }
+    .print-photos figure {
+      margin: 0;
+    }
+    .print-photos img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #111;
+      border: 1px solid #2a2a2a;
+    }
+    .print-photos figcaption {
+      margin-top: 0.45rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    .print-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+      flex-wrap: wrap;
+      margin: 0 0 2.2rem;
+      padding: 1.05rem 1.15rem;
+      background: #141a22;
+      border: 1px solid #2a3d4a;
+      border-radius: 10px;
+    }
+    .print-kicker {
+      margin: 0 0 0.35rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .print-statline {
+      margin: 0;
+      color: #c8c8c8;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .print-statline span {
+      color: #f0f0f0;
+      font-weight: 600;
+    }
+    .print-story {
+      max-width: 42rem;
+      margin: 0 auto 2.2rem;
+    }
+    .print-story p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #b0b0b0;
+    }
+    .print-story p:last-child { margin-bottom: 0; }
+    .shelf {
+      margin-bottom: 0;
+      padding: 1.6rem 1.2rem 2.2rem;
+      border-top: 1px solid #2a3d4a;
+      border-radius: 10px;
+    }
+    .shelf:nth-of-type(odd) { background: #0e1218; }
+    .shelf:nth-of-type(even) { background: #141a22; }
+    .shelf h2 { margin-bottom: 1.3rem; }
+    .shelf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.4rem 1rem;
+    }
+    .print-card {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-width: 0;
+    }
+    .print-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      display: block;
+    }
+    .print-card:hover img { border-color: #4a6a7a; }
+    .print-card:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .print-card strong {
+      font-size: 0.84rem;
+      color: #eee;
+      line-height: 1.3;
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .print-card span {
+      font-size: 0.75rem;
+      color: #888;
+      line-height: 1.35;
+    }
+    .print-featured {
+      max-width: 42rem;
+      margin: 2rem auto 0;
+    }
+    .print-featured p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #8a8a8a;
+    }
+    .print-note {
+      max-width: 560px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #8a8a8a;
+    }
+    .print-note a { color: var(--gold); }
+    .print-footer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 2.2rem 0 0.4rem;
+    }
+    @media (max-width: 700px) {
+      .print-photos { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .shelf-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
+  <div class="print-page" id="top">
+    <div class="print-top">
+      <a class="back-btn stub-back" href="/#passion">← Return</a>
       <h1>3D Printing</h1>
-      <p>This page is under construction.</p>
+      <span></span>
     </div>
-  </section>
 
-  <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
-  </script>
+    <div class="print-copy">
+      <div class="print-intro">
+        <p>I print parts for the house, the shop, and the occasional toy on a Bambu Lab P1S. When I need a model, I pull it from MakerWorld. This page is that library, not a portfolio of designs I made.</p>
+      </div>
 
+      <h2>Rig</h2>
+      <table class="print-specs">
+        <tbody>
+          <tr><th scope="row">Printer</th><td>Bambu Lab P1S</td></tr>
+          <tr><th scope="row">AMS</th><td>Yes</td></tr>
+          <tr><th scope="row">Primary filament</th><td>PLA</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="print-photos">
+      <figure>
+        <img src="../images/passion/3d-printing/photo-coming.svg" alt="Placeholder for a photo of the Bambu Lab P1S on the bench" width="800" height="600">
+        <figcaption>Bench photo coming</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/photo-coming.svg" alt="Placeholder for a photo of printed parts on the bench" width="800" height="600">
+        <figcaption>Bench photo coming</figcaption>
+      </figure>
+    </div>
+
+    <section class="print-stats" aria-label="MakerWorld stats">
+      <div>
+        <p class="print-kicker">Pioneer Maker</p>
+        <p class="print-statline"><span>116</span> different models</p>
+        <p class="print-statline"><span>880</span> print hours</p>
+        <p class="print-statline">Level <span>15</span></p>
+      </div>
+      <a class="back-btn stub-back" href="https://makerworld.com/en/@NavarreVal" target="_blank" rel="noopener">MakerWorld profile</a>
+    </section>
+
+    <section class="print-story" aria-labelledby="form1-title">
+      <h2 id="form1-title">Form 1 suppressor</h2>
+      <p>I have a custom AR pistol chambered in .300 Blackout. I filed a Form 1 and paid the tax stamp. That is the legal NFA path, and the stamp was in hand before the part was printed.</p>
+      <p>The suppressor was printed in PET-CF, which required a hardened steel hotend.</p>
+      <p>There is more to this. It is not written yet.</p>
+    </section>
+
+    <section class="shelf" id="work" aria-labelledby="work-title">
+      <h2 id="work-title">Work</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/706554-40v-ryobi-leaf-blower-mount" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/706554.webp" alt="40v Ryobi Leaf Blower Mount" width="640" height="640">
+          <strong>40v Ryobi Leaf Blower Mount</strong>
+          <span>Mike S.</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/897656-ryobi-18v-tool-circular-saw-holder" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/897656.webp" alt="Ryobi 18v tool (circular saw) holder" width="640" height="640">
+          <strong>Ryobi 18v tool (circular saw) holder</strong>
+          <span>krazyderek</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/177310-ryobi-tool-holder" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/177310.webp" alt="Ryobi Tool Holder" width="640" height="640">
+          <strong>Ryobi Tool Holder</strong>
+          <span>PZI 3D</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/701606-battery-holder-for-ryobi-one-18v-batteries" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/701606.webp" alt="Battery Holder for RYOBI ONE+ 18V Batteries" width="640" height="640">
+          <strong>Battery Holder for RYOBI ONE+ 18V Batteries</strong>
+          <span>Manicken.se</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="pews" aria-labelledby="pews-title">
+      <h2 id="pews-title">Pews</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/658528-butt-out-tool-hunting-tool" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/658528.webp" alt="Butt Out Tool Hunting Tool" width="640" height="640" loading="lazy">
+          <strong>Butt Out Tool Hunting Tool</strong>
+          <span>3DSbySteve</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/565102-original-skull-helmet-stand" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/565102.webp" alt="Original skull helmet stand" width="640" height="640" loading="lazy">
+          <strong>Original skull helmet stand</strong>
+          <span>Carbon</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="to-be-printed" aria-labelledby="to-be-printed-title">
+      <h2 id="to-be-printed-title">To Be Printed</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/1150840-sheet-corner-holder" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1150840.webp" alt="sheet Corner Holder" width="640" height="640" loading="lazy">
+          <strong>sheet Corner Holder</strong>
+          <span>Notorious</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1707611-ragtime-the-ultimate-rag-making-tool" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1707611.webp" alt="RAGTIME - The ultimate rag making tool" width="640" height="640" loading="lazy">
+          <strong>RAGTIME - The ultimate rag making tool</strong>
+          <span>Nominal Cycling Gear</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="toys-and-games" aria-labelledby="toys-and-games-title">
+      <h2 id="toys-and-games-title">Toys &amp; Games</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/708184-miniature-painting-handle-the-chuck-v2" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/708184.webp" alt="Miniature painting handle: &quot;The Chuck V2&quot;" width="640" height="640" loading="lazy">
+          <strong>Miniature painting handle: &quot;The Chuck V2&quot;</strong>
+          <span>Ashwood</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/724705-hexagon-tile-system-for-dnd" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/724705.webp" alt="Hexagon Tile System for DnD" width="640" height="640" loading="lazy">
+          <strong>Hexagon Tile System for DnD</strong>
+          <span>HenrikB</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/740693-hexagon-tile-system-for-dnd-straight-path" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/740693.webp" alt="Hexagon Tile System for DnD: Straight path" width="640" height="640" loading="lazy">
+          <strong>Hexagon Tile System for DnD: Straight path</strong>
+          <span>HenrikB</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/740775-hexagon-tile-system-for-dnd-curved-path" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/740775.webp" alt="Hexagon Tile System for DnD: Curved path" width="640" height="640" loading="lazy">
+          <strong>Hexagon Tile System for DnD: Curved path</strong>
+          <span>HenrikB</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/780749-d-d-initiative-tracker-for-laptop-cover-screen" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/780749.webp" alt="D&amp;D Initiative Tracker for Laptop Cover/Screen" width="640" height="640" loading="lazy">
+          <strong>D&amp;D Initiative Tracker for Laptop Cover/Screen</strong>
+          <span>Shaztech.info</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1108953-f-a-18-super-hornet-top-gun-maverick-plane-kitcard" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1108953.webp" alt="F/A-18 Super Hornet Top Gun Maverick Plane KitCard" width="640" height="640" loading="lazy">
+          <strong>F/A-18 Super Hornet Top Gun Maverick Plane KitCard</strong>
+          <span>PB94</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1064539-sky-team-upgrade-working-leds" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1064539.webp" alt="Sky Team Upgrade Working Leds" width="640" height="640" loading="lazy">
+          <strong>Sky Team Upgrade Working Leds</strong>
+          <span>Aedon Trading</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/541705-elven-leaf-armor" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/541705.webp" alt="Elven Leaf Armor" width="640" height="640" loading="lazy">
+          <strong>Elven Leaf Armor</strong>
+          <span>protomota</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/223303-jeep-kit-card" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/223303.webp" alt="Jeep Kit Card" width="640" height="640" loading="lazy">
+          <strong>Jeep Kit Card</strong>
+          <span>agepbiz</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/13620-minimalistic-xbox-controller-stand" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/13620.webp" alt="Minimalistic Xbox Controller Stand" width="640" height="640" loading="lazy">
+          <strong>Minimalistic Xbox Controller Stand</strong>
+          <span>agepbiz</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="printer-utilities" aria-labelledby="printer-utilities-title">
+      <h2 id="printer-utilities-title">3D Printer Utilities</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/583683-filament-storage-dry-box-by-stan" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/583683.webp" alt="Filament Storage Dry Box by Stan" width="640" height="640" loading="lazy">
+          <strong>Filament Storage Dry Box by Stan</strong>
+          <span>Stan S. Stanman</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/622873-bambulab-complete-hotend-and-tools-storage-box" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/622873.webp" alt="BambuLab Complete Hotend and tools storage box" width="640" height="640" loading="lazy">
+          <strong>BambuLab Complete Hotend and tools storage box</strong>
+          <span>Our 3D Cosmos</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/470301-stealth-press-zero-small-heat-set-insert-press" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/470301.webp" alt="Stealth Press ZERO (Small Heat Set Insert Press)" width="640" height="640" loading="lazy">
+          <strong>Stealth Press ZERO (Small Heat Set Insert Press)</strong>
+          <span>Iconic FAB</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/13414-heat-insert-press-mgn9c-remix" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/13414.webp" alt="Heat Insert Press (mgn9c remix)" width="640" height="640" loading="lazy">
+          <strong>Heat Insert Press (mgn9c remix)</strong>
+          <span>thrutheframe</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/941146-creality-space-pi-heat-shield-heat-deflector" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/941146.webp" alt="Creality Space Pi Heat Shield / Heat Deflector" width="640" height="640" loading="lazy">
+          <strong>Creality Space Pi Heat Shield / Heat Deflector</strong>
+          <span>Küki of Science</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/787835-creality-space-pi-dessicant-tray" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/787835.webp" alt="Creality Space Pi Dessicant Tray" width="640" height="640" loading="lazy">
+          <strong>Creality Space Pi Dessicant Tray</strong>
+          <span>PRINTNIC</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/797058-creality-space-pi-silica-gel-drying-container" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/797058.webp" alt="Creality Space Pi - Silica gel drying container" width="640" height="640" loading="lazy">
+          <strong>Creality Space Pi - Silica gel drying container</strong>
+          <span>Piotr_C</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/64902-lightweight-ams-riser-with-led-etc" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/64902.webp" alt="lightweight AMS Riser with LED etc." width="640" height="640" loading="lazy">
+          <strong>lightweight AMS Riser with LED etc.</strong>
+          <span>duck.knapp</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/99478-clippy-filament-clip" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/99478.webp" alt="CLIPPY - Filament clip" width="640" height="640" loading="lazy">
+          <strong>CLIPPY - Filament clip</strong>
+          <span>iLab 3D</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/73599-v4-bambu-spool-honeycomb-edition" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/73599.webp" alt="*V4* Bambu Spool - HoneyComb Edition" width="640" height="640" loading="lazy">
+          <strong>*V4* Bambu Spool - HoneyComb Edition</strong>
+          <span>andythilo</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/900527-dust-cover-for-p1s-p1p-x1c" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/900527.webp" alt="Dust Cover for P1S / P1P / X1C" width="640" height="640" loading="lazy">
+          <strong>Dust Cover for P1S / P1P / X1C</strong>
+          <span>Lamy</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/162059-x1c-p1p-p1s-poop-chute-bin" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/162059.webp" alt="X1C P1P P1S Poop Chute Bin" width="640" height="640" loading="lazy">
+          <strong>X1C P1P P1S Poop Chute Bin</strong>
+          <span>eclien</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/413220-bed-scraper-xl" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/413220.webp" alt="Bed Scraper XL" width="640" height="640" loading="lazy">
+          <strong>Bed Scraper XL</strong>
+          <span>ThreeD-Michael</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="kitchen-utilities" aria-labelledby="kitchen-utilities-title">
+      <h2 id="kitchen-utilities-title">Kitchen Utilities</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/1077689-potato-onion-garlic-bin-dispenser-keeper" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1077689.webp" alt="Potato, Onion &amp; Garlic Bin / Dispenser / Keeper" width="640" height="640" loading="lazy">
+          <strong>Potato, Onion &amp; Garlic Bin / Dispenser / Keeper</strong>
+          <span>Jerald</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1008326-tumbler-lid-stack-shelf" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1008326.webp" alt="Tumbler Lid Stack &amp; Shelf" width="640" height="640" loading="lazy">
+          <strong>Tumbler Lid Stack &amp; Shelf</strong>
+          <span>Alfonzo</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/93222-stackable-can-dispenser" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/93222.webp" alt="Stackable Can Dispenser" width="640" height="640" loading="lazy">
+          <strong>Stackable Can Dispenser</strong>
+          <span>zach13</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1006448-cabinet-shelf-organizer" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1006448.webp" alt="Cabinet Shelf Organizer" width="640" height="640" loading="lazy">
+          <strong>Cabinet Shelf Organizer</strong>
+          <span>Tater Prints</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/895329-cable-winder-organizer-v3-all-cable-sizes" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/895329.webp" alt="Cable Winder Organizer V3 (All Cable Sizes)" width="640" height="640" loading="lazy">
+          <strong>Cable Winder Organizer V3 (All Cable Sizes)</strong>
+          <span>CherrysCollection</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="tools-and-utilities" aria-labelledby="tools-and-utilities-title">
+      <h2 id="tools-and-utilities-title">Tools and Utilities</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/1070478-wall-mount-hanger-holder-storage-rope-padeye" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1070478.webp" alt="Wall mount Hanger - Holder / Storage Rope Padeye" width="640" height="640" loading="lazy">
+          <strong>Wall mount Hanger - Holder / Storage Rope Padeye</strong>
+          <span>SY3D</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/896575-drain-hair-catcher" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/896575.webp" alt="Drain hair catcher" width="640" height="640" loading="lazy">
+          <strong>Drain hair catcher</strong>
+          <span>Printed_3D</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/904274-panel-stand-support-helpers-imperial-1-4-1-inch" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/904274.webp" alt="Panel stand support helpers - Imperial 1/4-1 inch" width="640" height="640" loading="lazy">
+          <strong>Panel stand support helpers - Imperial 1/4-1 inch</strong>
+          <span>Darren 3d print</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/899016-the-better-hanger-picture-hanging-tool" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/899016.webp" alt="The Better Hanger - Picture Hanging Tool" width="640" height="640" loading="lazy">
+          <strong>The Better Hanger - Picture Hanging Tool</strong>
+          <span>YelTrik Designs</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/891266-super-strong-universal-wall-mount" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/891266.webp" alt="Super Strong Universal Wall Mount" width="640" height="640" loading="lazy">
+          <strong>Super Strong Universal Wall Mount</strong>
+          <span>Allar3D</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/893085-universal-wall-mount-medium" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/893085.webp" alt="Universal Wall Mount: Medium" width="640" height="640" loading="lazy">
+          <strong>Universal Wall Mount: Medium</strong>
+          <span>Blake</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/893062-universal-wall-mount-large" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/893062.webp" alt="Universal Wall Mount: Large" width="640" height="640" loading="lazy">
+          <strong>Universal Wall Mount: Large</strong>
+          <span>Blake</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/893097-universal-wall-mount-small" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/893097.webp" alt="Universal Wall Mount: Small" width="640" height="640" loading="lazy">
+          <strong>Universal Wall Mount: Small</strong>
+          <span>Blake</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/1022306-jigsaw-blade-box" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1022306.webp" alt="Jigsaw Blade Box" width="640" height="640" loading="lazy">
+          <strong>Jigsaw Blade Box</strong>
+          <span>HandToolBrad</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/489328-soft-tape-measure-spool" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/489328.webp" alt="Soft Tape Measure Spool" width="640" height="640" loading="lazy">
+          <strong>Soft Tape Measure Spool</strong>
+          <span>d0kt0rgs3</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="shelf" id="storage" aria-labelledby="storage-title">
+      <h2 id="storage-title">Storage</h2>
+      <div class="shelf-grid">
+        <a class="print-card" href="https://makerworld.com/en/models/1010874-divider-for-170x240mm-basket-by-eternity-labs" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/1010874.webp" alt="Divider for 170x240mm Basket by Eternity Labs" width="640" height="640" loading="lazy">
+          <strong>Divider for 170x240mm Basket by Eternity Labs</strong>
+          <span>TeamK</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/581328-170x240mm-large-stacking-basket-eternity-labs" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/581328.webp" alt="170x240mm Large Stacking Basket - Eternity Labs" width="640" height="640" loading="lazy">
+          <strong>170x240mm Large Stacking Basket - Eternity Labs</strong>
+          <span>Eternity Labs</span>
+        </a>
+        <a class="print-card" href="https://makerworld.com/en/models/620799-fast-print-box" target="_blank" rel="noopener">
+          <img src="../images/passion/3d-printing/collections/620799.webp" alt="FAST PRINT Box" width="640" height="640" loading="lazy">
+          <strong>FAST PRINT Box</strong>
+          <span>3Design</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured makes: drop bench photos in here later without moving the shelves. -->
+    <section class="print-featured" aria-labelledby="featured-title">
+      <h2 id="featured-title">Featured makes</h2>
+      <p>Photos coming.</p>
+    </section>
+
+    <p class="print-note">
+      Counts and collections are from
+      <a href="https://makerworld.com/en/@NavarreVal" target="_blank" rel="noopener">MakerWorld</a>
+      and can lag behind the profile.
+    </p>
+
+    <div class="print-footer">
+      <a class="back-btn stub-back" href="/#passion">← Return</a>
+      <a class="back-btn stub-back" href="https://makerworld.com/en/@NavarreVal" target="_blank" rel="noopener">MakerWorld profile</a>
+      <a class="back-btn stub-back" href="#top">↑ Top</a>
+    </div>
+  </div>
+
+  <script src="../js/page-enter.js"></script>
 </body>
 </html>
