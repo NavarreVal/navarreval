@@ -114,6 +114,47 @@
       border: 0;
       background: transparent;
     }
+    button.print-frame,
+    button.print-zoom {
+      padding: 0;
+      margin: 0;
+      cursor: zoom-in;
+      font: inherit;
+      color: inherit;
+      text-align: inherit;
+    }
+    button.print-zoom {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: transparent;
+    }
+    .print-photos button.print-frame:hover { border-color: #4a6a7a; }
+    button.print-frame:focus-visible,
+    button.print-zoom:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 1.7rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-nav:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
     .print-photos figcaption {
       margin-top: 0.45rem;
       font-size: 0.75rem;
@@ -304,32 +345,76 @@
 
     <div class="print-photos">
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/bambu-printer-desk.webp">
+          <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
+        </button>
         <figcaption>P1S on the bench</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/printer-interior-blue.webp" alt="Inside the P1S chamber, blue light on the build plate and the AMS above" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/printer-interior-blue.webp">
+          <img src="../images/passion/3d-printing/printer-interior-blue.webp" alt="Inside the P1S chamber, blue light on the build plate and the AMS above" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>Chamber</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/filament-rack.webp">
+          <img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>Filament rack</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/filament-spools-closeup.webp">
+          <img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>PLA spools</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/red-trex.webp" alt="A small red articulated T. rex, printed in PLA" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/red-trex.webp">
+          <img src="../images/passion/3d-printing/red-trex.webp" alt="A small red articulated T. rex, printed in PLA" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>Red T. rex</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/toothless-dragons.webp" alt="Three black articulated Toothless dragons, printed in three sizes" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/toothless-dragons.webp">
+          <img src="../images/passion/3d-printing/toothless-dragons.webp" alt="Three black articulated Toothless dragons, printed in three sizes" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>Toothless</figcaption>
       </figure>
       <figure>
-        <span class="print-frame"><img src="../images/passion/3d-printing/green-bracket.webp" alt="A hand holding a small green printed bracket" width="1200" height="900" loading="lazy"></span>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/green-bracket.webp">
+          <img src="../images/passion/3d-printing/green-bracket.webp" alt="A hand holding a small green printed bracket" width="1200" height="900" loading="lazy">
+        </button>
         <figcaption>Green bracket</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/life-counter-full.webp">
+          <img src="../images/passion/3d-printing/life-counter.webp" alt="Dual-dial life counter printed in black, white, and orange" width="1269" height="952" loading="lazy">
+        </button>
+        <figcaption>Life counter</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/pokemon-deck-box-full.webp">
+          <img src="../images/passion/3d-printing/pokemon-deck-box.webp" alt="Blue Pokémon TCG deck box with a stack of sleeved cards beside it" width="1269" height="952" loading="lazy">
+        </button>
+        <figcaption>Pokémon deck box</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/dice-cases-full.webp">
+          <img src="../images/passion/3d-printing/dice-cases.webp" alt="Three dice cases in orange, green, and black, each holding a polyhedral set" width="293" height="220" loading="lazy">
+        </button>
+        <figcaption>Dice cases</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/initiative-trackers-full.webp">
+          <img src="../images/passion/3d-printing/initiative-trackers.webp" alt="Red and green screen-edge initiative trackers clipped to a laptop with character cards" width="1269" height="952" loading="lazy">
+        </button>
+        <figcaption>Initiative trackers</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/mandalorian-helmet-full.webp">
+          <img src="../images/passion/3d-printing/mandalorian-helmet.webp" alt="A printed Mandalorian helmet worn as a self portrait" width="711" height="952" loading="lazy">
+        </button>
+        <figcaption>Mandalorian helmet</figcaption>
       </figure>
     </div>
 
@@ -352,15 +437,21 @@
       <p>The suppressor was printed in PET-CF, which required a hardened steel hotend. It is wrapped in a carbon fiber weave fastened with hardened epoxy resin.</p>
       <div class="print-story-shots">
         <figure>
-          <img src="../images/passion/3d-printing/form1-suppressor.webp" alt="Custom AR pistol in .300 BLK with Form 1 printed suppressor." width="1190" height="952" loading="lazy">
+          <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/form1-suppressor.webp">
+            <img src="../images/passion/3d-printing/form1-suppressor.webp" alt="Custom AR pistol in .300 BLK with Form 1 printed suppressor." width="1190" height="952" loading="lazy">
+          </button>
         </figure>
         <div class="print-story-pair">
           <figure>
-            <img src="../images/passion/3d-printing/toolhead-print-1.webp" alt="P1S toolhead at the start of printing the suppressor" width="1200" height="1600" loading="lazy">
+            <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/toolhead-print-1.webp">
+              <img src="../images/passion/3d-printing/toolhead-print-1.webp" alt="P1S toolhead at the start of printing the suppressor" width="1200" height="1600" loading="lazy">
+            </button>
             <figcaption>Start of a print</figcaption>
           </figure>
           <figure>
-            <img src="../images/passion/3d-printing/toolhead-print-2.webp" alt="P1S toolhead partway through printing the suppressor" width="1200" height="1600" loading="lazy">
+            <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/toolhead-print-2.webp">
+              <img src="../images/passion/3d-printing/toolhead-print-2.webp" alt="P1S toolhead partway through printing the suppressor" width="1200" height="1600" loading="lazy">
+            </button>
             <figcaption>Partway through</figcaption>
           </figure>
         </div>
@@ -673,6 +764,56 @@
     </div>
   </div>
 
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo">
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">‹</button>
+    <img src="" alt="" class="lightbox-image">
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">›</button>
+  </div>
+
+  <script>
+    const shots = [...document.querySelectorAll("button.print-frame[data-full], button.print-zoom[data-full]")];
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector(".lightbox-image");
+    let current = 0;
+
+    function openLightbox(index) {
+      current = (index + shots.length) % shots.length;
+      const btn = shots[current];
+      const img = btn.querySelector("img");
+      lightboxImg.src = btn.dataset.full;
+      lightboxImg.alt = img ? img.alt : "";
+      lightbox.classList.add("active");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("active");
+      lightboxImg.src = "";
+      lightboxImg.alt = "";
+    }
+
+    shots.forEach((btn, i) => btn.addEventListener("click", () => openLightbox(i)));
+    lightbox.addEventListener("click", closeLightbox);
+    lightbox.querySelector(".lightbox-prev").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(current - 1);
+    });
+    lightbox.querySelector(".lightbox-next").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(current + 1);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("active")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        openLightbox(current + 1);
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        openLightbox(current - 1);
+      }
+    });
+  </script>
   <script src="../js/page-enter.js"></script>
 </body>
 </html>
