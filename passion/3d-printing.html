@@ -86,30 +86,38 @@
       color: #e6e6e6;
       font-weight: 400;
     }
-    .print-photos {
+    .print-photos,
+    .print-makes {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
       margin: 1.4rem 0 2rem;
     }
-    .print-photos figure {
+    .print-hero,
+    .print-span { grid-column: 1 / -1; }
+    .print-photos figure,
+    .print-makes figure {
       margin: 0;
     }
-    .print-photos img {
+    .print-photos img,
+    .print-makes img {
       width: 100%;
       height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
       display: block;
       background: #111;
       border: 1px solid #2a2a2a;
     }
-    .print-photos figcaption {
+    .print-photos figcaption,
+    .print-makes figcaption {
       margin-top: 0.45rem;
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #777;
+    }
+    .print-makes {
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0;
     }
     .print-stats {
       display: flex;
@@ -203,14 +211,7 @@
       line-height: 1.35;
     }
     .print-featured {
-      max-width: 42rem;
-      margin: 2rem auto 0;
-    }
-    .print-featured p {
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #8a8a8a;
+      margin: 2.2rem 0 0;
     }
     .print-note {
       max-width: 560px;
@@ -229,7 +230,8 @@
       padding: 2.2rem 0 0.4rem;
     }
     @media (max-width: 700px) {
-      .print-photos { grid-template-columns: 1fr; }
+      .print-photos,
+      .print-makes { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .shelf-grid {
@@ -262,13 +264,29 @@
     </div>
 
     <div class="print-photos">
-      <figure>
-        <img src="../images/passion/3d-printing/photo-coming.svg" alt="Placeholder for a photo of the Bambu Lab P1S on the bench" width="800" height="600">
-        <figcaption>Bench photo coming</figcaption>
+      <figure class="print-hero">
+        <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
+        <figcaption>P1S on the bench</figcaption>
       </figure>
       <figure>
-        <img src="../images/passion/3d-printing/photo-coming.svg" alt="Placeholder for a photo of printed parts on the bench" width="800" height="600">
-        <figcaption>Bench photo coming</figcaption>
+        <img src="../images/passion/3d-printing/printer-interior-blue.webp" alt="Inside the P1S chamber, blue light on the build plate and the AMS above" width="1200" height="900" loading="lazy">
+        <figcaption>Chamber</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900" loading="lazy">
+        <figcaption>Filament rack</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/toolhead-print-1.webp" alt="P1S toolhead at the start of a print, nozzle just above a small part" width="1200" height="1600" loading="lazy">
+        <figcaption>Start of a print</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/toolhead-print-2.webp" alt="P1S toolhead partway through a print, with a line of filament on the plate" width="1200" height="1600" loading="lazy">
+        <figcaption>Partway through</figcaption>
+      </figure>
+      <figure class="print-span">
+        <img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900" loading="lazy">
+        <figcaption>PLA spools</figcaption>
       </figure>
     </div>
 
@@ -582,10 +600,22 @@
       </div>
     </section>
 
-    <!-- Featured makes: drop bench photos in here later without moving the shelves. -->
     <section class="print-featured" aria-labelledby="featured-title">
       <h2 id="featured-title">Featured makes</h2>
-      <p>Photos coming.</p>
+      <div class="print-makes">
+        <figure>
+          <img src="../images/passion/3d-printing/red-trex.webp" alt="A small red articulated T. rex, printed in PLA" width="1200" height="900" loading="lazy">
+          <figcaption>Red T. rex</figcaption>
+        </figure>
+        <figure>
+          <img src="../images/passion/3d-printing/toothless-dragons.webp" alt="Three black articulated Toothless dragons, printed in three sizes" width="1200" height="900" loading="lazy">
+          <figcaption>Toothless</figcaption>
+        </figure>
+        <figure>
+          <img src="../images/passion/3d-printing/green-bracket.webp" alt="A hand holding a small green printed bracket" width="1200" height="900" loading="lazy">
+          <figcaption>Green bracket</figcaption>
+        </figure>
+      </div>
     </section>
 
     <p class="print-note">
