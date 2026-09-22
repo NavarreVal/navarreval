@@ -86,38 +86,27 @@
       color: #e6e6e6;
       font-weight: 400;
     }
-    .print-photos,
-    .print-makes {
+    .print-photos {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
       margin: 1.4rem 0 2rem;
     }
-    .print-hero,
-    .print-span { grid-column: 1 / -1; }
-    .print-photos figure,
-    .print-makes figure {
-      margin: 0;
-    }
-    .print-photos img,
-    .print-makes img {
+    .print-photos figure { margin: 0; }
+    .print-photos img {
       width: 100%;
-      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
       display: block;
       background: #111;
       border: 1px solid #2a2a2a;
     }
-    .print-photos figcaption,
-    .print-makes figcaption {
+    .print-photos figcaption {
       margin-top: 0.45rem;
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #777;
-    }
-    .print-makes {
-      grid-template-columns: repeat(3, 1fr);
-      margin: 0;
     }
     .print-stats {
       display: flex;
@@ -160,13 +149,47 @@
       color: #b0b0b0;
     }
     .print-story p:last-child { margin-bottom: 0; }
-    .print-story figure { margin: 0 0 1.15rem; }
+    .print-story figure { margin: 0; }
     .print-story img {
       width: 100%;
       height: auto;
       display: block;
       background: #111;
       border: 1px solid #2a2a2a;
+    }
+    .print-story-shots {
+      display: grid;
+      gap: 0.85rem;
+      margin: 1.15rem 0 0;
+    }
+    .print-story-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    .print-story-pair img {
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+    .print-story figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    a.back-btn.print-profile {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    a.back-btn.print-profile img {
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #111;
+      border: 1px solid #3a3a3a;
     }
     .shelf {
       margin-bottom: 0;
@@ -179,8 +202,8 @@
     .shelf h2 { margin-bottom: 1.3rem; }
     .shelf-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.4rem 1rem;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.15rem 0.85rem;
     }
     .print-card {
       text-decoration: none;
@@ -218,9 +241,6 @@
       color: #888;
       line-height: 1.35;
     }
-    .print-featured {
-      margin: 2.2rem 0 0;
-    }
     .print-note {
       max-width: 560px;
       margin: 2rem auto 0;
@@ -237,14 +257,17 @@
       gap: 1rem;
       padding: 2.2rem 0 0.4rem;
     }
-    @media (max-width: 700px) {
-      .print-photos,
-      .print-makes { grid-template-columns: 1fr; }
+    @media (max-width: 1000px) {
+      .shelf-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
-    @media (max-width: 480px) {
-      .shelf-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      }
+    @media (max-width: 800px) {
+      .print-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shelf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .print-photos,
+      .print-story-pair { grid-template-columns: 1fr; }
+      .shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -272,7 +295,7 @@
     </div>
 
     <div class="print-photos">
-      <figure class="print-hero">
+      <figure>
         <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
         <figcaption>P1S on the bench</figcaption>
       </figure>
@@ -285,16 +308,20 @@
         <figcaption>Filament rack</figcaption>
       </figure>
       <figure>
-        <img src="../images/passion/3d-printing/toolhead-print-1.webp" alt="P1S toolhead at the start of a print, nozzle just above a small part" width="1200" height="1600" loading="lazy">
-        <figcaption>Start of a print</figcaption>
-      </figure>
-      <figure>
-        <img src="../images/passion/3d-printing/toolhead-print-2.webp" alt="P1S toolhead partway through a print, with a line of filament on the plate" width="1200" height="1600" loading="lazy">
-        <figcaption>Partway through</figcaption>
-      </figure>
-      <figure class="print-span">
         <img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900" loading="lazy">
         <figcaption>PLA spools</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/red-trex.webp" alt="A small red articulated T. rex, printed in PLA" width="1200" height="900" loading="lazy">
+        <figcaption>Red T. rex</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/toothless-dragons.webp" alt="Three black articulated Toothless dragons, printed in three sizes" width="1200" height="900" loading="lazy">
+        <figcaption>Toothless</figcaption>
+      </figure>
+      <figure>
+        <img src="../images/passion/3d-printing/green-bracket.webp" alt="A hand holding a small green printed bracket" width="1200" height="900" loading="lazy">
+        <figcaption>Green bracket</figcaption>
       </figure>
     </div>
 
@@ -305,17 +332,31 @@
         <p class="print-statline"><span>880</span> print hours</p>
         <p class="print-statline">Level <span>15</span></p>
       </div>
-      <a class="back-btn stub-back" href="https://makerworld.com/en/@NavarreVal" target="_blank" rel="noopener">MakerWorld profile</a>
+      <a class="back-btn stub-back print-profile" href="https://makerworld.com/en/@NavarreVal" target="_blank" rel="noopener">
+        <img src="../images/passion/3d-printing/makerworld-mark.png" alt="" width="48" height="48">
+        MakerWorld profile
+      </a>
     </section>
 
     <section class="print-story" aria-labelledby="form1-title">
       <h2 id="form1-title">Form 1 suppressor</h2>
-      <figure>
-        <img src="../images/passion/3d-printing/form1-suppressor.webp" alt="Custom AR pistol in .300 BLK with Form 1 printed suppressor." width="1190" height="952" loading="lazy">
-      </figure>
-      <p>I have a custom AR pistol chambered in .300 Blackout. I filed a Form 1 and paid the tax stamp. That is the legal NFA path, and the stamp was in hand before the part was printed.</p>
-      <p>The suppressor was printed in PET-CF, which required a hardened steel hotend.</p>
-      <p>There is more to this. It is not written yet.</p>
+      <p>I have a custom AR pistol chambered in .300 Blackout. I filed a Form 1 and paid the tax stamp so I could 3d Print a silencer. It actually worked really well!</p>
+      <p>The suppressor was printed in PET-CF, which required a hardened steel hotend. It is wrapped in a carbon fiber weave fastened with hardened epoxy resin.</p>
+      <div class="print-story-shots">
+        <figure>
+          <img src="../images/passion/3d-printing/form1-suppressor.webp" alt="Custom AR pistol in .300 BLK with Form 1 printed suppressor." width="1190" height="952" loading="lazy">
+        </figure>
+        <div class="print-story-pair">
+          <figure>
+            <img src="../images/passion/3d-printing/toolhead-print-1.webp" alt="P1S toolhead at the start of printing the suppressor" width="1200" height="1600" loading="lazy">
+            <figcaption>Start of a print</figcaption>
+          </figure>
+          <figure>
+            <img src="../images/passion/3d-printing/toolhead-print-2.webp" alt="P1S toolhead partway through printing the suppressor" width="1200" height="1600" loading="lazy">
+            <figcaption>Partway through</figcaption>
+          </figure>
+        </div>
+      </div>
     </section>
 
     <section class="shelf" id="work" aria-labelledby="work-title">
@@ -608,24 +649,6 @@
           <strong>FAST PRINT Box</strong>
           <span>3Design</span>
         </a>
-      </div>
-    </section>
-
-    <section class="print-featured" aria-labelledby="featured-title">
-      <h2 id="featured-title">Featured makes</h2>
-      <div class="print-makes">
-        <figure>
-          <img src="../images/passion/3d-printing/red-trex.webp" alt="A small red articulated T. rex, printed in PLA" width="1200" height="900" loading="lazy">
-          <figcaption>Red T. rex</figcaption>
-        </figure>
-        <figure>
-          <img src="../images/passion/3d-printing/toothless-dragons.webp" alt="Three black articulated Toothless dragons, printed in three sizes" width="1200" height="900" loading="lazy">
-          <figcaption>Toothless</figcaption>
-        </figure>
-        <figure>
-          <img src="../images/passion/3d-printing/green-bracket.webp" alt="A hand holding a small green printed bracket" width="1200" height="900" loading="lazy">
-          <figcaption>Green bracket</figcaption>
-        </figure>
       </div>
     </section>
 
