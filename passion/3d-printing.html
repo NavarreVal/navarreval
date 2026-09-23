@@ -108,7 +108,7 @@
     .print-timelapses img { aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
     .print-rig {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
       align-items: stretch;
       margin: 0 0 1.6rem;
@@ -132,14 +132,18 @@
       text-align: center;
     }
     .print-rig-copy .print-specs {
-      width: auto;
+      width: 100%;
       margin: 0 auto;
       text-align: center;
+      font-size: 0.84rem;
     }
     .print-rig-copy .print-specs th,
     .print-rig-copy .print-specs td {
       text-align: center;
+      white-space: normal;
+      padding: 0.28rem 0.2rem;
     }
+    .print-rig-copy .print-specs th { width: auto; }
     .print-timelapses figcaption,
     .print-rig figcaption {
       margin-top: 0.45rem;
@@ -375,12 +379,13 @@
     }
     @media (max-width: 800px) {
       .print-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .print-rig { grid-template-columns: 1fr; }
+      .print-rig { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .shelf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 520px) {
       .print-photos,
       .print-timelapses,
+      .print-rig,
       .print-story-pair { grid-template-columns: 1fr; }
       .shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -416,12 +421,6 @@
     </div>
 
     <section class="print-rig" aria-labelledby="rig-title">
-      <figure class="print-rig-photo">
-        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/bambu-printer-desk.webp">
-          <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
-        </button>
-        <figcaption>P1S on the bench</figcaption>
-      </figure>
       <div class="print-rig-copy">
         <h2 id="rig-title">Rig</h2>
         <table class="print-specs">
@@ -433,10 +432,22 @@
         </table>
       </div>
       <figure class="print-rig-photo">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/bambu-printer-desk.webp">
+          <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
+        </button>
+        <figcaption>P1S on the bench</figcaption>
+      </figure>
+      <figure class="print-rig-photo">
         <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/filament-rack.webp">
           <img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900">
         </button>
         <figcaption>Filament rack</figcaption>
+      </figure>
+      <figure class="print-rig-photo">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/filament-spools-closeup.webp">
+          <img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900">
+        </button>
+        <figcaption>PLA spools</figcaption>
       </figure>
     </section>
 
