@@ -86,6 +86,50 @@
       color: #e6e6e6;
       font-weight: 400;
     }
+    .print-timelapses {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 0 0 1.6rem;
+    }
+    .print-timelapses figure,
+    .print-rig-photo {
+      margin: 0;
+      min-width: 0;
+    }
+    .print-timelapses img,
+    .print-rig-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #111;
+      border: 1px solid #2a2a2a;
+    }
+    .print-timelapses img { aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
+    .print-rig {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: center;
+      margin: 0 0 1.6rem;
+    }
+    .print-rig-photo img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+    }
+    .print-rig-copy { min-width: 0; }
+    .print-rig-copy h2 { margin-bottom: 0.55rem; }
+    .print-timelapses figcaption,
+    .print-rig figcaption {
+      margin-top: 0.45rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    .print-timelapses button.print-zoom:hover img,
+    .print-rig-photo button.print-zoom:hover img { border-color: #4a6a7a; }
     .print-photos {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -311,10 +355,12 @@
     }
     @media (max-width: 800px) {
       .print-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .print-rig { grid-template-columns: 1fr; }
       .shelf-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 520px) {
       .print-photos,
+      .print-timelapses,
       .print-story-pair { grid-template-columns: 1fr; }
       .shelf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -332,42 +378,49 @@
       <div class="print-intro">
         <p>I print parts for the house, the shop, and the occasional toy on a Bambu Lab P1S. When I need a model, I usually pull it from MakerWorld.</p>
       </div>
-
-      <h2>Rig</h2>
-      <table class="print-specs">
-        <tbody>
-          <tr><th scope="row">Printer</th><td>Bambu Lab P1S</td></tr>
-          <tr><th scope="row">AMS</th><td>Yes</td></tr>
-          <tr><th scope="row">Primary filament</th><td>PLA</td></tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="print-photos">
+    <div class="print-timelapses">
       <figure>
-        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/bambu-printer-desk.webp">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-1.gif">
+          <img src="../images/passion/3d-printing/print-timelapse-1.gif" alt="Timelapse inside the P1S chamber as the first layers of a flat base build up" width="800" height="450">
+        </button>
+        <figcaption>Print timelapse</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-2.gif">
+          <img src="../images/passion/3d-printing/print-timelapse-2.gif" alt="Timelapse inside the P1S chamber of a taller white cylindrical print" width="800" height="450">
+        </button>
+        <figcaption>Print timelapse</figcaption>
+      </figure>
+    </div>
+
+    <section class="print-rig" aria-labelledby="rig-title">
+      <figure class="print-rig-photo">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/bambu-printer-desk.webp">
           <img src="../images/passion/3d-printing/bambu-printer-desk.webp" alt="Bambu Lab P1S on a wooden desk, AMS stacked on top, with a small screen beside it" width="1600" height="1200">
         </button>
         <figcaption>P1S on the bench</figcaption>
       </figure>
-      <figure>
-        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/printer-interior-blue.webp">
-          <img src="../images/passion/3d-printing/printer-interior-blue.webp" alt="Inside the P1S chamber, blue light on the build plate and the AMS above" width="1200" height="900" loading="lazy">
-        </button>
-        <figcaption>Chamber</figcaption>
-      </figure>
-      <figure>
-        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/filament-rack.webp">
-          <img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900" loading="lazy">
+      <div class="print-rig-copy">
+        <h2 id="rig-title">Rig</h2>
+        <table class="print-specs">
+          <tbody>
+            <tr><th scope="row">Printer</th><td>Bambu Lab P1S</td></tr>
+            <tr><th scope="row">AMS</th><td>Yes</td></tr>
+            <tr><th scope="row">Primary filament</th><td>PLA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="print-rig-photo">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/filament-rack.webp">
+          <img src="../images/passion/3d-printing/filament-rack.webp" alt="Wall rack of filament spools beside the printer" width="1200" height="900">
         </button>
         <figcaption>Filament rack</figcaption>
       </figure>
-      <figure>
-        <button type="button" class="print-frame" data-full="../images/passion/3d-printing/filament-spools-closeup.webp">
-          <img src="../images/passion/3d-printing/filament-spools-closeup.webp" alt="Close-up of PLA spools, including a translucent spool and a labeled Bambu spool" width="1200" height="900" loading="lazy">
-        </button>
-        <figcaption>PLA spools</figcaption>
-      </figure>
+    </section>
+
+    <div class="print-photos">
       <figure>
         <button type="button" class="print-frame" data-full="../images/passion/3d-printing/red-trex.webp">
           <img src="../images/passion/3d-printing/red-trex.webp" alt="Red Knit Raptor, a small articulated dinosaur printed in PLA" width="1200" height="900" loading="lazy">
