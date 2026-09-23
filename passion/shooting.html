@@ -6,53 +6,40 @@
   <title>Shooting | J. Navarre Valdivieso</title>
   <meta name="description" content="Long-range rifles, a Form 1 printed suppressor, and handloaded ammunition.">
   <link rel="stylesheet" href="../css/style.css?v=3.6">
-  <link rel="stylesheet" href="../css/shooting.css?v=1">
+  <link rel="stylesheet" href="../css/shooting.css?v=3">
 </head>
 <body>
   <!-- Placeholder copy. CAPT will rewrite. -->
   <article class="shoot" id="top">
-    <header class="shoot-mast">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>Shooting</h1>
-      <span></span>
+    <header class="hero">
+      <img
+        class="hero-photo"
+        src="../images/shooting/intro-athlon-bolt.jpg"
+        alt="OD green bolt-action rifle with an Athlon scope, resting on a bipod"
+        width="1555"
+        height="875"
+      >
+      <a class="back-btn stub-back hero-back" href="/#passion">← Passion</a>
+      <div class="hero-copy">
+        <h1>Shooting</h1>
+        <p class="dek">Three jobs sit under shooting: precision at distance, suppressors I print, and handloading.</p>
+        <p class="hero-note">Bolt rifle. Athlon scope, bipod.</p>
+      </div>
     </header>
 
-    <section class="shoot-section" aria-label="Intro">
-      <div class="prose">
-        <p class="lede">Three jobs sit under shooting: precision at distance, suppressors I print, and handloading.</p>
-      </div>
-
-      <figure class="fig fig-wide">
+    <section class="pair" aria-label="Intro">
+      <figure>
         <img
           src="../images/shooting/intro-ar-pistol.jpg"
           alt="AR pistol and loose ammunition laid out on an AR-15 cleaning mat"
           width="1079"
           height="806"
-        >
-        <figcaption>AR pistol on the mat.</figcaption>
-      </figure>
-
-      <div class="prose">
-        <p>The close work still starts there. An AR pistol, loose brass, and a diagram of the pins.</p>
-      </div>
-
-      <figure class="fig fig-bleed">
-        <img
-          src="../images/shooting/intro-athlon-bolt.jpg"
-          alt="OD green bolt-action rifle with an Athlon scope, resting on a bipod"
-          width="1555"
-          height="875"
           loading="lazy"
           decoding="async"
         >
-        <figcaption>Bolt rifle. Athlon scope, bipod.</figcaption>
+        <figcaption>AR pistol on the mat.</figcaption>
       </figure>
-
-      <div class="prose">
-        <p>Then the rifles built to sit still. OD green, an Athlon on top, bipod on the concrete. The chassis gun is the same job with the furniture changed.</p>
-      </div>
-
-      <figure class="fig fig-wide">
+      <figure>
         <img
           src="../images/shooting/intro-chassis.jpg"
           alt="Black chassis precision rifle with wood grip and forend panels, a muzzle brake, and a red chamber flag"
@@ -65,13 +52,13 @@
       </figure>
     </section>
 
-    <section class="shoot-section" aria-labelledby="long-range">
-      <div class="prose">
-        <h2 id="long-range">Long Range Shooting</h2>
-        <p>Long-range days are a bipod, a pad, and desert. The mountains are scenery.</p>
-      </div>
+    <section class="statement">
+      <p>The close work still starts there. An AR pistol, loose brass, and a diagram of the pins.</p>
+      <p>Then the rifles built to sit still. OD green, an Athlon on top, bipod on the concrete. The chassis gun is the same job with the furniture changed.</p>
+    </section>
 
-      <figure class="fig fig-portrait">
+    <section class="split" aria-labelledby="long-range">
+      <figure class="split-media">
         <img
           src="../images/shooting/lr-pov-mountains.jpg"
           alt="View downrange from behind a chassis rifle on a bipod, across desert toward mountains"
@@ -82,44 +69,42 @@
         >
         <figcaption>Downrange.</figcaption>
       </figure>
-
-      <div class="prose">
+      <div class="split-copy">
+        <h2 id="long-range">Long Range Shooting</h2>
+        <p>Long-range days are a bipod, a pad, and desert. The mountains are scenery.</p>
         <p>The Ruger American gets the same practice, off a bag. The red arrows are part of the photo.</p>
       </div>
+    </section>
 
-      <figure class="fig fig-portrait">
+    <section class="pair" aria-label="Range and the mile post">
+      <figure>
         <img
           src="../images/shooting/lr-ruger-range.jpg"
           alt="Ruger American rifle on a range bag, with red arrows marking distant targets"
           width="621"
           height="1011"
+          class="pos-ruger"
           loading="lazy"
           decoding="async"
         >
         <figcaption>Ruger American.</figcaption>
       </figure>
-
-      <div class="prose">
-        <p>Posted as-is: a milk jug at a mile, 6.5 Creedmoor.</p>
-      </div>
-
-      <figure class="fig fig-col">
+      <figure>
         <img
           src="../images/shooting/lr-milk-jug-post.jpg"
           alt="Social post about hitting a milk jug a mile away with a 6.5 Creedmoor, beside a photo of the shooter and a scoped rifle"
           width="959"
           height="1011"
+          class="pos-post"
           loading="lazy"
           decoding="async"
         >
         <figcaption>A mile. A milk jug. 6.5 Creedmoor.</figcaption>
       </figure>
+    </section>
 
-      <div class="prose">
-        <p>The patch says the other distance. LRSU Milk Jug Challenge, 1,000 yards.</p>
-      </div>
-
-      <figure class="fig fig-wide">
+    <section class="split split-reverse">
+      <figure class="split-media">
         <img
           src="../images/shooting/lr-patch.jpg"
           alt="Holding an LRSU Milk Jug Challenge patch marked 1,000 yards, chassis rifle in the other arm"
@@ -130,71 +115,65 @@
         >
         <figcaption>1,000 yards.</figcaption>
       </figure>
-
-      <div class="prose">
+      <div class="split-copy">
+        <p class="lead-line">Posted as-is: a milk jug at a mile, 6.5 Creedmoor.</p>
+        <p>The patch says the other distance. LRSU Milk Jug Challenge, 1,000 yards.</p>
         <p>Red steel. The impacts are the point.</p>
+        <figure class="detail">
+          <img
+            src="../images/shooting/lr-steel-selfie.jpg"
+            alt="Selfie beside a red steel target with several impacts"
+            width="345"
+            height="259"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>Steel.</figcaption>
+        </figure>
       </div>
-
-      <figure class="fig fig-modest">
-        <img
-          src="../images/shooting/lr-steel-selfie.jpg"
-          alt="Selfie beside a red steel target with several impacts"
-          width="345"
-          height="259"
-          loading="lazy"
-          decoding="async"
-        >
-        <figcaption>Steel.</figcaption>
-      </figure>
     </section>
 
-    <section class="shoot-section" aria-labelledby="suppressor">
-      <div class="prose">
+    <section class="feature" aria-labelledby="suppressor">
+      <div class="feature-copy">
         <h2 id="suppressor">3D Printed Suppressor</h2>
         <p>This one is a Form 1, printed rather than bought. Notes on the build are on the <a href="3d-printing.html#form1-title">3D printing</a> page. The video of it running comes later.</p>
       </div>
-
       <!-- CAPT: replace this block with the suppressor video. -->
-      <figure class="fig fig-wide">
-        <div class="video-slot">
-          <span>Suppressor video — coming soon</span>
-        </div>
-      </figure>
+      <div class="video-slot">
+        <span>Suppressor video — coming soon</span>
+      </div>
     </section>
 
-    <section class="shoot-section" aria-labelledby="reloading">
-      <div class="prose">
+    <section class="split split-reverse" aria-labelledby="reloading">
+      <div class="split-pair">
+        <figure>
+          <img
+            src="../images/shooting/reload-lee-press.jpg"
+            alt="Red Lee reloading press clamped to a workbench beside baskets of brass"
+            width="758"
+            height="1011"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>Lee press.</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="../images/shooting/reload-mtm-ammo.jpg"
+            alt="Loaded cartridges standing in a blue MTM ammunition tray"
+            width="758"
+            height="1011"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>MTM tray.</figcaption>
+        </figure>
+      </div>
+      <div class="split-copy">
         <h2 id="reloading">Reloading</h2>
         <p>Handloading is the half with no view downrange. A Lee press on the bench, brass waiting in a basket.</p>
-      </div>
-
-      <figure class="fig fig-portrait">
-        <img
-          src="../images/shooting/reload-lee-press.jpg"
-          alt="Red Lee reloading press clamped to a workbench beside baskets of brass"
-          width="758"
-          height="1011"
-          loading="lazy"
-          decoding="async"
-        >
-        <figcaption>Lee press.</figcaption>
-      </figure>
-
-      <div class="prose">
         <p>Finished rounds go in the MTM tray. A short row, then empty holes.</p>
       </div>
-
-      <figure class="fig fig-portrait">
-        <img
-          src="../images/shooting/reload-mtm-ammo.jpg"
-          alt="Loaded cartridges standing in a blue MTM ammunition tray"
-          width="758"
-          height="1011"
-          loading="lazy"
-          decoding="async"
-        >
-        <figcaption>MTM tray.</figcaption>
-      </figure>
     </section>
 
     <footer class="shoot-foot">
