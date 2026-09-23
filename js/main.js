@@ -1018,6 +1018,24 @@ window.addEventListener('popstate', () => {
 
     if (lightbox && lightboxImg) {
 
+      const heroFrames = [...document.querySelectorAll('.hero-collage .flow-frame[data-full]')];
+      const heroPhotos = [];
+      heroFrames.forEach((frame) => {
+        const src = new URL(frame.getAttribute('data-full'), location.href).href;
+        if (!heroPhotos.includes(src)) heroPhotos.push(src);
+      });
+      heroFrames.forEach((frame) => {
+        frame.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const src = new URL(frame.getAttribute('data-full'), location.href).href;
+          lightboxImages = heroPhotos.slice();
+          lightboxIndex = Math.max(0, lightboxImages.indexOf(src));
+          lightboxImg.src = lightboxImages[lightboxIndex];
+          lightbox.classList.add('active');
+        });
+      });
+
       // Open lightbox and remember the full set of images
       document.addEventListener('click', e => {
         if (e.target.classList.contains('gallery-image')) {
