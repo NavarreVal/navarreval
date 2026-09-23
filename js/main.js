@@ -1,3 +1,18 @@
+function clearPageSlide() {
+  document.documentElement.classList.remove('page-slide');
+  if (!document.body) return;
+  document.body.classList.remove('page-exit', 'page-enter', 'page-enter-active');
+  document.body.style.transform = '';
+  document.body.style.opacity = '';
+}
+
+// Leaving for a passion page slides the hub off-screen. Back/forward cache
+// restores that exact DOM, which otherwise comes back blank.
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) clearPageSlide();
+});
+window.addEventListener('pagehide', clearPageSlide);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   let lightboxImages = [];
@@ -34,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     current.classList.remove('active');
   }
 
+  window.showSitePanel = showPanel;
+
   links.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -65,11 +82,12 @@ window.addEventListener('popstate', () => {
     if (currentMode === 'detail') {
       const events = getEventsForYear(currentYear);
       if (events.length > 1) {
-        // Go back to the year selection panel
+        // Go back to the year selection panel. The detail shared the selection's
+        // history entry, so clear that flag or the replacement entry never lands
+        // and the next Back skips the timeline entirely.
         detailTooltip.classList.remove('visible', 'pinned');
+        clearOverlayState();
         openSelection(currentYear, null);
-        // Keep the history entry so another back closes the selection
-        pushOverlayState();
       } else {
         closeAll();
         clearOverlayState();
