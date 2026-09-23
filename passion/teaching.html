@@ -65,12 +65,22 @@
     }
 
     .teach-page h2 {
-      font-size: 0.82rem;
-      letter-spacing: 0.16em;
+      font-size: 1.45rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 600;
-      margin: 2.1rem 0 0.85rem;
+      line-height: 1.25;
+      margin: 2.6rem 0 1rem;
+    }
+
+    .teach-page h2::after {
+      content: "";
+      display: block;
+      width: 3.2rem;
+      height: 2px;
+      margin-top: 0.55rem;
+      background: var(--gold);
     }
 
     .teach-page section:first-of-type h2 {
@@ -160,11 +170,22 @@
       border-radius: 8px;
     }
 
-    .teach-page figcaption {
-      margin-top: 0.55rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.04em;
-      color: #8a8a8a;
+    .degree-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .teach-page figure.degree-logo img {
+      width: min(16.5rem, 70%);
+      max-width: 260px;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      border-radius: 50%;
     }
 
     .study-sounds figure {
@@ -208,6 +229,7 @@
     .study-links {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       align-items: baseline;
       gap: 0.55rem 1.4rem;
       margin: 0;
@@ -303,7 +325,7 @@
 
       <section aria-labelledby="licensing-heading">
         <h2 id="licensing-heading">Licensing</h2>
-        <p>Utah educator license through the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>. The name on the license record is Jade Valdivieso.</p>
+        <p>Utah educator license through the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>.</p>
         <div class="teach-card">
           <dl>
             <dt>License type</dt>
@@ -344,14 +366,13 @@
               <dd>Teach Social Studies at a High School or Collegiate level</dd>
             </dl>
           </div>
-          <figure>
+          <figure class="degree-logo">
             <img
-              src="../images/passion/teaching/degree-placeholder.svg"
-              alt="Degree photo coming soon"
-              width="800"
-              height="520"
+              src="../images/passion/teaching/wgu-logo.jpg"
+              alt="Western Governors University logo"
+              width="521"
+              height="521"
             >
-            <figcaption>Degree photo coming soon</figcaption>
           </figure>
         </div>
       </section>
