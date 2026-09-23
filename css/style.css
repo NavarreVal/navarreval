@@ -156,6 +156,27 @@ body.site-hub.personal-open {
   color: #e8c547;
 }
 
+.crew-footer {
+  margin: 1.35rem auto 0;
+  max-width: 36rem;
+  text-align: center;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: #8d8d8d;
+}
+
+.crew-footer a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+}
+
+.crew-footer a:hover,
+.crew-footer a:focus-visible {
+  border-bottom-color: var(--gold);
+}
+
 
 /* ===== Professional Timeline (Desktop) ===== */
 #professional {
@@ -1134,6 +1155,10 @@ a.back-btn.stub-back {
 
   #passion .fan {
     margin-bottom: 0.4rem;
+  }
+
+  #passion .crew-footer {
+    margin-top: 0.45rem;
   }
 }
 
