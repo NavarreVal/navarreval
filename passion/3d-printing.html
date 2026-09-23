@@ -110,7 +110,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
       gap: 1rem;
-      align-items: center;
+      align-items: stretch;
       margin: 0 0 1.6rem;
     }
     .print-rig-photo img {
@@ -118,8 +118,28 @@
       object-fit: cover;
       object-position: center;
     }
-    .print-rig-copy { min-width: 0; }
-    .print-rig-copy h2 { margin-bottom: 0.55rem; }
+    .print-rig-copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .print-rig-copy h2 {
+      margin: 0 0 0.7rem;
+      width: 100%;
+      text-align: center;
+    }
+    .print-rig-copy .print-specs {
+      width: auto;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .print-rig-copy .print-specs th,
+    .print-rig-copy .print-specs td {
+      text-align: center;
+    }
     .print-timelapses figcaption,
     .print-rig figcaption {
       margin-top: 0.45rem;
