@@ -1141,7 +1141,7 @@ body.page-enter-active {
 
 .hero-name {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   left: 0;
   right: 0;
   top: 45%;
@@ -1169,90 +1169,74 @@ body.page-enter-active {
 .hero-collage {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 1;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.hero-tile {
+.flow-row {
   position: absolute;
-  display: block;
-  padding: 0;
-  border: 0;
-  margin: 0;
-  background: #1a1a1a;
-  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.55);
+  left: 0;
+  right: 0;
   overflow: hidden;
-  cursor: pointer;
-  pointer-events: auto;
-  line-height: 0;
 }
 
-.hero-tile img {
+.flow-row-top {
+  top: calc(var(--chrome-h) + 0.4rem);
+}
+
+.flow-row-bottom {
+  bottom: 12vh;
+}
+
+.flow-track {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: max-content;
+}
+
+.flow-track.is-flowing {
+  animation: flow-ltr 64s linear infinite;
+}
+
+.flow-row-bottom .flow-track.is-flowing {
+  animation-duration: 86s;
+  animation-delay: -28s;
+}
+
+@keyframes flow-ltr {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.flow-frame {
+  flex: 0 0 auto;
+  width: 17vw;
+  height: 24vh;
+  min-width: 9.5rem;
+  overflow: hidden;
+  background: #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.45);
+}
+
+.flow-row-bottom .flow-frame {
+  width: 14vw;
+  height: 18vh;
+  min-width: 8rem;
+}
+
+.flow-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 22%;
   display: block;
-  transition: transform 0.45s ease;
-}
-
-.hero-tile:hover img,
-.hero-tile:focus-visible img {
-  transform: scale(1.045);
-}
-
-.tile-1 {
-  left: -1.4vw;
-  top: calc(var(--chrome-h) + 0.55rem);
-  width: 16vw;
-  height: 26vh;
-}
-
-.tile-2 {
-  left: 33vw;
-  top: calc(var(--chrome-h) + 0.25rem);
-  width: 28vw;
-  height: 19vh;
-}
-
-.tile-3 {
-  right: -1.2vw;
-  top: calc(var(--chrome-h) + 0.9rem);
-  width: 15vw;
-  height: 27vh;
-}
-
-.tile-4 {
-  left: -0.8vw;
-  bottom: 3.2vh;
-  width: 15.5vw;
-  height: 24vh;
-}
-
-.tile-5 {
-  left: 16vw;
-  bottom: 5.5vh;
-  width: 11.5vw;
-  height: 18vh;
-}
-
-.tile-6 {
-  right: 0.4vw;
-  top: 44%;
-  width: 12.5vw;
-  height: 18vh;
-}
-
-.tile-7 {
-  right: -1vw;
-  bottom: 3.2vh;
-  width: 14vw;
-  height: 22vh;
 }
 
 .hero-bio {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   left: 50%;
   bottom: 2.6vh;
   transform: translateX(-50%);
@@ -1442,8 +1426,7 @@ body.menu-open .site-chrome {
 }
 
 .site-logo:focus-visible,
-.menu-toggle:focus-visible,
-.hero-tile:focus-visible {
+.menu-toggle:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
@@ -1477,38 +1460,20 @@ body.menu-open .menu-toggle:focus-visible,
     line-height: 1.35;
   }
 
-  .tile-2,
-  .tile-5,
-  .tile-7 {
-    display: none;
-  }
-
-  .tile-1 {
-    left: -8vw;
-    top: calc(var(--chrome-h) + 0.35rem);
+  .flow-frame {
     width: 42vw;
-    height: 20vh;
+    height: 18vh;
+    min-width: 8.5rem;
   }
 
-  .tile-3 {
-    right: -10vw;
-    top: calc(var(--chrome-h) + 1.4rem);
-    width: 38vw;
-    height: 22vh;
-  }
-
-  .tile-4 {
-    left: -6vw;
-    bottom: 11vh;
+  .flow-row-bottom .flow-frame {
     width: 36vw;
-    height: 16vh;
+    height: 14vh;
+    min-width: 7.5rem;
   }
 
-  .tile-6 {
-    right: -6vw;
-    bottom: 12vh;
-    width: 34vw;
-    height: 15vh;
+  .flow-row-bottom {
+    bottom: 14vh;
   }
 
   .menu-nav a {
@@ -1518,13 +1483,12 @@ body.menu-open .menu-toggle:focus-visible,
 
 @media (max-height: 700px) and (min-width: 821px) {
   .hero-name { top: 42%; }
-  .tile-2 { height: 16vh; }
-  .tile-1, .tile-3 { height: 22vh; }
+  .flow-frame { height: 20vh; }
+  .flow-row-bottom .flow-frame { height: 15vh; }
   .hero-bio { font-size: 0.82rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-tile img,
   .burger,
   .burger::before,
   .burger::after {
@@ -1533,5 +1497,10 @@ body.menu-open .menu-toggle:focus-visible,
 
   .site-menu:not([hidden]) {
     animation: none;
+  }
+
+  .flow-track.is-flowing {
+    animation: none;
+    transform: none;
   }
 }

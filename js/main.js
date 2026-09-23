@@ -283,46 +283,11 @@ window.addEventListener('popstate', () => {
     });
   }
 
-  // ========== Profile photo cycling ==========
-  const profilePhotos = [
-    "images/profilePics/navarre.jpg",
-    "images/profilePics/navarre01.jpg",
-    "images/profilePics/navarre02.jpg",
-    "images/profilePics/navarre03.jpg",
-    "images/profilePics/navarre04.jpg",
-    "images/profilePics/navarre05.jpg",
-    "images/profilePics/navarre06.jpg",
-    "images/profilePics/navarre07.jpg",
-    "images/profilePics/navarre08.jpg",
-    "images/profilePics/navarre09.jpg",
-    "images/profilePics/navarre10.jpg",
-    "images/profilePics/navarre11.png",
-    "images/profilePics/navarre12.jpg"
-  ];
-
-  profilePhotos.forEach((src) => {
-    const preload = new Image();
-    preload.src = src;
-  });
-
-  const heroTiles = [...document.querySelectorAll('.hero-tile')];
-
-  function shuffleTile(tile) {
-    const showing = new Set(
-      heroTiles
-        .filter((item) => item.getClientRects().length)
-        .map((item) => item.dataset.src)
-    );
-    let pool = profilePhotos.filter((src) => !showing.has(src));
-    if (!pool.length) pool = profilePhotos.filter((src) => src !== tile.dataset.src);
-    const next = pool[Math.floor(Math.random() * pool.length)];
-    tile.dataset.src = next;
-    const img = tile.querySelector('img');
-    if (img) img.src = next;
-  }
-
-  heroTiles.forEach((tile) => {
-    tile.addEventListener('click', () => shuffleTile(tile));
+  // Double each photo row so the left-to-right drift can loop without a jump.
+  document.querySelectorAll('.flow-track').forEach((track) => {
+    const frames = [...track.children];
+    frames.forEach((frame) => track.appendChild(frame.cloneNode(true)));
+    track.classList.add('is-flowing');
   });
 
   function fitHeroName() {
