@@ -332,21 +332,21 @@ a.back-btn:focus-visible,
   transform: scale(1.03);
 }
 
-.video-slot {
+.video-band {
+  margin: 0;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(ellipse at center, #221e16 0%, #0c0c0c 68%);
+  background: #0c0c0c;
   border-top: 1px solid rgba(201, 162, 39, 0.4);
   border-bottom: 1px solid rgba(201, 162, 39, 0.4);
-  color: var(--gold);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: clamp(0.78rem, 1.5vw, 1.05rem);
-  text-align: center;
-  padding: 1.5rem;
+}
+
+.video-band video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #0c0c0c;
 }
 
 .lightbox-nav {
