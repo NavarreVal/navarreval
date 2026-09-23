@@ -93,6 +93,13 @@
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 1.4rem 1rem;
     }
+    /* 1100px content width fits 6 tiles (minmax 150px, 1rem gap). */
+    .shelf[data-shelf="recent"] .shelf-grid,
+    .shelf[data-shelf="favorites"] .shelf-grid {
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      min-width: 0;
+      overflow-x: auto;
+    }
     .listen {
       text-decoration: none;
       color: inherit;
@@ -169,18 +176,18 @@
       <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>.
     </p>
 
-    <section class="shelf" data-shelf="favorites" data-count="24">
+    <section class="shelf" data-shelf="recent" data-count="6">
+      <h2>Recently played</h2>
+      <p class="shelf-status">Loading…</p>
+      <div class="shelf-grid"></div>
+    </section>
+
+    <section class="shelf" data-shelf="favorites" data-count="12">
       <div class="shelf-head">
         <h2>Juliet November Victor</h2>
         <a class="shelf-open" href="https://open.spotify.com/playlist/1LgVAzG8COkMPbRBksoCCq" target="_blank" rel="noopener">Open playlist</a>
       </div>
       <p class="shelf-blurb">These are my current favorite tracks.</p>
-      <p class="shelf-status">Loading…</p>
-      <div class="shelf-grid"></div>
-    </section>
-
-    <section class="shelf" data-shelf="recent" data-count="12">
-      <h2>Recently played</h2>
       <p class="shelf-status">Loading…</p>
       <div class="shelf-grid"></div>
     </section>
@@ -230,17 +237,21 @@
 
     async function loadShelf(section) {
       const shelf = section.dataset.shelf;
-      const count = section.dataset.count || 12;
+      const count = Number(section.dataset.count) || 12;
       const status = section.querySelector(".shelf-status");
       const grid = section.querySelector(".shelf-grid");
       const open = section.querySelector(".shelf-open");
-      const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + count;
+      /* Recently played is a play log, so duplicate tracks are dropped and
+         a request for 6 can come back short. Ask for twice as many, then
+         keep one row. */
+      const fetchCount = shelf === "recent" ? Math.min(50, count * 2) : count;
+      const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + fetchCount;
 
       try {
         const res = await fetch(feed);
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
-        const items = Array.isArray(data.items) ? data.items : [];
+        const items = (Array.isArray(data.items) ? data.items : []).slice(0, count);
         if (open) open.href = playlistUrl(data.playlist_url);
         status.remove();
         if (!items.length) {
