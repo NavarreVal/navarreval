@@ -1132,7 +1132,7 @@ a.back-btn.stub-back {
     align-items: center;
     text-align: center;
     gap: 0.55rem;
-    margin-bottom: 2.4rem;
+    margin-bottom: 3.5rem;
   }
 
   .passion-head .passion-lead {
@@ -1159,7 +1159,7 @@ a.back-btn.stub-back {
   }
 
   #passion .passion-head {
-    margin-bottom: 3.5rem;
+    margin-bottom: 6rem;
   }
 
   #passion .passion-hands {
@@ -1172,7 +1172,7 @@ a.back-btn.stub-back {
 }
 
 #passion .crew-footer {
-  margin-top: clamp(4.5rem, 12vh, 7rem);
+  margin-top: clamp(7.5rem, 18vh, 11rem);
 }
 
 @media (min-width: 901px) and (max-height: 860px) {
@@ -1361,7 +1361,7 @@ body.page-enter-active {
 .flow-track {
   display: flex;
   align-items: flex-start;
-  gap: clamp(11rem, 22vw, 26rem);
+  gap: clamp(22rem, 44vw, 52rem);
   width: max-content;
   animation-name: flow-ltr;
   animation-duration: 13s;
@@ -1372,13 +1372,13 @@ body.page-enter-active {
 }
 
 .flow-row-mid .flow-track {
-  gap: clamp(14rem, 30vw, 34rem);
+  gap: clamp(28rem, 60vw, 68rem);
   animation-duration: 19s;
   animation-delay: -6s;
 }
 
 .flow-row-low .flow-track {
-  gap: clamp(12rem, 24.8vw, 29rem);
+  gap: clamp(24rem, 49.6vw, 58rem);
   animation-duration: 26s;
   animation-delay: -11s;
 }
@@ -1611,15 +1611,27 @@ body.menu-open .site-chrome {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 104px;
-  height: 104px;
+  flex: 0 0 96px;
+  width: 96px;
+  height: 96px;
+  overflow: hidden;
 }
 
 .menu-social img {
   width: 96px;
   height: 96px;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
+  object-position: center;
   display: block;
+}
+
+/* LinkedIn’s view box is mostly empty, so the mark is scaled up
+   inside the same 96px box the other icons already fill. */
+.menu-social a[title="LinkedIn"] img {
+  width: 184px;
+  height: 184px;
 }
 
 .site-logo:focus-visible,
