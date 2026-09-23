@@ -18,21 +18,27 @@ body {
 }
 
 .write-top {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  width: 100%;
+  column-gap: 1rem;
   margin-bottom: 2.2rem;
 }
 
 .write-top h1 {
+  justify-self: center;
+  text-align: center;
   font-size: 1.15rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #f0f0f0;
   font-weight: 500;
   margin: 0;
-  text-align: center;
+}
+
+.write-top .stub-back {
+  justify-self: start;
 }
 
 .write-top .stub-back,
@@ -108,12 +114,20 @@ body {
   }
 
   .write-top {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
+    row-gap: 0.7rem;
   }
 
   .write-top h1 {
-    order: -1;
-    width: 100%;
+    grid-row: 1;
+  }
+
+  .write-top .stub-back {
+    grid-row: 2;
+  }
+
+  .write-top > span {
+    display: none;
   }
 
   .write-covers {
