@@ -11,7 +11,7 @@ function currentPanelId() {
 
 function directionFor(id) {
   if (id === "landing") return "top";
-  const link = document.querySelector('.nav-link[href="#' + id + '"]');
+  const link = document.querySelector('[data-panel][href="#' + id + '"]');
   return link ? link.dataset.direction : null;
 }
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const initial = panelFromHash();
   if (initial !== "landing") showHistoryPanel(initial);
 
-  document.querySelectorAll(".nav-link").forEach((link) => {
+  document.querySelectorAll("[data-panel]").forEach((link) => {
     link.addEventListener("click", () => {
       const id = (link.getAttribute("href") || "").replace(/^#/, "");
       if (!id || id === "landing") return;

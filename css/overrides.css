@@ -6,17 +6,26 @@
 
 #passion .back-btn {
   position: absolute;
-  top: 1.25rem;
+  top: calc(var(--chrome-h) + 0.45rem);
   left: 1.25rem;
   z-index: 20;
 }
 
 #personal .back-btn {
   position: absolute;
-  top: 1.25rem;
+  top: calc(var(--chrome-h) + 0.45rem);
   left: auto;
   right: 1.25rem;
   z-index: 20;
+}
+
+body.site-hub #passion .passion-inner,
+body.site-hub #personal .panel-inner {
+  padding-top: calc(var(--chrome-h) + 3.5rem);
+}
+
+body.site-hub #professional .professional-inner {
+  padding-top: calc(var(--chrome-h) + 1.15rem);
 }
 
 #professional .back-btn {

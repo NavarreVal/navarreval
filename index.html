@@ -4,59 +4,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css?v=3.7">
-  <link rel="stylesheet" href="css/overrides.css?v=5.1">
+  <link rel="stylesheet" href="css/style.css?v=4.0">
+  <link rel="stylesheet" href="css/overrides.css?v=6.0">
 </head>
-<body>
+<body class="site-hub on-landing">
+
+  <header class="site-chrome">
+    <a class="site-logo" href="/" aria-label="Navarre Valdivieso, home">
+      <img src="assets/signature.png" alt="">
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label="Open menu"
+    >
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <nav class="menu-nav" aria-label="Sections">
+      <a href="#personal" data-panel data-direction="left">Personal</a>
+      <a href="#passion" data-panel data-direction="right">Passion</a>
+      <a href="#professional" data-panel data-direction="bottom">Professional</a>
+    </nav>
+    <div class="menu-social">
+      <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
+        <img src="images/icons/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
+        <img src="images/icons/github.svg" alt="GitHub">
+      </a>
+      <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
+        <img src="images/icons/globe.svg" alt="Uintah Valley">
+      </a>
+    </div>
+  </div>
 
   <!-- ========== LANDING ========== -->
   <section id="landing" class="panel active">
-    <div class="landing-wrapper">
-      <div class="intro">
-        <h1 class="name">J. Navarre Valdivieso</h1>
+    <div class="hero">
+      <h1 class="hero-name">
+        <span class="line">Navarre</span>
+        <span class="line">Valdivieso</span>
+      </h1>
 
-        <p class="bio">
-          Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
-          currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
-          clear thinking, and building things that last.
-        </p>
+      <div class="hero-collage">
+        <button type="button" class="hero-tile tile-1" data-src="images/profilePics/navarre.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-2" data-src="images/profilePics/navarre03.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre03.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-3" data-src="images/profilePics/navarre08.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre08.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-4" data-src="images/profilePics/navarre05.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre05.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-5" data-src="images/profilePics/navarre12.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre12.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-6" data-src="images/profilePics/navarre06.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre06.jpg" alt="" draggable="false">
+        </button>
+        <button type="button" class="hero-tile tile-7" data-src="images/profilePics/navarre07.jpg" aria-label="Show another portrait">
+          <img src="images/profilePics/navarre07.jpg" alt="" draggable="false">
+        </button>
       </div>
 
-      <div class="photo-nav">
-        <a href="#personal" class="nav-link left" data-direction="left">
-          <span class="arrow">←</span>
-          <span class="label">Personal</span>
-        </a>
-
-        <img src="images/profilePics/navarre.jpg" alt="Navarre Valdivieso" class="profile-photo">
-
-        <a href="#passion" class="nav-link right" data-direction="right">
-          <span class="label">Passion</span>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-
-      <a href="#professional" class="nav-link bottom" data-direction="bottom">
-        <span class="arrow">↓</span>
-        <span class="label">Professional</span>
-      </a>
-
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
-          <img src="images/icons/linkedin.svg" alt="LinkedIn">
-        </a>
-        <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
-          <img src="images/icons/github.svg" alt="GitHub">
-        </a>
-        <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
-          <img src="images/icons/globe.svg" alt="Uintah Valley">
-        </a>
-      </div>
+      <p class="hero-bio">
+        Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
+        currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
+        clear thinking, and building things that last.
+      </p>
     </div>
   </section>
 
   <!-- ========== PERSONAL ========== -->
-  <section id="personal" class="panel">
+  <section id="personal" class="panel" aria-hidden="true">
     <div class="panel-inner">
       <button class="back-btn">Back →</button>
       <h1>Personal</h1>
@@ -75,7 +103,7 @@
   </section>
 
   <!-- ========== PASSION ========== -->
-  <section id="passion" class="panel">
+  <section id="passion" class="panel" aria-hidden="true">
     <div class="panel-inner passion-inner">
       <button class="back-btn">← Back</button>
       <h1>Passion</h1>
@@ -162,7 +190,7 @@
   </section>
 
   <!-- ========== PROFESSIONAL ========== -->
-  <section id="professional" class="panel">
+  <section id="professional" class="panel" aria-hidden="true">
     <div class="panel-inner professional-inner">
       <button class="back-btn">↑ Back</button>
       <h1>Professional & Educational Timeline</h1>
@@ -204,7 +232,7 @@
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=3.8"></script>
-  <script src="js/hash-panel.js?v=3.8"></script>
+  <script src="js/main.js?v=4.0"></script>
+  <script src="js/hash-panel.js?v=4.0"></script>
 </body>
 </html>
