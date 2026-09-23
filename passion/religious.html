@@ -416,14 +416,10 @@
       .band {
         grid-template-columns: 1fr;
       }
-      .band-copy,
       .band-photo,
-      .band-flip .band-copy,
-      .band-flip .band-photo {
-        order: unset;
-      }
-      .band-copy { order: 1; }
-      .band-photo { order: 2; }
+      .band-flip .band-photo { order: 1; }
+      .band-copy,
+      .band-flip .band-copy { order: 2; }
       .band-photo {
         min-height: 240px;
       }
