@@ -4,24 +4,444 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teaching | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <meta name="description" content="A passion for teaching, a Study Sounds mix, a Utah educator license, and degrees from Western Governors University.">
+  <link rel="stylesheet" href="../css/style.css?v=3.6">
+  <style>
+    :root { --gold: #c9a227; }
+
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+
+    .teach-page {
+      width: min(70vw, 1100px);
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1.6rem 1.1rem 3.2rem;
+    }
+
+    .teach-panel {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .teach-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .teach-top h1 {
+      font-size: 1.15rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin: 0;
+      text-align: center;
+    }
+
+    .teach-top .stub-back,
+    .teach-footer .stub-back {
+      text-decoration: none;
+      margin-bottom: 0;
+    }
+
+    .teach-rule {
+      width: 3.2rem;
+      height: 2px;
+      background: var(--gold);
+      border: 0;
+      margin: 0 0 1.8rem;
+    }
+
+    .teach-page h2 {
+      font-size: 1.45rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 2.6rem 0 1rem;
+    }
+
+    .teach-page h2::after {
+      content: "";
+      display: block;
+      width: 3.2rem;
+      height: 2px;
+      margin-top: 0.55rem;
+      background: var(--gold);
+    }
+
+    .teach-page section:first-of-type h2 {
+      margin-top: 0;
+    }
+
+    .teach-page p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #c8c8c8;
+      margin: 0 0 1.15rem;
+    }
+
+    .teach-page p a,
+    .study-links a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+      padding-bottom: 0.05em;
+    }
+
+    .teach-page p a:hover,
+    .teach-page p a:focus-visible,
+    .study-links a:hover,
+    .study-links a:focus-visible {
+      border-bottom-color: var(--gold);
+    }
+
+    .teach-card {
+      background: #141414;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1.15rem 1.2rem 0.35rem;
+      margin: 0 0 0.4rem;
+    }
+
+    .teach-card dl {
+      margin: 0;
+    }
+
+    .teach-card dt {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 0 0 0.3rem;
+    }
+
+    .teach-card dd {
+      margin: 0 0 0.95rem;
+      color: #c8c8c8;
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+
+    .teach-card ul {
+      margin: 0.45rem 0 0;
+      padding: 0 0 0 1.15rem;
+    }
+
+    .teach-card li {
+      margin: 0 0 0.28rem;
+      color: #c8c8c8;
+      font-size: 1.02rem;
+      line-height: 1.5;
+    }
+
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      align-items: center;
+      margin: 0;
+    }
+
+    .license-card {
+      padding: 0.95rem 1.15rem 0.45rem;
+    }
+
+    .license-card dt {
+      margin-bottom: 0.15rem;
+    }
+
+    .license-card dd {
+      margin-bottom: 0.55rem;
+    }
+
+    .license-card dd:last-child {
+      margin-bottom: 0.15rem;
+    }
+
+    .license-card ul {
+      margin-top: 0.25rem;
+    }
+
+    .license-card li {
+      margin-bottom: 0.12rem;
+      line-height: 1.4;
+    }
+
+    .teach-page figure {
+      margin: 0;
+    }
+
+    .teach-page figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #161616;
+      border: 1px solid rgba(201, 162, 39, 0.45);
+      border-radius: 8px;
+    }
+
+    .seal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .teach-page figure.seal img {
+      width: min(16.5rem, 70%);
+      max-width: 260px;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .teach-page figure.seal--round img {
+      border-radius: 50%;
+    }
+
+    .study-sounds figure {
+      margin: 0 0 1.15rem;
+    }
+
+    .study-sounds figure img {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .study-sounds-actions {
+      display: flex;
+      justify-content: center;
+      margin: 0.15rem 0 1.2rem;
+    }
+
+    .study-sounds-btn {
+      appearance: none;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1a1408;
+      background: var(--gold);
+      border: 0;
+      border-radius: 999px;
+      padding: 0.9rem 1.35rem;
+    }
+
+    .study-sounds-btn:hover,
+    .study-sounds-btn:focus-visible {
+      background: #e0c15a;
+      outline: 2px solid #f4e2a0;
+      outline-offset: 3px;
+    }
+
+    .study-sounds-fallback {
+      text-align: center;
+    }
+
+    .study-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.55rem 1.4rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .study-links li {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .teach-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 2rem 0 0.2rem;
+    }
+
+    @media (min-width: 640px) {
+      .teach-page {
+        padding: 2.2rem 1.25rem 3.4rem;
+      }
+    }
+
+    @media (min-width: 720px) {
+      .split-layout {
+        grid-template-columns: minmax(0, 1.15fr) minmax(14rem, 0.85fr);
+        gap: 1.5rem;
+      }
+
+      .split-layout--logo-left {
+        grid-template-columns: minmax(14rem, 0.85fr) minmax(0, 1.15fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .teach-page {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .teach-top {
+        flex-wrap: wrap;
+      }
+
+      .teach-top h1 {
+        order: -1;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <section class="panel active" style="position: relative;">
-    <div class="panel-inner">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
-      <h1>Teaching</h1>
-      <p>This page is under construction.</p>
+  <article class="teach-page" id="top">
+    <div class="teach-panel">
+      <div class="teach-top">
+        <a class="back-btn stub-back" href="/#passion">← Passion</a>
+        <h1>Teaching</h1>
+        <span></span>
+      </div>
+      <hr class="teach-rule">
+
+      <section aria-labelledby="goal-heading">
+        <h2 id="goal-heading">Goal</h2>
+        <p>I know everyone uses the word “passion” ad nauseam to describe what they do, or the job they’re trying to get, but I’ve had an honest to God passion for teaching for as long as I can remember. I was lucky to have been surrounded by teachers throughout the years, and fostered with a love for education especially by my mother. I always wanted to teach, but life pushed me in a different direction professionally.</p>
+        <p>Whenever I’ve had the opportunity to teach, I’ve always taken it. I love teaching in church, I love teaching my children, and I’ve enjoyed volunteering to teach whenever and wherever possible. I am especially passionate about teaching History. I wasn’t a huge fan of History and Social Studies until I had a teacher in High School who you could tell really loved the subject. He sparked that same passion in me, and I want to share that with others.</p>
+        <p>For the last 20 years or so, I’ve spent time leading work in tech: Agile teams, projects, the daily job of getting people pointed toward the same goal and in the same direction. I now find myself in a position to be able to pivot back to exploring my passion for teaching.</p>
+        <p>I currently hold a Bachelor of Science in Business Management from Western Governors University, and I’m now pursuing a Master of Arts in Secondary Education with an emphasis in teaching Social Studies; also with Western Governors University. My ultimate goal is to teach Social Studies at a High School or Collegiate level.</p>
+      </section>
+
+      <section aria-labelledby="study-heading">
+        <h2 id="study-heading">Study Sounds Mix</h2>
+        <div class="study-sounds">
+          <figure>
+            <img
+              src="../images/passion/teaching/study-sounds-mix.jpg"
+              alt="Lo-fi study scene: writing at a desk with headphones on a rainy night, desert mesas outside the window."
+              width="1712"
+              height="1152"
+            >
+          </figure>
+          <div class="study-sounds-actions">
+            <button type="button" class="study-sounds-btn" id="study-sounds">Study Sounds Mix</button>
+          </div>
+          <p>Click this link to open multiple tabs that I run while I study. One click opens rainymood, an outdoor fire crackling video, and a playlist of music that helps me focus. These sounds, overlapped, help me stay focused and on task, and boost my productivity. Your mileage may vary!</p>
+          <p class="study-sounds-fallback">If a browser blocks the extra tabs, use the following links.</p>
+          <ul class="study-links">
+            <li><a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer">rainymood</a></li>
+            <li><a href="https://www.youtube.com/watch?v=NUKKzdVy0EI" target="_blank" rel="noopener noreferrer">YouTube fire video</a></li>
+            <li><a href="https://www.youtube.com/playlist?list=PLca_5JS9gs0E" target="_blank" rel="noopener noreferrer">Playlist</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="licensing-heading">
+        <h2 id="licensing-heading">Licensing</h2>
+        <p>Utah educator license through the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>.</p>
+        <div class="split-layout split-layout--logo-left">
+          <figure class="seal">
+            <img
+              src="../images/passion/teaching/usbe-logo.jpg"
+              alt="Utah State Board of Education logo"
+              width="448"
+              height="446"
+            >
+          </figure>
+          <div class="teach-card license-card">
+            <dl>
+              <dt>License type</dt>
+              <dd>Associate</dd>
+              <dt>Issued</dt>
+              <dd>February 25, 2026</dd>
+              <dt>License area</dt>
+              <dd>Secondary Education (Associate, USBE)</dd>
+              <dt>Endorsements</dt>
+              <dd>
+                <ul>
+                  <li>Social Studies Composite</li>
+                  <li>Economics</li>
+                  <li>Geography</li>
+                  <li>History</li>
+                  <li>Sociology</li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="degree-heading">
+        <h2 id="degree-heading">Degree</h2>
+        <div class="split-layout">
+          <div class="teach-card">
+            <dl>
+              <dt>Completed</dt>
+              <dd>Bachelor of Science in Business Management — Western Governors University</dd>
+              <dt>In progress</dt>
+              <dd>Master of Arts in Secondary Education with an emphasis in teaching Social Studies — Western Governors University</dd>
+              <dt>Aim</dt>
+              <dd>Teach Social Studies at a High School or Collegiate level</dd>
+            </dl>
+          </div>
+          <figure class="seal seal--round">
+            <img
+              src="../images/passion/teaching/wgu-logo.jpg"
+              alt="Western Governors University logo"
+              width="521"
+              height="521"
+            >
+          </figure>
+        </div>
+      </section>
+
+      <div class="teach-footer">
+        <a class="back-btn stub-back" href="/#passion">← Passion</a>
+        <a class="back-btn stub-back" href="#top">↑ Top</a>
+      </div>
     </div>
-  </section>
+  </article>
 
+  <script src="../js/page-enter.js"></script>
   <script>
-    document.documentElement.classList.add('page-slide');
-    document.body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => document.body.classList.add('page-enter-active'));
-    });
+    (function () {
+      var urls = [
+        "https://www.rainymood.com/",
+        "https://www.youtube.com/watch?v=NUKKzdVy0EI",
+        "https://www.youtube.com/playlist?list=PLca_5JS9gs0E"
+      ];
+      var button = document.getElementById("study-sounds");
+      if (!button) return;
+      button.addEventListener("click", function () {
+        urls.forEach(function (url) {
+          window.open(url, "_blank", "noopener,noreferrer");
+        });
+      });
+    })();
   </script>
-
 </body>
 </html>
