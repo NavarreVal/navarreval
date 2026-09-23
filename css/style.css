@@ -32,23 +32,24 @@ body {
   --chrome-h: 5.5rem;
 }
 
-/* Hub page only. Passion pages keep document scroll. */
-html:has(body.site-hub) {
-  height: 100dvh;
-  overflow: hidden;
-}
-
+/* Hub page scrolls. Passion subpages never get .site-hub. */
 body.site-hub {
   background: #0d0d0d;
-  height: 100dvh;
   min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+html:has(body.site-hub.menu-open),
+html:has(body.site-hub.personal-open),
+body.site-hub.menu-open,
+body.site-hub.personal-open {
   overflow: hidden;
-  overscroll-behavior: none;
 }
 
 /* ===== Panels ===== */
 .panel {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
@@ -158,10 +159,9 @@ body.site-hub {
 
 /* ===== Professional Timeline (Desktop) ===== */
 #professional {
-  position: absolute;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
+  background: #0d0d0d;
+  overflow: visible;
 }
 
 #professional .back-btn {
@@ -852,8 +852,7 @@ body.site-hub {
   }
 
   #professional {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow: visible !important;
   }
 
   .professional-inner {
@@ -1110,10 +1109,17 @@ body.page-enter-active {
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#passion.panel,
 #personal.panel {
   align-items: flex-start;
   justify-content: flex-start;
+  z-index: 40;
+  background: #0d0d0d;
+}
+
+#passion,
+#professional {
+  position: relative;
+  background: #0d0d0d;
 }
 
 #passion .back-btn,
@@ -1125,16 +1131,16 @@ body.page-enter-active {
 }
 
 /* ===== Landing hero ===== */
-#landing.panel {
+#landing {
   display: block;
-  overflow: hidden;
   background: #0d0d0d;
   color: #f0f0f0;
 }
 
 .hero {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  height: 100dvh;
+  min-height: 100dvh;
   overflow: hidden;
   background: #0d0d0d;
 }
@@ -1151,6 +1157,17 @@ body.page-enter-active {
   text-align: center;
   pointer-events: none;
   user-select: none;
+  text-shadow:
+    0 0 14px rgba(13, 13, 13, 0.95),
+    0 2px 28px rgba(13, 13, 13, 0.88);
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 46%, rgba(13, 13, 13, 0.5) 0%, rgba(13, 13, 13, 0.12) 46%, transparent 70%);
 }
 
 .hero-name .line {
@@ -1182,27 +1199,40 @@ body.page-enter-active {
 }
 
 .flow-row-top {
-  top: calc(var(--chrome-h) + 0.4rem);
+  top: calc(var(--chrome-h) * 0.28);
 }
 
-.flow-row-bottom {
-  bottom: 12vh;
+.flow-row-mid {
+  top: 31vh;
+}
+
+.flow-row-low {
+  top: 56vh;
 }
 
 .flow-track {
   display: flex;
-  align-items: center;
-  gap: 0.9rem;
+  align-items: flex-start;
+  gap: 1.15rem;
   width: max-content;
+  animation-name: flow-ltr;
+  animation-duration: 28s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  will-change: transform;
 }
 
-.flow-track.is-flowing {
-  animation: flow-ltr 64s linear infinite;
+.flow-row-mid .flow-track {
+  gap: 2.1rem;
+  animation-duration: 41s;
+  animation-delay: -15s;
 }
 
-.flow-row-bottom .flow-track.is-flowing {
-  animation-duration: 86s;
-  animation-delay: -28s;
+.flow-row-low .flow-track {
+  gap: 1.6rem;
+  animation-duration: 54s;
+  animation-delay: -24s;
 }
 
 @keyframes flow-ltr {
@@ -1212,19 +1242,21 @@ body.page-enter-active {
 
 .flow-frame {
   flex: 0 0 auto;
-  width: 17vw;
-  height: 24vh;
-  min-width: 9.5rem;
+  width: var(--fw, 18vw);
+  height: var(--fh, 26vh);
+  margin-top: var(--oy, 0vh);
   overflow: hidden;
   background: #1a1a1a;
   box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.45);
 }
 
-.flow-row-bottom .flow-frame {
-  width: 14vw;
-  height: 18vh;
-  min-width: 8rem;
-}
+.flow-frame.sz-s { --fw: 12vw; --fh: 17vh; }
+.flow-frame.sz-m { --fw: 17vw; --fh: 25vh; }
+.flow-frame.sz-l { --fw: 23vw; --fh: 33vh; }
+.flow-frame.sz-t { --fw: 14vw; --fh: 38vh; }
+.flow-frame.oy-up { --oy: 0vh; }
+.flow-frame.oy-mid { --oy: 6vh; }
+.flow-frame.oy-dn { --oy: 13vh; }
 
 .flow-frame img {
   width: 100%;
@@ -1234,18 +1266,22 @@ body.page-enter-active {
   display: block;
 }
 
-.hero-bio {
-  position: absolute;
-  z-index: 4;
-  left: 50%;
-  bottom: 2.6vh;
-  transform: translateX(-50%);
-  width: min(34rem, 40vw);
+.site-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52vh;
+  padding: 12vh 8vw 16vh;
+  background: #0d0d0d;
+}
+
+.site-summary p {
+  max-width: 40rem;
   margin: 0;
   text-align: center;
-  font-size: clamp(0.84rem, 1.05vw, 1.05rem);
-  line-height: 1.45;
   color: #e4ddd2;
+  font-size: clamp(1.08rem, 1.7vw, 1.42rem);
+  line-height: 1.7;
 }
 
 .site-chrome {
@@ -1453,28 +1489,25 @@ body.menu-open .menu-toggle:focus-visible,
     padding: 0 2vw;
   }
 
-  .hero-bio {
-    width: min(22rem, 88vw);
-    bottom: 1.6vh;
-    font-size: 0.78rem;
-    line-height: 1.35;
+  .site-summary {
+    min-height: 46vh;
+    padding: 10vh 7vw 12vh;
   }
 
-  .flow-frame {
-    width: 42vw;
-    height: 18vh;
-    min-width: 8.5rem;
+  .site-summary p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
-  .flow-row-bottom .flow-frame {
-    width: 36vw;
-    height: 14vh;
-    min-width: 7.5rem;
-  }
+  .flow-frame.sz-s { --fw: 32vw; --fh: 16vh; }
+  .flow-frame.sz-m { --fw: 42vw; --fh: 21vh; }
+  .flow-frame.sz-l { --fw: 54vw; --fh: 27vh; }
+  .flow-frame.sz-t { --fw: 36vw; --fh: 32vh; }
+  .flow-frame.oy-mid { --oy: 3vh; }
+  .flow-frame.oy-dn { --oy: 7vh; }
 
-  .flow-row-bottom {
-    bottom: 14vh;
-  }
+  .flow-row-mid { top: 30vh; }
+  .flow-row-low { top: 54vh; }
 
   .menu-nav a {
     font-size: clamp(2.4rem, 12vw, 4.2rem);
@@ -1483,9 +1516,11 @@ body.menu-open .menu-toggle:focus-visible,
 
 @media (max-height: 700px) and (min-width: 821px) {
   .hero-name { top: 42%; }
-  .flow-frame { height: 20vh; }
-  .flow-row-bottom .flow-frame { height: 15vh; }
-  .hero-bio { font-size: 0.82rem; }
+  .flow-frame.sz-s { --fh: 15vh; }
+  .flow-frame.sz-m { --fh: 20vh; }
+  .flow-frame.sz-l { --fh: 26vh; }
+  .flow-frame.sz-t { --fh: 30vh; }
+  .site-summary { min-height: 42vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1499,8 +1534,11 @@ body.menu-open .menu-toggle:focus-visible,
     animation: none;
   }
 
-  .flow-track.is-flowing {
-    animation: none;
-    transform: none;
+  .flow-track {
+    animation-duration: 120s;
+    animation-play-state: running;
   }
+
+  .flow-row-mid .flow-track { animation-duration: 160s; }
+  .flow-row-low .flow-track { animation-duration: 200s; }
 }

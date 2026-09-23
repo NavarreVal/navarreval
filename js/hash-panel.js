@@ -4,29 +4,21 @@ function panelFromHash() {
   return "landing";
 }
 
-function currentPanelId() {
-  const active = document.querySelector(".panel.active");
-  return active ? active.id : "landing";
-}
-
 function directionFor(id) {
-  if (id === "landing") return "top";
   const link = document.querySelector('[data-panel][href="#' + id + '"]');
   return link ? link.dataset.direction : null;
 }
 
 function showHistoryPanel(id) {
-  if (id === currentPanelId()) return;
-  if (typeof window.showSitePanel === "function") {
-    window.showSitePanel(id, directionFor(id));
+  if (typeof window.showSitePanel !== "function") return;
+  if (id === "personal") {
+    const personal = document.getElementById("personal");
+    if (personal && personal.classList.contains("active")) return;
+    window.showSitePanel("personal", directionFor(id));
+    window.scrollTo(0, 0);
     return;
   }
-  const next = document.getElementById(id);
-  if (!next || !next.classList.contains("panel")) return;
-  document.querySelectorAll(".panel.active").forEach((panel) => {
-    panel.classList.remove("active");
-  });
-  next.classList.add("active");
+  window.showSitePanel(id, directionFor(id));
 }
 
 function landingUrl() {
@@ -50,9 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll(".panel .back-btn").forEach((btn) => {
+  document.querySelectorAll(".back-btn").forEach((btn) => {
     if (btn.tagName === "A") return;
     btn.addEventListener("click", () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       // Pop a section entry this page pushed. A hash opened directly, or an
       // overlay sitting on top of one, is not its own trip — clear it in place.
       if (history.state && history.state.panel && history.state.panel !== "landing") {
@@ -60,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       if (location.hash) history.replaceState({ panel: "landing" }, "", landingUrl());
+      if (typeof window.showSitePanel === "function") window.showSitePanel("landing");
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
     });
   });
 

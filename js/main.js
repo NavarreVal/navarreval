@@ -19,43 +19,68 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxIndex = 0;
 
   // ========== Panel Navigation ==========
+  // Personal stays an overlay. Professional and Passion scroll with the page.
   const links = document.querySelectorAll('[data-panel]');
-  const backButtons = document.querySelectorAll('.back-btn');
+  const personal = document.getElementById('personal');
 
-  function showPanel(id, direction = null) {
-    const current = document.querySelector('.panel.active');
-    const next = document.getElementById(id);
-    if (!next || current === next) {
-      document.body.classList.toggle('on-landing', !!(current && current.id === 'landing'));
+  function motion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  }
+
+  function pageSections() {
+    return document.querySelectorAll('#landing, #professional, #passion, #personal');
+  }
+
+  function syncInert() {
+    const menuOpen = isMenuOpen();
+    const personalOpen = !!(personal && personal.classList.contains('active'));
+    pageSections().forEach((el) => el.removeAttribute('inert'));
+    if (menuOpen) {
+      pageSections().forEach((el) => el.setAttribute('inert', ''));
       return;
     }
-
-    document.body.classList.toggle('on-landing', id === 'landing');
-    document.querySelectorAll('.panel').forEach((panel) => {
-      if (panel === next) panel.removeAttribute('aria-hidden');
-      else panel.setAttribute('aria-hidden', 'true');
-    });
-
-    next.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
-    current.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
-
-    if (direction === 'left') {
-      next.classList.add('from-right');
-      current.classList.add('to-left');
-    } else if (direction === 'right') {
-      next.classList.add('from-left');
-      current.classList.add('to-right');
-    } else if (direction === 'bottom') {
-      next.classList.add('from-top');
-      current.classList.add('to-bottom');
-    } else if (direction === 'top') {
-      next.classList.add('from-bottom');
-      current.classList.add('to-top');
+    if (personal && !personalOpen) personal.setAttribute('inert', '');
+    if (personalOpen) {
+      document.querySelectorAll('#landing, #professional, #passion').forEach((el) => {
+        el.setAttribute('inert', '');
+      });
     }
+  }
 
-    void next.offsetWidth;
-    next.classList.add('active');
-    current.classList.remove('active');
+  function openPersonal() {
+    if (!personal || personal.classList.contains('active')) return;
+    personal.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
+    personal.classList.add('from-right');
+    personal.removeAttribute('aria-hidden');
+    void personal.offsetWidth;
+    personal.classList.add('active');
+    document.body.classList.add('personal-open');
+    document.body.classList.remove('on-landing');
+    syncInert();
+  }
+
+  function closePersonal() {
+    if (personal && personal.classList.contains('active')) {
+      personal.classList.remove('active');
+      personal.classList.add('to-right');
+      personal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.remove('personal-open');
+    document.body.classList.add('on-landing');
+    syncInert();
+  }
+
+  function showPanel(id, behavior) {
+    if (id === 'personal') {
+      openPersonal();
+      return;
+    }
+    closePersonal();
+    if (id === 'passion' || id === 'professional') {
+      const target = document.getElementById(id);
+      const scrollBehavior = behavior === 'smooth' ? 'smooth' : 'auto';
+      if (target) target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+    }
   }
 
   window.showSitePanel = showPanel;
@@ -91,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuBtn.setAttribute('aria-expanded', 'true');
     menuBtn.setAttribute('aria-label', 'Close menu');
     document.body.classList.add('menu-open');
-    document.querySelectorAll('.panel').forEach((panel) => panel.setAttribute('inert', ''));
+    syncInert();
     fitMenuLinks();
     const firstLink = menu.querySelector('a[href]');
     if (firstLink) firstLink.focus();
@@ -103,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuBtn.setAttribute('aria-expanded', 'false');
     menuBtn.setAttribute('aria-label', 'Open menu');
     document.body.classList.remove('menu-open');
-    document.querySelectorAll('.panel').forEach((panel) => panel.removeAttribute('inert'));
+    syncInert();
     if (restoreFocus) menuBtn.focus();
   }
 
@@ -148,14 +173,15 @@ document.addEventListener('DOMContentLoaded', () => {
     logo.addEventListener('click', (event) => {
       event.preventDefault();
       closeMenu({ restoreFocus: false });
-      const active = document.querySelector('.panel.active');
-      const onLanding = active && active.id === 'landing' && !location.hash;
-      if (onLanding) return;
+      const personalOpen = !!(personal && personal.classList.contains('active'));
+      const atTop = window.scrollY < 8;
+      if (!personalOpen && !location.hash && atTop) return;
       const next = location.pathname + location.search;
       if (location.pathname + location.search + location.hash !== next) {
         history.pushState({ panel: 'landing' }, '', next);
       }
-      showPanel('landing', 'top');
+      closePersonal();
+      window.scrollTo({ top: 0, behavior: motion() });
     });
   }
 
@@ -164,14 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       closeMenu({ restoreFocus: false });
       const id = link.getAttribute('href').substring(1);
-      showPanel(id, link.dataset.direction);
+      showPanel(id, motion());
       const back = document.getElementById(id)?.querySelector('.back-btn');
-      if (back) back.focus();
+      if (back) back.focus({ preventScroll: true });
     });
-  });
-
-  backButtons.forEach(btn => {
-    btn.addEventListener('click', () => showPanel('landing', 'top'));
   });
 
   // ========== History management for overlays (mobile back button) ==========
@@ -282,13 +304,6 @@ window.addEventListener('popstate', () => {
       card.addEventListener('pointercancel', () => card.classList.remove('is-pressed'));
     });
   }
-
-  // Double each photo row so the left-to-right drift can loop without a jump.
-  document.querySelectorAll('.flow-track').forEach((track) => {
-    const frames = [...track.children];
-    frames.forEach((frame) => track.appendChild(frame.cloneNode(true)));
-    track.classList.add('is-flowing');
-  });
 
   function fitHeroName() {
     const name = document.querySelector('.hero-name');
