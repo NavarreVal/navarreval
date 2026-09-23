@@ -191,8 +191,14 @@ document.addEventListener('DOMContentLoaded', () => {
       closeMenu({ restoreFocus: false });
       const id = link.getAttribute('href').substring(1);
       showPanel(id, motion());
-      const back = document.getElementById(id)?.querySelector('.back-btn');
+      const section = document.getElementById(id);
+      const back = section?.querySelector('.back-btn');
+      const heading = section?.querySelector('h1');
       if (back) back.focus({ preventScroll: true });
+      else if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+      }
     });
   });
 
@@ -306,29 +312,29 @@ window.addEventListener('popstate', () => {
   }
 
   function fitHeroName() {
-    const name = document.querySelector('.hero-name');
-    if (!name) return;
-    const style = getComputedStyle(name);
-    const pad = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-    // Leave a sliver so the last glyph is not clipped by the viewport edge.
-    const max = Math.max(10, (name.clientWidth - pad) * 0.96);
-    const lines = [...name.querySelectorAll('.line')];
-    lines.forEach((line) => {
-      const probe = 100;
-      line.style.fontSize = probe + 'px';
-      const range = document.createRange();
-      range.selectNodeContents(line);
-      const width = range.getBoundingClientRect().width || 1;
-      line.style.fontSize = (probe * max / width) + 'px';
-    });
-    const maxH = window.innerHeight * 0.58;
-    const total = lines.reduce((sum, line) => sum + line.getBoundingClientRect().height, 0);
-    if (total > maxH) {
-      const scale = maxH / total;
+    document.querySelectorAll('.hero-name').forEach((name) => {
+      const style = getComputedStyle(name);
+      const pad = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+      // Leave a sliver so the last glyph is not clipped by the viewport edge.
+      const max = Math.max(10, (name.clientWidth - pad) * 0.96);
+      const lines = [...name.querySelectorAll('.line')];
       lines.forEach((line) => {
-        line.style.fontSize = (parseFloat(line.style.fontSize) * scale) + 'px';
+        const probe = 100;
+        line.style.fontSize = probe + 'px';
+        const range = document.createRange();
+        range.selectNodeContents(line);
+        const width = range.getBoundingClientRect().width || 1;
+        line.style.fontSize = (probe * max / width) + 'px';
       });
-    }
+      const maxH = window.innerHeight * 0.58;
+      const total = lines.reduce((sum, line) => sum + line.getBoundingClientRect().height, 0);
+      if (total > maxH) {
+        const scale = maxH / total;
+        lines.forEach((line) => {
+          line.style.fontSize = (parseFloat(line.style.fontSize) * scale) + 'px';
+        });
+      }
+    });
   }
 
   fitHeroName();
@@ -336,6 +342,43 @@ window.addEventListener('popstate', () => {
     document.fonts.ready.then(fitHeroName);
   }
   window.addEventListener('resize', fitHeroName);
+
+  // Park a wheel/trackpad gesture on Professional, then let the next gesture through.
+  const professionalEdge = document.getElementById('professional');
+  if (professionalEdge) {
+    let holdEdge = false;
+    let gestureTimer = 0;
+    const gestureGap = 200;
+
+    window.addEventListener('wheel', (event) => {
+      if (event.ctrlKey) return;
+      if (document.body.classList.contains('menu-open') || document.body.classList.contains('personal-open')) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+
+      const edge = professionalEdge.getBoundingClientRect().top + window.scrollY;
+      const y = window.scrollY;
+      const next = y + event.deltaY;
+      const crossingDown = y < edge - 2 && next >= edge - 2;
+      const crossingUp = y > edge + 2 && next <= edge + 2;
+
+      clearTimeout(gestureTimer);
+      gestureTimer = setTimeout(() => { holdEdge = false; }, gestureGap);
+
+      if (holdEdge && Math.abs(y - edge) < 120) {
+        event.preventDefault();
+        window.scrollTo(0, edge);
+        return;
+      }
+      holdEdge = false;
+
+      if (crossingDown || crossingUp) {
+        event.preventDefault();
+        window.scrollTo(0, edge);
+        holdEdge = true;
+      }
+    }, { passive: false });
+  }
 
   // ========== Timeline Data ==========
   const timelineEvents = [

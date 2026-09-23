@@ -173,15 +173,17 @@ body.site-hub.personal-open {
 }
 
 .professional-inner {
-  max-width: 1100px;
+  max-width: none;
   width: 100%;
-  padding: 4.5rem 1.5rem 4rem;
+  margin-inline: auto;
+  padding: 4.5rem max(1.5rem, 3vw) 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: auto;
   min-height: 100%;
   justify-content: flex-start;
+  box-sizing: border-box;
 }
 
 .professional-inner h1 {
@@ -916,9 +918,11 @@ body.site-hub.personal-open {
 
 /* ===== Passion hands ===== */
 #passion .passion-inner {
-  max-width: 1100px;
+  max-width: none;
   width: 100%;
-  padding: 4.5rem 1.4rem 4rem;
+  margin-inline: auto;
+  padding: 4.5rem max(1.4rem, 4vw) 4rem;
+  box-sizing: border-box;
 }
 
 .passion-lead {
@@ -930,11 +934,13 @@ body.site-hub.personal-open {
 
 .passion-hands {
   display: grid;
-  grid-template-columns: repeat(2, minmax(300px, 1fr));
-  gap: 3.2rem 1.5rem;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: clamp(2.4rem, 6vh, 4rem) clamp(2rem, 8vw, 9rem);
+  justify-content: center;
   justify-items: center;
   align-items: start;
   width: 100%;
+  margin-inline: auto;
 }
 
 .hand {
@@ -1147,27 +1153,39 @@ body.page-enter-active {
 
 .hero-name {
   position: absolute;
-  z-index: 3;
-  left: 0;
-  right: 0;
-  top: 45%;
-  transform: translateY(-52%);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   padding: 0 1.2vw;
   text-align: center;
   pointer-events: none;
   user-select: none;
-  text-shadow:
-    0 0 14px rgba(13, 13, 13, 0.95),
-    0 2px 28px rgba(13, 13, 13, 0.88);
+  transform: none;
+}
+
+.hero-name-back { z-index: 1; }
+.hero-name-front { z-index: 5; }
+
+.hero-name-back .glyph.front,
+.hero-name-back .glyph.prime {
+  color: transparent;
+  text-shadow: none;
+}
+
+.hero-name-front .glyph.back {
+  color: transparent;
+  text-shadow: none;
 }
 
 .hero-veil {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 46%, rgba(13, 13, 13, 0.5) 0%, rgba(13, 13, 13, 0.12) 46%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 46%, rgba(13, 13, 13, 0.28) 0%, transparent 62%);
 }
 
 .hero-name .line {
@@ -1183,10 +1201,22 @@ body.page-enter-active {
   white-space: nowrap;
 }
 
+.glyph {
+  position: relative;
+  display: inline;
+  text-shadow:
+    0 0 14px rgba(13, 13, 13, 0.95),
+    0 2px 22px rgba(13, 13, 13, 0.9);
+}
+
+.glyph.back { z-index: 1; }
+.glyph.front { z-index: 4; }
+.glyph.prime { z-index: 6; }
+
 .hero-collage {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   pointer-events: none;
 }
@@ -1195,6 +1225,7 @@ body.page-enter-active {
   position: absolute;
   left: 0;
   right: 0;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -1213,10 +1244,10 @@ body.page-enter-active {
 .flow-track {
   display: flex;
   align-items: flex-start;
-  gap: 1.15rem;
+  gap: clamp(2.75rem, 5.5vw, 6.5rem);
   width: max-content;
   animation-name: flow-ltr;
-  animation-duration: 28s;
+  animation-duration: 13s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-play-state: running;
@@ -1224,15 +1255,15 @@ body.page-enter-active {
 }
 
 .flow-row-mid .flow-track {
-  gap: 2.1rem;
-  animation-duration: 41s;
-  animation-delay: -15s;
+  gap: clamp(3.5rem, 7.5vw, 8.5rem);
+  animation-duration: 19s;
+  animation-delay: -6s;
 }
 
 .flow-row-low .flow-track {
-  gap: 1.6rem;
-  animation-duration: 54s;
-  animation-delay: -24s;
+  gap: clamp(3rem, 6.2vw, 7.25rem);
+  animation-duration: 26s;
+  animation-delay: -11s;
 }
 
 @keyframes flow-ltr {
@@ -1270,18 +1301,19 @@ body.page-enter-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 52vh;
-  padding: 12vh 8vw 16vh;
+  min-height: 72vh;
+  padding: 16vh 8vw 18vh;
   background: #0d0d0d;
 }
 
 .site-summary p {
-  max-width: 40rem;
+  max-width: 48rem;
   margin: 0;
   text-align: center;
-  color: #e4ddd2;
-  font-size: clamp(1.08rem, 1.7vw, 1.42rem);
-  line-height: 1.7;
+  color: var(--gold);
+  font-size: clamp(1.55rem, 2.7vw, 2.35rem);
+  line-height: 1.45;
+  font-weight: 500;
 }
 
 .site-chrome {
@@ -1485,18 +1517,17 @@ body.menu-open .menu-toggle:focus-visible,
   }
 
   .hero-name {
-    top: 43%;
     padding: 0 2vw;
   }
 
   .site-summary {
-    min-height: 46vh;
-    padding: 10vh 7vw 12vh;
+    min-height: 64vh;
+    padding: 14vh 7vw 16vh;
   }
 
   .site-summary p {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.35rem;
+    line-height: 1.45;
   }
 
   .flow-frame.sz-s { --fw: 32vw; --fh: 16vh; }
@@ -1515,12 +1546,11 @@ body.menu-open .menu-toggle:focus-visible,
 }
 
 @media (max-height: 700px) and (min-width: 821px) {
-  .hero-name { top: 42%; }
   .flow-frame.sz-s { --fh: 15vh; }
   .flow-frame.sz-m { --fh: 20vh; }
   .flow-frame.sz-l { --fh: 26vh; }
   .flow-frame.sz-t { --fh: 30vh; }
-  .site-summary { min-height: 42vh; }
+  .site-summary { min-height: 56vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1535,10 +1565,10 @@ body.menu-open .menu-toggle:focus-visible,
   }
 
   .flow-track {
-    animation-duration: 120s;
+    animation-duration: 52s;
     animation-play-state: running;
   }
 
-  .flow-row-mid .flow-track { animation-duration: 160s; }
-  .flow-row-low .flow-track { animation-duration: 200s; }
+  .flow-row-mid .flow-track { animation-duration: 76s; }
+  .flow-row-low .flow-track { animation-duration: 104s; }
 }

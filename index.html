@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css?v=4.5">
+  <link rel="stylesheet" href="css/style.css?v=4.6">
   <link rel="stylesheet" href="css/overrides.css?v=6.0">
 </head>
 <body class="site-hub on-landing">
@@ -26,9 +26,9 @@
 
   <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <nav class="menu-nav" aria-label="Sections">
-      <a href="#personal" data-panel data-direction="left">Personal</a>
-      <a href="#passion" data-panel data-direction="right">Passion</a>
       <a href="#professional" data-panel data-direction="bottom">Professional</a>
+      <a href="#passion" data-panel data-direction="right">Passion</a>
+      <a href="#personal" data-panel data-direction="left">Personal</a>
     </nav>
     <div class="menu-social">
       <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
@@ -46,9 +46,9 @@
   <!-- ========== LANDING ========== -->
   <main id="landing">
     <div class="hero">
-      <h1 class="hero-name">
-        <span class="line">Navarre</span>
-        <span class="line">Valdivieso</span>
+      <h1 class="hero-name hero-name-back">
+        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
+        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
       </h1>
 
       <div class="hero-veil" aria-hidden="true"></div>
@@ -93,6 +93,11 @@
           </div>
         </div>
       </div>
+
+      <div class="hero-name hero-name-front" aria-hidden="true">
+        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
+        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
+      </div>
     </div>
 
     <section class="site-summary" aria-label="Summary">
@@ -126,7 +131,6 @@
   <!-- ========== PROFESSIONAL ========== -->
   <section id="professional">
     <div class="panel-inner professional-inner">
-      <button class="back-btn">↑ Back</button>
       <h1>Professional & Educational Timeline</h1>
       <p class="timeline-intro">
         A timeline of my professional and educational journey.<br>
@@ -165,7 +169,6 @@
   <!-- ========== PASSION ========== -->
   <section id="passion">
     <div class="panel-inner passion-inner">
-      <button class="back-btn">← Back</button>
       <h1>Passion</h1>
       <p class="passion-lead">
         Sometimes life deals you good hands.<br>
@@ -253,7 +256,7 @@
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=4.3"></script>
+  <script src="js/main.js?v=4.4"></script>
   <script src="js/hash-panel.js?v=4.1"></script>
 </body>
 </html>
