@@ -122,9 +122,9 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
-      text-align: center;
+      text-align: left;
     }
     .print-rig-copy h2 {
       margin: 0 0 0.7rem;
@@ -133,15 +133,15 @@
     }
     .print-rig-copy .print-specs {
       width: 100%;
-      margin: 0 auto;
-      text-align: center;
+      margin: 0;
+      text-align: left;
       font-size: 0.84rem;
     }
     .print-rig-copy .print-specs th,
     .print-rig-copy .print-specs td {
-      text-align: center;
+      text-align: left;
       white-space: normal;
-      padding: 0.28rem 0.2rem;
+      padding: 0.28rem 0.35rem 0.28rem 0;
     }
     .print-rig-copy .print-specs th { width: auto; }
     .print-timelapses figcaption,
@@ -422,7 +422,7 @@
 
     <section class="print-rig" aria-labelledby="rig-title">
       <div class="print-rig-copy">
-        <h2 id="rig-title">Rig</h2>
+        <h2 id="rig-title">Printing Rig</h2>
         <table class="print-specs">
           <tbody>
             <tr><th scope="row">Printer</th><td>Bambu Lab P1S</td></tr>
