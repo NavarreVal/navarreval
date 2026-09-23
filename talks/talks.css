@@ -309,6 +309,10 @@ h1 {
   text-decoration: underline;
 }
 
+.home-link + .home-link {
+  margin-top: 0.55rem;
+}
+
 .return-float {
   position: fixed;
   right: 1.1rem;
