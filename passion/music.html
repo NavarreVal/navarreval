@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music | J. Navarre Valdivieso</title>
-  <meta name="description" content="What Navarre has been listening to lately: recently played tracks, top tracks, and top artists from Spotify.">
+  <meta name="description" content="What Navarre has been listening to lately: favorite tracks, recently played, top tracks, and top artists from Spotify.">
   <link rel="stylesheet" href="../css/style.css?v=3.4">
   <style>
     :root { --gold: #c9a227; }
@@ -64,6 +64,29 @@
       color: var(--gold);
       margin-bottom: 1.3rem;
       font-weight: 600;
+    }
+    .shelf-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.8rem 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.45rem;
+    }
+    .shelf-head h2 { margin-bottom: 0; }
+    .shelf-open {
+      color: var(--gold);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .shelf-open:hover { text-decoration: underline; }
+    .shelf-blurb {
+      margin: 0 0 1.2rem;
+      color: #8a8a8a;
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
     .shelf-grid {
       display: grid;
@@ -146,6 +169,16 @@
       <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>.
     </p>
 
+    <section class="shelf" data-shelf="favorites" data-count="50">
+      <div class="shelf-head">
+        <h2>Juliet November Victor</h2>
+        <a class="shelf-open" href="https://open.spotify.com/playlist/1LgVAzG8COkMPbRBksoCCq" target="_blank" rel="noopener">Open playlist</a>
+      </div>
+      <p class="shelf-blurb">These are my current favorite tracks.</p>
+      <p class="shelf-status">Loading…</p>
+      <div class="shelf-grid"></div>
+    </section>
+
     <section class="shelf" data-shelf="recent" data-count="12">
       <h2>Recently played</h2>
       <p class="shelf-status">Loading…</p>
@@ -177,6 +210,7 @@
 
   <script>
     const SPOTIFY = "https://open.spotify.com/";
+    const PLAYLIST = "https://open.spotify.com/playlist/1LgVAzG8COkMPbRBksoCCq";
     const WORKER = "https://spotify-shelves.navarreval.workers.dev";
 
     function artistsLine(item) {
@@ -189,11 +223,17 @@
       return SPOTIFY;
     }
 
+    function playlistUrl(url) {
+      if (typeof url === "string" && url.indexOf("https://") === 0) return url;
+      return PLAYLIST;
+    }
+
     async function loadShelf(section) {
       const shelf = section.dataset.shelf;
       const count = section.dataset.count || 12;
       const status = section.querySelector(".shelf-status");
       const grid = section.querySelector(".shelf-grid");
+      const open = section.querySelector(".shelf-open");
       const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + count;
 
       try {
@@ -201,12 +241,15 @@
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
         const items = Array.isArray(data.items) ? data.items : [];
+        if (open) open.href = playlistUrl(data.playlist_url);
         status.remove();
         if (!items.length) {
+          const emptyHref = open ? open.href : SPOTIFY;
+          const emptyLabel = open ? "Open playlist" : "Open on Spotify";
           section.insertAdjacentHTML(
             "beforeend",
             '<p class="shelf-status">Nothing on this shelf right now. <a href="' +
-              SPOTIFY + '" target="_blank" rel="noopener">Open on Spotify</a>.</p>'
+              emptyHref + '" target="_blank" rel="noopener">' + emptyLabel + "</a>.</p>"
           );
           return;
         }
@@ -237,9 +280,11 @@
           grid.appendChild(a);
         });
       } catch (err) {
+        const failHref = open ? open.href : SPOTIFY;
+        const failLabel = open ? "Open playlist" : "Open on Spotify";
         status.innerHTML =
-          'Could not load this shelf. <a href="' + SPOTIFY +
-          '" target="_blank" rel="noopener">Open on Spotify</a>.';
+          'Could not load this shelf. <a href="' + failHref +
+          '" target="_blank" rel="noopener">' + failLabel + "</a>.";
       }
     }
 
