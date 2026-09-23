@@ -149,12 +149,37 @@
       line-height: 1.5;
     }
 
-    .degree-layout {
+    .split-layout {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.25rem;
-      align-items: start;
+      align-items: center;
       margin: 0;
+    }
+
+    .license-card {
+      padding: 0.95rem 1.15rem 0.45rem;
+    }
+
+    .license-card dt {
+      margin-bottom: 0.15rem;
+    }
+
+    .license-card dd {
+      margin-bottom: 0.55rem;
+    }
+
+    .license-card dd:last-child {
+      margin-bottom: 0.15rem;
+    }
+
+    .license-card ul {
+      margin-top: 0.25rem;
+    }
+
+    .license-card li {
+      margin-bottom: 0.12rem;
+      line-height: 1.4;
     }
 
     .teach-page figure {
@@ -170,14 +195,14 @@
       border-radius: 8px;
     }
 
-    .degree-logo {
+    .seal {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 0;
     }
 
-    .teach-page figure.degree-logo img {
+    .teach-page figure.seal img {
       width: min(16.5rem, 70%);
       max-width: 260px;
       height: auto;
@@ -185,6 +210,10 @@
       object-fit: contain;
       background: transparent;
       border: 0;
+      border-radius: 0;
+    }
+
+    .teach-page figure.seal--round img {
       border-radius: 50%;
     }
 
@@ -261,9 +290,13 @@
     }
 
     @media (min-width: 720px) {
-      .degree-layout {
+      .split-layout {
         grid-template-columns: minmax(0, 1.15fr) minmax(14rem, 0.85fr);
         gap: 1.5rem;
+      }
+
+      .split-layout--logo-left {
+        grid-template-columns: minmax(14rem, 0.85fr) minmax(0, 1.15fr);
       }
     }
 
@@ -330,36 +363,41 @@
       <section aria-labelledby="licensing-heading">
         <h2 id="licensing-heading">Licensing</h2>
         <p>Utah educator license through the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>.</p>
-        <div class="teach-card">
-          <dl>
-            <dt>License type</dt>
-            <dd>Associate</dd>
-            <dt>Status</dt>
-            <dd>New</dd>
-            <dt>Issued</dt>
-            <dd>February 25, 2026</dd>
-            <dt>Expires</dt>
-            <dd>June 30, 2029</dd>
-            <dt>License area</dt>
-            <dd>Secondary Education (Associate, USBE)</dd>
-            <dt>Endorsements</dt>
-            <dd>
-              Associate, expire June 30, 2029
-              <ul>
-                <li>Social Studies Composite</li>
-                <li>Economics</li>
-                <li>Geography</li>
-                <li>History</li>
-                <li>Sociology</li>
-              </ul>
-            </dd>
-          </dl>
+        <div class="split-layout split-layout--logo-left">
+          <figure class="seal">
+            <img
+              src="../images/passion/teaching/usbe-logo.jpg"
+              alt="Utah State Board of Education logo"
+              width="448"
+              height="446"
+            >
+          </figure>
+          <div class="teach-card license-card">
+            <dl>
+              <dt>License type</dt>
+              <dd>Associate</dd>
+              <dt>Issued</dt>
+              <dd>February 25, 2026</dd>
+              <dt>License area</dt>
+              <dd>Secondary Education (Associate, USBE)</dd>
+              <dt>Endorsements</dt>
+              <dd>
+                <ul>
+                  <li>Social Studies Composite</li>
+                  <li>Economics</li>
+                  <li>Geography</li>
+                  <li>History</li>
+                  <li>Sociology</li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
         </div>
       </section>
 
       <section aria-labelledby="degree-heading">
         <h2 id="degree-heading">Degree</h2>
-        <div class="degree-layout">
+        <div class="split-layout">
           <div class="teach-card">
             <dl>
               <dt>Completed</dt>
@@ -370,7 +408,7 @@
               <dd>Teach Social Studies at a High School or Collegiate level</dd>
             </dl>
           </div>
-          <figure class="degree-logo">
+          <figure class="seal seal--round">
             <img
               src="../images/passion/teaching/wgu-logo.jpg"
               alt="Western Governors University logo"
