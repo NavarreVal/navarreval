@@ -12,10 +12,10 @@
 }
 
 #personal .back-btn {
-  position: absolute;
+  position: fixed;
   top: calc(var(--chrome-h) + 0.45rem);
-  left: auto;
-  right: 1.25rem;
+  left: 1.25rem;
+  right: auto;
   z-index: 20;
 }
 
