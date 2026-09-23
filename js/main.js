@@ -330,7 +330,8 @@ window.addEventListener('popstate', () => {
     if (!name) return;
     const style = getComputedStyle(name);
     const pad = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-    const max = Math.max(10, name.clientWidth - pad);
+    // Leave a sliver so the last glyph is not clipped by the viewport edge.
+    const max = Math.max(10, (name.clientWidth - pad) * 0.96);
     const lines = [...name.querySelectorAll('.line')];
     lines.forEach((line) => {
       const probe = 100;

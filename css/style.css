@@ -36,6 +36,11 @@ body {
 }
 
 /* Hub page only. Passion pages keep document scroll. */
+html:has(body.site-hub) {
+  height: 100dvh;
+  overflow: hidden;
+}
+
 body.site-hub {
   background: var(--paper);
   height: 100dvh;
@@ -1362,6 +1367,7 @@ body.site-hub:not(.on-landing):not(.menu-open) .menu-toggle {
   position: fixed;
   inset: 0;
   z-index: 70;
+  overflow: hidden;
   background: var(--coral);
   color: var(--ink);
   display: flex;
