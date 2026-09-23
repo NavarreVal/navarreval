@@ -159,6 +159,10 @@ a.back-btn.stub-back.hero-back {
   object-position: center 40%;
 }
 
+.pair-match img.flip-x {
+  transform: scaleX(-1);
+}
+
 .intro-copy p,
 .feature-copy p,
 .split-copy p {
