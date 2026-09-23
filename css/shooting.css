@@ -2,7 +2,6 @@
   --gold: #c9a227;
   --ink: #f3efe6;
   --muted: #c4bfb4;
-  --dim: #8d897f;
   --bg: #0d0d0d;
   --band: #12110e;
 }
@@ -30,13 +29,29 @@ body {
   overflow: hidden;
 }
 
+.hero-hit {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: zoom-in;
+  display: block;
+}
+
+.hero-hit:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -6px;
+}
+
 .hero-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 46%;
+  object-position: center 58%;
 }
 
 .hero::after {
@@ -68,7 +83,7 @@ a.back-btn.stub-back.hero-back {
   position: relative;
   z-index: 2;
   padding: 12vh 7vw 8vh;
-  max-width: 46rem;
+  pointer-events: none;
 }
 
 .hero h1 {
@@ -80,21 +95,41 @@ a.back-btn.stub-back.hero-back {
   color: var(--ink);
 }
 
-.hero .dek {
-  margin: 1.35rem 0 0;
-  max-width: 28rem;
-  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-  line-height: 1.4;
-  font-weight: 400;
-  color: #efe8da;
+.intro-copy,
+.feature-copy,
+.split-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.hero-note {
-  margin: 1.1rem 0 0;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(243, 239, 230, 0.72);
+.intro-copy {
+  padding: 6.25rem 8vw 3.4rem;
+  background: var(--bg);
+}
+
+.intro-copy p,
+.feature-copy p,
+.split-copy p {
+  max-width: 40rem;
+  margin: 0 0 1rem;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.intro-copy p:first-child {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.intro-copy p:last-child,
+.feature-copy p:last-child,
+.split-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .pair {
@@ -103,20 +138,29 @@ a.back-btn.stub-back.hero-back {
 }
 
 .pair figure,
-.split-media,
 .split-pair figure {
   position: relative;
   margin: 0;
   overflow: hidden;
   background: #111;
+  min-height: 72vh;
 }
 
-.pair figure {
-  min-height: 78vh;
+.pair .zoom,
+.split-pair .zoom {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: zoom-in;
+  display: block;
 }
 
 .pair img,
-.split-media img,
 .split-pair img {
   position: absolute;
   inset: 0;
@@ -126,46 +170,10 @@ a.back-btn.stub-back.hero-back {
   display: block;
 }
 
-.pair img.pos-ruger { object-position: center 40%; }
-.pair img.pos-post { object-position: center 18%; }
-
-.pair figcaption,
-.split-media figcaption,
-.split-pair figcaption {
-  position: absolute;
-  left: 1rem;
-  bottom: 0.85rem;
-  z-index: 1;
-  margin: 0;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.86);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.75);
-}
-
-.statement {
-  padding: 6.5rem 8vw 6.75rem;
-  background: var(--bg);
-}
-
-.statement p {
-  max-width: 34rem;
-  margin: 0 0 1.15rem;
-  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
-  line-height: 1.32;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.statement p:last-child {
-  margin-bottom: 0;
-  color: var(--muted);
-  font-weight: 400;
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-  line-height: 1.5;
-  letter-spacing: 0;
+.zoom:focus-visible,
+.shoot-wall button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -4px;
 }
 
 .split {
@@ -176,11 +184,10 @@ a.back-btn.stub-back.hero-back {
 }
 
 .split-reverse {
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   background: var(--bg);
 }
 
-.split-reverse .split-media,
 .split-reverse .split-pair {
   order: 2;
 }
@@ -189,14 +196,7 @@ a.back-btn.stub-back.hero-back {
   order: 1;
 }
 
-.split-media {
-  min-height: 88vh;
-}
-
 .split-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 4.5rem 6vw;
 }
 
@@ -211,74 +211,6 @@ a.back-btn.stub-back.hero-back {
   color: var(--ink);
 }
 
-.split-copy p,
-.feature-copy p {
-  max-width: 32rem;
-  margin: 0 0 0.95rem;
-  font-size: 1.05rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.split-copy p:last-child,
-.feature-copy p:last-child {
-  margin-bottom: 0;
-}
-
-.lead-line {
-  font-size: 1.55rem !important;
-  line-height: 1.28 !important;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--ink) !important;
-  max-width: 16em !important;
-}
-
-.split-copy a,
-.feature-copy a {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(201, 162, 39, 0.5);
-  padding-bottom: 0.04em;
-}
-
-.split-copy a:hover,
-.feature-copy a:hover {
-  border-bottom-color: var(--gold);
-}
-
-.split-copy a:focus-visible,
-.feature-copy a:focus-visible,
-a.back-btn:focus-visible {
-  outline: 1px solid var(--gold);
-  outline-offset: 3px;
-}
-
-.detail {
-  position: relative;
-  width: min(345px, 100%);
-  margin: 1.6rem 0 0;
-}
-
-.detail img {
-  position: static;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  border: 1px solid #2a2a2a;
-}
-
-.detail figcaption {
-  position: static;
-  display: block;
-  margin-top: 0.45rem;
-  padding: 0;
-  color: var(--dim);
-  text-shadow: none;
-  letter-spacing: 0.14em;
-}
-
 .split-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -290,11 +222,73 @@ a.back-btn:focus-visible {
 }
 
 .feature {
+  background: var(--band);
+}
+
+.feature-suppressor {
   background: #16140f;
 }
 
 .feature-copy {
   padding: 6.25rem 8vw 3.25rem;
+}
+
+.intro-copy a,
+.feature-copy a,
+.split-copy a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.5);
+  padding-bottom: 0.04em;
+}
+
+.intro-copy a:hover,
+.feature-copy a:hover,
+.split-copy a:hover {
+  border-bottom-color: var(--gold);
+}
+
+.intro-copy a:focus-visible,
+.feature-copy a:focus-visible,
+.split-copy a:focus-visible,
+a.back-btn:focus-visible,
+.lightbox-nav:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.shoot-wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+}
+
+.shoot-wall button {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #111;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.shoot-wall img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  transition: transform 0.35s ease, opacity 0.25s ease;
+}
+
+.shoot-wall button:hover img {
+  transform: scale(1.03);
 }
 
 .video-slot {
@@ -314,6 +308,25 @@ a.back-btn:focus-visible {
   padding: 1.5rem;
 }
 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+
 .shoot-foot {
   display: flex;
   flex-wrap: wrap;
@@ -325,6 +338,12 @@ a.back-btn:focus-visible {
 .shoot-foot .stub-back {
   text-decoration: none;
   margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .shoot-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 860px) {
@@ -343,22 +362,21 @@ a.back-btn:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .split-reverse .split-media,
   .split-reverse .split-pair,
   .split-reverse .split-copy {
     order: initial;
   }
 
   .pair figure,
-  .split-media,
-  .split-pair {
-    min-height: 68vh;
+  .split-pair,
+  .split-pair figure {
+    min-height: 62vh;
   }
 
-  .split-copy,
-  .statement,
-  .feature-copy {
-    padding: 2.8rem 1.3rem 3rem;
+  .intro-copy,
+  .feature-copy,
+  .split-copy {
+    padding: 2.8rem 1.3rem 2.4rem;
   }
 
   .split-copy h2,
@@ -367,11 +385,17 @@ a.back-btn:focus-visible {
     max-width: 12ch;
   }
 
-  .statement p {
+  .intro-copy p:first-child {
     font-size: 1.28rem;
   }
 
   .shoot-foot {
     padding: 2.4rem 1.3rem 2.6rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .shoot-wall {
+    grid-template-columns: 1fr;
   }
 }
