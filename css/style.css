@@ -1132,7 +1132,7 @@ a.back-btn.stub-back {
     align-items: center;
     text-align: center;
     gap: 0.55rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 2.4rem;
   }
 
   .passion-head .passion-lead {
@@ -1159,7 +1159,7 @@ a.back-btn.stub-back {
   }
 
   #passion .passion-head {
-    margin-bottom: 0.35rem;
+    margin-bottom: 3.5rem;
   }
 
   #passion .passion-hands {
@@ -1169,10 +1169,10 @@ a.back-btn.stub-back {
   #passion .fan {
     margin-bottom: 0.4rem;
   }
+}
 
-  #passion .crew-footer {
-    margin-top: 0.45rem;
-  }
+#passion .crew-footer {
+  margin-top: clamp(4.5rem, 12vh, 7rem);
 }
 
 @media (min-width: 901px) and (max-height: 860px) {
@@ -1361,7 +1361,7 @@ body.page-enter-active {
 .flow-track {
   display: flex;
   align-items: flex-start;
-  gap: clamp(5.5rem, 11vw, 13rem);
+  gap: clamp(11rem, 22vw, 26rem);
   width: max-content;
   animation-name: flow-ltr;
   animation-duration: 13s;
@@ -1372,13 +1372,13 @@ body.page-enter-active {
 }
 
 .flow-row-mid .flow-track {
-  gap: clamp(7rem, 15vw, 17rem);
+  gap: clamp(14rem, 30vw, 34rem);
   animation-duration: 19s;
   animation-delay: -6s;
 }
 
 .flow-row-low .flow-track {
-  gap: clamp(6rem, 12.4vw, 14.5rem);
+  gap: clamp(12rem, 24.8vw, 29rem);
   animation-duration: 26s;
   animation-delay: -11s;
 }
@@ -1552,7 +1552,7 @@ body.menu-open .menu-toggle {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: calc(var(--chrome-h) + 1.5rem) 7vw max(5.5rem, calc(env(safe-area-inset-bottom) + 4.5rem));
+  padding: calc(var(--chrome-h) + 1.5rem) 7vw max(11rem, calc(env(safe-area-inset-bottom) + 10rem));
 }
 
 .site-menu[hidden] {
@@ -1611,13 +1611,13 @@ body.menu-open .site-chrome {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 104px;
+  height: 104px;
 }
 
 .menu-social img {
-  width: 32px;
-  height: 32px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
   display: block;
 }
