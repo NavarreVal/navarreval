@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | J. Navarre Valdivieso</title>
+  <meta name="description" content="This page doesn’t exist. You didn’t see anything.">
+  <link rel="stylesheet" href="/css/style.css?v=3.6">
+  <style>
+    :root { --gold: #c9a227; }
+
+    html, body {
+      background: #0d0d0d;
+      color: #e8e8e8;
+      min-height: 100vh;
+    }
+
+    .miss-page {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      padding: 2.4rem 1.15rem 3.2rem;
+      text-align: center;
+    }
+
+    .miss-page h1 {
+      margin: 0;
+      font-size: clamp(4.6rem, 14vw, 7.5rem);
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      line-height: 0.9;
+      color: var(--gold);
+    }
+
+    .miss-rule {
+      width: 3.2rem;
+      height: 2px;
+      margin: 1rem auto 1.5rem;
+      border: 0;
+      background: var(--gold);
+    }
+
+    .miss-copy {
+      max-width: 38rem;
+      margin: 0 auto;
+    }
+
+    .miss-copy p {
+      margin: 0 0 0.85rem;
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: #c8c8c8;
+    }
+
+    .miss-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .miss-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin: 1.7rem auto;
+      max-width: 26rem;
+    }
+
+    .miss-gallery figure {
+      margin: 0;
+    }
+
+    .miss-gallery img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: #161616;
+    }
+
+    .miss-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.7rem;
+    }
+
+    .miss-exit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.9rem 1.5rem;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1a1408;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .miss-exit:hover,
+    .miss-exit:focus-visible {
+      background: #e0c15a;
+      outline: 2px solid #f4e2a0;
+      outline-offset: 3px;
+    }
+
+    @media (min-width: 760px) {
+      .miss-page {
+        padding: 3rem 1.4rem 3.6rem;
+      }
+
+      .miss-gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: center;
+        gap: 1rem;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="miss-page">
+    <h1>404</h1>
+    <hr class="miss-rule">
+    <div class="miss-copy">
+      <p>This is a rare page! We’re surprised you found it!</p>
+      <p>Here’s the thing though: you didn’t see anything.</p>
+    </div>
+
+    <div class="miss-gallery">
+      <figure>
+        <img
+          src="/images/404/wanted-poster.jpg"
+          alt="Wanted poster photo booth"
+          width="455"
+          height="610"
+        >
+      </figure>
+      <figure>
+        <img
+          src="/images/404/toy-handcuffs.jpg"
+          alt="Toy handcuffs in a transport van"
+          width="1014"
+          height="1011"
+        >
+      </figure>
+      <figure>
+        <img
+          src="/images/404/worried-reaction.jpg"
+          alt="Dramatic worried reaction"
+          width="680"
+          height="538"
+        >
+      </figure>
+    </div>
+
+    <div class="miss-copy">
+      <p>This page doesn’t exist. You better get outta here.</p>
+      <p>You’ve been logged. Get away while you still can.</p>
+    </div>
+
+    <div class="miss-actions">
+      <a class="miss-exit" href="/">Get outta here!</a>
+    </div>
+  </main>
+</body>
+</html>
