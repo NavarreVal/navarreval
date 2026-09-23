@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teaching | J. Navarre Valdivieso</title>
-  <meta name="description" content="Pursuing teaching in Utah public schools: the goal, a place for USBE licensing, and a degree still in progress.">
+  <meta name="description" content="A passion for teaching, a Study Sounds mix, a Utah educator license, and degrees from Western Governors University.">
   <link rel="stylesheet" href="../css/style.css?v=3.6">
   <style>
     :root { --gold: #c9a227; }
@@ -18,17 +18,18 @@
     }
 
     .teach-page {
-      width: min(46rem, 100%);
+      width: min(70vw, 1100px);
+      max-width: 100%;
       margin: 0 auto;
       padding: 1.6rem 1.1rem 3.2rem;
     }
 
     .teach-panel {
-      background: rgba(13, 13, 13, 0.92);
-      border: 1px solid rgba(201, 162, 39, 0.28);
-      border-radius: 12px;
-      padding: 2.2rem 1.5rem 2.2rem;
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
     }
 
     .teach-top {
@@ -100,20 +101,10 @@
 
     .teach-card {
       background: #141414;
-      border: 1px solid rgba(201, 162, 39, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      padding: 1.15rem 1.15rem 0.35rem;
+      padding: 1.15rem 1.2rem 0.35rem;
       margin: 0 0 0.4rem;
-    }
-
-    .teach-card .teach-placeholder {
-      margin: 0 0 1rem;
-      padding: 0.75rem 0.85rem;
-      border: 1px dashed rgba(201, 162, 39, 0.55);
-      border-radius: 8px;
-      color: #e6d7a2;
-      font-size: 0.98rem;
-      line-height: 1.55;
     }
 
     .teach-card dl {
@@ -131,8 +122,20 @@
 
     .teach-card dd {
       margin: 0 0 0.95rem;
-      color: #e6d7a2;
-      font-size: 1rem;
+      color: #c8c8c8;
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+
+    .teach-card ul {
+      margin: 0.45rem 0 0;
+      padding: 0 0 0 1.15rem;
+    }
+
+    .teach-card li {
+      margin: 0 0 0.28rem;
+      color: #c8c8c8;
+      font-size: 1.02rem;
       line-height: 1.5;
     }
 
@@ -141,7 +144,7 @@
       grid-template-columns: 1fr;
       gap: 1.25rem;
       align-items: start;
-      margin: 0 0 1.5rem;
+      margin: 0;
     }
 
     .teach-page figure {
@@ -164,11 +167,6 @@
       color: #8a8a8a;
     }
 
-    .study-sounds {
-      margin: 0.4rem 0 0.4rem;
-      padding-top: 0.2rem;
-    }
-
     .study-sounds figure {
       margin: 0 0 1.15rem;
     }
@@ -177,6 +175,12 @@
       border: 0;
       border-radius: 0;
       background: transparent;
+    }
+
+    .study-sounds-actions {
+      display: flex;
+      justify-content: center;
+      margin: 0.15rem 0 1.2rem;
     }
 
     .study-sounds-btn {
@@ -201,20 +205,18 @@
       outline-offset: 3px;
     }
 
-    .study-sounds-note {
-      margin: 0.9rem 0 0.45rem;
-      font-size: 0.95rem;
-      color: #a3a3a3;
-    }
-
     .study-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.55rem 1.4rem;
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
     .study-links li {
-      margin: 0 0 0.4rem;
+      margin: 0;
       font-size: 1rem;
       line-height: 1.5;
     }
@@ -226,18 +228,22 @@
       padding: 2rem 0 0.2rem;
     }
 
-    @media (min-width: 720px) {
+    @media (min-width: 640px) {
       .teach-page {
-        padding: 2.2rem 0 3.4rem;
+        padding: 2.2rem 1.25rem 3.4rem;
       }
+    }
 
-      .teach-panel {
-        padding: 2.4rem 2.3rem 2.5rem;
-      }
-
+    @media (min-width: 720px) {
       .degree-layout {
-        grid-template-columns: minmax(0, 1.1fr) minmax(12rem, 0.9fr);
+        grid-template-columns: minmax(0, 1.15fr) minmax(14rem, 0.85fr);
         gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .teach-page {
+        width: 100%;
       }
     }
 
@@ -254,12 +260,6 @@
   </style>
 </head>
 <body>
-  <!--
-    Draft copy for CAPT to edit.
-    Do not treat the homepage bio line (“currently pursuing a Master’s in Secondary Social Studies Education”) as confirmed detail for this page.
-    Iron County and Cedar Middle School are setting color only. This page does not claim a school assignment.
-    License type, endorsements, status, degree name, school, and completion are placeholders until CAPT fills them.
-  -->
   <article class="teach-page" id="top">
     <div class="teach-panel">
       <div class="teach-top">
@@ -271,39 +271,77 @@
 
       <section aria-labelledby="goal-heading">
         <h2 id="goal-heading">Goal</h2>
-        <p>For a long time I led work in tech — Agile teams, projects, the daily job of getting people pointed the same way. I’m transitioning that into classroom teaching.</p>
-        <p>I’m pursuing teaching in Utah public schools. The place I picture is Iron County, and a school like Cedar Middle School: a bell, a hallway, a room where you can learn the students’ names and mean it.</p>
-        <p>The goal is to help students learn, grow, and find purpose. I want lessons that are clear, a room that stays warm when the work gets hard, and enough expectation that a young person can start to see what they are for. The point is the student.</p>
+        <p>I know everyone uses the word “passion” ad nauseam to describe what they do, or the job they’re trying to get, but I’ve had an honest to God passion for teaching for as long as I can remember. I was lucky to have been surrounded by teachers throughout the years, and fostered with a love for education especially by my mother. I always wanted to teach, but life pushed me in a different direction professionally.</p>
+        <p>Whenever I’ve had the opportunity to teach, I’ve always taken it. I love teaching in church, I love teaching my children, and I’ve enjoyed volunteering to teach whenever and wherever possible. I am especially passionate about teaching History. I wasn’t a huge fan of History and Social Studies until I had a teacher in High School who you could tell really loved the subject. He sparked that same passion in me, and I want to share that with others.</p>
+        <p>For the last 20 years or so, I’ve spent time leading work in tech: Agile teams, projects, the daily job of getting people pointed toward the same goal and in the same direction. I now find myself in a position to be able to pivot back to exploring my passion for teaching.</p>
+        <p>I currently hold a Bachelor of Science in Business Management from Western Governors University, and I’m now pursuing a Master of Arts in Secondary Education with an emphasis in teaching Social Studies; also with Western Governors University. My ultimate goal is to teach Social Studies at a High School or Collegiate level.</p>
+      </section>
+
+      <section aria-labelledby="study-heading">
+        <h2 id="study-heading">Study Sounds Mix</h2>
+        <div class="study-sounds">
+          <figure>
+            <img
+              src="../images/passion/teaching/study-sounds-mix.jpg"
+              alt="Lo-fi study scene: writing at a desk with headphones on a rainy night, desert mesas outside the window."
+              width="1712"
+              height="1152"
+            >
+          </figure>
+          <div class="study-sounds-actions">
+            <button type="button" class="study-sounds-btn" id="study-sounds">Study Sounds Mix</button>
+          </div>
+          <p>Click this link to open multiple tabs that I run while I study. One click opens rainymood, an outdoor fire crackling video, and a playlist of music that helps me focus. These sounds, overlapped, help me stay focused and on task, and boost my productivity. Your mileage may vary!</p>
+          <p>If a browser blocks the extra tabs, use the following links.</p>
+          <ul class="study-links">
+            <li><a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer">rainymood</a></li>
+            <li><a href="https://www.youtube.com/watch?v=NUKKzdVy0EI" target="_blank" rel="noopener noreferrer">YouTube fire video</a></li>
+            <li><a href="https://www.youtube.com/playlist?list=PLca_5JS9gs0E" target="_blank" rel="noopener noreferrer">Playlist</a></li>
+          </ul>
+        </div>
       </section>
 
       <section aria-labelledby="licensing-heading">
         <h2 id="licensing-heading">Licensing</h2>
-        <p>Current licensing with the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>. The record below is the slot for the official details.</p>
+        <p>Utah educator license through the <a href="https://www.schools.utah.gov/" target="_blank" rel="noopener noreferrer">Utah State Board of Education</a>. The name on the license record is Jade Valdivieso.</p>
         <div class="teach-card">
-          <p class="teach-placeholder">[PLACEHOLDER: license type / endorsements / status — CAPT to fill]</p>
           <dl>
             <dt>License type</dt>
-            <dd>[PLACEHOLDER: license type — CAPT to fill]</dd>
-            <dt>Endorsements</dt>
-            <dd>[PLACEHOLDER: endorsements — CAPT to fill]</dd>
+            <dd>Associate</dd>
             <dt>Status</dt>
-            <dd>[PLACEHOLDER: status — CAPT to fill]</dd>
+            <dd>New</dd>
+            <dt>Issued</dt>
+            <dd>February 25, 2026</dd>
+            <dt>Expires</dt>
+            <dd>June 30, 2029</dd>
+            <dt>License area</dt>
+            <dd>Secondary Education (Associate, USBE)</dd>
+            <dt>Endorsements</dt>
+            <dd>
+              Associate, expire June 30, 2029
+              <ul>
+                <li>Social Studies Composite</li>
+                <li>Economics</li>
+                <li>Geography</li>
+                <li>History</li>
+                <li>Sociology</li>
+              </ul>
+            </dd>
           </dl>
         </div>
       </section>
 
       <section aria-labelledby="degree-heading">
-        <h2 id="degree-heading">Degree in progress</h2>
-        <p>The degree is still in motion. The name, the school, and where it stands belong in the lines below.</p>
+        <h2 id="degree-heading">Degree</h2>
         <div class="degree-layout">
           <div class="teach-card">
             <dl>
-              <dt>Degree</dt>
-              <dd>[PLACEHOLDER: degree name]</dd>
-              <dt>School</dt>
-              <dd>[PLACEHOLDER: school]</dd>
-              <dt>Status</dt>
-              <dd>[PLACEHOLDER: status / expected completion]</dd>
+              <dt>Completed</dt>
+              <dd>Bachelor of Science in Business Management — Western Governors University</dd>
+              <dt>In progress</dt>
+              <dd>Master of Arts in Secondary Education with an emphasis in teaching Social Studies — Western Governors University</dd>
+              <dt>Aim</dt>
+              <dd>Teach Social Studies at a High School or Collegiate level</dd>
             </dl>
           </div>
           <figure>
@@ -315,24 +353,6 @@
             >
             <figcaption>Degree photo coming soon</figcaption>
           </figure>
-        </div>
-
-        <div class="study-sounds">
-          <figure>
-            <img
-              src="../images/passion/teaching/study-sounds-mix.jpg"
-              alt="Lo-fi study scene: writing at a desk with headphones on a rainy night, desert mesas outside the window."
-              width="1712"
-              height="1152"
-            >
-          </figure>
-          <button type="button" class="study-sounds-btn" id="study-sounds">Study Sounds Mix</button>
-          <p class="study-sounds-note">One click opens rain, a long video, and a playlist. If a browser blocks the extra tabs, use the links.</p>
-          <ul class="study-links">
-            <li><a href="https://www.rainymood.com/" target="_blank" rel="noopener noreferrer">Rainy Mood</a></li>
-            <li><a href="https://www.youtube.com/watch?v=NUKKzdVy0EI" target="_blank" rel="noopener noreferrer">YouTube video</a></li>
-            <li><a href="https://www.youtube.com/playlist?list=PLca_5JS9gs0E" target="_blank" rel="noopener noreferrer">YouTube playlist</a></li>
-          </ul>
         </div>
       </section>
 
