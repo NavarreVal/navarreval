@@ -19,7 +19,11 @@
   z-index: 20;
 }
 
-body.site-hub #passion .passion-inner,
+body.site-hub #passion .passion-inner {
+  padding-top: calc(var(--chrome-h) + 0.45rem);
+  padding-bottom: 0.75rem;
+}
+
 body.site-hub #personal .panel-inner {
   padding-top: calc(var(--chrome-h) + 3.5rem);
 }
