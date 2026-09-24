@@ -100,6 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const recordStrip = document.querySelector('.record-strip');
+  if (recordStrip) {
+    recordStrip.addEventListener('wheel', (event) => {
+      if (event.ctrlKey) return;
+      const max = recordStrip.scrollWidth - recordStrip.clientWidth;
+      if (max <= 0) return;
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (!delta) return;
+      const before = recordStrip.scrollLeft;
+      recordStrip.scrollLeft += delta;
+      if (recordStrip.scrollLeft !== before) event.preventDefault();
+    }, { passive: false });
+
+    recordStrip.addEventListener('keydown', (event) => {
+      if (event.target !== recordStrip) return;
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      recordStrip.scrollLeft += event.key === 'ArrowRight' ? 120 : -120;
+    });
+  }
+
   links.forEach(link => {
     link.addEventListener('click', e => {
       const href = link.getAttribute('href') || '';

@@ -28,7 +28,7 @@ body {
 }
 
 :root {
-  --gold: #c9a227;
+  --gold: #3dff7a;
   --chrome-h: 5.5rem;
 }
 
@@ -98,7 +98,7 @@ body.site-hub.personal-open {
 .panel-inner p {
   font-size: 1.15rem;
   line-height: 1.7;
-  color: #b0b0b0;
+  color: #9ee8be;
 }
 
 .back-btn {
@@ -151,7 +151,7 @@ body.site-hub.personal-open {
 }
 
 .personal-card:hover .personal-card-caption {
-  color: #e8c547;
+  color: #9dffc0;
 }
 
 .crew-footer {
@@ -228,7 +228,7 @@ body.site-hub.personal-open {
 }
 
 .timeline-intro {
-  color: #777;
+  color: #8fd4aa;
   margin-bottom: 2rem;
   font-size: 0.95rem;
   line-height: 1.5;
@@ -415,7 +415,7 @@ body.site-hub.personal-open {
 .timeline-item.has-data .hash {
   width: 4px;
   height: 16px;
-  background: #777;
+  background: #1f8f4e;
 }
 
 .timeline-item.has-data:hover .hash {
@@ -493,7 +493,7 @@ body.site-hub.personal-open {
   justify-content: center;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #777;
+  color: #8fd4aa;
 }
 
 .year-label {
@@ -557,7 +557,7 @@ body.site-hub.personal-open {
   justify-content: center;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #777;
+  color: #8fd4aa;
 }
 
 .mobile-card-content {
@@ -990,7 +990,7 @@ body.site-hub.personal-open {
   margin: 0;
   font-size: 1rem;
   line-height: 1.4;
-  color: #9a9a9a;
+  color: #9ee8be;
   text-align: left;
 }
 

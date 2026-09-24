@@ -930,3 +930,33 @@ html.boot-live #landing {
   0%, 46% { opacity: 1; }
   54%, 100% { opacity: 0.62; }
 }
+
+/* Pages under the shared header use the same field as the record. */
+body:has(.dossier-head) {
+  background-color: #040a07;
+}
+
+#passion,
+#professional,
+body.dossier-tabbed #personal {
+  background-color: #040a07;
+}
+
+body:has(.dossier-head) :is(
+  .professional-inner,
+  .passion-head,
+  .panel-inner,
+  .music-top,
+  .games-top,
+  .teach-top,
+  .print-top,
+  .read-top,
+  .wd-content,
+  .vanilla-top,
+  .nas-top,
+  .photo-top,
+  .write-top,
+  .miss-page
+) h1 {
+  color: #3dff7a;
+}

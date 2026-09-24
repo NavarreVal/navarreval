@@ -5,7 +5,7 @@
   var section = "record";
   if (path === "/professional" || path.indexOf("/professional/") === 0) section = "professional";
   else if (path === "/passion" || path.indexOf("/passion/") === 0) section = "passion";
-  else if (path === "/personal" || path.indexOf("/personal/") === 0) section = "personal";
+  else if (path === "/personal" || path.indexOf("/personal/") === 0 || path === "/talks" || path.indexOf("/talks/") === 0) section = "personal";
 
   function tab(id, href, label) {
     var on = section === id;

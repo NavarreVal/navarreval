@@ -1,14 +1,14 @@
 /* Blogger Template Style — Simple (vawfern.blogspot.com / This blog has a name) */
 
 :root {
-  --blog-ink: #000000;
-  --blog-link: #2288bb;
-  --blog-link-hover: #33aaff;
-  --blog-visited: #888888;
-  --blog-rule: #dddddd;
-  --blog-footer-bg: #444444;
-  --blog-footer-ink: #eeeeee;
-  --blog-accent: #33aaff;
+  --blog-ink: #d7ffe6;
+  --blog-link: #3dff7a;
+  --blog-link-hover: #e9fff2;
+  --blog-visited: #8fd4aa;
+  --blog-rule: rgba(61, 255, 122, 0.28);
+  --blog-footer-bg: #07140f;
+  --blog-footer-ink: #d7ffe6;
+  --blog-accent: #3dff7a;
 }
 
 * { box-sizing: border-box; }
@@ -17,7 +17,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #ffffff;
+  background: #040a07;
   color: var(--blog-ink);
   font: normal normal 12px "Trebuchet MS", Trebuchet, Verdana, sans-serif;
 }
@@ -33,28 +33,28 @@ a:hover { color: var(--blog-link-hover); text-decoration: underline; }
 
 .content-inner {
   padding: 10px 40px 40px;
-  background: #ffffff;
+  background: #040a07;
 }
 
 .Header h1 {
   margin: 0;
   padding: 22px 0 6px;
   font: normal normal 40px "Trebuchet MS", Trebuchet, Verdana, sans-serif;
-  color: #000000;
+  color: #3dff7a;
   line-height: 1.15;
 }
 
 .Header h1 a:link,
 .Header h1 a:visited,
 .Header h1 a:hover {
-  color: #000000;
+  color: #3dff7a;
   text-decoration: none;
 }
 
 .Header .description {
   margin: 0 0 0.4rem;
   font-size: 18px;
-  color: #000000;
+  color: #3dff7a;
 }
 
 .Header .home-escape {
@@ -88,8 +88,8 @@ h2.date-header {
 
 .date-header span {
   display: inline-block;
-  background: #000000;
-  color: #ffffff;
+  background: #3dff7a;
+  color: #04140c;
   padding: 0.4em 0.55em;
   letter-spacing: 3px;
 }
@@ -101,12 +101,12 @@ h2.date-header {
 h3.post-title {
   margin: 0.75em 0 0.55em;
   font: normal bold 22px "Trebuchet MS", Trebuchet, sans-serif;
-  color: #000000;
+  color: #3dff7a;
 }
 
 h3.post-title a:link,
 h3.post-title a:visited {
-  color: #000000;
+  color: #3dff7a;
   text-decoration: none;
 }
 
@@ -125,9 +125,9 @@ h3.post-title a:hover {
   max-width: 100%;
   height: auto;
   padding: 5px;
-  background: #ffffff;
-  border: 1px solid #eeeeee;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  background: #07140f;
+  border: 1px solid rgba(61, 255, 122, 0.28);
+  box-shadow: none;
 }
 
 .post-body .separator {
@@ -138,11 +138,11 @@ h3.post-title a:hover {
 
 .post-body .tr-caption-container {
   margin: 0.8em auto;
-  color: #000000;
+  color: #8fd4aa;
   padding: 5px;
-  background: #ffffff;
-  border: 1px solid #eeeeee;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  background: #07140f;
+  border: 1px solid rgba(61, 255, 122, 0.28);
+  box-shadow: none;
 }
 
 .post-body .tr-caption-container img {
@@ -187,8 +187,8 @@ h3.post-title a:hover {
 .blog-video-fallback {
   margin: 1em 0;
   padding: 0.6em 0.8em;
-  background: #eeeeee;
-  border: 1px solid #dddddd;
+  background: #0c2218;
+  border: 1px solid rgba(61, 255, 122, 0.28);
 }
 
 .post-footer {
@@ -203,7 +203,7 @@ h3.post-title a:hover {
 
 .post-footer a:link,
 .post-footer a:visited {
-  color: #ffffff;
+  color: #e9fff2;
 }
 
 .post-footer a:hover {
@@ -214,13 +214,13 @@ h3.post-title a:hover {
   margin: 0.4em 0 0;
   font-size: 110%;
   line-height: 1.4;
-  color: #333333;
+  color: #9ee8be;
 }
 
 .blog-pager {
   margin: 2.2em 0 0;
   padding: 8px 0;
-  border-top: 1px dashed #bbbbbb;
+  border-top: 1px dashed rgba(61, 255, 122, 0.35);
   font-size: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -228,20 +228,20 @@ h3.post-title a:hover {
 }
 
 .blog-pager a {
-  background: #ffffff;
+  background: transparent;
   padding: 5px;
 }
 
 .archive-note {
   font-size: 12px;
-  color: #666;
+  color: #8fd4aa;
   margin: 0 0 1.4em;
 }
 
 .missing-img {
   display: inline-block;
   max-width: 16rem;
-  background: #f3f3f3;
+  background: #0c2218;
 }
 
 @media (max-width: 640px) {
