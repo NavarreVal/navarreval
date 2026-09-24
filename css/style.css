@@ -190,6 +190,10 @@ body.site-hub.personal-open {
   border-bottom-color: var(--gold);
 }
 
+#personal .crew-footer {
+  margin-top: clamp(4.75rem, 12vh, 7.5rem);
+}
+
 
 /* ===== Professional Timeline (Desktop) ===== */
 #professional {
