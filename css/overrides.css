@@ -187,13 +187,6 @@ body.dossier-tabbed #professional .professional-inner {
   100% { --mx: 0.18; --my: 0.30; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .playing-card.playing-card--foil,
-  .playing-card.playing-card--foil.is-tracking {
-    animation: none;
-  }
-}
-
 body.page-enter-active {
   animation: page-enter-unlock 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

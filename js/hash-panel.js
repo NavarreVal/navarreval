@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".back-btn").forEach((btn) => {
     if (btn.tagName === "A") return;
     btn.addEventListener("click", () => {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       // Pop a section entry this page pushed. A hash opened directly, or an
       // overlay sitting on top of one, is not its own trip — clear it in place.
       if (history.state && history.state.panel && history.state.panel !== "landing") {
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (location.hash) history.replaceState({ panel: "landing" }, "", landingUrl());
       if (typeof window.showSitePanel === "function") window.showSitePanel("landing");
-      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 

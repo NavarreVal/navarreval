@@ -8,8 +8,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
   <title>Passion | J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="/css/style.css?v=6.1">
-  <link rel="stylesheet" href="/css/overrides.css?v=6.5">
+  <link rel="stylesheet" href="/css/style.css?v=6.2">
+  <link rel="stylesheet" href="/css/overrides.css?v=6.6">
   <link rel="stylesheet" href="/css/dossier.css?v=1.20">
   <style>
     /* Desktop deal only. Mobile (≤900px) never matches, so cards stay in the fan. */
@@ -32,17 +32,6 @@
         transform-origin: 50% 100%;
         transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
         animation-name: card-deal-flat;
-      }
-    }
-
-    @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
-      #passion .passion-hands.is-dealing .playing-card {
-        --deal-rot: 8deg;
-        transform-origin: 50% 100%;
-        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
-        animation-name: card-deal-flat;
-        animation-duration: 0.20s;
-        animation-delay: calc(0.3s + var(--deal, 0) * 120ms);
       }
     }
 
@@ -173,7 +162,6 @@
           var desktop = window.matchMedia("(min-width: 901px)");
           if (!desktop.matches) return;
 
-          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
           var cycle = ["maker", "thinker", "doer", "dabbler"];
           var deal = 0;
           var cards = [];
@@ -263,9 +251,9 @@
           hands.classList.add("is-dealing");
 
           var pending = cards.length;
-          var stagger = reduce ? 120 : 150;
-          var duration = reduce ? 200 : 300;
-          var lead = reduce ? 300 : 550;
+          var stagger = 150;
+          var duration = 300;
+          var lead = 550;
           var timer = setTimeout(stop, lead + (cards.length - 1) * stagger + duration + 120);
 
           function stop() {
@@ -296,7 +284,7 @@
     </div>
   </main>
 
-  <script src="/js/main.js?v=5.2"></script>
+  <script src="/js/main.js?v=5.3"></script>
   <script src="/js/page-enter.js"></script>
 </body>
 </html>

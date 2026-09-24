@@ -1506,13 +1506,3 @@ body.page-enter-active {
   .flow-frame.sz-t { --fh: 30vh; }
   .site-summary { min-height: 56vh; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .flow-track {
-    animation-duration: 52s;
-    animation-play-state: running;
-  }
-
-  .flow-row-mid .flow-track { animation-duration: 76s; }
-  .flow-row-low .flow-track { animation-duration: 104s; }
-}

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const personal = document.getElementById('personal');
 
   function motion() {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    return 'smooth';
   }
 
   function pageSections() {
@@ -272,7 +272,6 @@ window.addEventListener('popstate', () => {
     window.addEventListener('wheel', (event) => {
       if (event.ctrlKey) return;
       if (document.body.classList.contains('personal-open')) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 
       const edge = professionalEdge.getBoundingClientRect().top + window.scrollY;
