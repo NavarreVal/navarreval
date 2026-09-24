@@ -10,7 +10,7 @@
   <title>Personal | J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="/css/style.css?v=6.2">
   <link rel="stylesheet" href="/css/overrides.css?v=6.6">
-  <link rel="stylesheet" href="/css/dossier.css?v=1.24">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.25">
 </head>
 <body class="site-hub dossier-tabbed">
   <script src="/js/dossier-chrome.js?v=1"></script>
@@ -34,91 +34,58 @@
         }
       </script>
 
-      <div class="personal-top">
-        <aside class="hud personal-slot" aria-hidden="true">
+      <div class="dossier-split">
+        <section class="hud portrait-hud" aria-label="Family portrait">
           <div class="hud-in">
-            <div class="uplink">
-              <div class="uplink-stage">
-                <div class="uplink-term"></div>
-              </div>
-              <div class="uplink-trace">
-                <p class="uplink-k">TRACE: SS_ARGUS UPLINK</p>
-                <p class="uplink-field"><span class="uplink-ip"></span><i class="uplink-cursor" aria-hidden="true"></i></p>
-                <svg class="uplink-net" viewBox="0 0 88 70" aria-hidden="true">
-                  <rect x="26" y="4" width="36" height="20"></rect>
-                  <path d="M44 24 V36 M16 36 H72 M16 36 V46 M44 36 V46 M72 36 V46"></path>
-                  <rect x="6" y="46" width="20" height="14"></rect>
-                  <rect x="34" y="46" width="20" height="14"></rect>
-                  <rect x="62" y="46" width="20" height="14"></rect>
-                </svg>
-                <p class="uplink-lock">LOCKED</p>
-              </div>
-            </div>
-          </div>
-        </aside>
-        <section class="hud personal-title">
-          <div class="hud-in">
-            <div class="hud-copy">
-              <p class="personal-label">Personal</p>
-              <h1>Personal</h1>
-              <p class="timeline-intro">Family, faith, and the crew behind this site.</p>
+            <div class="portrait-btn">
+              <img src="/images/personal/family-picnic.webp" alt="Illustrated family portrait at a picnic in southern Utah red-rock country" width="900" height="1338" draggable="false">
             </div>
           </div>
         </section>
-        <section class="hud personal-status" aria-labelledby="now-label">
+
+        <section class="hud id-hud" aria-labelledby="personal-label">
           <div class="hud-in">
-            <div class="hud-head">
-              <h2 id="now-label">Current Status</h2>
-            </div>
-            <div class="file-body">
-              <div class="now-rows">
-                <a class="now-row" href="/passion/reading.html">
-                  <span class="now-k">Reading</span>
-                  <span class="now-v" data-now="reading"></span>
-                </a>
-                <a class="now-row" href="/passion/video-games.html">
-                  <span class="now-k">Playing</span>
-                  <span class="now-v" data-now="playing"></span>
-                </a>
-                <a class="now-row" href="/passion/music.html">
-                  <span class="now-k">Listening</span>
-                  <span class="now-v now-songs" id="now-listening">Updating soon</span>
-                </a>
+            <div class="id-body personal-dossier">
+              <p class="personal-label" id="personal-label">Personal</p>
+              <h1>Personal</h1>
+              <p class="timeline-intro">Family, faith, and the crew behind this site.</p>
+
+              <div class="dossier-block file-motto">
+                <p class="file-motto-line" aria-label="We make do.">
+                  <span class="status-loading" data-word="We make do."><span class="status-loading-word"></span></span>
+                </p>
+                <!-- MOTTO COPY: additional family-motto text goes here. Leave this comment. Do not add visible placeholder text. -->
+              </div>
+
+              <div class="dossier-block">
+                <p class="faith-line">Served in the Mexico Merida Mission, 2005 to 2007.</p>
+                <p class="file-links">
+                  <a href="/passion/religious.html">Religious</a>
+                  <a href="/talks/">Talks</a>
+                </p>
+              </div>
+
+              <div class="dossier-block" aria-labelledby="now-label">
+                <h2 id="now-label">Current Status</h2>
+                <div class="now-rows">
+                  <a class="now-row" href="/passion/reading.html">
+                    <span class="now-k">Reading</span>
+                    <span class="now-v" data-now="reading"></span>
+                  </a>
+                  <a class="now-row" href="/passion/video-games.html">
+                    <span class="now-k">Playing</span>
+                    <span class="now-v" data-now="playing"></span>
+                  </a>
+                  <a class="now-row" href="/passion/music.html">
+                    <span class="now-k">Listening</span>
+                    <span class="now-v now-songs" id="now-listening">Updating soon</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-      <section class="hud file-block" aria-labelledby="motto-label">
-        <div class="hud-in">
-          <div class="hud-head">
-            <h2 id="motto-label">Family motto</h2>
-            <span>Family file</span>
-          </div>
-          <div class="file-body file-motto">
-            <p class="file-motto-line" aria-label="We make do.">
-              <span class="status-loading" data-word="We make do."><span class="status-loading-word"></span></span>
-            </p>
-            <!-- MOTTO COPY: additional family-motto text goes here. Leave this comment. Do not add visible placeholder text. -->
-          </div>
-        </div>
-      </section>
-
-      <section class="hud file-block" aria-labelledby="faith-label">
-        <div class="hud-in">
-          <div class="hud-head">
-            <h2 id="faith-label">Faith</h2>
-          </div>
-          <div class="file-body">
-            <p class="faith-line">Served in the Mexico Merida Mission, 2005 to 2007.</p>
-            <p class="file-links">
-              <a href="/passion/religious.html">Religious</a>
-              <a href="/talks/">Talks</a>
-            </p>
-          </div>
-        </div>
-      </section>
 
       <section class="hud file-block" aria-labelledby="yt-label">
         <div class="hud-in">
@@ -403,225 +370,6 @@
         .catch(function () {
           listening.textContent = "Updating soon";
         });
-    })();
-  </script>
-  <script>
-    (function () {
-      var slot = document.querySelector(".personal-slot");
-      var uplink = slot && slot.querySelector(".uplink");
-      var term = uplink && uplink.querySelector(".uplink-term");
-      var ipEl = uplink && uplink.querySelector(".uplink-ip");
-      var lockEl = uplink && uplink.querySelector(".uplink-lock");
-      if (!slot || !uplink || !term || !ipEl || !lockEl) return;
-
-      var listing = [
-        "struct crew_manifest {",
-        "  ship = SS_ARGUS;",
-        "  motto = \"We make do.\";",
-        "  crew = 16;",
-        "  watch = LIVE;",
-        "};"
-      ].join("\n");
-
-      var CHAR_MS = 48;
-      var NL_MS = 88;
-      var HOLD_MS = 700;
-      var SCROLL_MS = 1600;
-      var HEX_MS = 6400;
-      var HEX_TICK = 48;
-      var TRACE_MS = 6800;
-      var TRACE_CHAR = 78;
-      var typeWrite = 0;
-      var i;
-      for (i = 0; i < listing.length; i += 1) {
-        typeWrite += listing.charAt(i) === "\n" ? NL_MS : CHAR_MS;
-      }
-      var typeDur = typeWrite + HOLD_MS + SCROLL_MS;
-
-      var active = false;
-      var raf = 0;
-      var running = false;
-      var lastNow = 0;
-      var phase = "type";
-      var elapsed = 0;
-      var painted = null;
-      var wantCursor = null;
-      var hexRows = [];
-      var hexAt = 0;
-      var hexBuilt = -1;
-      var traceAddr = "";
-
-      function setActive(on) {
-        if (active === on) return;
-        active = on;
-        slot.classList.toggle("is-paused", !on);
-        if (on) startClock();
-        else stopClock();
-      }
-
-      function startClock() {
-        if (running) return;
-        running = true;
-        lastNow = performance.now();
-        raf = requestAnimationFrame(frame);
-      }
-
-      function stopClock() {
-        running = false;
-        if (raf) cancelAnimationFrame(raf);
-        raf = 0;
-      }
-
-      function frame(now) {
-        if (!active || !uplink.isConnected) {
-          running = false;
-          raf = 0;
-          return;
-        }
-        var dt = now - lastNow;
-        lastNow = now;
-        if (dt < 0) dt = 0;
-        if (dt > 40) dt = 40;
-        elapsed += dt;
-        if (phase === "type") renderType();
-        else if (phase === "hex") renderHex();
-        else renderTrace();
-        raf = requestAnimationFrame(frame);
-      }
-
-      function paint(text, cursor) {
-        if (text === painted && cursor === wantCursor) return;
-        painted = text;
-        wantCursor = cursor;
-        term.textContent = text || "";
-        if (!cursor) return;
-        var mark = document.createElement("span");
-        mark.className = "uplink-cursor";
-        term.appendChild(mark);
-      }
-
-      function nextHex() {
-        var bytes = [];
-        var n;
-        for (n = 0; n < 6; n += 1) {
-          bytes.push(("0" + (Math.random() * 256 | 0).toString(16)).slice(-2));
-        }
-        var off = ("000000" + hexAt.toString(16)).slice(-6);
-        hexAt += 6;
-        return off + "  " + bytes.join(" ");
-      }
-
-      function docIp() {
-        var prefix = Math.random() < 0.5 ? "203.0.113." : "198.51.100.";
-        return prefix + (1 + Math.floor(Math.random() * 254));
-      }
-
-      function renderType() {
-        uplink.classList.remove("is-trace");
-        lockEl.classList.remove("is-on");
-        var t = 0;
-        var count = 0;
-        var n;
-        for (n = 0; n < listing.length; n += 1) {
-          var step = listing.charAt(n) === "\n" ? NL_MS : CHAR_MS;
-          if (t + step > elapsed) break;
-          t += step;
-          count += 1;
-        }
-        paint(listing.slice(0, count), true);
-        var after = elapsed - typeWrite;
-        if (after < HOLD_MS) term.style.transform = "";
-        else {
-          var p = Math.min(1, (after - HOLD_MS) / SCROLL_MS);
-          term.style.transform = "translateY(-" + (p * 110) + "%)";
-        }
-        if (elapsed >= typeDur) enterHex();
-      }
-
-      function visibleRows() {
-        var stage = term.parentElement;
-        var cs = getComputedStyle(term);
-        var lh = parseFloat(cs.lineHeight);
-        if (!lh) lh = parseFloat(cs.fontSize) * 1.35;
-        var n = Math.round((stage.clientHeight || 0) / lh);
-        if (n < 6) n = 6;
-        if (n > 28) n = 28;
-        return n;
-      }
-
-      function enterHex() {
-        phase = "hex";
-        elapsed = 0;
-        hexRows = [];
-        hexBuilt = -1;
-        hexAt = (Math.random() * 4096) | 0;
-        hexAt -= hexAt % 6;
-        term.style.transform = "";
-        painted = null;
-      }
-
-      function renderHex() {
-        uplink.classList.remove("is-trace");
-        term.style.transform = "";
-        var ticks = Math.floor(elapsed / HEX_TICK);
-        var n;
-        if (hexBuilt < 0) {
-          var rows = visibleRows();
-          for (n = 0; n < rows; n += 1) hexRows.push(nextHex());
-          hexBuilt = 0;
-        }
-        while (hexBuilt < ticks) {
-          hexRows.shift();
-          hexRows.push(nextHex());
-          hexBuilt += 1;
-        }
-        paint(hexRows.join("\n"), false);
-        if (elapsed >= HEX_MS) enterTrace();
-      }
-
-      function enterTrace() {
-        phase = "trace";
-        elapsed = 0;
-        traceAddr = docIp();
-        ipEl.textContent = "";
-        lockEl.classList.remove("is-on");
-        painted = null;
-        term.style.transform = "";
-      }
-
-      function renderTrace() {
-        uplink.classList.add("is-trace");
-        var count = Math.min(traceAddr.length, Math.floor(elapsed / TRACE_CHAR));
-        var shown = traceAddr.slice(0, count);
-        if (ipEl.textContent !== shown) ipEl.textContent = shown;
-        lockEl.classList.toggle("is-on", elapsed >= traceAddr.length * TRACE_CHAR + 340);
-        if (elapsed >= TRACE_MS) {
-          phase = "type";
-          elapsed = 0;
-          traceAddr = "";
-          ipEl.textContent = "";
-          lockEl.classList.remove("is-on");
-          term.style.transform = "";
-          painted = null;
-        }
-      }
-
-      var seen = false;
-      if ("IntersectionObserver" in window) {
-        var watch = new IntersectionObserver(function (entries) {
-          seen = !!(entries[0] && entries[0].isIntersecting);
-          setActive(seen && !document.hidden);
-        });
-        watch.observe(slot);
-      } else {
-        seen = true;
-      }
-
-      document.addEventListener("visibilitychange", function () {
-        setActive(seen && !document.hidden);
-      });
-
-      setActive(seen && !document.hidden);
     })();
   </script>
   <script src="/js/page-enter.js"></script>

@@ -1098,77 +1098,155 @@ body:has(.dossier-head) .wd-content h1 {
   overflow: hidden;
 }
 
-#professional .flavor-in {
+#professional .prof-flavor .hud-in {
+  overflow: hidden;
+  min-height: 0;
+}
+
+#professional .uplink {
+  position: relative;
   z-index: 3;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  min-height: 0;
-}
-
-#professional .flavor-chart {
-  position: relative;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(61, 255, 122, 0.28);
-  background-image:
-    linear-gradient(rgba(61, 255, 122, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(143, 208, 220, 0.16) 1px, transparent 1px);
-  background-size: 18px 14px;
-}
-
-#professional .flavor-tag {
-  position: absolute;
-  z-index: 2;
-  top: 0.35rem;
-  left: 0.45rem;
-  color: #e9fff2;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-#professional .flavor-plot-wrap {
-  position: absolute;
-  inset: 1.35rem 0 0.2rem;
-  overflow: hidden;
-}
-
-#professional .flavor-plot {
-  width: 200%;
   height: 100%;
-  display: block;
-  animation: flavor-scroll 14s linear infinite;
-}
-
-#professional .flavor-term {
-  flex: 0 0 auto;
-  min-height: 4.6rem;
-  padding: 0.35rem 0.5rem 0.45rem;
-  color: #9ee8be;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.42rem 0.38rem 0.36rem;
+  background: #010403;
+  color: #3dff7a;
   font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, monospace;
-  font-size: 0.62rem;
+  font-size: clamp(8px, 0.7vw, 10px);
   line-height: 1.35;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: pre-wrap;
+  letter-spacing: 0;
 }
 
-#professional .flavor-caret {
+#professional .uplink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+#professional .uplink-stage,
+#professional .uplink-trace {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#professional .uplink-stage {
+  flex: 1 1 auto;
+}
+
+#professional .uplink-term {
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: pre;
+  color: #3dff7a;
+  text-shadow: 0 0 6px rgba(61, 255, 122, 0.45);
+}
+
+#professional .uplink-cursor {
   display: inline-block;
-  width: 0.45em;
-  height: 0.82em;
-  margin-left: 0.12em;
+  width: 0.55em;
+  height: 0.85em;
+  margin-left: 0.08em;
   background: #5dff90;
   box-shadow: 0 0 8px #5dff90;
   vertical-align: -0.08em;
   animation: crt-blink 1.06s steps(1, end) infinite;
 }
 
-@keyframes flavor-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+#professional .uplink.is-trace .uplink-stage {
+  display: none;
+}
+
+#professional .uplink-trace {
+  display: none;
+  height: 100%;
+}
+
+#professional .uplink.is-trace .uplink-trace {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+}
+
+body.dossier-tabbed #professional .uplink p {
+  margin: 0;
+  max-width: 100%;
+  font-size: inherit;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: #9ee8be;
+}
+
+#professional .uplink-k,
+#professional .uplink-field,
+#professional .uplink-lock {
+  margin: 0;
+  overflow: hidden;
+}
+
+body.dossier-tabbed #professional .uplink .uplink-k {
+  color: #e9fff2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+body.dossier-tabbed #professional .uplink .uplink-field {
+  min-height: 1.35em;
+  padding: 0.18rem 0.28rem;
+  border: 1px solid rgba(61, 255, 122, 0.7);
+  color: #3dff7a;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#professional .uplink-net {
+  display: block;
+  width: min(6.2rem, 78%);
+  height: auto;
+  margin: 0.1rem auto 0;
+  fill: none;
+  stroke: #3dff7a;
+  stroke-width: 2;
+  animation: uplink-pulse 1.35s ease-in-out infinite;
+}
+
+body.dossier-tabbed #professional .uplink .uplink-lock {
+  margin-top: auto;
+  color: #e9fff2;
+  letter-spacing: 0.16em;
+  text-align: center;
+  visibility: hidden;
+}
+
+body.dossier-tabbed #professional .uplink .uplink-lock.is-on {
+  visibility: visible;
+  animation: crt-blink 0.72s steps(1, end) infinite;
+}
+
+#professional .prof-flavor.is-paused .uplink-cursor,
+#professional .prof-flavor.is-paused .uplink-net,
+#professional .prof-flavor.is-paused .uplink-lock {
+  animation-play-state: paused;
+}
+
+@keyframes uplink-pulse {
+  0%, 100% { opacity: 0.42; }
+  50% { opacity: 1; }
 }
 
 @media (min-width: 901px) {
@@ -1414,178 +1492,20 @@ body.dossier-tabbed #personal .personal-file {
   font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
-#personal .personal-top {
-  --prof-rail: clamp(8.75rem, 22vw, 16rem);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: stretch;
-  gap: 0.55rem;
+#personal .dossier-split {
   margin-bottom: 0.75rem;
 }
 
-#personal .personal-slot {
-  display: none;
+#personal .portrait-btn {
+  cursor: default;
+}
+
+#personal .personal-dossier {
   min-width: 0;
-  min-height: 0;
-  overflow: hidden;
+  text-align: left;
 }
 
-#personal .personal-slot .hud-in {
-  overflow: hidden;
-  min-height: 0;
-}
-
-#personal .uplink {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
-  padding: 0.42rem 0.38rem 0.36rem;
-  background: #010403;
-  color: #3dff7a;
-  font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, monospace;
-  font-size: clamp(8px, 0.7vw, 10px);
-  line-height: 1.35;
-  letter-spacing: 0;
-}
-
-#personal .uplink::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0 1px,
-    transparent 1px 3px
-  );
-}
-
-#personal .uplink-stage,
-#personal .uplink-trace {
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-}
-
-#personal .uplink-stage {
-  flex: 1 1 auto;
-}
-
-#personal .uplink-term {
-  margin: 0;
-  max-width: 100%;
-  overflow: hidden;
-  white-space: pre;
-  color: #3dff7a;
-  text-shadow: 0 0 6px rgba(61, 255, 122, 0.45);
-}
-
-#personal .uplink-cursor {
-  display: inline-block;
-  width: 0.55em;
-  height: 0.85em;
-  margin-left: 0.08em;
-  background: #5dff90;
-  box-shadow: 0 0 8px #5dff90;
-  vertical-align: -0.08em;
-  animation: crt-blink 1.06s steps(1, end) infinite;
-}
-
-#personal .uplink.is-trace .uplink-stage {
-  display: none;
-}
-
-#personal .uplink-trace {
-  display: none;
-  height: 100%;
-}
-
-#personal .uplink.is-trace .uplink-trace {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.35rem;
-}
-
-body.dossier-tabbed #personal .uplink p {
-  margin: 0;
-  max-width: 100%;
-  font-size: inherit;
-  line-height: 1.3;
-  letter-spacing: 0;
-  color: #9ee8be;
-}
-
-#personal .uplink-k,
-#personal .uplink-field,
-#personal .uplink-lock {
-  margin: 0;
-  overflow: hidden;
-}
-
-#personal .uplink-k {
-  color: #e9fff2;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-#personal .uplink-field {
-  min-height: 1.35em;
-  padding: 0.18rem 0.28rem;
-  border: 1px solid rgba(61, 255, 122, 0.7);
-  color: #3dff7a;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-#personal .uplink-net {
-  display: block;
-  width: min(7.5rem, 86%);
-  height: auto;
-  margin: 0.15rem auto 0;
-  fill: none;
-  stroke: #3dff7a;
-  stroke-width: 2;
-  animation: uplink-pulse 1.35s ease-in-out infinite;
-}
-
-#personal .uplink-lock {
-  margin-top: auto;
-  color: #e9fff2;
-  letter-spacing: 0.16em;
-  text-align: center;
-  visibility: hidden;
-}
-
-#personal .uplink-lock.is-on {
-  visibility: visible;
-  animation: crt-blink 0.72s steps(1, end) infinite;
-}
-
-#personal .personal-slot.is-paused .uplink-cursor,
-#personal .personal-slot.is-paused .uplink-net,
-#personal .personal-slot.is-paused .uplink-lock {
-  animation-play-state: paused;
-}
-
-@keyframes uplink-pulse {
-  0%, 100% { opacity: 0.42; }
-  50% { opacity: 1; }
-}
-
-#personal .personal-title .hud-copy {
-  text-align: center;
-}
-
-body.dossier-tabbed #personal .personal-label {
+body.dossier-tabbed #personal .personal-dossier .personal-label {
   margin: 0 0 0.55rem;
   font-size: 0.72rem;
   font-weight: 600;
@@ -1595,49 +1515,41 @@ body.dossier-tabbed #personal .personal-label {
   color: #3dff7a;
 }
 
-#personal .hud-copy h1 {
+#personal .personal-dossier h1 {
   margin: 0;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  font-weight: 650;
+  line-height: 1.12;
   color: #e9fff2;
   text-shadow: 0 0 14px rgba(61, 255, 122, 0.22);
 }
 
-body.dossier-tabbed #personal .hud-copy .timeline-intro {
+body.dossier-tabbed #personal .personal-dossier .timeline-intro {
   margin: 0.45rem 0 0;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #8fd4aa;
 }
 
-#personal .personal-status .hud-head {
-  letter-spacing: 0.1em;
+#personal .dossier-block {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(61, 255, 122, 0.22);
 }
 
-#personal .personal-status .file-body {
-  padding: 0.15rem 0.45rem 0.55rem;
+#personal .dossier-block h2 {
+  margin: 0 0 0.55rem;
+  font: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3dff7a;
 }
 
-#personal .personal-status .now-rows {
-  border: 0;
-}
-
-#personal .personal-status .now-row {
-  grid-template-columns: 1fr;
-  gap: 0.12rem;
-  padding: 0.45rem 0.2rem;
-}
-
-#personal .personal-status .now-v,
-#personal .personal-status .now-songs {
-  font-size: 0.75rem;
-}
-
-@media (min-width: 901px) {
-  #personal .personal-top {
-    grid-template-columns: var(--prof-rail) minmax(0, 1fr) var(--prof-rail);
-  }
-
-  #personal .personal-slot {
-    display: flex;
+@media (max-width: 860px) {
+  #personal .portrait-btn {
+    height: auto;
+    aspect-ratio: 900 / 1338;
   }
 }
 
@@ -1658,7 +1570,7 @@ body.dossier-tabbed #personal .personal-file p {
   padding: 0.95rem 1rem 1.1rem;
 }
 
-body.dossier-tabbed #personal .file-motto-line {
+body.dossier-tabbed #personal .personal-dossier .file-motto-line {
   margin: 0;
   font-size: clamp(1.7rem, 4vw, 2.55rem);
   font-weight: 500;
@@ -1668,15 +1580,15 @@ body.dossier-tabbed #personal .file-motto-line {
   color: #67ff9a;
 }
 
-#personal .file-motto .status-loading {
+#personal .personal-dossier .file-motto .status-loading {
   margin-left: 0;
   font-size: inherit;
   font-weight: inherit;
   letter-spacing: 0.04em;
 }
 
-#personal .faith-line {
-  margin-bottom: 0.75rem;
+body.dossier-tabbed #personal .personal-dossier .faith-line {
+  margin: 0 0 0.75rem;
 }
 
 #personal .file-links {
@@ -1859,9 +1771,11 @@ body.dossier-tabbed #personal .file-motto-line {
 }
 
 #personal .now-v {
+  min-width: 0;
   color: var(--ph-hot);
   font-size: 0.88rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 #personal .now-songs {

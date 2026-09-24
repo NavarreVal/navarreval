@@ -10,7 +10,7 @@
   <title>Professional | J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="/css/style.css?v=6.2">
   <link rel="stylesheet" href="/css/overrides.css?v=6.6">
-  <link rel="stylesheet" href="/css/dossier.css?v=1.20">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.25">
 </head>
 <body class="site-hub dossier-tabbed">
   <script src="/js/dossier-chrome.js?v=1"></script>
@@ -18,19 +18,32 @@
   <main id="professional">
     <div class="panel-inner professional-inner">
       <div class="prof-top prof-column">
-        <aside class="hud prof-flavor" aria-hidden="true">
-          <div class="hud-in flavor-in">
-            <div class="flavor-chart">
-              <span class="flavor-tag">MKT // LIVE</span>
-              <div class="flavor-plot-wrap">
-                <svg class="flavor-plot" viewBox="0 0 480 72" preserveAspectRatio="none">
-                  <g class="flavor-candles" stroke-width="1.15"></g>
-                  <polyline class="flavor-close" fill="none" stroke="#ff3b4a" stroke-width="1.25" points=""></polyline>
+        <aside class="hud prof-flavor is-paused" data-uplink aria-hidden="true">
+          <div class="hud-in">
+            <div class="uplink">
+              <div class="uplink-stage">
+                <div class="uplink-term"></div>
+              </div>
+              <div class="uplink-trace">
+                <p class="uplink-k">TRACE: SS_ARGUS UPLINK</p>
+                <p class="uplink-field"><span class="uplink-ip"></span><i class="uplink-cursor" aria-hidden="true"></i></p>
+                <svg class="uplink-net" viewBox="0 0 88 70" aria-hidden="true">
+                  <rect x="26" y="4" width="36" height="20"></rect>
+                  <path d="M44 24 V36 M16 36 H72 M16 36 V46 M44 36 V46 M72 36 V46"></path>
+                  <rect x="6" y="46" width="20" height="14"></rect>
+                  <rect x="34" y="46" width="20" height="14"></rect>
+                  <rect x="62" y="46" width="20" height="14"></rect>
                 </svg>
+                <p class="uplink-lock">LOCKED</p>
               </div>
             </div>
-            <div class="flavor-term"><span class="flavor-log"></span><i class="flavor-caret" aria-hidden="true"></i></div>
           </div>
+          <template id="uplink-lines">struct service_record {
+  role = SCRUM_MASTER;
+  field = AGILE_PM;
+  years = 10;
+  record = OPEN;
+};</template>
         </aside>
         <section class="hud">
           <div class="hud-in">
@@ -88,140 +101,7 @@
   </div>
 
   <script src="/js/main.js?v=5.3"></script>
-  <script>
-    (function () {
-      var log = document.querySelector(".flavor-log");
-      if (!log) return;
-      var lines = [
-        "> feed nv-val open",
-        "tick argus  +0.44",
-        "vol 7c-12   8.2k",
-        "bid 441.2 ask 441.9",
-        "trace phos-9 lock",
-        "delta +0.07 sig ok",
-        "candle 14 green",
-        "wick 02 noise low",
-        "> rewind feed"
-      ];
-      var i = 0;
-      var n = 0;
-      function paint() {
-        var rows = lines.slice(0, i);
-        if (i < lines.length) rows.push(lines[i].slice(0, n));
-        log.textContent = rows.slice(-4).join("\n");
-      }
-      function tick() {
-        if (i >= lines.length) {
-          i = 0;
-          n = 0;
-          log.textContent = "";
-          window.setTimeout(tick, 420);
-          return;
-        }
-        n += 1;
-        paint();
-        if (n >= lines[i].length) {
-          i += 1;
-          n = 0;
-          window.setTimeout(tick, 180);
-        } else {
-          window.setTimeout(tick, 42);
-        }
-      }
-      tick();
-    })();
-  </script>
-  <script>
-    (function () {
-      var plot = document.querySelector(".flavor-plot");
-      if (!plot) return;
-      var ns = "http://www.w3.org/2000/svg";
-      var host = plot.querySelector(".flavor-candles");
-      var close = plot.querySelector(".flavor-close");
-      var period = 240;
-      var fill = "#3dff7a";
-      var stroke = "#9ee8be";
-      function svgEl(name, attrs) {
-        var node = document.createElementNS(ns, name);
-        Object.keys(attrs).forEach(function (key) {
-          node.setAttribute(key, attrs[key]);
-        });
-        return node;
-      }
-      function sum(list) {
-        return list.reduce(function (total, value) { return total + value; }, 0);
-      }
-      function paintCandles() {
-        var bodyW = 8;
-        var count = 6 + Math.floor(Math.random() * 3);
-        var gapWeight = [];
-        var i;
-        for (i = 0; i < count; i += 1) {
-          gapWeight.push(0.4 + Math.random() * 1.35);
-        }
-        var budget = period - count * bodyW;
-        var minGap = 12;
-        while (budget < count * minGap && count > 5) {
-          count -= 1;
-          gapWeight.pop();
-          budget = period - count * bodyW;
-        }
-        var weight = sum(gapWeight);
-        var gaps = gapWeight.map(function (value) { return budget * value / weight; });
-        var specs = [];
-        var x = gaps[0];
-        for (i = 0; i < count; i += 1) {
-          var bodyH = 5 + Math.random() * 40;
-          var bodyTop = 3 + Math.random() * Math.max(6, 62 - bodyH);
-          var wickUp = Math.random() * 18;
-          var wickDown = Math.random() * 18;
-          var y1 = Math.max(1.2, bodyTop - wickUp);
-          var y2 = Math.min(70.6, bodyTop + bodyH + wickDown);
-          var closeY = Math.random() < 0.5 ? bodyTop + 0.6 : bodyTop + bodyH - 0.6;
-          specs.push({
-            x: x,
-            w: bodyW,
-            cx: x + bodyW / 2,
-            bodyTop: bodyTop,
-            bodyH: bodyH,
-            y1: y1,
-            y2: y2,
-            closeY: closeY,
-            fill: fill,
-            stroke: stroke
-          });
-          x += bodyW + gaps[(i + 1) % count];
-        }
-        while (host.firstChild) host.removeChild(host.firstChild);
-        function draw(shift) {
-          specs.forEach(function (spec) {
-            var candle = svgEl("g", { "class": "flavor-candle", fill: spec.fill, stroke: spec.stroke });
-            candle.appendChild(svgEl("line", {
-              x1: spec.cx + shift,
-              y1: spec.y1,
-              x2: spec.cx + shift,
-              y2: spec.y2
-            }));
-            candle.appendChild(svgEl("rect", {
-              x: spec.x + shift,
-              y: spec.bodyTop,
-              width: spec.w,
-              height: spec.bodyH
-            }));
-            host.appendChild(candle);
-          });
-        }
-        draw(0);
-        draw(period);
-        var points = [];
-        specs.forEach(function (spec) { points.push(spec.cx + "," + spec.closeY); });
-        specs.forEach(function (spec) { points.push((spec.cx + period) + "," + spec.closeY); });
-        close.setAttribute("points", points.join(" "));
-      }
-      paintCandles();
-      plot.addEventListener("animationiteration", paintCandles);
-    })();
-  </script>
+  <script src="/js/uplink.js?v=1"></script>
   <script src="/js/page-enter.js"></script>
 </body>
 </html>
