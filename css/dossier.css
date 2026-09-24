@@ -1031,63 +1031,76 @@ body:has(.dossier-head) :is(
 }
 
 #professional .flavor-in {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   min-height: 0;
 }
 
-#professional .flavor-svg {
+#professional .flavor-chart {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(61, 255, 122, 0.28);
+  background-image:
+    linear-gradient(rgba(61, 255, 122, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 255, 122, 0.09) 1px, transparent 1px);
+  background-size: 18px 14px;
+}
+
+#professional .flavor-tag {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
+  z-index: 2;
+  top: 0.35rem;
+  left: 0.45rem;
+  color: #e9fff2;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#professional .flavor-plot-wrap {
+  position: absolute;
+  inset: 1.35rem 0 0.2rem;
+  overflow: hidden;
+}
+
+#professional .flavor-plot {
+  width: 200%;
   height: 100%;
   display: block;
+  animation: flavor-scroll 14s linear infinite;
 }
 
-#professional .flavor-rotor {
-  transform-box: fill-box;
-  transform-origin: 0 0;
-  animation: flavor-spin 5.2s linear infinite;
+#professional .flavor-term {
+  flex: 0 0 auto;
+  min-height: 4.6rem;
+  padding: 0.35rem 0.5rem 0.45rem;
+  color: #9ee8be;
+  font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: pre-wrap;
 }
 
-#professional .flavor-wave {
-  stroke-dasharray: 36 120;
-  animation: flavor-dash 2.4s linear infinite;
+#professional .flavor-caret {
+  display: inline-block;
+  width: 0.45em;
+  height: 0.82em;
+  margin-left: 0.12em;
+  background: #5dff90;
+  box-shadow: 0 0 8px #5dff90;
+  vertical-align: -0.08em;
+  animation: crt-blink 1.06s steps(1, end) infinite;
 }
 
-#professional .flavor-scan {
-  animation: flavor-scan 3.6s linear infinite;
-}
-
-#professional .flavor-gridpan {
-  animation: flavor-pan 8s linear infinite;
-}
-
-#professional .flavor-ticker {
-  animation: flavor-tick 9s linear infinite;
-}
-
-@keyframes flavor-spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes flavor-dash {
-  to { stroke-dashoffset: -156; }
-}
-
-@keyframes flavor-scan {
-  from { transform: translateY(-20px); }
-  to { transform: translateY(250px); }
-}
-
-@keyframes flavor-pan {
-  from { transform: translate(0, 0); }
-  to { transform: translate(16px, 16px); }
-}
-
-@keyframes flavor-tick {
+@keyframes flavor-scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-168px); }
+  to { transform: translateX(-50%); }
 }
 
 @media (min-width: 901px) {
