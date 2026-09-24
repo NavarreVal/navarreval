@@ -13,6 +13,38 @@ window.addEventListener('pageshow', (event) => {
 });
 window.addEventListener('pagehide', clearPageSlide);
 
+// Each visit permutes the portraits inside a track. Both loop halves
+// get the same order so translate3d(-50%) still meets the duplicate.
+function shuffleInPlace(list) {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const swap = list[i];
+    list[i] = list[j];
+    list[j] = swap;
+  }
+  return list;
+}
+
+function shuffleCollageTracks() {
+  document.querySelectorAll('.hero-collage .flow-track').forEach((track) => {
+    const sets = [...track.querySelectorAll(':scope > .flow-set')];
+    if (sets.length < 2) return;
+    const primary = [...sets[0].querySelectorAll('.flow-frame[data-full]')];
+    const sources = shuffleInPlace(primary.map((frame) => frame.getAttribute('data-full')));
+    sets.forEach((set) => {
+      [...set.querySelectorAll('.flow-frame[data-full]')].forEach((frame, index) => {
+        const src = sources[index];
+        if (!src) return;
+        frame.setAttribute('data-full', src);
+        const img = frame.querySelector('img');
+        if (img) img.setAttribute('src', src);
+      });
+    });
+  });
+}
+
+shuffleCollageTracks();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   let lightboxImages = [];
