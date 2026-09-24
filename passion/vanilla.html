@@ -70,18 +70,32 @@
       margin: 0 0 1.6rem;
     }
 
+    .vanilla-row {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0 0 1.6rem;
+      align-items: start;
+    }
+
+    .vanilla-row figure {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .vanilla-row-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .vanilla-row-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .vanilla-page img {
       display: block;
       width: 100%;
       height: auto;
       background: #161616;
       border: 1px solid #2a2a2a;
-    }
-
-    .figure-narrow {
-      max-width: calc(50vw + 10rem);
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .logo-cta {
@@ -108,6 +122,13 @@
       padding: 2rem 0 0.2rem;
     }
 
+    @media (max-width: 720px) {
+      .vanilla-row-2,
+      .vanilla-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 520px) {
       .vanilla-page {
         padding: 1.6rem 0.55rem 2.6rem;
@@ -115,10 +136,6 @@
 
       .vanilla-top {
         flex-wrap: wrap;
-      }
-
-      .figure-narrow {
-        max-width: 100%;
       }
     }
   </style>
@@ -143,47 +160,48 @@
 
     <p>This has become a hobby and side hustle for me. Each type of bean is different, and its provenance has an effect on the flavor, strength, and tone of the vanilla extract itself. I prefer Madagascar beans, they’re smooth and creamy, not too sweet. They impart just the right amount of that good vanilla flavor and aroma for my process.</p>
 
-    <figure>
-      <img
-        src="../images/passion/vanilla/stock-beans.jpg"
-        alt="Five whole vanilla beans"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure>
-      <img
-        src="../images/passion/vanilla/bottle-hero-white-label.jpg"
-        alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
-        loading="lazy"
-      >
-    </figure>
+    <div class="vanilla-row vanilla-row-2">
+      <figure>
+        <img
+          src="../images/passion/vanilla/stock-beans.jpg"
+          alt="Five whole vanilla beans"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/bottle-hero-white-label.jpg"
+          alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
+          loading="lazy"
+        >
+      </figure>
+    </div>
 
     <p>Our beans are more concentrated per jar, and are aged for a set period of time, so we don't bottle too soon. While most people split the beans, we cut them by hand because I have found that it allows the flavorings to be extracted more evenly across the aging period, giving the extractives and vanilla time to get to know each other and really blend. Extract is mostly waiting and patience provides a superior result.</p>
 
-    <figure class="figure-narrow">
-      <img
-        src="../images/passion/vanilla/beans-jar.jpg"
-        alt="Mason jar with vanilla beans standing inside"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure class="figure-narrow">
-      <img
-        src="../images/passion/vanilla/beans-chopped.jpg"
-        alt="Vanilla beans cut by hand into short pieces"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure>
-      <img
-        src="../images/passion/vanilla/jars-aging.jpg"
-        alt="Mason jars of vanilla extract aging on a table"
-        loading="lazy"
-      >
-    </figure>
+    <div class="vanilla-row vanilla-row-3">
+      <figure>
+        <img
+          src="../images/passion/vanilla/beans-jar.jpg"
+          alt="Mason jar with vanilla beans standing inside"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/beans-chopped.jpg"
+          alt="Vanilla beans cut by hand into short pieces"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/jars-aging.jpg"
+          alt="Mason jars of vanilla extract aging on a table"
+          loading="lazy"
+        >
+      </figure>
+    </div>
 
     <p>If you want some vanilla (and if I have any available) you can get some at <a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></p>
 
