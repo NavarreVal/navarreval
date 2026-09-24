@@ -1591,6 +1591,21 @@ body.dossier-tabbed #personal .personal-dossier .faith-line {
   margin: 0 0 0.75rem;
 }
 
+body.dossier-tabbed #personal .personal-dossier .faith-line + .faith-line {
+  margin-bottom: 0;
+}
+
+body.dossier-tabbed #personal a.inline-link {
+  color: #3dff7a;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+body.dossier-tabbed #personal a.inline-link:hover,
+body.dossier-tabbed #personal a.inline-link:focus-visible {
+  color: #e9fff2;
+}
+
 #personal .file-links {
   display: flex;
   flex-wrap: wrap;
@@ -1786,6 +1801,26 @@ body.dossier-tabbed #personal .personal-dossier .faith-line {
 
 #personal .crew-footer {
   margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+@media (max-width: 900px) {
+  #personal .crew-roster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  #personal .crew-meta {
+    gap: 0.08rem;
+    padding: 0.32rem 0.32rem 0.4rem;
+  }
+
+  body.dossier-tabbed #personal .personal-file .crew-name,
+  body.dossier-tabbed #personal .personal-file .crew-rank,
+  body.dossier-tabbed #personal .personal-file .crew-assign {
+    font-size: clamp(8px, 2.25vw, 0.92rem);
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
 }
 
 @media (max-width: 800px) {
