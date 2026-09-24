@@ -1,22 +1,42 @@
-:root,
+:root {
+  --ink: #2c2c2c;
+  --muted: #6b6b6b;
+  --gold: #c9a227;
+  --rule: #e4e0d8;
+  --paper: #f7f4ee;
+  --card: #fffcf7;
+  --link: #365f91;
+  --cite: #2b6cff;
+  --link-hover: #1557e0;
+  --prompt-bg: #efe8d6;
+  --prompt-ink: #3d4a63;
+  --hero-bg: #ece7dc;
+  --float-bg: #1f1f1f;
+  --float-ink: #f4f0e6;
+  --quote: #3a3a3a;
+  --summary: #444;
+  --notes: #555;
+  color-scheme: light;
+}
+
 html[data-theme="dark"] {
-  --ink: #e9fff2;
-  --muted: #8fd4aa;
-  --gold: #3dff7a;
-  --rule: rgba(61, 255, 122, 0.28);
-  --paper: #040a07;
-  --card: #07140f;
-  --link: #3dff7a;
-  --cite: #9dffc0;
-  --link-hover: #e9fff2;
-  --prompt-bg: #0c2218;
-  --prompt-ink: #d7ffe6;
-  --hero-bg: #0c2218;
-  --float-bg: #3dff7a;
-  --float-ink: #04140c;
-  --quote: #d7ffe6;
-  --summary: #c8f5d8;
-  --notes: #8fd4aa;
+  --ink: #e8eaed;
+  --muted: #9aa0a6;
+  --gold: #8fd0dc;
+  --rule: #3a3f44;
+  --paper: #121416;
+  --card: #1c1e21;
+  --link: #8fd0dc;
+  --cite: #8fd0dc;
+  --link-hover: #b7e4eb;
+  --prompt-bg: #2a2f33;
+  --prompt-ink: #d5d7db;
+  --hero-bg: #2a2f33;
+  --float-bg: #8fd0dc;
+  --float-ink: #121416;
+  --quote: #cfd3d6;
+  --summary: #cfd3d6;
+  --notes: #9aa0a6;
   color-scheme: dark;
 }
 
@@ -156,7 +176,6 @@ h1 {
   font-size: 2.15rem;
   line-height: 1.25;
   margin-bottom: 0.55rem;
-  color: var(--gold);
 }
 
 .byline {

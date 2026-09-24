@@ -980,9 +980,14 @@ html:not(.boot-skip):not(.boot-clear) body.site-hub {
   54%, 100% { opacity: 0.62; }
 }
 
-/* Pages under the shared header use the same field as the record. */
-body:has(.dossier-head) {
+/* Pages under the shared header use the same field as the record.
+   Photography, shooting, religious, talks, and writing keep their own body chrome. */
+body:has(.dossier-head):not(:has(.photo-page)):not(:has(.shoot)):not(:has(.faith-hero)):not(:has(.topbar)):not(:has(.write-page)) {
   background-color: #040a07;
+}
+
+body:has(.photo-page) {
+  --gold: #c9a227;
 }
 
 #passion,
@@ -1001,8 +1006,6 @@ body:has(.dossier-head) :is(
   .wd-content,
   .vanilla-top,
   .nas-top,
-  .photo-top,
-  .write-top,
   .miss-page
 ) h1 {
   color: #3dff7a;

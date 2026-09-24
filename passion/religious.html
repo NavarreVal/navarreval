@@ -21,18 +21,18 @@
   <link rel="stylesheet" href="../css/style.css?v=3.3">
   <style>
     :root {
-      --faith-ink: #e9fff2;
-      --faith-muted: #8fd4aa;
-      --faith-paper: #040a07;
-      --faith-card: #07140f;
-      --faith-rule: rgba(61, 255, 122, 0.28);
-      --faith-link: #3dff7a;
-      --faith-link-hover: #e9fff2;
-      --faith-gold: #3dff7a;
-      --band-teal: #0c6e78;
-      --band-coral: #8e2450;
-      --band-orange: #8a4a18;
-      --band-gutter: #040a07;
+      --faith-ink: #2c2c2c;
+      --faith-muted: #6b6b6b;
+      --faith-paper: #f7f4ee;
+      --faith-card: #fffcf7;
+      --faith-rule: #e4e0d8;
+      --faith-link: #365f91;
+      --faith-link-hover: #1557e0;
+      --faith-gold: #c9a227;
+      --band-teal: #007A8A;
+      --band-coral: #E10F5A;
+      --band-orange: #E66A1F;
+      --band-gutter: #ffffff;
     }
 
     html, body {
@@ -53,7 +53,7 @@
       justify-content: space-between;
       gap: 1rem;
       padding: 0.85rem 1.4rem;
-      background: #040a07;
+      background: #fff;
       border-bottom: 1px solid var(--faith-rule);
       font-size: 0.85rem;
     }
@@ -73,7 +73,7 @@
     .faith-footer .stub-back {
       text-decoration: none;
       margin-bottom: 0;
-      border-color: rgba(61, 255, 122, 0.4);
+      border-color: #c8c2b6;
       color: var(--faith-ink);
       background: var(--faith-card);
     }
@@ -153,11 +153,11 @@
 
     .faith-disclaimer {
       border-left: 3px solid var(--faith-gold);
-      background: #0c2218;
+      background: #efe8d6;
       padding: 1rem 1.15rem;
       font-size: 0.9rem;
       line-height: 1.65;
-      color: #d7ffe6;
+      color: #3d4a63;
     }
     .faith-disclaimer a {
       color: var(--faith-link);
@@ -252,7 +252,7 @@
       height: 100%;
       overflow: hidden;
       position: relative;
-      background: #07140f;
+      background: #d5d0c8;
     }
     .band-photo img {
       position: absolute;
@@ -381,7 +381,7 @@
       display: block;
       border: 1px solid var(--faith-rule);
       border-radius: 6px;
-      background: #07140f;
+      background: #ece7dc;
     }
     .personal-card:hover img,
     .invite-card:hover img {
@@ -435,21 +435,11 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="/css/dossier.css?v=1.16">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.17">
 </head>
 <body>
   <script src="/js/dossier-chrome.js?v=1"></script>
-  <header class="faith-chrome" id="top">
-    <div class="faith-crumbs">
-      <a href="/">J. Navarre Valdivieso</a>
-      &nbsp;›&nbsp;
-      <a href="/passion/">Passion</a>
-      &nbsp;›&nbsp;
-      Religious
-    </div>
-  </header>
-
-  <section class="faith-hero" aria-label="Hero">
+  <section class="faith-hero" id="top" aria-label="Hero">
     <img
       class="faith-hero-img"
       src="../images/religious/hero_jesus_teaching.jpg"
