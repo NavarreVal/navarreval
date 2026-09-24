@@ -1,6 +1,6 @@
 function panelFromHash() {
   const id = (location.hash || "").replace(/^#/, "");
-  if (id === "personal" || id === "passion" || id === "professional") return id;
+  if (id === "personal") return id;
   return "landing";
 }
 
@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("[data-panel]").forEach((link) => {
     link.addEventListener("click", () => {
-      const id = (link.getAttribute("href") || "").replace(/^#/, "");
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+      const id = href.replace(/^#/, "");
       if (!id || id === "landing") return;
       const next = landingUrl() + "#" + id;
       // Compare the URL, not the active panel. The panel switch runs first and
@@ -45,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".back-btn").forEach((btn) => {
     if (btn.tagName === "A") return;
     btn.addEventListener("click", () => {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       // Pop a section entry this page pushed. A hash opened directly, or an
       // overlay sitting on top of one, is not its own trip — clear it in place.
       if (history.state && history.state.panel && history.state.panel !== "landing") {
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (location.hash) history.replaceState({ panel: "landing" }, "", landingUrl());
       if (typeof window.showSitePanel === "function") window.showSitePanel("landing");
-      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 

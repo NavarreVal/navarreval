@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <title>Passion | J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="/css/style.css?v=6.2">
+  <link rel="stylesheet" href="/css/overrides.css?v=6.6">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.20">
+  <style>
+    /* Desktop deal only. Mobile (≤900px) never matches, so cards stay in the fan. */
+    @media (min-width: 901px) {
+      #passion .passion-hands.is-dealing .playing-card {
+        --deal-x: 0px;
+        --deal-y: 0px;
+        --deal-rot: 8deg;
+        z-index: 2;
+        opacity: 1;
+        transition: none;
+        transform-origin: 50% 50%;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(0deg);
+        animation: card-deal 0.30s cubic-bezier(0.16, 0.84, 0.28, 1) forwards;
+        animation-delay: calc(0.55s + var(--deal, 0) * 150ms);
+      }
+
+      #passion .passion-hands.is-dealing .playing-card.is-flick {
+        --deal-rot: 8deg;
+        transform-origin: 50% 100%;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
+        animation-name: card-deal-flat;
+      }
+    }
+
+    @keyframes card-deal {
+      0% {
+        opacity: 1;
+        z-index: 40;
+        transform-origin: 50% 50%;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(0deg);
+      }
+      100% {
+        opacity: 1;
+        z-index: 6;
+        transform-origin: 50% 100%;
+        transform: translate3d(0, 0, 0) rotate(calc(360deg + (var(--i) - (var(--n) - 1) / 2) * 17deg));
+      }
+    }
+
+    @keyframes card-deal-flat {
+      0% {
+        opacity: 1;
+        z-index: 40;
+        transform-origin: 50% 100%;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
+      }
+      72% {
+        opacity: 1;
+        z-index: 40;
+        transform-origin: 50% 100%;
+        transform: translate3d(0, 0, 0) rotate(var(--deal-rot));
+      }
+      100% {
+        opacity: 1;
+        z-index: 6;
+        transform-origin: 50% 100%;
+        transform: translate3d(0, 0, 0) rotate(calc((var(--i) - (var(--n) - 1) / 2) * 17deg));
+      }
+    }
+  </style>
+</head>
+<body class="site-hub dossier-tabbed">
+  <script src="/js/dossier-chrome.js?v=1"></script>
+
+  <main id="passion">
+    <div class="panel-inner passion-inner">
+      <header class="passion-mast">
+        <h1>Passion</h1>
+        <p class="passion-lead">Sometimes life deals you good hands. Click a hand to spread the cards. Click a card to open that page.</p>
+      </header>
+
+      <div class="passion-hands">
+        <div class="hand" data-hand="maker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/3d-printing.html" style="--i: 0">
+              <img src="/images/passion/3dPrinting_card.jpg" alt="">
+              <span>3D Printing</span>
+            </a>
+            <a class="playing-card" href="/passion/vanilla.html" style="--i: 1">
+              <img src="/images/passion/vanilla_card.jpg" alt="">
+              <span>Vanilla</span>
+            </a>
+            <a class="playing-card playing-card--foil" href="/passion/photography.html" style="--i: 2">
+              <img src="/images/passion/photography_card.jpg" alt="">
+              <span>Photography</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Maker</button>
+        </div>
+
+        <div class="hand" data-hand="thinker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/teaching.html" style="--i: 0">
+              <img src="/images/passion/teaching_card.jpg" alt="">
+              <span>Teaching</span>
+            </a>
+            <a class="playing-card playing-card--foil" href="/passion/religious.html" style="--i: 1">
+              <img src="/images/passion/religion_card.jpg" alt="">
+              <span>Religious</span>
+            </a>
+            <a class="playing-card" href="/passion/reading.html" style="--i: 2">
+              <img src="/images/passion/reading_card.jpg" alt="">
+              <span>Reading</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Thinker</button>
+        </div>
+
+        <div class="hand" data-hand="dabbler">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/writing.html" style="--i: 0">
+              <img src="/images/passion/writing_card.jpg" alt="">
+              <span>Writing</span>
+            </a>
+            <a class="playing-card" href="/passion/nas.html" style="--i: 1">
+              <img src="/images/passion/NAS_card.jpg" alt="">
+              <span>NAS</span>
+            </a>
+            <a class="playing-card" href="/passion/web-design.html" style="--i: 2">
+              <img src="/images/passion/webDesign_card.jpg" alt="">
+              <span>Web Design</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Dabbler</button>
+        </div>
+
+        <div class="hand" data-hand="doer">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/music.html" style="--i: 0">
+              <img src="/images/passion/music_card.jpg" alt="">
+              <span>Music</span>
+            </a>
+            <a class="playing-card" href="/passion/shooting.html" style="--i: 1">
+              <img src="/images/passion/shooting_card.jpg" alt="">
+              <span>Shooting</span>
+            </a>
+            <a class="playing-card" href="/passion/video-games.html" style="--i: 2">
+              <img src="/images/passion/videoGames_card.jpg" alt="">
+              <span>Video Games</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Do-er</button>
+        </div>
+      </div>
+      <script>
+        (function () {
+          var hands = document.querySelector(".passion-hands");
+          if (!hands || !window.matchMedia) return;
+          var desktop = window.matchMedia("(min-width: 901px)");
+          if (!desktop.matches) return;
+
+          var cycle = ["maker", "thinker", "doer", "dabbler"];
+          var deal = 0;
+          var cards = [];
+          for (var round = 0; round < 3; round++) {
+            for (var h = 0; h < cycle.length; h++) {
+              var hand = hands.querySelector('.hand[data-hand="' + cycle[h] + '"]');
+              if (!hand) continue;
+              var inHand = hand.querySelectorAll(".playing-card");
+              for (var c = 0; c < inHand.length; c++) {
+                if (Number(inHand[c].style.getPropertyValue("--i")) !== round) continue;
+                inHand[c].style.setProperty("--deal", String(deal++));
+                cards.push(inHand[c]);
+              }
+            }
+          }
+          if (!cards.length) return;
+
+          var kinds = rollKinds(cards.length);
+          for (var k = 0; k < cards.length; k++) {
+            if (kinds[k] === "flick") cards[k].classList.add("is-flick");
+          }
+
+          function rollKinds(n) {
+            var spins = 4 + Math.floor(Math.random() * 5);
+            var kinds = [];
+            var i;
+            for (i = 0; i < spins; i++) kinds.push("spin");
+            for (; i < n; i++) kinds.push("flick");
+            function shuffle(list) {
+              for (var s = list.length - 1; s > 0; s--) {
+                var j = Math.floor(Math.random() * (s + 1));
+                var tmp = list[s];
+                list[s] = list[j];
+                list[j] = tmp;
+              }
+            }
+            function longestRun(list) {
+              var best = 1;
+              var run = 1;
+              for (var r = 1; r < list.length; r++) {
+                run = list[r] === list[r - 1] ? run + 1 : 1;
+                if (run > best) best = run;
+              }
+              return best;
+            }
+            var guard = 0;
+            do { shuffle(kinds); } while (longestRun(kinds) > 3 && guard++ < 80);
+            if (longestRun(kinds) > 3) {
+              kinds = [];
+              var sLeft = spins;
+              var fLeft = n - spins;
+              var turn = Math.random() < 0.5 ? "spin" : "flick";
+              while (kinds.length < n) {
+                var left = turn === "spin" ? sLeft : fLeft;
+                var chunk = Math.min(1 + Math.floor(Math.random() * 3), left, n - kinds.length);
+                if (chunk < 1) {
+                  turn = turn === "spin" ? "flick" : "spin";
+                  continue;
+                }
+                for (var c = 0; c < chunk; c++) kinds.push(turn);
+                if (turn === "spin") sLeft -= chunk;
+                else fLeft -= chunk;
+                turn = turn === "spin" ? "flick" : "spin";
+              }
+            }
+            return kinds;
+          }
+
+          var handsBox = hands.getBoundingClientRect();
+          var originX = handsBox.left + handsBox.width / 2;
+          var cardH = cards[0].offsetHeight || 256;
+          var originY = window.innerHeight + cardH / 2 + 80;
+          function layoutCenter(el) {
+            var prev = el.style.transform;
+            el.style.transform = "none";
+            var rect = el.getBoundingClientRect();
+            if (prev) el.style.transform = prev;
+            else el.style.removeProperty("transform");
+            return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+          }
+          for (var i = 0; i < cards.length; i++) {
+            var center = layoutCenter(cards[i]);
+            cards[i].style.setProperty("--deal-x", (originX - center.x).toFixed(1) + "px");
+            cards[i].style.setProperty("--deal-y", (originY - center.y).toFixed(1) + "px");
+          }
+
+          hands.classList.add("is-dealing");
+
+          var pending = cards.length;
+          var stagger = 150;
+          var duration = 300;
+          var lead = 550;
+          var timer = setTimeout(stop, lead + (cards.length - 1) * stagger + duration + 120);
+
+          function stop() {
+            clearTimeout(timer);
+            hands.classList.remove("is-dealing");
+          }
+
+          hands.addEventListener("animationend", function (e) {
+            if (!e.animationName || e.animationName.indexOf("card-deal") !== 0) return;
+            if (!e.target.classList || !e.target.classList.contains("playing-card")) return;
+            pending -= 1;
+            if (pending <= 0) stop();
+          });
+
+          hands.addEventListener("click", stop, true);
+
+          function onViewport(e) {
+            if (!e.matches) stop();
+          }
+          if (desktop.addEventListener) desktop.addEventListener("change", onViewport);
+          else if (desktop.addListener) desktop.addListener(onViewport);
+        })();
+      </script>
+      <footer class="crew-footer">
+        <img class="crew-mark" src="/assets/signature.png" alt="">
+        <span>Built by <a href="/personal/">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+      </footer>
+    </div>
+  </main>
+
+  <script src="/js/main.js?v=5.3"></script>
+  <script src="/js/page-enter.js"></script>
+</body>
+</html>

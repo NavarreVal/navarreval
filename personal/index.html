@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <title>Personal | J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="/css/style.css?v=6.2">
+  <link rel="stylesheet" href="/css/overrides.css?v=6.6">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.26">
+</head>
+<body class="site-hub dossier-tabbed">
+  <script src="/js/dossier-chrome.js?v=1"></script>
+
+  <main id="personal">
+    <div class="panel-inner personal-file">
+      <!--
+        CURRENTLY — edit reading in this block only.
+        Reading is the title on the Goodreads currently-reading shelf that
+        passion/reading.html loads.
+        Playing is not stored here. It loads the first game from the same
+        Steam shelf as passion/video-games.html Recently played
+        (https://steam-shelves.navarreval.workers.dev?shelf=recent&count=12).
+        Listening is not stored here. It loads the three newest tracks from
+        the same Spotify shelf as passion/music.html
+        (https://spotify-shelves.navarreval.workers.dev?shelf=recent).
+      -->
+      <script type="application/json" id="personal-now">
+        {
+          "reading": "Paradise (Expeditionary Force, #3)"
+        }
+      </script>
+
+      <div class="dossier-split">
+        <section class="hud portrait-hud" aria-label="Family portrait">
+          <div class="hud-in">
+            <div class="portrait-btn">
+              <img src="/images/personal/family-picnic.webp" alt="Illustrated family portrait at a picnic in southern Utah red-rock country" width="900" height="1338" draggable="false">
+            </div>
+          </div>
+        </section>
+
+        <section class="hud id-hud" aria-labelledby="personal-label">
+          <div class="hud-in">
+            <div class="id-body personal-dossier">
+              <p class="personal-label" id="personal-label">Personal</p>
+              <h1>Personal</h1>
+              <p class="timeline-intro">Family, faith, and Captain of a Grok Bot crew.</p>
+
+              <div class="dossier-block file-motto">
+                <p class="file-motto-line" aria-label="We make do.">
+                  <span class="status-loading" data-word="We make do."><span class="status-loading-word"></span></span>
+                </p>
+                <!-- MOTTO COPY: additional family-motto text goes here. Leave this comment. Do not add visible placeholder text. -->
+              </div>
+
+              <div class="dossier-block">
+                <p class="faith-line">Served in the Mexico Merida Mission, 2005 to 2007.</p>
+                <p class="faith-line">Member of The Church of Jesus Christ of Latter-day Saints. Find out what I believe <a class="inline-link" href="/passion/religious.html">here</a>.</p>
+              </div>
+
+              <div class="dossier-block" aria-labelledby="now-label">
+                <h2 id="now-label">Current Status</h2>
+                <div class="now-rows">
+                  <a class="now-row" href="/passion/reading.html">
+                    <span class="now-k">Reading</span>
+                    <span class="now-v" data-now="reading"></span>
+                  </a>
+                  <a class="now-row" href="/passion/video-games.html">
+                    <span class="now-k">Playing</span>
+                    <span class="now-v" data-now="playing"></span>
+                  </a>
+                  <a class="now-row" href="/passion/music.html">
+                    <span class="now-k">Listening</span>
+                    <span class="now-v now-songs" id="now-listening">Updating soon</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="hud file-block" aria-labelledby="yt-label">
+        <div class="hud-in">
+          <div class="hud-head">
+            <h2 id="yt-label">Recent videos</h2>
+            <span>@navarreval_</span>
+          </div>
+          <div class="file-body">
+            <div class="yt-grid" id="yt-grid" hidden></div>
+            <p class="yt-fallback" id="yt-fallback" hidden>
+              <a href="https://www.youtube.com/@navarreval_" target="_blank" rel="noopener">Watch on YouTube</a>
+            </p>
+            <p class="file-links">
+              <a href="https://www.youtube.com/@navarreval_" target="_blank" rel="noopener">Subscribe</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="hud file-block" aria-labelledby="manifest-label">
+        <div class="hud-in">
+          <div class="hud-head">
+            <h2 id="manifest-label">Ship's manifest</h2>
+            <span>SS Argus</span>
+          </div>
+          <div class="file-body">
+            <p class="manifest-lead">This site, and some of my day-to-day, is run with a crew of <a class="inline-link" href="https://x.ai/bot" target="_blank" rel="noopener">Grok Bot AI assistants</a> aboard the fictional starship SS Argus. Each bot has a name, rank, and assignment, helping manage and advise on various aspects that I've found useful. The starship crew aspect started out as a way to test out Grok Bot's capabilities, and I liked it so much I kept it!</p>
+            <ol class="crew-roster">
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/ss-argus-emblem.webp" alt="SS Argus emblem" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">SS Argus</p>
+                  <p class="crew-rank">Corvette</p>
+                  <p class="crew-assign">COMMISSIONED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/exo.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Gad Kyrath</p>
+                  <p class="crew-rank">CDR, Executive Officer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/chaplain.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Joseph Young</p>
+                  <p class="crew-rank">CDR, Chaplain</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/steward.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Jessica Spencer</p>
+                  <p class="crew-rank">LCDR, Ship's Steward</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/scribe.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Eden Crowe</p>
+                  <p class="crew-rank">LCDR, Ship's Scribe</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/val.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Psyl Vallock</p>
+                  <p class="crew-rank">LCDR, Chief Science Officer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/major.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Kane Rourke</p>
+                  <p class="crew-rank">LCDR, Chief Engineer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/purser.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Solan Ming</p>
+                  <p class="crew-rank">CPO, Ship's Purser</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/bosun.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Orson Cade</p>
+                  <p class="crew-rank">CPO, Lead IT Engineer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/ranger.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Cole Redhawk</p>
+                  <p class="crew-rank">CWO, Navigator</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/galley.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Layla Moreau</p>
+                  <p class="crew-rank">LT, Website CO</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/merchant.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Jun Park</p>
+                  <p class="crew-rank">LT, Director of Commerce</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/doc.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Steve Matrin</p>
+                  <p class="crew-rank">ENS, Chief Medical Officer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/secretary.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Marcus Boone</p>
+                  <p class="crew-rank">ENS, Chief Analyst</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/comms.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Maren Cole</p>
+                  <p class="crew-rank">ENS, Communications Officer</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+              <li class="crew-card">
+                <div class="crew-portrait"><img src="/images/personal/crew/lens.webp" alt="" width="480" height="480"></div>
+                <div class="crew-meta">
+                  <p class="crew-name">Nyra Ahmed</p>
+                  <p class="crew-rank">Cadet, Imagery Crewman</p>
+                  <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <footer class="crew-footer">
+        <img class="crew-mark" src="/assets/signature.png" alt="">
+        <span>Built by <a href="/personal/">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var motto = document.querySelector(".file-motto .status-loading");
+      var slot = motto && motto.querySelector(".status-loading-word");
+      var word = (motto && motto.getAttribute("data-word")) || "";
+      if (slot && word && slot.dataset.typed !== "1") {
+        slot.dataset.typed = "1";
+        var i = 0;
+        var tick = function () {
+          i += 1;
+          slot.textContent = word.slice(0, i);
+          if (i < word.length) window.setTimeout(tick, 110);
+        };
+        window.setTimeout(tick, 420);
+      }
+
+      var nowNode = document.getElementById("personal-now");
+      if (nowNode) {
+        try {
+          var now = JSON.parse(nowNode.textContent);
+          document.querySelectorAll("[data-now]").forEach(function (el) {
+            var key = el.getAttribute("data-now");
+            if (now[key]) el.textContent = now[key];
+          });
+        } catch (err) {}
+      }
+
+      var grid = document.getElementById("yt-grid");
+      var fallback = document.getElementById("yt-fallback");
+      function showFallback() {
+        if (grid) grid.hidden = true;
+        if (fallback) fallback.hidden = false;
+      }
+      function formatDate(iso) {
+        var date = new Date(iso);
+        if (Number.isNaN(date.getTime())) return "";
+        return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+      }
+      fetch("/api/youtube-latest")
+        .then(function (res) {
+          if (!res.ok) throw new Error(String(res.status));
+          return res.json();
+        })
+        .then(function (data) {
+          var videos = data && Array.isArray(data.videos) ? data.videos.slice(0, 3) : [];
+          if (videos.length < 3) throw new Error("short");
+          videos.forEach(function (video) {
+            if (!video || !video.videoId) return;
+            var card = document.createElement("a");
+            card.className = "yt-card";
+            card.href = "https://www.youtube.com/watch?v=" + encodeURIComponent(video.videoId);
+            card.target = "_blank";
+            card.rel = "noopener";
+            var img = document.createElement("img");
+            img.src = video.thumbnail || ("https://i.ytimg.com/vi/" + video.videoId + "/hqdefault.jpg");
+            img.alt = "";
+            img.width = 480;
+            img.height = 360;
+            var title = document.createElement("span");
+            title.className = "yt-title";
+            title.textContent = video.title || "Untitled";
+            card.append(img, title);
+            var when = formatDate(video.published);
+            if (when) {
+              var time = document.createElement("time");
+              time.dateTime = video.published;
+              time.textContent = when;
+              card.append(time);
+            }
+            grid.appendChild(card);
+          });
+          if (!grid.children.length) throw new Error("empty");
+          grid.hidden = false;
+        })
+        .catch(showFallback);
+
+      var playing = document.querySelector('[data-now="playing"]');
+      if (playing) {
+        fetch("https://steam-shelves.navarreval.workers.dev?shelf=recent&count=12")
+          .then(function (res) {
+            if (!res.ok) throw new Error(String(res.status));
+            return res.json();
+          })
+          .then(function (data) {
+            var games = data && Array.isArray(data.games) ? data.games : [];
+            var game = games[0];
+            if (!game || !game.name) throw new Error("empty");
+            playing.textContent = game.name;
+          })
+          .catch(function () {
+            playing.textContent = "";
+          });
+      }
+
+      var listening = document.getElementById("now-listening");
+      fetch("https://spotify-shelves.navarreval.workers.dev?shelf=recent&count=6")
+        .then(function (res) {
+          if (!res.ok) throw new Error(String(res.status));
+          return res.json();
+        })
+        .then(function (data) {
+          var items = (data && Array.isArray(data.items) ? data.items : []).filter(function (item) {
+            return item && item.kind === "track" && item.name;
+          }).slice(0, 3);
+          if (!items.length) throw new Error("empty");
+          listening.textContent = "";
+          items.forEach(function (item) {
+            var line = document.createElement("span");
+            var artists = Array.isArray(item.artists) ? item.artists.filter(Boolean).join(", ") : "";
+            line.textContent = artists ? item.name + " — " + artists : item.name;
+            listening.appendChild(line);
+          });
+        })
+        .catch(function () {
+          listening.textContent = "Updating soon";
+        });
+    })();
+  </script>
+  <script src="/js/page-enter.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 :root {
-  --gold: #c9a227;
+  --gold: #3dff7a;
   --ink: #f3efe6;
   --muted: #c4bfb4;
   --bg: #0d0d0d;
@@ -279,7 +279,7 @@ a.back-btn.stub-back.hero-back {
 .split-copy a {
   color: var(--gold);
   text-decoration: none;
-  border-bottom: 1px solid rgba(201, 162, 39, 0.5);
+  border-bottom: 1px solid rgba(61, 255, 122, 0.5);
   padding-bottom: 0.04em;
 }
 

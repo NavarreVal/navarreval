@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
   <title>Vanilla | J. Navarre Valdivieso</title>
   <meta name="description" content="I’m serious about Vanilla Extract. I don’t know why, but it’s important to me.">
   <link rel="stylesheet" href="../css/style.css?v=3.1">
@@ -20,9 +20,9 @@
     }
 
     .vanilla-page {
-      max-width: 38rem;
+      max-width: calc(50vw + 19rem);
       margin: 0 auto;
-      padding: 2.2rem 1.4rem 3.2rem;
+      padding: 2.2rem 0.7rem 3.2rem;
     }
 
     .vanilla-top {
@@ -70,6 +70,28 @@
       margin: 0 0 1.6rem;
     }
 
+    .vanilla-row {
+      display: grid;
+      gap: 0;
+      margin: 0 0 1.6rem;
+      align-items: stretch;
+    }
+
+    .vanilla-row figure {
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+      line-height: 0;
+    }
+
+    .vanilla-row-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .vanilla-row-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .vanilla-page img {
       display: block;
       width: 100%;
@@ -78,10 +100,14 @@
       border: 1px solid #2a2a2a;
     }
 
-    .figure-narrow {
-      max-width: 20rem;
-      margin-left: auto;
-      margin-right: auto;
+    /* Groups share one frame so neighbors match. 1:1 sits between the
+       portrait and landscape sources in each row. */
+    .vanilla-row-2 img,
+    .vanilla-row-3 img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+      border: 0;
     }
 
     .logo-cta {
@@ -108,25 +134,29 @@
       padding: 2rem 0 0.2rem;
     }
 
+    @media (max-width: 720px) {
+      .vanilla-row-2,
+      .vanilla-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 520px) {
       .vanilla-page {
-        padding: 1.6rem 1.1rem 2.6rem;
+        padding: 1.6rem 0.55rem 2.6rem;
       }
 
       .vanilla-top {
         flex-wrap: wrap;
       }
-
-      .figure-narrow {
-        max-width: 100%;
-      }
     }
   </style>
+  <link rel="stylesheet" href="/css/dossier.css?v=1.20">
 </head>
 <body>
+  <script src="/js/dossier-chrome.js?v=1"></script>
   <article class="vanilla-page" id="top">
     <div class="vanilla-top">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
       <h1>Vanilla</h1>
       <span></span>
     </div>
@@ -142,47 +172,48 @@
 
     <p>This has become a hobby and side hustle for me. Each type of bean is different, and its provenance has an effect on the flavor, strength, and tone of the vanilla extract itself. I prefer Madagascar beans, they’re smooth and creamy, not too sweet. They impart just the right amount of that good vanilla flavor and aroma for my process.</p>
 
-    <figure>
-      <img
-        src="../images/passion/vanilla/stock-beans.jpg"
-        alt="Five whole vanilla beans"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure>
-      <img
-        src="../images/passion/vanilla/bottle-hero-white-label.jpg"
-        alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
-        loading="lazy"
-      >
-    </figure>
+    <div class="vanilla-row vanilla-row-2">
+      <figure>
+        <img
+          src="../images/passion/vanilla/stock-beans.jpg"
+          alt="Five whole vanilla beans"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/bottle-hero-white-label.jpg"
+          alt="Three amber bottles of Uintah Valley Pure Vanilla Extract"
+          loading="lazy"
+        >
+      </figure>
+    </div>
 
     <p>Our beans are more concentrated per jar, and are aged for a set period of time, so we don't bottle too soon. While most people split the beans, we cut them by hand because I have found that it allows the flavorings to be extracted more evenly across the aging period, giving the extractives and vanilla time to get to know each other and really blend. Extract is mostly waiting and patience provides a superior result.</p>
 
-    <figure class="figure-narrow">
-      <img
-        src="../images/passion/vanilla/beans-jar.jpg"
-        alt="Mason jar with vanilla beans standing inside"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure class="figure-narrow">
-      <img
-        src="../images/passion/vanilla/beans-chopped.jpg"
-        alt="Vanilla beans cut by hand into short pieces"
-        loading="lazy"
-      >
-    </figure>
-
-    <figure>
-      <img
-        src="../images/passion/vanilla/jars-aging.jpg"
-        alt="Mason jars of vanilla extract aging on a table"
-        loading="lazy"
-      >
-    </figure>
+    <div class="vanilla-row vanilla-row-3">
+      <figure>
+        <img
+          src="../images/passion/vanilla/beans-jar.jpg"
+          alt="Mason jar with vanilla beans standing inside"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/beans-chopped.jpg"
+          alt="Vanilla beans cut by hand into short pieces"
+          loading="lazy"
+        >
+      </figure>
+      <figure>
+        <img
+          src="../images/passion/vanilla/jars-aging.jpg"
+          alt="Mason jars of vanilla extract aging on a table"
+          loading="lazy"
+        >
+      </figure>
+    </div>
 
     <p>If you want some vanilla (and if I have any available) you can get some at <a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></p>
 
@@ -194,7 +225,6 @@
     </a>
 
     <div class="vanilla-footer">
-      <a class="back-btn stub-back" href="/#passion">← Passion</a>
     </div>
   </article>
 
