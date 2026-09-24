@@ -1173,7 +1173,7 @@ a.back-btn.stub-back {
 
   #passion .passion-hands {
     grid-template-columns: repeat(2, max-content);
-    gap: 1rem 4.5rem;
+    gap: 3.25rem 8.25rem;
     width: max-content;
     max-width: 100%;
   }
