@@ -5,9 +5,29 @@
   const root = document.documentElement;
   const boot = document.getElementById("crt-boot");
 
+  function typeLoading() {
+    const host = document.querySelector(".status-loading");
+    const slot = host && host.querySelector(".status-loading-word");
+    const word = (host && host.getAttribute("data-word")) || "LOADING";
+    if (!slot || slot.dataset.typed === "1") return;
+    slot.dataset.typed = "1";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      slot.textContent = word;
+      return;
+    }
+    let i = 0;
+    const tick = () => {
+      i += 1;
+      slot.textContent = word.slice(0, i);
+      if (i < word.length) window.setTimeout(tick, 110);
+    };
+    window.setTimeout(tick, 420);
+  }
+
   if (!boot || root.classList.contains("boot-skip")) {
     if (boot) boot.remove();
     root.classList.add("boot-clear");
+    typeLoading();
     return;
   }
 
@@ -83,6 +103,7 @@
       root.classList.add("boot-live");
     }
     boot.classList.add("is-done");
+    typeLoading();
     const removeBoot = () => {
       if (boot.parentNode) boot.remove();
     };

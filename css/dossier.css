@@ -496,18 +496,23 @@
   text-shadow:
     0 0 8px rgba(61, 255, 122, 0.95),
     0 0 18px rgba(61, 255, 122, 0.55);
-  animation: load-pulse 1.15s steps(1, end) infinite;
+  white-space: nowrap;
+}
+
+.status-loading-word {
+  display: inline-block;
+  vertical-align: baseline;
 }
 
 .status-loading::after {
   content: "";
   display: inline-block;
-  width: 0.42em;
-  height: 0.82em;
-  margin-left: 0.28em;
-  background: currentColor;
-  box-shadow: 0 0 8px currentColor;
-  vertical-align: -0.05em;
+  width: 0.55em;
+  height: 0.92em;
+  margin-left: 0.14em;
+  background: #5dff90;
+  box-shadow: 0 0 10px #5dff90;
+  vertical-align: -0.08em;
   animation: crt-blink 1.06s steps(1, end) infinite;
 }
 
@@ -1036,23 +1041,25 @@ body:has(.dossier-head) :is(
 }
 
 #passion .passion-mast h1 {
+  display: inline;
   margin: 0;
   font-size: clamp(1.05rem, 2vw, 1.45rem);
   font-weight: 500;
   letter-spacing: 0.14em;
-  line-height: 1.1;
+  line-height: 1.2;
   text-transform: uppercase;
   color: #e9fff2;
   text-shadow: 0 0 12px rgba(61, 255, 122, 0.28);
 }
 
 #passion .passion-mast .passion-lead {
+  display: inline;
   max-width: none;
-  margin: 0.28rem 0 0;
+  margin: 0 0 0 0.7em;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.18em;
-  line-height: 1.45;
+  line-height: 1.2;
   text-transform: uppercase;
   text-align: left;
   color: #9ee8be;
@@ -1153,15 +1160,20 @@ body:has(.dossier-head) :is(
 @media (max-width: 640px) {
   #professional .prof-top {
     grid-template-columns: minmax(0, 1fr) 8.6rem;
-    align-items: start;
+    align-items: stretch;
   }
 
   #professional .hud-copy {
     padding: 0.85rem 0.8rem 0.95rem;
   }
 
+  #professional .prof-actions {
+    align-self: stretch;
+    min-height: 0;
+  }
+
   #professional .prof-actions .action-btn {
-    flex: 0 0 auto;
+    flex: 1 1 0;
     font-size: 0.62rem;
     letter-spacing: 0.06em;
     padding: 0.55rem 0.35rem;
