@@ -4,39 +4,22 @@
   justify-content: safe center;
 }
 
-#passion .back-btn,
-#professional .back-btn {
-  position: fixed;
-  display: inline-flex;
-  align-items: center;
-  top: calc(var(--chrome-h) + 0.45rem);
-  left: max(1.25rem, env(safe-area-inset-left));
-  right: auto;
-  z-index: 60;
-  margin: 0;
-  transform: none;
-  text-decoration: none;
+body.dossier-tabbed #passion .passion-inner {
+  padding-top: 2.35rem;
+  padding-bottom: 1.25rem;
 }
 
-#personal .back-btn {
-  position: fixed;
-  top: calc(var(--chrome-h) + 0.45rem);
-  left: 1.25rem;
-  right: auto;
-  z-index: 20;
+body.dossier-tabbed #personal {
+  background: #0d0d0d;
 }
 
-body.site-hub #passion .passion-inner {
-  padding-top: calc(var(--chrome-h) + 0.45rem);
-  padding-bottom: 0.75rem;
+body.dossier-tabbed #personal .panel-inner {
+  padding-top: 2.6rem;
+  padding-bottom: 2rem;
 }
 
-body.site-hub #personal .panel-inner {
-  padding-top: calc(var(--chrome-h) + 3.5rem);
-}
-
-body.site-hub #professional .professional-inner {
-  padding-top: calc(var(--chrome-h) + 1.15rem);
+body.dossier-tabbed #professional .professional-inner {
+  padding-top: 2.35rem;
 }
 
 

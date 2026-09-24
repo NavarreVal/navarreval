@@ -5,21 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--
     CRT boot plays once per tab session (sessionStorage key nv-dossier-boot).
-    It is skipped for prefers-reduced-motion and for #personal.
-    Old /#professional and /#passion bookmarks go to /professional/ and /passion/.
+    It is skipped for prefers-reduced-motion.
+    Old /#professional, /#passion, and /#personal bookmarks go to those pages.
     Escape, click, or any key skips the sequence.
   -->
   <script>
     (function () {
       var hash = (location.hash || "").replace(/^#/, "");
-      if (hash === "professional" || hash === "passion") {
+      if (hash === "professional" || hash === "passion" || hash === "personal") {
         document.documentElement.classList.add("boot-skip");
         location.replace("/" + hash + "/" + location.search);
         return;
       }
-      var personal = hash === "personal";
-      if (!personal) document.documentElement.classList.add("dossier-top");
-      var skip = personal;
+      var skip = false;
       try {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true;
         if (sessionStorage.getItem("nv-dossier-boot") === "1") skip = true;
@@ -34,9 +32,9 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
   <title>J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css?v=6.0">
-  <link rel="stylesheet" href="css/overrides.css?v=6.4">
-  <link rel="stylesheet" href="css/dossier.css?v=1.4">
+  <link rel="stylesheet" href="css/style.css?v=6.1">
+  <link rel="stylesheet" href="css/overrides.css?v=6.5">
+  <link rel="stylesheet" href="css/dossier.css?v=1.6">
 </head>
 <body class="site-hub on-landing">
   <noscript>
@@ -53,75 +51,10 @@
     </div>
   </div>
 
-  <header class="site-chrome">
-    <a class="site-logo" href="/" aria-label="Navarre Valdivieso, home">
-      <img src="assets/signature.png" alt="">
-    </a>
-    <button
-      class="menu-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-menu"
-      aria-label="Open menu"
-    >
-      <span class="burger" aria-hidden="true"></span>
-    </button>
-  </header>
-
-  <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-    <nav class="menu-nav" aria-label="Sections">
-      <a href="/professional/">Professional</a>
-      <a href="/passion/">Passion</a>
-      <a href="#personal" data-panel data-direction="left">Personal</a>
-    </nav>
-    <div class="menu-social">
-      <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
-        <img src="images/icons/linkedin.svg" alt="LinkedIn">
-      </a>
-      <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
-        <img src="images/icons/github.svg" alt="GitHub">
-      </a>
-      <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
-        <img src="images/icons/globe.svg" alt="Uintah Valley">
-      </a>
-    </div>
-  </div>
-
   <!-- ========== LANDING ========== -->
+  <script src="js/dossier-chrome.js?v=1"></script>
   <main id="landing">
     <div class="dossier-shell">
-      <header class="dossier-mast">
-        <div class="mast-title">
-          <p class="mast-system">NavarreVal Personal Record</p>
-          <p class="mast-file">File <span>NV-VAL-01</span></p>
-        </div>
-        <ul class="mast-status" aria-label="Link status">
-          <li><i class="led on" aria-hidden="true"></i> Standby</li>
-          <li><i class="led" aria-hidden="true"></i> Connection established</li>
-          <li><i class="led" aria-hidden="true"></i> Record live</li>
-        </ul>
-      </header>
-
-      <div class="dossier-nav">
-        <nav class="dossier-tabs" aria-label="Record sections">
-          <span class="tab is-current" aria-current="page">Record</span>
-          <a href="/professional/">Professional</a>
-          <a href="/passion/">Passion</a>
-          <a href="#personal" data-panel data-direction="left">Personal</a>
-        </nav>
-        <div class="dossier-social">
-          <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
-            <img src="images/icons/linkedin.svg" alt="LinkedIn">
-          </a>
-          <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
-            <img src="images/icons/github.svg" alt="GitHub">
-          </a>
-          <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
-            <img src="images/icons/globe.svg" alt="Uintah Valley">
-          </a>
-        </div>
-      </div>
-
       <div class="dossier-split">
         <section class="hud portrait-hud" aria-label="Primary portrait">
           <div class="hud-in">
@@ -156,7 +89,7 @@
                 </div>
                 <div>
                   <dt>Education</dt>
-                  <dd>BS Business, MA History</dd>
+                  <dd>BS Business, MA <span class="status-loading">LOADING</span></dd>
                 </div>
               </dl>
               <div class="id-bio">
@@ -203,41 +136,17 @@
         </p>
         <footer class="crew-footer">
           <img class="crew-mark" src="assets/signature.png" alt="">
-          <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+          <span>Built by <a href="/personal/">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
         </footer>
       </div>
     </div>
   </main>
 
-  <!-- ========== PERSONAL ========== -->
-  <section id="personal" class="panel" aria-hidden="true" inert>
-    <div class="panel-inner">
-      <button class="back-btn">← Back</button>
-      <h1>Personal</h1>
-      <p>This is the Personal section. Family, values, and the things that matter most outside of work.</p>
-
-      <a class="personal-card" href="/talks/">
-        <img
-          src="images/personal/salvation_christ_only.jpeg"
-          alt="Salvation is only in and through the name of Christ. Mosiah 3:17"
-        >
-        <span class="personal-card-caption">
-          Religious talks and essays written and given by Navarre
-        </span>
-      </a>
-      <footer class="crew-footer">
-        <img class="crew-mark" src="assets/signature.png" alt="">
-        <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
-      </footer>
-    </div>
-  </section>
-
   <div id="lightbox" class="lightbox">
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=4.9"></script>
-  <script src="js/hash-panel.js?v=4.2"></script>
-  <script src="js/boot.js?v=1.0"></script>
+  <script src="js/main.js?v=5.0"></script>
+  <script src="js/boot.js?v=1.1"></script>
 </body>
 </html>

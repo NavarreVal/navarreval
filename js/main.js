@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxImages = [];
   let lightboxIndex = 0;
 
-  // ========== Panel Navigation ==========
-  // Personal stays an overlay. Professional and Passion scroll with the page.
+  // Personal, Professional, and Passion are their own pages.
+  // This overlay path only runs if a #personal panel is still on the page.
   const links = document.querySelectorAll('[data-panel]');
   const personal = document.getElementById('personal');
 
@@ -32,13 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function syncInert() {
-    const menuOpen = isMenuOpen();
     const personalOpen = !!(personal && personal.classList.contains('active'));
     pageSections().forEach((el) => el.removeAttribute('inert'));
-    if (menuOpen) {
-      pageSections().forEach((el) => el.setAttribute('inert', ''));
-      return;
-    }
     if (personal && !personalOpen) personal.setAttribute('inert', '');
     if (personalOpen) {
       document.querySelectorAll('#landing, #professional, #passion').forEach((el) => {
@@ -85,89 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.showSitePanel = showPanel;
 
-  const menuBtn = document.querySelector('.menu-toggle');
-  const menu = document.getElementById('site-menu');
-  const logo = document.querySelector('.site-logo');
-
-  function isMenuOpen() {
-    return !!(menu && !menu.hasAttribute('hidden'));
-  }
-
-  function menuFocusables() {
-    if (!menu || !menuBtn) return [];
-    return [menuBtn, ...menu.querySelectorAll('a[href]')];
-  }
-
-  function fitMenuLinks() {
-    const nav = document.querySelector('.menu-nav');
-    if (!nav) return;
-    const items = [...nav.querySelectorAll('a')];
-    if (!items.length || nav.clientWidth < 10) return;
-    const probe = 160;
-    items.forEach((item) => { item.style.fontSize = probe + 'px'; });
-    const widest = Math.max(...items.map((item) => item.scrollWidth));
-    const fitted = Math.max(32, Math.min(probe * (nav.clientWidth / widest), window.innerHeight * 0.16));
-    items.forEach((item) => { item.style.fontSize = fitted + 'px'; });
-  }
-
-  function openMenu() {
-    if (!menu || !menuBtn) return;
-    menu.hidden = false;
-    menuBtn.setAttribute('aria-expanded', 'true');
-    menuBtn.setAttribute('aria-label', 'Close menu');
-    document.body.classList.add('menu-open');
-    syncInert();
-    fitMenuLinks();
-    const firstLink = menu.querySelector('a[href]');
-    if (firstLink) firstLink.focus();
-  }
-
-  function closeMenu({ restoreFocus = true } = {}) {
-    if (!menu || !menuBtn || !isMenuOpen()) return;
-    menu.hidden = true;
-    menuBtn.setAttribute('aria-expanded', 'false');
-    menuBtn.setAttribute('aria-label', 'Open menu');
-    document.body.classList.remove('menu-open');
-    syncInert();
-    if (restoreFocus) menuBtn.focus();
-  }
-
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
-      if (isMenuOpen()) closeMenu();
-      else openMenu();
-    });
-  }
-
-  document.addEventListener('keydown', (event) => {
-    if (!isMenuOpen()) return;
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      closeMenu();
-      return;
-    }
-    if (event.key !== 'Tab') return;
-    const items = menuFocusables();
-    if (!items.length) return;
-    const first = items[0];
-    const last = items[items.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }, true);
-
-  window.addEventListener('popstate', () => {
-    if (isMenuOpen()) closeMenu({ restoreFocus: false });
-  });
-
-  window.addEventListener('resize', () => {
-    if (isMenuOpen()) fitMenuLinks();
-  });
+  const logo = document.querySelector('.dossier-mark');
 
   if (logo) {
     logo.addEventListener('click', (event) => {
@@ -175,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const onHome = path === '/' || path === '/index.html';
       if (!onHome) return;
       event.preventDefault();
-      closeMenu({ restoreFocus: false });
       const personalOpen = !!(personal && personal.classList.contains('active'));
       const atTop = window.scrollY < 8;
       if (!personalOpen && !location.hash && atTop) return;
@@ -193,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const href = link.getAttribute('href') || '';
       if (!href.startsWith('#')) return;
       e.preventDefault();
-      closeMenu({ restoreFocus: false });
       const id = href.substring(1);
       showPanel(id, motion());
       const section = document.getElementById(id);
@@ -339,7 +250,7 @@ window.addEventListener('popstate', () => {
 
     window.addEventListener('wheel', (event) => {
       if (event.ctrlKey) return;
-      if (document.body.classList.contains('menu-open') || document.body.classList.contains('personal-open')) return;
+      if (document.body.classList.contains('personal-open')) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
 

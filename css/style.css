@@ -40,9 +40,7 @@ body.site-hub {
   overflow-y: auto;
 }
 
-html:has(body.site-hub.menu-open),
 html:has(body.site-hub.personal-open),
-body.site-hub.menu-open,
 body.site-hub.personal-open {
   overflow: hidden;
 }
@@ -163,7 +161,7 @@ body.site-hub.personal-open {
   gap: 0.65rem;
   width: fit-content;
   max-width: min(40rem, 100%);
-  margin: 1.35rem auto 0;
+  margin: clamp(4.75rem, 11vh, 7.5rem) auto 0;
   text-align: left;
   font-size: 0.78rem;
   line-height: 1.45;
@@ -191,7 +189,7 @@ body.site-hub.personal-open {
 }
 
 #personal .crew-footer {
-  margin-top: clamp(4.75rem, 12vh, 7.5rem);
+  margin-top: clamp(6.5rem, 14vh, 9.5rem);
 }
 
 
@@ -1184,7 +1182,7 @@ a.back-btn.stub-back {
 }
 
 #passion .crew-footer {
-  margin-top: clamp(7.5rem, 18vh, 11rem);
+  margin-top: clamp(9rem, 20vh, 13rem);
 }
 
 @media (min-width: 901px) and (max-height: 860px) {
@@ -1473,218 +1471,9 @@ body.page-enter-active {
   font-weight: 500;
 }
 
-.site-chrome {
-  position: fixed;
-  z-index: 80;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: var(--chrome-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: max(0.45rem, env(safe-area-inset-top)) max(1.1rem, env(safe-area-inset-right)) 0.35rem max(1.1rem, env(safe-area-inset-left));
-  pointer-events: none;
-}
-
-body.site-hub .site-chrome {
-  background: linear-gradient(to bottom, rgba(13, 13, 13, 0.94) 62%, rgba(13, 13, 13, 0));
-}
-
-.site-chrome > * {
-  pointer-events: auto;
-}
-
-.site-logo {
-  display: block;
-  height: 4.35rem;
-  width: auto;
-  line-height: 0;
-}
-
-.site-logo img {
-  display: block;
-  height: 100%;
-  width: auto;
-}
-
-body.site-hub .site-logo img {
-  filter: invert(1);
-}
-
-body.site-hub.menu-open .site-logo img {
-  filter: none;
-}
-
-.menu-toggle {
-  width: 44px;
-  height: 44px;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: #f4efe8;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-body.menu-open .menu-toggle {
-  color: #14110c;
-}
-
-.burger,
-.burger::before,
-.burger::after {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: currentColor;
-  border-radius: 1px;
-  position: relative;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.burger::before,
-.burger::after {
-  content: "";
-  position: absolute;
-  left: 0;
-}
-
-.burger::before { top: -7px; }
-.burger::after { top: 7px; }
-
-.menu-toggle[aria-expanded="true"] .burger {
-  background: transparent;
-}
-
-.menu-toggle[aria-expanded="true"] .burger::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.menu-toggle[aria-expanded="true"] .burger::after {
-  top: 0;
-  transform: rotate(-45deg);
-}
-
-.site-menu {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  overflow: hidden;
-  background: var(--gold);
-  color: #14110c;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--chrome-h) + 1.5rem) 7vw max(11rem, calc(env(safe-area-inset-bottom) + 10rem));
-}
-
-.site-menu[hidden] {
-  display: none !important;
-}
-
-.site-menu:not([hidden]) {
-  animation: menu-in 0.22s ease;
-}
-
-@keyframes menu-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-body.menu-open .site-chrome {
-  background: transparent;
-}
-
-.menu-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15em;
-  width: min(100%, 72rem);
-}
-
-.menu-nav a {
-  font-family: "Archivo Black", "Arial Black", Impact, sans-serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-  color: #14110c;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.menu-nav a:hover,
-.menu-nav a:focus-visible {
-  color: #000;
-}
-
-.menu-social {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: max(1.35rem, env(safe-area-inset-bottom));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.6rem;
-}
-
-.menu-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 96px;
-  width: 96px;
-  height: 96px;
-  overflow: hidden;
-}
-
-.menu-social img {
-  width: 96px;
-  height: 96px;
-  max-width: none;
-  max-height: none;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-}
-
-/* LinkedIn’s view box is mostly empty, so the mark is scaled up
-   inside the same 96px box the other icons already fill. */
-.menu-social a[title="LinkedIn"] img {
-  width: 184px;
-  height: 184px;
-}
-
-.site-logo:focus-visible,
-.menu-toggle:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-
-body.menu-open .site-logo:focus-visible,
-body.menu-open .menu-toggle:focus-visible,
-.menu-nav a:focus-visible,
-.menu-social a:focus-visible {
-  outline: 2px solid #14110c;
-  outline-offset: 3px;
-}
+/* Section navigation is the dossier tab bar. The hamburger menu is gone. */
 
 @media (max-width: 820px) {
-  :root {
-    --chrome-h: 4.55rem;
-  }
-
-  .site-logo {
-    height: 3.35rem;
-  }
-
   .hero-name {
     padding: 0 2vw;
   }
@@ -1708,10 +1497,6 @@ body.menu-open .menu-toggle:focus-visible,
 
   .flow-row-mid { top: 30vh; }
   .flow-row-low { top: 54vh; }
-
-  .menu-nav a {
-    font-size: clamp(2.4rem, 12vw, 4.2rem);
-  }
 }
 
 @media (max-height: 700px) and (min-width: 821px) {
@@ -1723,16 +1508,6 @@ body.menu-open .menu-toggle:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .burger,
-  .burger::before,
-  .burger::after {
-    transition: none;
-  }
-
-  .site-menu:not([hidden]) {
-    animation: none;
-  }
-
   .flow-track {
     animation-duration: 52s;
     animation-play-state: running;

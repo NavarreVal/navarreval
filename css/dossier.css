@@ -1,4 +1,4 @@
-/* Landing dossier + CRT boot. Loaded only from index.html. */
+/* Landing dossier, shared tab header, and CRT boot. */
 
 #landing {
   --ph: #3dff7a;
@@ -39,12 +39,53 @@
   background: linear-gradient(to bottom, rgba(4, 10, 7, 0), #0d0d0d);
 }
 
+.dossier-head {
+  --ph: #3dff7a;
+  --ph-hot: #e9fff2;
+  --ph-dim: #9ee8be;
+  --ph-mute: #8fd4aa;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) 0.95rem max(1rem, env(safe-area-inset-left));
+  color: var(--ph-hot);
+  background-color: #040a07;
+  background-image:
+    linear-gradient(rgba(61, 255, 122, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 255, 122, 0.04) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(36, 110, 64, 0.28), transparent 62%);
+  background-size: 42px 42px, 42px 42px, auto;
+  box-shadow: inset 0 -1px 0 rgba(61, 255, 122, 0.28), inset 0 0 80px rgba(0, 0, 0, 0.35);
+  font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+.dossier-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.16) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+.dossier-mast,
+.dossier-nav {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
 .dossier-shell {
   position: relative;
   z-index: 1;
   width: min(1180px, calc(100% - 1.5rem));
   margin: 0 auto;
-  padding: calc(var(--chrome-h) + 0.55rem) max(0.15rem, env(safe-area-inset-right)) 0.85rem max(0.15rem, env(safe-area-inset-left));
+  padding: 1.15rem max(0.15rem, env(safe-area-inset-right)) 1.35rem max(0.15rem, env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -57,6 +98,32 @@
   gap: 1rem;
   padding: 0.15rem 0.2rem 0.55rem;
   border-bottom: 1px solid rgba(61, 255, 122, 0.35);
+}
+
+.mast-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.dossier-mark {
+  display: block;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.dossier-mark img {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: invert(1) sepia(0.65) saturate(3.2) hue-rotate(82deg) brightness(1.05);
+}
+
+.dossier-mark:focus-visible {
+  outline: 2px solid var(--ph-hot);
+  outline-offset: 3px;
 }
 
 .mast-system {
@@ -186,9 +253,14 @@
   display: block;
 }
 
+.dossier-social a[title="LinkedIn"] img,
+.dossier-social a[title="GitHub"] img {
+  filter: brightness(0) saturate(100%) invert(72%) sepia(86%) saturate(620%) hue-rotate(85deg) brightness(1.08);
+}
+
 .dossier-social a[title="LinkedIn"] img {
-  width: 42px;
-  height: 42px;
+  width: 30px;
+  height: 30px;
 }
 
 .dossier-split {
@@ -415,6 +487,30 @@
   line-height: 1.35;
 }
 
+.status-loading {
+  display: inline-block;
+  margin-left: 0.15rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #67ff9a;
+  text-shadow:
+    0 0 8px rgba(61, 255, 122, 0.95),
+    0 0 18px rgba(61, 255, 122, 0.55);
+  animation: load-pulse 1.15s steps(1, end) infinite;
+}
+
+.status-loading::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.82em;
+  margin-left: 0.28em;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  vertical-align: -0.05em;
+  animation: crt-blink 1.06s steps(1, end) infinite;
+}
+
 .id-bio {
   margin-top: 0.85rem;
   padding-top: 0.75rem;
@@ -535,7 +631,8 @@
 .dossier-foot {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 1.15rem;
+  margin-top: clamp(3.5rem, 8vh, 5.75rem);
   padding: 0.2rem 0.15rem 0.15rem;
 }
 
@@ -559,7 +656,7 @@
 #landing .crew-footer {
   width: 100%;
   max-width: 100%;
-  margin: 0.45rem 0 0;
+  margin: 0;
   color: var(--ph-dim);
   flex-wrap: wrap;
 }
@@ -584,23 +681,6 @@
 #landing .dossier-social a:focus-visible {
   outline: 2px solid var(--ph-hot);
   outline-offset: 3px;
-}
-
-html.dossier-top body.site-hub:not(.menu-open) .site-chrome {
-  background: linear-gradient(to bottom, rgba(4, 10, 7, 0.94) 60%, rgba(4, 10, 7, 0));
-}
-
-html.dossier-top body.site-hub:not(.menu-open) .menu-toggle {
-  color: var(--ph);
-}
-
-html.dossier-top body.site-hub:not(.menu-open) .site-logo img {
-  filter: invert(1) sepia(0.7) saturate(3.4) hue-rotate(84deg) brightness(1.05);
-}
-
-html.dossier-top body.site-hub:not(.menu-open) .site-logo:focus-visible,
-html.dossier-top body.site-hub:not(.menu-open) .menu-toggle:focus-visible {
-  outline-color: #e9fff2;
 }
 
 /* ===== CRT boot ===== */
@@ -730,7 +810,9 @@ html.boot-live #landing {
   html.boot-live #landing,
   .crt-boot::before,
   .crt-cursor,
-  .led.on {
+  .led.on,
+  .status-loading,
+  .status-loading::after {
     animation: none;
   }
 }
@@ -842,4 +924,9 @@ html.boot-live #landing {
 @keyframes led-blink {
   0%, 72%, 100% { opacity: 1; }
   78%, 88% { opacity: 0.25; }
+}
+
+@keyframes load-pulse {
+  0%, 46% { opacity: 1; }
+  54%, 100% { opacity: 0.62; }
 }

@@ -1,25 +1,9 @@
 // CRT boot for the landing dossier.
 // Plays once per tab (sessionStorage nv-dossier-boot).
-// Head script adds html.boot-skip for reduced motion, #personal, and replays.
+// Head script adds html.boot-skip for reduced motion, section redirects, and replays.
 (function () {
   const root = document.documentElement;
   const boot = document.getElementById("crt-boot");
-  const landing = document.getElementById("landing");
-
-  function watchDossierChrome() {
-    if (!landing) return;
-    const sync = () => {
-      root.classList.toggle("dossier-top", landing.getBoundingClientRect().bottom > 96);
-    };
-    document.addEventListener("DOMContentLoaded", () => {
-      sync();
-      window.requestAnimationFrame(sync);
-      window.addEventListener("scroll", sync, { passive: true });
-      window.addEventListener("resize", sync);
-    });
-  }
-
-  watchDossierChrome();
 
   if (!boot || root.classList.contains("boot-skip")) {
     if (boot) boot.remove();
@@ -47,7 +31,7 @@
       const el = document.getElementById(id);
       if (el) el.setAttribute("inert", "");
     });
-    const chrome = document.querySelector(".site-chrome");
+    const chrome = document.querySelector(".dossier-head");
     if (chrome) chrome.setAttribute("inert", "");
   }
 
@@ -56,7 +40,7 @@
       const el = document.getElementById(id);
       if (el) el.removeAttribute("inert");
     });
-    const chrome = document.querySelector(".site-chrome");
+    const chrome = document.querySelector(".dossier-head");
     if (chrome) chrome.removeAttribute("inert");
   }
 
