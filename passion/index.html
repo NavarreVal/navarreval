@@ -26,6 +26,13 @@
         animation: card-deal 0.30s cubic-bezier(0.16, 0.84, 0.28, 1) forwards;
         animation-delay: calc(0.55s + var(--deal, 0) * 150ms);
       }
+
+      #passion .passion-hands.is-dealing .playing-card.is-flick {
+        --deal-rot: 8deg;
+        transform-origin: 50% 100%;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
+        animation-name: card-deal-flat;
+      }
     }
 
     @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
@@ -183,6 +190,57 @@
             }
           }
           if (!cards.length) return;
+
+          var kinds = rollKinds(cards.length);
+          for (var k = 0; k < cards.length; k++) {
+            if (kinds[k] === "flick") cards[k].classList.add("is-flick");
+          }
+
+          function rollKinds(n) {
+            var spins = 4 + Math.floor(Math.random() * 5);
+            var kinds = [];
+            var i;
+            for (i = 0; i < spins; i++) kinds.push("spin");
+            for (; i < n; i++) kinds.push("flick");
+            function shuffle(list) {
+              for (var s = list.length - 1; s > 0; s--) {
+                var j = Math.floor(Math.random() * (s + 1));
+                var tmp = list[s];
+                list[s] = list[j];
+                list[j] = tmp;
+              }
+            }
+            function longestRun(list) {
+              var best = 1;
+              var run = 1;
+              for (var r = 1; r < list.length; r++) {
+                run = list[r] === list[r - 1] ? run + 1 : 1;
+                if (run > best) best = run;
+              }
+              return best;
+            }
+            var guard = 0;
+            do { shuffle(kinds); } while (longestRun(kinds) > 3 && guard++ < 80);
+            if (longestRun(kinds) > 3) {
+              kinds = [];
+              var sLeft = spins;
+              var fLeft = n - spins;
+              var turn = Math.random() < 0.5 ? "spin" : "flick";
+              while (kinds.length < n) {
+                var left = turn === "spin" ? sLeft : fLeft;
+                var chunk = Math.min(1 + Math.floor(Math.random() * 3), left, n - kinds.length);
+                if (chunk < 1) {
+                  turn = turn === "spin" ? "flick" : "spin";
+                  continue;
+                }
+                for (var c = 0; c < chunk; c++) kinds.push(turn);
+                if (turn === "spin") sLeft -= chunk;
+                else fLeft -= chunk;
+                turn = turn === "spin" ? "flick" : "spin";
+              }
+            }
+            return kinds;
+          }
 
           var handsBox = hands.getBoundingClientRect();
           var originX = handsBox.left + handsBox.width / 2;
