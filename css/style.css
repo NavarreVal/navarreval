@@ -1373,7 +1373,7 @@ body.page-enter-active {
 .flow-track {
   display: flex;
   align-items: flex-start;
-  gap: clamp(22rem, 44vw, 52rem);
+  gap: 0;
   width: max-content;
   animation-name: flow-ltr;
   animation-duration: 13s;
@@ -1383,16 +1383,31 @@ body.page-enter-active {
   will-change: transform;
 }
 
+.flow-set {
+  display: flex;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  --flow-gap: clamp(22rem, 44vw, 52rem);
+  gap: var(--flow-gap);
+  padding-right: var(--flow-gap);
+}
+
 .flow-row-mid .flow-track {
-  gap: clamp(28rem, 60vw, 68rem);
   animation-duration: 19s;
   animation-delay: -6s;
 }
 
+.flow-row-mid .flow-set {
+  --flow-gap: clamp(28rem, 60vw, 68rem);
+}
+
 .flow-row-low .flow-track {
-  gap: clamp(24rem, 49.6vw, 58rem);
   animation-duration: 26s;
   animation-delay: -11s;
+}
+
+.flow-row-low .flow-set {
+  --flow-gap: clamp(24rem, 49.6vw, 58rem);
 }
 
 @keyframes flow-ltr {
