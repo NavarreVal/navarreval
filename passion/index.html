@@ -138,12 +138,14 @@
           if (!desktop.matches) return;
 
           var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          var groups = hands.querySelectorAll(".hand");
+          var cycle = ["maker", "thinker", "doer", "dabbler"];
           var deal = 0;
           var cards = [];
           for (var round = 0; round < 3; round++) {
-            for (var h = 0; h < groups.length; h++) {
-              var inHand = groups[h].querySelectorAll(".playing-card");
+            for (var h = 0; h < cycle.length; h++) {
+              var hand = hands.querySelector('.hand[data-hand="' + cycle[h] + '"]');
+              if (!hand) continue;
+              var inHand = hand.querySelectorAll(".playing-card");
               for (var c = 0; c < inHand.length; c++) {
                 if (Number(inHand[c].style.getPropertyValue("--i")) !== round) continue;
                 inHand[c].style.setProperty("--deal", String(deal++));
