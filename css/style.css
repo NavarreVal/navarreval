@@ -1046,11 +1046,15 @@ body.site-hub.personal-open {
   background: radial-gradient(ellipse at center, rgba(180, 60, 55, 0.28) 0%, transparent 70%);
 }
 
+.passion-hands .hand {
+  z-index: 1;
+}
+
 .passion-hands.has-open .hand:not(.open) {
   opacity: 0.32;
 }
 
-.hand.open { z-index: 6; }
+.hand.open { z-index: 12; }
 
 .fan {
   position: relative;
@@ -1167,7 +1171,10 @@ a.back-btn.stub-back {
   }
 
   #passion .passion-hands {
-    gap: 0.35rem clamp(2rem, 8vw, 8rem);
+    grid-template-columns: repeat(2, max-content);
+    gap: 0.5rem 2.25rem;
+    width: max-content;
+    max-width: 100%;
   }
 
   #passion .fan {
