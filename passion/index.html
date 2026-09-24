@@ -2,6 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    (function () {
+      try {
+        if (/(?:^|[?&])deal=1(?:&|$)/.test(location.search)) return;
+      } catch (e) {}
+      var dealt = false;
+      try {
+        dealt = localStorage.getItem("nv-passion-dealt") === "1";
+      } catch (e) {
+        try { dealt = sessionStorage.getItem("nv-passion-dealt") === "1"; } catch (e2) {}
+      }
+      if (dealt) document.documentElement.classList.add("passion-dealt");
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico?v=3" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
@@ -32,6 +46,15 @@
         transform-origin: 50% 100%;
         transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
         animation-name: card-deal-flat;
+      }
+
+      /* Return visits: fan is already in place, even if a restored deal class lingers. */
+      html.passion-dealt #passion .passion-hands.is-dealing .playing-card {
+        animation: none;
+        transform-origin: 50% 100%;
+        transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * 17deg));
+        transition: none;
+        z-index: auto;
       }
     }
 
@@ -162,6 +185,41 @@
           var desktop = window.matchMedia("(min-width: 901px)");
           if (!desktop.matches) return;
 
+          var root = document.documentElement;
+          var forceDeal = false;
+          try {
+            forceDeal = /(?:^|[?&])deal=1(?:&|$)/.test(location.search);
+          } catch (e) {}
+
+          function storageDealt() {
+            try {
+              return localStorage.getItem("nv-passion-dealt") === "1";
+            } catch (e) {
+              try {
+                return sessionStorage.getItem("nv-passion-dealt") === "1";
+              } catch (e2) {
+                return false;
+              }
+            }
+          }
+
+          function markDealt() {
+            try {
+              localStorage.setItem("nv-passion-dealt", "1");
+              return;
+            } catch (e) {}
+            try { sessionStorage.setItem("nv-passion-dealt", "1"); } catch (e2) {}
+          }
+
+          window.addEventListener("pageshow", function (e) {
+            if (!e.persisted || forceDeal) return;
+            if (!storageDealt()) return;
+            root.classList.add("passion-dealt");
+            hands.classList.remove("is-dealing");
+          });
+
+          if (root.classList.contains("passion-dealt")) return;
+
           var cycle = ["maker", "thinker", "doer", "dabbler"];
           var deal = 0;
           var cards = [];
@@ -248,6 +306,7 @@
             cards[i].style.setProperty("--deal-y", (originY - center.y).toFixed(1) + "px");
           }
 
+          markDealt();
           hands.classList.add("is-dealing");
 
           var pending = cards.length;
