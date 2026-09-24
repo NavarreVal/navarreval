@@ -998,17 +998,34 @@ body.dossier-tabbed #personal {
 
 body:has(.dossier-head) :is(
   .panel-inner,
-  .music-top,
-  .games-top,
-  .teach-top,
-  .print-top,
-  .read-top,
-  .wd-content,
-  .vanilla-top,
-  .nas-top,
   .miss-page
 ) h1 {
   color: #3dff7a;
+}
+
+body:has(.dossier-head) :is(
+  .print-top,
+  .vanilla-top,
+  .teach-top,
+  .read-top,
+  .write-top,
+  .nas-top,
+  .music-top,
+  .games-top
+) h1 {
+  margin: 0;
+  font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, monospace;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #e9fff2;
+  text-shadow: 0 0 12px rgba(61, 255, 122, 0.28);
+}
+
+body:has(.dossier-head) .wd-content h1 {
+  color: #e9fff2;
 }
 
 #professional .prof-column {
