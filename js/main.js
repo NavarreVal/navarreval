@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (logo) {
     logo.addEventListener('click', (event) => {
+      const path = location.pathname.replace(/\/+$/, '') || '/';
+      const onHome = path === '/' || path === '/index.html';
+      if (!onHome) return;
       event.preventDefault();
       closeMenu({ restoreFocus: false });
       const personalOpen = !!(personal && personal.classList.contains('active'));
@@ -187,9 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   links.forEach(link => {
     link.addEventListener('click', e => {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
       e.preventDefault();
       closeMenu({ restoreFocus: false });
-      const id = link.getAttribute('href').substring(1);
+      const id = href.substring(1);
       showPanel(id, motion());
       const section = document.getElementById(id);
       const back = section?.querySelector('.back-btn');
@@ -326,7 +331,8 @@ window.addEventListener('popstate', () => {
 
   // Park a wheel/trackpad gesture on Professional, then let the next gesture through.
   const professionalEdge = document.getElementById('professional');
-  if (professionalEdge) {
+  const landingEdge = document.getElementById('landing');
+  if (professionalEdge && landingEdge) {
     let holdEdge = false;
     let gestureTimer = 0;
     const gestureGap = 200;
@@ -365,20 +371,20 @@ window.addEventListener('popstate', () => {
   const timelineEvents = [
     {
       year: 2003,
-      yearThumb: "images/timeline/calwest.jpg",
+      yearThumb: "/images/timeline/calwest.jpg",
       events: [{
         id: "2003-shell",
         label: "Shell Station",
         title: "Shell Station / Local Jobs",
         role: "Work",
         desc: "There was a Mean Gene's Burgers, a Subway, and the Convenience Store. I worked all three counters as needed.<br><br>I had a few other random jobs around town as well, including at Cal Western Converting Inc.",
-        thumb: "images/timeline/calwest.jpg",
-        images: ["images/timeline/shell.jpg"]
+        thumb: "/images/timeline/calwest.jpg",
+        images: ["/images/timeline/shell.jpg"]
       }]
     },
     {
       year: 2004,
-      yearThumb: "images/timeline/200400.jpg",
+      yearThumb: "/images/timeline/200400.jpg",
       events: [
         {
           id: "2004-graduation",
@@ -386,8 +392,8 @@ window.addEventListener('popstate', () => {
           title: "Graduated from Golden West High School",
           role: "Education",
           desc: "<strong>The year:</strong> 2004.<br><strong>My GPA:</strong> not great<br>(enough for football & college!)<br><strong>My life:</strong> a blur.",
-          thumb: "images/timeline/GWHS-logo.jpg",
-          images: ["images/timeline/highschool.jpg", "images/timeline/alyssa_and_navarre.jpg"]
+          thumb: "/images/timeline/GWHS-logo.jpg",
+          images: ["/images/timeline/highschool.jpg", "/images/timeline/alyssa_and_navarre.jpg"]
         },
         {
           id: "2004-argus",
@@ -395,8 +401,8 @@ window.addEventListener('popstate', () => {
           title: "Summer 2004: Tallship Argus",
           role: "Work",
           desc: "I lived and worked aboard the Tallship Argus for the Orange County Council of the Boy Scouts of America. I was a certified deckhand in charge of the foresails. I conducted training, instruction, and supervision over our visiting groups.",
-          thumb: "images/timeline/argus.jpg",
-          images: ["images/timeline/argus.jpg", "images/timeline/navarreargus.jpg"]
+          thumb: "/images/timeline/argus.jpg",
+          images: ["/images/timeline/argus.jpg", "/images/timeline/navarreargus.jpg"]
         },
         {
           id: "2004-nauvoo",
@@ -404,92 +410,92 @@ window.addEventListener('popstate', () => {
           title: "Fall 2004: BYU – Nauvoo",
           role: "Education",
           desc: "I had the opportunity to experience BYU's \"Semester Abroad\" program at BYU Nauvoo.<br><br>I was also apparently incapable of taking a normal picture of myself.",
-          thumb: "images/timeline/nauvoo.jpg",
-          images: ["images/timeline/nauvoo.jpg", "images/timeline/nauvoo01.jpg", "images/timeline/nauvoo02.jpg"]
+          thumb: "/images/timeline/nauvoo.jpg",
+          images: ["/images/timeline/nauvoo.jpg", "/images/timeline/nauvoo01.jpg", "/images/timeline/nauvoo02.jpg"]
         }
       ]
     },
     {
       year: 2005,
-      yearThumb: "images/timeline/mission02.jpg",
+      yearThumb: "/images/timeline/mission02.jpg",
       events: [{
         id: "2005-mission",
         label: "Mission Merida Mexico",
         title: "LDS Missionary Service",
         role: "Volunteer Service",
         desc: "I was called to serve a mission in the Merida Mexico Mission. I served from 2005-2007. I learned Spanish & Mayan and gained a strong testimony of the gospel of Jesus Christ, and a deep and abiding love for the people of the Yucatan.",
-        thumb: "images/timeline/mission02.jpg",
-        images: ["images/timeline/mission01.jpg", "images/timeline/mission03.jpg", "images/timeline/mission04.jpg", "images/timeline/mission05.jpg"]
+        thumb: "/images/timeline/mission02.jpg",
+        images: ["/images/timeline/mission01.jpg", "/images/timeline/mission03.jpg", "/images/timeline/mission04.jpg", "/images/timeline/mission05.jpg"]
       }]
     },
     {
       year: 2008,
-      yearThumb: "images/timeline/libertySquare.png",
+      yearThumb: "/images/timeline/libertySquare.png",
       events: [{
         id: "2008-ls",
         label: "Liberty Square Apartments",
         title: "Leasing Assistant",
         role: "Work & Education",
         desc: "Worked at Liberty Square Student Housing in the leasing office and doing general maintenance while attending BYU.",
-        thumb: "images/timeline/libertySquare.png",
+        thumb: "/images/timeline/libertySquare.png",
         images: []
       }]
     },
     {
       year: 2009,
-      yearThumb: "images/timeline/rain01.png",
+      yearThumb: "/images/timeline/rain01.png",
       events: [{
         id: "2009-rain",
         label: "Rain Nutrition",
         title: "IT Specialist",
         role: "Work",
         desc: "This felt like my first \"real\" job. I wore a lot of hats, because this was a small company. I handled Customer Support, Website Testing, and Database Management.<br>If I ever get rich, I'm going to recreate their Blueberry Energy Drink because MAN was it good!",
-        thumb: "images/timeline/rain01.png",
+        thumb: "/images/timeline/rain01.png",
         images: []
       }]
     },
     {
       year: 2011,
-      yearThumb: "images/timeline/impact00.jpg",
+      yearThumb: "/images/timeline/impact00.jpg",
       events: [{
         id: "2011-impact",
         label: "Impact Pest Service",
         title: "HR/Office Manager",
         role: "HR/Office Manager",
         desc: "We lived in Texas for a bit, and I worked for a pest control company doing office administration, employee management, and service streamlining. Eventually, this small business was bought out, and we returned to Utah.<br>Sometimes, we got up to nonsense.",
-        thumb: "images/timeline/impact00.jpg",
-        images: ["images/timeline/impact01.jpg"]
+        thumb: "/images/timeline/impact00.jpg",
+        images: ["/images/timeline/impact01.jpg"]
       }]
     },
     {
       year: 2012,
-      yearThumb: "images/timeline/usu00.jpg",
+      yearThumb: "/images/timeline/usu00.jpg",
       events: [{
         id: "2012-usu",
         label: "USU Family Housing",
         title: "Assistant Leasing Manager",
         role: "Work & Education",
         desc: "I worked in Family Housing while I attended USU doing their Law & Constitutional Studies undergrad. I loved the coursework so much!<br><br>Unfortunately, life circumstances prevented me from finishing that degree, but it was fun to indulge my passion for Law while there!",
-        thumb: "images/timeline/usu00.jpg",
-        images: ["images/timeline/usu01.jpg"]
+        thumb: "/images/timeline/usu00.jpg",
+        images: ["/images/timeline/usu01.jpg"]
       }]
     },
     {
       year: 2013,
-      yearThumb: "images/timeline/cpix00.jpg",
+      yearThumb: "/images/timeline/cpix00.jpg",
       events: [{
         id: "2013-cpix",
         label: "CirclePix",
         title: "QA Engineer",
         role: "Work",
         desc: "I wore a couple different hats at this job as well, but landed in QA Engineering, getting my first real taste of true Engineering work and I was hooked!<br><br>Shoutout to the people at CirclePix who took a chance on me and gave me a *real* career trajectory!",
-        thumb: "images/timeline/cpix00.jpg",
-        images: ["images/timeline/cpix01.jpg"]
+        thumb: "/images/timeline/cpix00.jpg",
+        images: ["/images/timeline/cpix01.jpg"]
       }]
     },
     {
       year: 2015,
-      yearThumb: "images/timeline/201500.jpg",
+      yearThumb: "/images/timeline/201500.jpg",
       events: [
         {
           id: "2015-sahd",
@@ -497,8 +503,8 @@ window.addEventListener('popstate', () => {
         title: "Dad!",
         role: "Work?",
         desc: "This was probably my favorite job I ever had. After a bout of health issues and other circumstances, I got to be home with my 2 year old son for a time, helping him through these formative years; learning to read, talk, and potty training. I miss this!",
-        thumb: "images/timeline/sahd00.jpg",
-        images: ["images/timeline/sahd01.jpg", "images/timeline/sahd02.jpg", "images/timeline/sahd03.jpg"]
+        thumb: "/images/timeline/sahd00.jpg",
+        images: ["/images/timeline/sahd01.jpg", "/images/timeline/sahd02.jpg", "/images/timeline/sahd03.jpg"]
         },
         {
           id: "2015-ccjs",
@@ -506,14 +512,14 @@ window.addEventListener('popstate', () => {
         title: "Certified JavaScript Angular Web Developer",
         role: "Certification",
         desc: "The coursework focused primarily on Angular.js full-stack web development with some Node.js. Classes included lecture and practice for the majority of the course and evolved into SCRUM style standups and product building. This course included job search training and monthly opportunities for networking with local companies, and instruction & practice for preparing to enter the work force. <br><br> Major areas of study included HTML, CSS, JavaScript, git, MongoDB, AngularJS, and NodeJS.",
-        thumb: "images/timeline/ccjs.png",
-        images: ["images/timeline/ccjs_Cert.jpg"]
+        thumb: "/images/timeline/ccjs.png",
+        images: ["/images/timeline/ccjs_Cert.jpg"]
         }
       ]
     },
     {
       year: 2016,
-      yearThumb: "images/timeline/201600.jpg",
+      yearThumb: "/images/timeline/201600.jpg",
       events: [
         {
           id: "2016-boost",
@@ -521,8 +527,8 @@ window.addEventListener('popstate', () => {
           title: "QA Specialist",
           role: "Work",
           desc: "After working through my health complications, and feeling ready to send my son back into the daycare world, I returned to work at Boostability.<br>We built, tested, and maintained websites for small business owners. My team worked mainly with people in Australia, which was a lot of fun!<br><br>This allowed me to get my feet wet again in the Tech world with the occasional use of Adobe Photoshop, Illustrator, and various front end development languages including HTML, CSS, and Javascript.",
-          thumb: "images/timeline/boost00.png",
-          images: ["images/timeline/boost01.jpg", "images/timeline/boost02.jpg"]
+          thumb: "/images/timeline/boost00.png",
+          images: ["/images/timeline/boost01.jpg", "/images/timeline/boost02.jpg"]
         },
         {
           id: "2016-ipart",
@@ -530,53 +536,53 @@ window.addEventListener('popstate', () => {
           title: "QA/Operations/UX",
           role: "Work",
           desc: "This role was a major step up for me, and another area where I wore many hats and was able to expand my understanding of the tech world.<br><br>I got to delve into automated testing, script coding, and User Experience Research and Design.<br><br>I even got to attend my first work-related conference!",
-          thumb: "images/timeline/ipart00.jpg",
-          images: ["images/timeline/ipart01.jpg", "images/timeline/ipart02.jpg", "images/timeline/ipart03.jpg"]
+          thumb: "/images/timeline/ipart00.jpg",
+          images: ["/images/timeline/ipart01.jpg", "/images/timeline/ipart02.jpg", "/images/timeline/ipart03.jpg"]
         }
       ]
     },
     {
       year: 2017,
-      yearThumb: "images/timeline/medici00.jpg",
+      yearThumb: "/images/timeline/medici00.jpg",
       events: [{
         id: "2017-medici",
         label: "Medici Ventures",
         title: "Associate Scrum Master",
         role: "Work",
         desc: "Medici Ventures was a wholly owned subsidiary of Overstock focused on newly emerging Blockchain Technologies. For me, this role represented a turning point in my life, and another place where others took a chance on me and changed my life forever.<br><br>I started here in Software Testing and was encouraged to explore a role in Scrum. I was mentored by some of the best servant leaders I've ever had the good fortune of working with, was blessed to meet amazing people, make lifelong friendships, and I finally felt like I'd found my place in the tech world.",
-        thumb: "images/timeline/medici00.jpg",
-        images: ["images/timeline/medici01.jpg", "images/timeline/medici02.jpg", "images/timeline/medici03.jpg", "images/timeline/medici04.jpg"]
+        thumb: "/images/timeline/medici00.jpg",
+        images: ["/images/timeline/medici01.jpg", "/images/timeline/medici02.jpg", "/images/timeline/medici03.jpg", "/images/timeline/medici04.jpg"]
       }]
     },
     {
       year: 2018,
-      yearThumb: "images/timeline/CSM.png",
+      yearThumb: "/images/timeline/CSM.png",
       events: [{
         id: "2018-csm",
         label: "Scrum Alliance Certification",
         title: "Certified Scrum Master",
         role: "Certification",
         desc: "As an introductory course, the CSM covers the scrum framework, including team accountabilities, events, and artifacts. Training included how to guide teams in applying scrum and in gaining a deeper understanding of the agile principles and values that are the foundation of this way of working. <br><br>The scrum master course equipped me with knowledge useful in virtually any job role, including widely applicable agile principles as well as the details of working on a scrum team.",
-        thumb: "images/timeline/CSM_Cert.jpg",
-        images: ["images/timeline/CSM_Cert.jpg"]
+        thumb: "/images/timeline/CSM_Cert.jpg",
+        images: ["/images/timeline/CSM_Cert.jpg"]
       }]
     },
     {
       year: 2019,
-      yearThumb: "images/timeline/ihc00.png",
+      yearThumb: "/images/timeline/ihc00.png",
       events: [{
         id: "2019-ihc",
         label: "Intermountain Healthcare",
         title: "Application Systems Technical Analyst/Scrum Master",
         role: "Work",
         desc: "At Intermountain Healthcare, I had the opportunity to expand my professional capabilities by working within a large and well established organization. My teams were tasked with taking the many disparate apps and tools used by Providers, Administrators, Patients, and Families, and begin the work of bringing them all together into one central application. This role really stretched my capabilities and allowed me to truly strengthen my understanding and approach in Scrum and Agile.<br><br>This job was also cool because our office was in the World Trade Center in Salt Lake City, with great views of the LDS Office grounds, and the State Capital. My teams also pioneered work from home initiatives before the Covid Pandemic, and we were well positioned to transition to fully remote when that became the norm.",
-        thumb: "images/timeline/ihc00.png",
-        images: ["images/timeline/ihc03.jpg", "images/timeline/ihc04.jpg"]
+        thumb: "/images/timeline/ihc00.png",
+        images: ["/images/timeline/ihc03.jpg", "/images/timeline/ihc04.jpg"]
       }]
     },
     {
       year: 2020,
-      yearThumb: "images/timeline/tripleCert.jpg",
+      yearThumb: "/images/timeline/tripleCert.jpg",
       events: [
         {
           id: "2020-acsm",
@@ -584,8 +590,8 @@ window.addEventListener('popstate', () => {
           title: "Advanced Certified Scrum Master",
           role: "Certification",
           desc: "This certification course elevated my skills and competencies as a Scrum Master. The training built on the foundational knowledge from the Certified ScrumMaster (CSM) training, and from my work experiences. Some areas of training included scrum accountability, practical tools, and new competencies to help elevate my abilities and value as a Senior Scrum Master.",
-          thumb: "images/timeline/A-CSM.png",
-          images: ["images/timeline/ACSM_Cert.jpg"]
+          thumb: "/images/timeline/A-CSM.png",
+          images: ["/images/timeline/ACSM_Cert.jpg"]
         },
         {
           id: "2020-cspo",
@@ -593,8 +599,8 @@ window.addEventListener('popstate', () => {
           title: "Certified Scrum Product Owner",
           role: "Certification",
           desc: "In the CSPO course, learning objectives covered the framework, principles, and values that help make scrum work. We were trained in key skills and tools I needed to be effective; how to juggle multiple stakeholders' needs, get hands-on practice creating a product vision, and learning new ways to get to know our customers so that we'd be able to choose the right increment of value to bring to market next. <br><br>The course centered on mastering agile principles, fostering collaborative teamwork, and managing the product backlog.",
-          thumb: "images/timeline/CSPO.png",
-          images: ["images/timeline/CSPO_Cert.jpg"]
+          thumb: "/images/timeline/CSPO.png",
+          images: ["/images/timeline/CSPO_Cert.jpg"]
         },
         {
           id: "2020-wgu",
@@ -602,27 +608,27 @@ window.addEventListener('popstate', () => {
           title: "Bachelor of Science Business Management",
           role: "Degree",
           desc: "From the WGU.edu website: This program covers a wide range of career-relevant topics such as marketing, finance, human resources, operations, and strategy. You’ll learn how to analyze financial statements, create marketing plans, manage human resources effectively, and make strategic decisions that drive business success. Our program can help you stand out from the competition and achieve your goals.",
-          thumb: "images/timeline/wgu00.jpg",
-          images: ["images/timeline/wgu01.jpg"]
+          thumb: "/images/timeline/wgu00.jpg",
+          images: ["/images/timeline/wgu01.jpg"]
         }
       ]
     },
     {
       year: 2022,
-      yearThumb: "images/timeline/gravity00.png",
+      yearThumb: "/images/timeline/gravity00.png",
       events: [{
         id: "2022-gravity",
         label: "Gravity Payments",
         title: "Sr Scrum Master",
         role: "Work",
         desc: "This was a fully remote role. In my role at Gravity Payments, I led multiple teams and projects while implementing Agile methodologies to enhance efficiency. I participated in creating the Project Management Organization, which improved project delivery processes. My coaching efforts empowered Project Managers and Scrum Masters to adopt Agile practices effectively, contributing to a more collaborative work environment.",
-        thumb: "images/timeline/gravity00.png",
-        images: ["images/timeline/gravity01.jpg", "images/timeline/gravity02.jpg", "images/timeline/gravity03.jpg"]
+        thumb: "/images/timeline/gravity00.png",
+        images: ["/images/timeline/gravity01.jpg", "/images/timeline/gravity02.jpg", "/images/timeline/gravity03.jpg"]
       }]
     },
     {
       year: 2026,
-      yearThumb: "images/timeline/usbe00.jpg",
+      yearThumb: "/images/timeline/usbe00.jpg",
       events: [{
         id: "2026-usbe",
         label: "Utah State Board of Education",
@@ -637,7 +643,7 @@ window.addEventListener('popstate', () => {
       <li>History</li>
       <li>Sociology</li>
     </ul>`,
-        thumb: "images/timeline/usbe00.jpg",
+        thumb: "/images/timeline/usbe00.jpg",
         images: []
       }]
     }

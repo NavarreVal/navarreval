@@ -1,6 +1,6 @@
 function panelFromHash() {
   const id = (location.hash || "").replace(/^#/, "");
-  if (id === "personal" || id === "passion" || id === "professional") return id;
+  if (id === "personal") return id;
   return "landing";
 }
 
@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll("[data-panel]").forEach((link) => {
     link.addEventListener("click", () => {
-      const id = (link.getAttribute("href") || "").replace(/^#/, "");
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+      const id = href.replace(/^#/, "");
       if (!id || id === "landing") return;
       const next = landingUrl() + "#" + id;
       // Compare the URL, not the active panel. The panel switch runs first and

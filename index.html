@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--
     CRT boot plays once per tab session (sessionStorage key nv-dossier-boot).
-    It is skipped for prefers-reduced-motion and for #professional, #passion,
-    and #personal so those links open the existing sections immediately.
+    It is skipped for prefers-reduced-motion and for #personal.
+    Old /#professional and /#passion bookmarks go to /professional/ and /passion/.
     Escape, click, or any key skips the sequence.
   -->
   <script>
     (function () {
       var hash = (location.hash || "").replace(/^#/, "");
-      var deep = hash === "professional" || hash === "passion" || hash === "personal";
-      if (!deep) document.documentElement.classList.add("dossier-top");
-      var skip = deep;
+      if (hash === "professional" || hash === "passion") {
+        document.documentElement.classList.add("boot-skip");
+        location.replace("/" + hash + "/" + location.search);
+        return;
+      }
+      var personal = hash === "personal";
+      if (!personal) document.documentElement.classList.add("dossier-top");
+      var skip = personal;
       try {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true;
         if (sessionStorage.getItem("nv-dossier-boot") === "1") skip = true;
@@ -30,8 +35,8 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
   <title>J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="css/style.css?v=6.0">
-  <link rel="stylesheet" href="css/overrides.css?v=6.3">
-  <link rel="stylesheet" href="css/dossier.css?v=1.2">
+  <link rel="stylesheet" href="css/overrides.css?v=6.4">
+  <link rel="stylesheet" href="css/dossier.css?v=1.4">
 </head>
 <body class="site-hub on-landing">
   <noscript>
@@ -65,8 +70,8 @@
 
   <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <nav class="menu-nav" aria-label="Sections">
-      <a href="#professional" data-panel data-direction="bottom">Professional</a>
-      <a href="#passion" data-panel data-direction="right">Passion</a>
+      <a href="/professional/">Professional</a>
+      <a href="/passion/">Passion</a>
       <a href="#personal" data-panel data-direction="left">Personal</a>
     </nav>
     <div class="menu-social">
@@ -100,8 +105,8 @@
       <div class="dossier-nav">
         <nav class="dossier-tabs" aria-label="Record sections">
           <span class="tab is-current" aria-current="page">Record</span>
-          <a href="#professional" data-panel data-direction="bottom">Professional</a>
-          <a href="#passion" data-panel data-direction="right">Passion</a>
+          <a href="/professional/">Professional</a>
+          <a href="/passion/">Passion</a>
           <a href="#personal" data-panel data-direction="left">Personal</a>
         </nav>
         <div class="dossier-social">
@@ -151,32 +156,21 @@
                 </div>
                 <div>
                   <dt>Education</dt>
-                  <dd>Master’s in Secondary Social Studies Education</dd>
-                </div>
-                <div>
-                  <dt>Focus</dt>
-                  <dd>Teaching, clear thinking, building things that last</dd>
+                  <dd>BS Business, MA History</dd>
                 </div>
               </dl>
-              <p class="file-stamp" aria-hidden="true">On file</p>
+              <div class="id-bio">
+                <h2 id="bio-label">Bio</h2>
+                <p>
+                  Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
+                  currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
+                  clear thinking, and building things that last.
+                </p>
+              </div>
             </div>
           </div>
         </section>
       </div>
-
-      <section class="hud bio-hud" aria-labelledby="bio-label">
-        <div class="hud-in">
-          <div class="hud-head">
-            <h2 id="bio-label">Bio</h2>
-            <span>Summary</span>
-          </div>
-          <p class="bio-copy">
-            Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
-            currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
-            clear thinking, and building things that last.
-          </p>
-        </div>
-      </section>
 
       <section class="hud strip-hud" aria-labelledby="strip-label">
         <div class="hud-in">
@@ -213,7 +207,6 @@
         </footer>
       </div>
     </div>
-    <div class="landing-fade" aria-hidden="true"></div>
   </main>
 
   <!-- ========== PERSONAL ========== -->
@@ -239,142 +232,12 @@
     </div>
   </section>
 
-  <!-- ========== PROFESSIONAL ========== -->
-  <section id="professional">
-    <div class="panel-inner professional-inner">
-      <h1>Professional & Educational Timeline</h1>
-      <p class="timeline-intro">
-        A timeline of my professional and educational journey.<br>
-        Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
-        Click an icon to see the highlights
-      </p>
-
-      <div class="prof-actions">
-        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" download class="action-btn">
-          <img src="images/icons/pdf.svg" alt="PDF" class="btn-icon">
-          Download Resume
-        </a>
-
-        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" target="_blank" rel="noopener" class="action-btn">
-          View Resume in Browser
-        </a>
-
-        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" class="action-btn linkedin-btn">
-          <img src="images/icons/linkedin.svg" alt="LinkedIn" class="btn-icon">
-          LinkedIn
-        </a>
-      </div>
-
-      <div class="timeline-wrapper desktop-only">
-        <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
-        <div class="timeline-container">
-          <div class="timeline-track" id="timeline-track"></div>
-        </div>
-        <button class="timeline-arrow right" aria-label="Scroll right">›</button>
-      </div>
-
-      <div class="mobile-timeline" id="mobile-timeline"></div>
-    </div>
-  </section>
-
-  <!-- ========== PASSION ========== -->
-  <section id="passion">
-    <div class="panel-inner passion-inner">
-      <div class="passion-head">
-        <h1>Passion</h1>
-        <p class="passion-lead">
-          Sometimes life deals you good hands.<br>
-          Click a hand to spread the cards.<br>
-          Click a card to open that page.
-        </p>
-      </div>
-
-      <div class="passion-hands">
-        <div class="hand" data-hand="maker">
-          <div class="fan" style="--n: 3">
-            <a class="playing-card" href="passion/3d-printing.html" style="--i: 0">
-              <img src="images/passion/3dPrinting_card.jpg" alt="">
-              <span>3D Printing</span>
-            </a>
-            <a class="playing-card" href="passion/vanilla.html" style="--i: 1">
-              <img src="images/passion/vanilla_card.jpg" alt="">
-              <span>Vanilla</span>
-            </a>
-            <a class="playing-card playing-card--foil" href="passion/photography.html" style="--i: 2">
-              <img src="images/passion/photography_card.jpg" alt="">
-              <span>Photography</span>
-            </a>
-          </div>
-          <button class="hand-label" type="button">Maker</button>
-        </div>
-
-        <div class="hand" data-hand="thinker">
-          <div class="fan" style="--n: 3">
-            <a class="playing-card" href="passion/teaching.html" style="--i: 0">
-              <img src="images/passion/teaching_card.jpg" alt="">
-              <span>Teaching</span>
-            </a>
-            <a class="playing-card playing-card--foil" href="passion/religious.html" style="--i: 1">
-              <img src="images/passion/religion_card.jpg" alt="">
-              <span>Religious</span>
-            </a>
-            <a class="playing-card" href="passion/reading.html" style="--i: 2">
-              <img src="images/passion/reading_card.jpg" alt="">
-              <span>Reading</span>
-            </a>
-          </div>
-          <button class="hand-label" type="button">Thinker</button>
-        </div>
-
-        <div class="hand" data-hand="dabbler">
-          <div class="fan" style="--n: 3">
-            <a class="playing-card" href="passion/writing.html" style="--i: 0">
-              <img src="images/passion/writing_card.jpg" alt="">
-              <span>Writing</span>
-            </a>
-            <a class="playing-card" href="passion/nas.html" style="--i: 1">
-              <img src="images/passion/NAS_card.jpg" alt="">
-              <span>NAS</span>
-            </a>
-            <a class="playing-card" href="passion/web-design.html" style="--i: 2">
-              <img src="images/passion/webDesign_card.jpg" alt="">
-              <span>Web Design</span>
-            </a>
-          </div>
-          <button class="hand-label" type="button">Dabbler</button>
-        </div>
-
-        <div class="hand" data-hand="doer">
-          <div class="fan" style="--n: 3">
-            <a class="playing-card" href="passion/music.html" style="--i: 0">
-              <img src="images/passion/music_card.jpg" alt="">
-              <span>Music</span>
-            </a>
-            <a class="playing-card" href="passion/shooting.html" style="--i: 1">
-              <img src="images/passion/shooting_card.jpg" alt="">
-              <span>Shooting</span>
-            </a>
-            <a class="playing-card" href="passion/video-games.html" style="--i: 2">
-              <img src="images/passion/videoGames_card.jpg" alt="">
-              <span>Video Games</span>
-            </a>
-          </div>
-          <button class="hand-label" type="button">Do-er</button>
-        </div>
-      </div>
-      <footer class="crew-footer">
-        <img class="crew-mark" src="assets/signature.png" alt="">
-        <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
-      </footer>
-    </div>
-  </section>
-
   <div id="lightbox" class="lightbox">
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=4.8"></script>
-  <script src="js/hash-panel.js?v=4.1"></script>
+  <script src="js/main.js?v=4.9"></script>
+  <script src="js/hash-panel.js?v=4.2"></script>
   <script src="js/boot.js?v=1.0"></script>
 </body>
 </html>

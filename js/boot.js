@@ -1,6 +1,6 @@
 // CRT boot for the landing dossier.
 // Plays once per tab (sessionStorage nv-dossier-boot).
-// Head script adds html.boot-skip for reduced motion, section hashes, and replays.
+// Head script adds html.boot-skip for reduced motion, #personal, and replays.
 (function () {
   const root = document.documentElement;
   const boot = document.getElementById("crt-boot");

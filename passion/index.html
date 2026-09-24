@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+  <title>Passion | J. Navarre Valdivieso</title>
+  <link rel="stylesheet" href="/css/style.css?v=6.0">
+  <link rel="stylesheet" href="/css/overrides.css?v=6.4">
+</head>
+<body class="site-hub">
+
+  <header class="site-chrome">
+    <a class="site-logo" href="/" aria-label="Navarre Valdivieso, home">
+      <img src="/assets/signature.png" alt="">
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label="Open menu"
+    >
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <nav class="menu-nav" aria-label="Sections">
+      <a href="/professional/">Professional</a>
+      <a href="/passion/" aria-current="page">Passion</a>
+      <a href="/#personal">Personal</a>
+    </nav>
+    <div class="menu-social">
+      <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
+        <img src="/images/icons/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
+        <img src="/images/icons/github.svg" alt="GitHub">
+      </a>
+      <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
+        <img src="/images/icons/globe.svg" alt="Uintah Valley">
+      </a>
+    </div>
+  </div>
+
+  <main id="passion">
+    <div class="panel-inner passion-inner">
+      <a class="back-btn" href="/">← Back</a>
+      <div class="passion-head">
+        <h1>Passion</h1>
+        <p class="passion-lead">
+          Sometimes life deals you good hands.<br>
+          Click a hand to spread the cards.<br>
+          Click a card to open that page.
+        </p>
+      </div>
+
+      <div class="passion-hands">
+        <div class="hand" data-hand="maker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/3d-printing.html" style="--i: 0">
+              <img src="/images/passion/3dPrinting_card.jpg" alt="">
+              <span>3D Printing</span>
+            </a>
+            <a class="playing-card" href="/passion/vanilla.html" style="--i: 1">
+              <img src="/images/passion/vanilla_card.jpg" alt="">
+              <span>Vanilla</span>
+            </a>
+            <a class="playing-card playing-card--foil" href="/passion/photography.html" style="--i: 2">
+              <img src="/images/passion/photography_card.jpg" alt="">
+              <span>Photography</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Maker</button>
+        </div>
+
+        <div class="hand" data-hand="thinker">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/teaching.html" style="--i: 0">
+              <img src="/images/passion/teaching_card.jpg" alt="">
+              <span>Teaching</span>
+            </a>
+            <a class="playing-card playing-card--foil" href="/passion/religious.html" style="--i: 1">
+              <img src="/images/passion/religion_card.jpg" alt="">
+              <span>Religious</span>
+            </a>
+            <a class="playing-card" href="/passion/reading.html" style="--i: 2">
+              <img src="/images/passion/reading_card.jpg" alt="">
+              <span>Reading</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Thinker</button>
+        </div>
+
+        <div class="hand" data-hand="dabbler">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/writing.html" style="--i: 0">
+              <img src="/images/passion/writing_card.jpg" alt="">
+              <span>Writing</span>
+            </a>
+            <a class="playing-card" href="/passion/nas.html" style="--i: 1">
+              <img src="/images/passion/NAS_card.jpg" alt="">
+              <span>NAS</span>
+            </a>
+            <a class="playing-card" href="/passion/web-design.html" style="--i: 2">
+              <img src="/images/passion/webDesign_card.jpg" alt="">
+              <span>Web Design</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Dabbler</button>
+        </div>
+
+        <div class="hand" data-hand="doer">
+          <div class="fan" style="--n: 3">
+            <a class="playing-card" href="/passion/music.html" style="--i: 0">
+              <img src="/images/passion/music_card.jpg" alt="">
+              <span>Music</span>
+            </a>
+            <a class="playing-card" href="/passion/shooting.html" style="--i: 1">
+              <img src="/images/passion/shooting_card.jpg" alt="">
+              <span>Shooting</span>
+            </a>
+            <a class="playing-card" href="/passion/video-games.html" style="--i: 2">
+              <img src="/images/passion/videoGames_card.jpg" alt="">
+              <span>Video Games</span>
+            </a>
+          </div>
+          <button class="hand-label" type="button">Do-er</button>
+        </div>
+      </div>
+      <footer class="crew-footer">
+        <img class="crew-mark" src="/assets/signature.png" alt="">
+        <span>Built by <a href="/#personal">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+      </footer>
+    </div>
+  </main>
+
+  <script src="/js/main.js?v=4.9"></script>
+  <script src="/js/page-enter.js"></script>
+</body>
+</html>
