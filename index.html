@@ -3,6 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    CRT boot plays once per tab session (sessionStorage key nv-dossier-boot).
+    It is skipped for prefers-reduced-motion and for #professional, #passion,
+    and #personal so those links open the existing sections immediately.
+    Escape, click, or any key skips the sequence.
+  -->
+  <script>
+    (function () {
+      var hash = (location.hash || "").replace(/^#/, "");
+      var deep = hash === "professional" || hash === "passion" || hash === "personal";
+      if (!deep) document.documentElement.classList.add("dossier-top");
+      var skip = deep;
+      try {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true;
+        if (sessionStorage.getItem("nv-dossier-boot") === "1") skip = true;
+      } catch (err) {
+        skip = true;
+      }
+      if (skip) document.documentElement.classList.add("boot-skip");
+    })();
+  </script>
   <link rel="icon" href="/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
@@ -10,8 +31,22 @@
   <title>J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="css/style.css?v=6.0">
   <link rel="stylesheet" href="css/overrides.css?v=6.3">
+  <link rel="stylesheet" href="css/dossier.css?v=1.2">
 </head>
 <body class="site-hub on-landing">
+  <noscript>
+    <style>
+      .crt-boot { display: none !important; }
+      body.site-hub { overflow: auto !important; height: auto !important; }
+    </style>
+  </noscript>
+
+  <div id="crt-boot" class="crt-boot">
+    <p class="crt-sr" id="crt-sr">Initializing personal record</p>
+    <div class="crt-stage" aria-hidden="true">
+      <div id="crt-log" class="crt-log"></div>
+    </div>
+  </div>
 
   <header class="site-chrome">
     <a class="site-logo" href="/" aria-label="Navarre Valdivieso, home">
@@ -49,80 +84,136 @@
 
   <!-- ========== LANDING ========== -->
   <main id="landing">
-    <div class="hero">
-      <h1 class="hero-name hero-name-back">
-        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
-        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
-      </h1>
-
-      <div class="hero-veil" aria-hidden="true"></div>
-
-      <div class="hero-collage">
-        <div class="flow-row flow-row-top">
-          <div class="flow-track">
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-t oy-up" data-full="images/profilePics/navarre.jpg" aria-label="View photo"><img src="images/profilePics/navarre.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre02.jpg" aria-label="View photo"><img src="images/profilePics/navarre02.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-l oy-mid" data-full="images/profilePics/navarre05.jpg" aria-label="View photo"><img src="images/profilePics/navarre05.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-up" data-full="images/profilePics/navarre08.jpg" aria-label="View photo"><img src="images/profilePics/navarre08.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre11.png" aria-label="View photo"><img src="images/profilePics/navarre11.png" alt="" draggable="false"></button>
-            </div>
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-t oy-up" data-full="images/profilePics/navarre.jpg" aria-label="View photo"><img src="images/profilePics/navarre.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre02.jpg" aria-label="View photo"><img src="images/profilePics/navarre02.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-l oy-mid" data-full="images/profilePics/navarre05.jpg" aria-label="View photo"><img src="images/profilePics/navarre05.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-up" data-full="images/profilePics/navarre08.jpg" aria-label="View photo"><img src="images/profilePics/navarre08.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre11.png" aria-label="View photo"><img src="images/profilePics/navarre11.png" alt="" draggable="false"></button>
-            </div>
-          </div>
+    <div class="dossier-shell">
+      <header class="dossier-mast">
+        <div class="mast-title">
+          <p class="mast-system">NavarreVal Personal Record</p>
+          <p class="mast-file">File <span>NV-VAL-01</span></p>
         </div>
-        <div class="flow-row flow-row-mid">
-          <div class="flow-track">
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-l oy-up" data-full="images/profilePics/navarre01.jpg" aria-label="View photo"><img src="images/profilePics/navarre01.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre04.jpg" aria-label="View photo"><img src="images/profilePics/navarre04.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre07.jpg" aria-label="View photo"><img src="images/profilePics/navarre07.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre10.jpg" aria-label="View photo"><img src="images/profilePics/navarre10.jpg" alt="" draggable="false"></button>
-            </div>
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-l oy-up" data-full="images/profilePics/navarre01.jpg" aria-label="View photo"><img src="images/profilePics/navarre01.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre04.jpg" aria-label="View photo"><img src="images/profilePics/navarre04.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre07.jpg" aria-label="View photo"><img src="images/profilePics/navarre07.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre10.jpg" aria-label="View photo"><img src="images/profilePics/navarre10.jpg" alt="" draggable="false"></button>
-            </div>
-          </div>
-        </div>
-        <div class="flow-row flow-row-low">
-          <div class="flow-track">
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-l oy-dn" data-full="images/profilePics/navarre03.jpg" aria-label="View photo"><img src="images/profilePics/navarre03.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre06.jpg" aria-label="View photo"><img src="images/profilePics/navarre06.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre09.jpg" aria-label="View photo"><img src="images/profilePics/navarre09.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre12.jpg" aria-label="View photo"><img src="images/profilePics/navarre12.jpg" alt="" draggable="false"></button>
-            </div>
-            <div class="flow-set">
-              <button type="button" class="flow-frame sz-l oy-dn" data-full="images/profilePics/navarre03.jpg" aria-label="View photo"><img src="images/profilePics/navarre03.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre06.jpg" aria-label="View photo"><img src="images/profilePics/navarre06.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre09.jpg" aria-label="View photo"><img src="images/profilePics/navarre09.jpg" alt="" draggable="false"></button>
-              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre12.jpg" aria-label="View photo"><img src="images/profilePics/navarre12.jpg" alt="" draggable="false"></button>
-            </div>
-          </div>
+        <ul class="mast-status" aria-label="Link status">
+          <li><i class="led on" aria-hidden="true"></i> Standby</li>
+          <li><i class="led" aria-hidden="true"></i> Connection established</li>
+          <li><i class="led" aria-hidden="true"></i> Record live</li>
+        </ul>
+      </header>
+
+      <div class="dossier-nav">
+        <nav class="dossier-tabs" aria-label="Record sections">
+          <span class="tab is-current" aria-current="page">Record</span>
+          <a href="#professional" data-panel data-direction="bottom">Professional</a>
+          <a href="#passion" data-panel data-direction="right">Passion</a>
+          <a href="#personal" data-panel data-direction="left">Personal</a>
+        </nav>
+        <div class="dossier-social">
+          <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
+            <img src="images/icons/linkedin.svg" alt="LinkedIn">
+          </a>
+          <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
+            <img src="images/icons/github.svg" alt="GitHub">
+          </a>
+          <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
+            <img src="images/icons/globe.svg" alt="Uintah Valley">
+          </a>
         </div>
       </div>
 
-      <div class="hero-name hero-name-front" aria-hidden="true">
-        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
-        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
+      <div class="dossier-split">
+        <section class="hud portrait-hud" aria-label="Primary portrait">
+          <div class="hud-in">
+            <button type="button" class="dossier-frame portrait-btn" data-full="images/profilePics/navarre.jpg" aria-label="View primary portrait">
+              <img src="images/profilePics/navarre.jpg" alt="J. Navarre Valdivieso" width="1080" height="1223" draggable="false">
+            </button>
+            <p class="portrait-cap"><span>Primary image</span><span>NV-VAL-01</span></p>
+          </div>
+        </section>
+
+        <section class="hud id-hud" aria-labelledby="identity-label">
+          <div class="hud-in">
+            <div class="hud-head">
+              <h2 id="identity-label">Identity</h2>
+              <span>Open record</span>
+            </div>
+            <div class="id-body">
+              <h1>J. Navarre Valdivieso</h1>
+              <p class="id-about">Husband, father, and lifelong learner</p>
+              <dl class="kv">
+                <div>
+                  <dt>Status</dt>
+                  <dd>Record open</dd>
+                </div>
+                <div>
+                  <dt>Role</dt>
+                  <dd>Senior Scrum Master &amp; Project Manager</dd>
+                </div>
+                <div>
+                  <dt>Location</dt>
+                  <dd>Utah</dd>
+                </div>
+                <div>
+                  <dt>Education</dt>
+                  <dd>Master’s in Secondary Social Studies Education</dd>
+                </div>
+                <div>
+                  <dt>Focus</dt>
+                  <dd>Teaching, clear thinking, building things that last</dd>
+                </div>
+              </dl>
+              <p class="file-stamp" aria-hidden="true">On file</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="hud bio-hud" aria-labelledby="bio-label">
+        <div class="hud-in">
+          <div class="hud-head">
+            <h2 id="bio-label">Bio</h2>
+            <span>Summary</span>
+          </div>
+          <p class="bio-copy">
+            Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
+            currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
+            clear thinking, and building things that last.
+          </p>
+        </div>
+      </section>
+
+      <section class="hud strip-hud" aria-labelledby="strip-label">
+        <div class="hud-in">
+          <div class="hud-head">
+            <h2 id="strip-label">Visual record</h2>
+            <span>Select an image</span>
+          </div>
+          <div class="record-strip" tabindex="0" aria-label="Other portraits">
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre01.jpg" aria-label="View photo 1 of 12"><img src="images/profilePics/navarre01.jpg" alt="" width="360" height="480" draggable="false" loading="lazy"><span class="strip-idx">01</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre02.jpg" aria-label="View photo 2 of 12"><img src="images/profilePics/navarre02.jpg" alt="" width="482" height="361" draggable="false" loading="lazy"><span class="strip-idx">02</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre03.jpg" aria-label="View photo 3 of 12"><img src="images/profilePics/navarre03.jpg" alt="" width="1252" height="939" draggable="false" loading="lazy"><span class="strip-idx">03</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre04.jpg" aria-label="View photo 4 of 12"><img src="images/profilePics/navarre04.jpg" alt="" width="168" height="190" draggable="false" loading="lazy"><span class="strip-idx">04</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre05.jpg" aria-label="View photo 5 of 12"><img src="images/profilePics/navarre05.jpg" alt="" width="926" height="939" draggable="false" loading="lazy"><span class="strip-idx">05</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre06.jpg" aria-label="View photo 6 of 12"><img src="images/profilePics/navarre06.jpg" alt="" width="699" height="939" draggable="false" loading="lazy"><span class="strip-idx">06</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre07.jpg" aria-label="View photo 7 of 12"><img src="images/profilePics/navarre07.jpg" alt="" width="650" height="939" draggable="false" loading="lazy"><span class="strip-idx">07</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre08.jpg" aria-label="View photo 8 of 12"><img src="images/profilePics/navarre08.jpg" alt="" width="939" height="939" draggable="false" loading="lazy"><span class="strip-idx">08</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre09.jpg" aria-label="View photo 9 of 12"><img src="images/profilePics/navarre09.jpg" alt="" width="297" height="297" draggable="false" loading="lazy"><span class="strip-idx">09</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre10.jpg" aria-label="View photo 10 of 12"><img src="images/profilePics/navarre10.jpg" alt="" width="222" height="220" draggable="false" loading="lazy"><span class="strip-idx">10</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre11.png" aria-label="View photo 11 of 12"><img src="images/profilePics/navarre11.png" alt="" width="181" height="193" draggable="false" loading="lazy"><span class="strip-idx">11</span></button>
+            <button type="button" class="dossier-frame strip-frame" data-full="images/profilePics/navarre12.jpg" aria-label="View photo 12 of 12"><img src="images/profilePics/navarre12.jpg" alt="" width="1024" height="1024" draggable="false" loading="lazy"><span class="strip-idx">12</span></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="dossier-foot">
+        <p class="dossier-statusline">
+          <span>Retrieving data</span>
+          <span>Channel navarreval.com</span>
+          <span>Record live</span>
+        </p>
+        <footer class="crew-footer">
+          <img class="crew-mark" src="assets/signature.png" alt="">
+          <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+        </footer>
       </div>
     </div>
-
-    <section class="site-summary" aria-label="Summary">
-      <p>
-        Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
-        currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
-        clear thinking, and building things that last.
-      </p>
-    </section>
+    <div class="landing-fade" aria-hidden="true"></div>
   </main>
 
   <!-- ========== PERSONAL ========== -->
@@ -282,7 +373,8 @@
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=4.7"></script>
+  <script src="js/main.js?v=4.8"></script>
   <script src="js/hash-panel.js?v=4.1"></script>
+  <script src="js/boot.js?v=1.0"></script>
 </body>
 </html>

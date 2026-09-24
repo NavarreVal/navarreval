@@ -13,38 +13,6 @@ window.addEventListener('pageshow', (event) => {
 });
 window.addEventListener('pagehide', clearPageSlide);
 
-// Each visit permutes the portraits inside a track. Both loop halves
-// get the same order so translate3d(-50%) still meets the duplicate.
-function shuffleInPlace(list) {
-  for (let i = list.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const swap = list[i];
-    list[i] = list[j];
-    list[j] = swap;
-  }
-  return list;
-}
-
-function shuffleCollageTracks() {
-  document.querySelectorAll('.hero-collage .flow-track').forEach((track) => {
-    const sets = [...track.querySelectorAll(':scope > .flow-set')];
-    if (sets.length < 2) return;
-    const primary = [...sets[0].querySelectorAll('.flow-frame[data-full]')];
-    const sources = shuffleInPlace(primary.map((frame) => frame.getAttribute('data-full')));
-    sets.forEach((set) => {
-      [...set.querySelectorAll('.flow-frame[data-full]')].forEach((frame, index) => {
-        const src = sources[index];
-        if (!src) return;
-        frame.setAttribute('data-full', src);
-        const img = frame.querySelector('img');
-        if (img) img.setAttribute('src', src);
-      });
-    });
-  });
-}
-
-shuffleCollageTracks();
-
 document.addEventListener('DOMContentLoaded', () => {
 
   let lightboxImages = [];
@@ -355,38 +323,6 @@ window.addEventListener('popstate', () => {
       card.addEventListener('pointercancel', () => card.classList.remove('is-pressed'));
     });
   }
-
-  function fitHeroName() {
-    document.querySelectorAll('.hero-name').forEach((name) => {
-      const style = getComputedStyle(name);
-      const pad = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
-      // Leave a sliver so the last glyph is not clipped by the viewport edge.
-      const max = Math.max(10, (name.clientWidth - pad) * 0.96);
-      const lines = [...name.querySelectorAll('.line')];
-      lines.forEach((line) => {
-        const probe = 100;
-        line.style.fontSize = probe + 'px';
-        const range = document.createRange();
-        range.selectNodeContents(line);
-        const width = range.getBoundingClientRect().width || 1;
-        line.style.fontSize = (probe * max / width) + 'px';
-      });
-      const maxH = window.innerHeight * 0.58;
-      const total = lines.reduce((sum, line) => sum + line.getBoundingClientRect().height, 0);
-      if (total > maxH) {
-        const scale = maxH / total;
-        lines.forEach((line) => {
-          line.style.fontSize = (parseFloat(line.style.fontSize) * scale) + 'px';
-        });
-      }
-    });
-  }
-
-  fitHeroName();
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(fitHeroName);
-  }
-  window.addEventListener('resize', fitHeroName);
 
   // Park a wheel/trackpad gesture on Professional, then let the next gesture through.
   const professionalEdge = document.getElementById('professional');
@@ -1063,7 +999,7 @@ window.addEventListener('popstate', () => {
 
     if (lightbox && lightboxImg) {
 
-      const heroFrames = [...document.querySelectorAll('.hero-collage .flow-frame[data-full]')];
+      const heroFrames = [...document.querySelectorAll('#landing .dossier-frame[data-full]')];
       const heroPhotos = [];
       heroFrames.forEach((frame) => {
         const src = new URL(frame.getAttribute('data-full'), location.href).href;
