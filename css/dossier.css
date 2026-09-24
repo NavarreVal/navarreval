@@ -845,14 +845,45 @@ html.boot-live #landing {
     --cut-in: 9px;
   }
 
+  .dossier-head {
+    display: grid;
+    grid-template-columns: max-content max-content minmax(0, 1fr);
+    justify-content: start;
+    align-items: center;
+    column-gap: 0.9rem;
+    row-gap: 0.7rem;
+  }
+
+  .dossier-mast,
   .dossier-nav {
-    flex-direction: column-reverse;
-    align-items: stretch;
-    gap: 0.55rem;
+    display: contents;
+    width: auto;
+    margin: 0;
+  }
+
+  .mast-brand {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(61, 255, 122, 0.35);
+  }
+
+  .mast-status {
+    grid-column: 1;
+    grid-row: 2;
+    align-items: flex-start;
   }
 
   .dossier-social {
-    justify-content: flex-end;
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-start;
+    align-self: center;
+  }
+
+  .dossier-tabs {
+    grid-column: 1 / -1;
+    grid-row: 3;
   }
 
   .kv div {
@@ -876,6 +907,12 @@ html.boot-live #landing {
 
   .mast-status {
     align-items: flex-start;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+  }
+
+  .dossier-head {
+    column-gap: 0.55rem;
   }
 
   .dossier-tabs a,
@@ -960,32 +997,63 @@ body:has(.dossier-head) :is(
   color: #3dff7a;
 }
 
-.section-panel {
-  box-sizing: border-box;
-  border: 1px solid rgba(61, 255, 122, 0.42);
-  background: linear-gradient(180deg, rgba(14, 42, 28, 0.96), rgba(5, 16, 11, 0.98));
-  box-shadow: inset 0 0 24px rgba(61, 255, 122, 0.05);
+#professional .prof-column {
+  width: min(76rem, calc(100% - clamp(2.5rem, 7vw, 7rem)));
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#professional .section-panel {
-  width: min(46rem, 100%);
-  margin: 0 auto 1.6rem;
-  padding: 1.15rem 1.35rem 1.2rem;
+#professional .prof-column.hud,
+#professional .prof-actions {
+  margin-bottom: 0.55rem;
+}
+
+#professional .timeline-hud {
+  margin-bottom: 0;
+}
+
+.hud-copy,
+#passion .section-hud .passion-head {
+  position: relative;
+  z-index: 3;
+}
+
+.hud-copy {
+  padding: 1.05rem 1.3rem 1.15rem;
   text-align: center;
 }
 
-#passion .section-panel {
-  padding: 1.05rem 1.35rem 1.15rem;
+#passion .section-hud {
+  width: min(52rem, 100%);
+  margin: 0 auto 3.5rem;
 }
 
-#professional .section-panel h1,
-#passion .section-panel h1 {
+#passion .section-hud .passion-head {
+  width: auto;
+  margin: 0;
+  padding: 1.05rem 1.3rem 1.15rem;
+}
+
+@media (min-width: 901px) {
+  #passion .section-hud {
+    margin-bottom: 6rem;
+  }
+}
+
+#professional .hud-copy h1,
+#passion .section-hud h1 {
   color: #e9fff2;
   text-shadow: 0 0 14px rgba(61, 255, 122, 0.22);
 }
 
-#professional .section-panel .timeline-intro {
+#professional .hud-copy .timeline-intro {
   margin-bottom: 0;
+}
+
+#professional .prof-actions {
+  margin-top: 0;
+  margin-bottom: 0.55rem;
+  justify-content: flex-start;
 }
 
 #professional .action-btn {
@@ -1024,29 +1092,52 @@ body:has(.dossier-head) :is(
   height: 30px;
 }
 
-#professional .timeline-wrapper {
-  border: 1px solid rgba(61, 255, 122, 0.42);
+#professional .timeline-hud .timeline-wrapper {
+  width: 100%;
+  margin: 0;
+  border: 0;
   border-radius: 0;
-  background: linear-gradient(180deg, rgba(14, 42, 28, 0.96), rgba(5, 16, 11, 0.98));
+  background: transparent;
 }
 
-#professional .timeline-wrapper::before {
-  border-radius: 0;
-  background: radial-gradient(ellipse at center, rgba(61, 255, 122, 0.08) 0%, transparent 68%);
+#professional .timeline-hud .timeline-wrapper::before {
+  display: none;
+}
+
+#professional .timeline-hud .timeline-arrow,
+#professional .timeline-hud .timeline-container {
+  position: relative;
+  z-index: 3;
 }
 
 #professional .timeline-track::before {
   background: linear-gradient(90deg, transparent, rgba(61, 255, 122, 0.55) 4%, rgba(61, 255, 122, 0.55) 96%, transparent);
 }
 
-#professional .mobile-card {
-  border: 1px solid rgba(61, 255, 122, 0.42);
-  border-radius: 0;
-  background: linear-gradient(180deg, rgba(14, 42, 28, 0.96), rgba(5, 16, 11, 0.98));
+#professional .mobile-timeline {
+  width: min(76rem, calc(100% - clamp(2.5rem, 7vw, 7rem)));
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-#professional .mobile-card:hover,
-#professional .mobile-card:active {
-  border-color: #3dff7a;
-  background: rgba(12, 40, 24, 0.96);
+#professional .mobile-card.hud {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+#professional .mobile-card-in {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+}
+
+#professional .mobile-card-in > * {
+  position: relative;
+  z-index: 3;
 }

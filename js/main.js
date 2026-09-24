@@ -895,13 +895,14 @@ window.addEventListener('popstate', () => {
 
     sorted.forEach(entry => {
       const card = document.createElement('div');
-      card.className = 'mobile-card';
+      card.className = 'mobile-card hud';
       card.dataset.year = entry.year;
 
       const iconSrc = entry.yearThumb || (entry.events[0] && entry.events[0].thumb) || null;
       const firstEvent = entry.events[0];
 
       card.innerHTML = `
+        <div class="hud-in mobile-card-in">
         <div class="mobile-card-icon">
           ${iconSrc
             ? `<img src="${iconSrc}" alt="${entry.year}">`
@@ -912,6 +913,7 @@ window.addEventListener('popstate', () => {
           <div class="mobile-card-title">${firstEvent ? firstEvent.title : ''}</div>
           <div class="mobile-card-role">${firstEvent ? firstEvent.role : ''}</div>
           ${entry.events.length > 1 ? `<div class="mobile-card-more">+${entry.events.length - 1} more</div>` : ''}
+        </div>
         </div>
       `;
 

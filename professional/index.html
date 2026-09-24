@@ -10,23 +10,27 @@
   <title>Professional | J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="/css/style.css?v=6.1">
   <link rel="stylesheet" href="/css/overrides.css?v=6.5">
-  <link rel="stylesheet" href="/css/dossier.css?v=1.8">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.9">
 </head>
 <body class="site-hub dossier-tabbed">
   <script src="/js/dossier-chrome.js?v=1"></script>
 
   <main id="professional">
     <div class="panel-inner professional-inner">
-      <div class="section-panel">
-        <h1>Professional &amp; Educational Timeline</h1>
-        <p class="timeline-intro">
-          A timeline of my professional and educational journey.<br>
-          Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
-          Click an icon to see the highlights
-        </p>
-      </div>
+      <section class="hud prof-column">
+        <div class="hud-in">
+          <div class="hud-copy">
+            <h1>Professional &amp; Educational Timeline</h1>
+            <p class="timeline-intro">
+              A timeline of my professional and educational journey.<br>
+              Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
+              Click an icon to see the highlights
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <div class="prof-actions">
+      <div class="prof-actions prof-column">
         <a href="/assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" download class="action-btn">
           <img src="/images/icons/pdf.svg" alt="PDF" class="btn-icon">
           Download Resume
@@ -42,12 +46,16 @@
         </a>
       </div>
 
-      <div class="timeline-wrapper desktop-only">
-        <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
-        <div class="timeline-container">
-          <div class="timeline-track" id="timeline-track"></div>
+      <div class="hud prof-column timeline-hud desktop-only">
+        <div class="hud-in">
+          <div class="timeline-wrapper">
+            <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
+            <div class="timeline-container">
+              <div class="timeline-track" id="timeline-track"></div>
+            </div>
+            <button class="timeline-arrow right" aria-label="Scroll right">›</button>
+          </div>
         </div>
-        <button class="timeline-arrow right" aria-label="Scroll right">›</button>
       </div>
 
       <div class="mobile-timeline" id="mobile-timeline"></div>
@@ -63,7 +71,7 @@
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="/js/main.js?v=5.1"></script>
+  <script src="/js/main.js?v=5.2"></script>
   <script src="/js/page-enter.js"></script>
 </body>
 </html>
