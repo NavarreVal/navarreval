@@ -11,6 +11,41 @@
   <link rel="stylesheet" href="/css/style.css?v=6.1">
   <link rel="stylesheet" href="/css/overrides.css?v=6.5">
   <link rel="stylesheet" href="/css/dossier.css?v=1.20">
+  <style>
+    /* Desktop deal only. Mobile (≤900px) never matches, so cards stay in the fan. */
+    @media (min-width: 901px) {
+      #passion .passion-hands.is-dealing .playing-card {
+        --deal-x: 18vw;
+        --deal-y: -36vh;
+        --deal-rot: 14deg;
+        z-index: calc(var(--deal, 0) + 2);
+        animation: card-deal 0.68s cubic-bezier(0.16, 0.45, 0.3, 1) both;
+        animation-delay: calc(0.56s + var(--deal, 0) * 100ms);
+      }
+    }
+
+    @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+      #passion .passion-hands.is-dealing .playing-card {
+        --deal-rot: 4deg;
+        animation-duration: 0.22s;
+        animation-delay: calc(0.4s + var(--deal, 0) * 28ms);
+      }
+    }
+
+    @keyframes card-deal {
+      0% {
+        opacity: 0;
+        transform: translate3d(var(--deal-x), var(--deal-y), 0) rotate(var(--deal-rot));
+      }
+      7% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(calc((var(--i) - (var(--n) - 1) / 2) * 17deg));
+      }
+    }
+  </style>
 </head>
 <body class="site-hub dossier-tabbed">
   <script src="/js/dossier-chrome.js?v=1"></script>
@@ -95,6 +130,70 @@
           <button class="hand-label" type="button">Do-er</button>
         </div>
       </div>
+      <script>
+        (function () {
+          var hands = document.querySelector(".passion-hands");
+          if (!hands || !window.matchMedia) return;
+          var desktop = window.matchMedia("(min-width: 901px)");
+          if (!desktop.matches) return;
+
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          var groups = hands.querySelectorAll(".hand");
+          var deal = 0;
+          var cards = [];
+          for (var round = 0; round < 3; round++) {
+            for (var h = 0; h < groups.length; h++) {
+              var inHand = groups[h].querySelectorAll(".playing-card");
+              for (var c = 0; c < inHand.length; c++) {
+                if (Number(inHand[c].style.getPropertyValue("--i")) !== round) continue;
+                inHand[c].style.setProperty("--deal", String(deal++));
+                cards.push(inHand[c]);
+              }
+            }
+          }
+          if (!cards.length) return;
+
+          var pile = hands.getBoundingClientRect();
+          var originX = pile.left + pile.width / 2;
+          var originY = Math.max(12, pile.top - 28);
+          var travel = reduce ? 0.28 : 1;
+          for (var i = 0; i < cards.length; i++) {
+            var rect = cards[i].getBoundingClientRect();
+            var dx = (originX - (rect.left + rect.width / 2)) * travel;
+            var dy = (originY - (rect.top + rect.height / 2)) * travel;
+            cards[i].style.setProperty("--deal-x", dx.toFixed(1) + "px");
+            cards[i].style.setProperty("--deal-y", dy.toFixed(1) + "px");
+          }
+
+          hands.classList.add("is-dealing");
+
+          var pending = cards.length;
+          var stagger = reduce ? 28 : 100;
+          var duration = reduce ? 220 : 680;
+          var lead = reduce ? 400 : 560;
+          var timer = setTimeout(stop, lead + (cards.length - 1) * stagger + duration + 120);
+
+          function stop() {
+            clearTimeout(timer);
+            hands.classList.remove("is-dealing");
+          }
+
+          hands.addEventListener("animationend", function (e) {
+            if (!e.animationName || e.animationName.indexOf("card-deal") !== 0) return;
+            if (!e.target.classList || !e.target.classList.contains("playing-card")) return;
+            pending -= 1;
+            if (pending <= 0) stop();
+          });
+
+          hands.addEventListener("click", stop, true);
+
+          function onViewport(e) {
+            if (!e.matches) stop();
+          }
+          if (desktop.addEventListener) desktop.addEventListener("change", onViewport);
+          else if (desktop.addListener) desktop.addListener(onViewport);
+        })();
+      </script>
       <footer class="crew-footer">
         <img class="crew-mark" src="/assets/signature.png" alt="">
         <span>Built by <a href="/personal/">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
