@@ -20,7 +20,7 @@
         --deal-rot: 14deg;
         z-index: calc(var(--deal, 0) + 2);
         animation: card-deal 0.68s cubic-bezier(0.16, 0.45, 0.3, 1) both;
-        animation-delay: calc(0.56s + var(--deal, 0) * 100ms);
+        animation-delay: calc(0.56s + var(--deal, 0) * 560ms);
       }
     }
 
@@ -170,7 +170,7 @@
           hands.classList.add("is-dealing");
 
           var pending = cards.length;
-          var stagger = reduce ? 28 : 100;
+          var stagger = reduce ? 28 : 560;
           var duration = reduce ? 220 : 680;
           var lead = reduce ? 400 : 560;
           var timer = setTimeout(stop, lead + (cards.length - 1) * stagger + duration + 120);
