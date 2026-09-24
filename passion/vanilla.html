@@ -72,14 +72,16 @@
 
     .vanilla-row {
       display: grid;
-      gap: 0.75rem;
+      gap: 0;
       margin: 0 0 1.6rem;
-      align-items: start;
+      align-items: stretch;
     }
 
     .vanilla-row figure {
       margin: 0;
+      padding: 0;
       min-width: 0;
+      line-height: 0;
     }
 
     .vanilla-row-2 {
@@ -96,6 +98,16 @@
       height: auto;
       background: #161616;
       border: 1px solid #2a2a2a;
+    }
+
+    /* Groups share one frame so neighbors match. 1:1 sits between the
+       portrait and landscape sources in each row. */
+    .vanilla-row-2 img,
+    .vanilla-row-3 img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+      border: 0;
     }
 
     .logo-cta {
