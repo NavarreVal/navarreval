@@ -25,7 +25,7 @@
               <div class="flavor-plot-wrap">
                 <svg class="flavor-plot" viewBox="0 0 480 72" preserveAspectRatio="none">
                   <g class="flavor-candles" stroke-width="1.15"></g>
-                  <polyline class="flavor-close" fill="none" stroke="#8fd0dc" stroke-width="1.25" points=""></polyline>
+                  <polyline class="flavor-close" fill="none" stroke="#ff3b4a" stroke-width="1.25" points=""></polyline>
                 </svg>
               </div>
             </div>
@@ -139,16 +139,8 @@
       var host = plot.querySelector(".flavor-candles");
       var close = plot.querySelector(".flavor-close");
       var period = 240;
-      var palette = [
-        ["#14e86a", "#d8ffe8"],
-        ["#f0a202", "#ffe4a3"],
-        ["#12d0ea", "#d8fbff"],
-        ["#e23d8a", "#ffd0e6"],
-        ["#9b6dff", "#eadfff"],
-        ["#c6f218", "#f4ffc2"],
-        ["#12c48a", "#c9ffe8"],
-        ["#ff6a2a", "#ffd4c2"]
-      ];
+      var fill = "#3dff7a";
+      var stroke = "#9ee8be";
       function svgEl(name, attrs) {
         var node = document.createElementNS(ns, name);
         Object.keys(attrs).forEach(function (key) {
@@ -180,7 +172,6 @@
         var gaps = gapWeight.map(function (value) { return budget * value / weight; });
         var specs = [];
         var x = gaps[0];
-        var prev = -1;
         for (i = 0; i < count; i += 1) {
           var bodyH = 5 + Math.random() * 40;
           var bodyTop = 3 + Math.random() * Math.max(6, 62 - bodyH);
@@ -188,9 +179,6 @@
           var wickDown = Math.random() * 18;
           var y1 = Math.max(1.2, bodyTop - wickUp);
           var y2 = Math.min(70.6, bodyTop + bodyH + wickDown);
-          var pick = Math.floor(Math.random() * palette.length);
-          if (pick === prev) pick = (pick + 1 + Math.floor(Math.random() * (palette.length - 1))) % palette.length;
-          prev = pick;
           var closeY = Math.random() < 0.5 ? bodyTop + 0.6 : bodyTop + bodyH - 0.6;
           specs.push({
             x: x,
@@ -201,8 +189,8 @@
             y1: y1,
             y2: y2,
             closeY: closeY,
-            fill: palette[pick][0],
-            stroke: palette[pick][1]
+            fill: fill,
+            stroke: stroke
           });
           x += widths[i] + gaps[(i + 1) % count];
         }
