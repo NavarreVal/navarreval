@@ -1035,33 +1035,34 @@ body:has(.dossier-head) :is(
   padding: 0.15rem 0.2rem 0.55rem;
   border-bottom: 1px solid rgba(61, 255, 122, 0.35);
   font-family: "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", "Segoe UI Mono", Menlo, Consolas, monospace;
-  text-align: left;
+  text-align: center;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 #passion .passion-mast h1 {
-  display: inline;
+  display: block;
   margin: 0;
   font-size: clamp(1.05rem, 2vw, 1.45rem);
   font-weight: 500;
   letter-spacing: 0.14em;
   line-height: 1.2;
   text-transform: uppercase;
+  text-align: center;
   color: #e9fff2;
   text-shadow: 0 0 12px rgba(61, 255, 122, 0.28);
 }
 
 #passion .passion-mast .passion-lead {
-  display: inline;
+  display: block;
   max-width: none;
-  margin: 0 0 0 0.7em;
+  margin: 0.28rem 0 0;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.18em;
-  line-height: 1.2;
+  line-height: 1.45;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   color: #9ee8be;
 }
 
