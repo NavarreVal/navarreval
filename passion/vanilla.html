@@ -85,11 +85,11 @@
     }
 
     .vanilla-row-2 {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .vanilla-row-3 {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .vanilla-page img {
@@ -132,13 +132,6 @@
       display: flex;
       justify-content: flex-start;
       padding: 2rem 0 0.2rem;
-    }
-
-    @media (max-width: 720px) {
-      .vanilla-row-2,
-      .vanilla-row-3 {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 520px) {
