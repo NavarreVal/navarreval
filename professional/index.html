@@ -152,21 +152,19 @@
         return list.reduce(function (total, value) { return total + value; }, 0);
       }
       function paintCandles() {
+        var bodyW = 8;
         var count = 6 + Math.floor(Math.random() * 3);
-        var widths = [];
         var gapWeight = [];
         var i;
         for (i = 0; i < count; i += 1) {
-          widths.push(3.4 + Math.random() * 11);
           gapWeight.push(0.4 + Math.random() * 1.35);
         }
-        var budget = period - sum(widths);
+        var budget = period - count * bodyW;
         var minGap = 12;
         while (budget < count * minGap && count > 5) {
           count -= 1;
-          widths.pop();
           gapWeight.pop();
-          budget = period - sum(widths);
+          budget = period - count * bodyW;
         }
         var weight = sum(gapWeight);
         var gaps = gapWeight.map(function (value) { return budget * value / weight; });
@@ -182,8 +180,8 @@
           var closeY = Math.random() < 0.5 ? bodyTop + 0.6 : bodyTop + bodyH - 0.6;
           specs.push({
             x: x,
-            w: widths[i],
-            cx: x + widths[i] / 2,
+            w: bodyW,
+            cx: x + bodyW / 2,
             bodyTop: bodyTop,
             bodyH: bodyH,
             y1: y1,
@@ -192,7 +190,7 @@
             fill: fill,
             stroke: stroke
           });
-          x += widths[i] + gaps[(i + 1) % count];
+          x += bodyW + gaps[(i + 1) % count];
         }
         while (host.firstChild) host.removeChild(host.firstChild);
         function draw(shift) {
