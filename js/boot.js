@@ -1,6 +1,6 @@
 // CRT boot for the landing dossier.
 // Plays once per tab (sessionStorage nv-dossier-boot).
-// Head script adds html.boot-skip for reduced motion, section redirects, and replays.
+// Head script adds html.boot-skip for section redirects and same-tab replays.
 (function () {
   const root = document.documentElement;
   const boot = document.getElementById("crt-boot");
@@ -11,10 +11,6 @@
     const word = (host && host.getAttribute("data-word")) || "LOADING";
     if (!slot || slot.dataset.typed === "1") return;
     slot.dataset.typed = "1";
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      slot.textContent = word;
-      return;
-    }
     let i = 0;
     const tick = () => {
       i += 1;
@@ -99,9 +95,7 @@
     if (sr) sr.textContent = "Personal record ready";
     unlockPage();
     root.classList.add("boot-clear");
-    if (!skipped && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      root.classList.add("boot-live");
-    }
+    if (!skipped) root.classList.add("boot-live");
     boot.classList.add("is-done");
     typeLoading();
     const removeBoot = () => {

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--
     CRT boot plays once per tab session (sessionStorage key nv-dossier-boot).
-    It is skipped for prefers-reduced-motion.
+    OS prefers-reduced-motion does not skip it.
     Old /#professional, /#passion, and /#personal bookmarks go to those pages.
     Escape, click, or any key skips the sequence.
   -->
@@ -17,14 +17,13 @@
         location.replace("/" + hash + "/" + location.search);
         return;
       }
-      var skip = false;
       try {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) skip = true;
-        if (sessionStorage.getItem("nv-dossier-boot") === "1") skip = true;
+        if (sessionStorage.getItem("nv-dossier-boot") === "1") {
+          document.documentElement.classList.add("boot-skip");
+        }
       } catch (err) {
-        skip = true;
+        /* storage blocked: play the boot */
       }
-      if (skip) document.documentElement.classList.add("boot-skip");
     })();
   </script>
   <link rel="icon" href="/favicon.ico?v=3" sizes="any">
@@ -34,7 +33,7 @@
   <title>J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="css/style.css?v=6.1">
   <link rel="stylesheet" href="css/overrides.css?v=6.5">
-  <link rel="stylesheet" href="css/dossier.css?v=1.13">
+  <link rel="stylesheet" href="css/dossier.css?v=1.14">
 </head>
 <body class="site-hub on-landing">
   <noscript>
@@ -147,6 +146,6 @@
   </div>
 
   <script src="js/main.js?v=5.2"></script>
-  <script src="js/boot.js?v=1.2"></script>
+  <script src="js/boot.js?v=1.3"></script>
 </body>
 </html>

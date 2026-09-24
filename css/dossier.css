@@ -797,29 +797,12 @@ html.boot-live #landing {
   animation: dossier-power 0.7s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html:not(.boot-skip):not(.boot-clear) body.site-hub {
-    overflow: hidden;
-  }
-
-  .led.on {
-    animation: led-blink 2.6s steps(1, end) infinite;
-  }
+html:not(.boot-skip):not(.boot-clear) body.site-hub {
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .crt-boot {
-    display: none !important;
-  }
-
-  html.boot-live #landing,
-  .crt-boot::before,
-  .crt-cursor,
-  .led.on,
-  .status-loading,
-  .status-loading::after {
-    animation: none;
-  }
+.led.on {
+  animation: led-blink 2.6s steps(1, end) infinite;
 }
 
 @media (max-width: 860px) {
