@@ -18,17 +18,19 @@
   <main id="personal">
     <div class="panel-inner personal-file">
       <!--
-        CURRENTLY — edit reading and playing in this block only.
+        CURRENTLY — edit reading in this block only.
         Reading is the title on the Goodreads currently-reading shelf that
-        passion/reading.html loads. Playing has no current title on its page.
+        passion/reading.html loads.
+        Playing is not stored here. It loads the first game from the same
+        Steam shelf as passion/video-games.html Recently played
+        (https://steam-shelves.navarreval.workers.dev?shelf=recent&count=12).
         Listening is not stored here. It loads the three newest tracks from
         the same Spotify shelf as passion/music.html
         (https://spotify-shelves.navarreval.workers.dev?shelf=recent).
       -->
       <script type="application/json" id="personal-now">
         {
-          "reading": "Paradise (Expeditionary Force, #3)",
-          "playing": "Updating soon"
+          "reading": "Paradise (Expeditionary Force, #3)"
         }
       </script>
 
@@ -344,6 +346,24 @@
           grid.hidden = false;
         })
         .catch(showFallback);
+
+      var playing = document.querySelector('[data-now="playing"]');
+      if (playing) {
+        fetch("https://steam-shelves.navarreval.workers.dev?shelf=recent&count=12")
+          .then(function (res) {
+            if (!res.ok) throw new Error(String(res.status));
+            return res.json();
+          })
+          .then(function (data) {
+            var games = data && Array.isArray(data.games) ? data.games : [];
+            var game = games[0];
+            if (!game || !game.name) throw new Error("empty");
+            playing.textContent = game.name;
+          })
+          .catch(function () {
+            playing.textContent = "";
+          });
+      }
 
       var listening = document.getElementById("now-listening");
       fetch("https://spotify-shelves.navarreval.workers.dev?shelf=recent&count=6")
