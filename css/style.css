@@ -1052,6 +1052,7 @@ body.site-hub.personal-open {
 
 .passion-hands.has-open .hand:not(.open) {
   opacity: 0.32;
+  pointer-events: none;
 }
 
 .hand.open { z-index: 12; }
@@ -1172,7 +1173,7 @@ a.back-btn.stub-back {
 
   #passion .passion-hands {
     grid-template-columns: repeat(2, max-content);
-    gap: 0.5rem 2.25rem;
+    gap: 1rem 4.5rem;
     width: max-content;
     max-width: 100%;
   }

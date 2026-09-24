@@ -244,7 +244,10 @@ window.addEventListener('popstate', () => {
   if (handsWrap) {
     const hands = handsWrap.querySelectorAll('.hand');
     function closeHands() {
-      hands.forEach(h => h.classList.remove('open'));
+      hands.forEach(h => {
+        h.classList.remove('open');
+        h.removeAttribute('inert');
+      });
       handsWrap.classList.remove('has-open');
     }
     hands.forEach(hand => {
@@ -265,8 +268,18 @@ window.addEventListener('popstate', () => {
         if (!alreadyOpen) {
           hand.classList.add('open');
           handsWrap.classList.add('has-open');
+          hands.forEach(h => {
+            if (h !== hand) h.setAttribute('inert', '');
+          });
         }
       });
+    });
+
+    document.addEventListener('click', e => {
+      if (!handsWrap.classList.contains('has-open')) return;
+      const open = handsWrap.querySelector('.hand.open');
+      if (open && open.contains(e.target)) return;
+      closeHands();
     });
 
     handsWrap.querySelectorAll('.playing-card--foil').forEach(card => {
