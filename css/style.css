@@ -1458,12 +1458,13 @@ body.page-enter-active {
   align-items: center;
   justify-content: center;
   min-height: 72vh;
-  padding: 16vh 8vw 18vh;
+  padding: 16vh clamp(1.25rem, 2.5vw, 2.75rem) 18vh;
   background: #0d0d0d;
 }
 
 .site-summary p {
-  max-width: 48rem;
+  max-width: none;
+  width: 100%;
   margin: 0;
   text-align: center;
   color: var(--gold);
@@ -1690,7 +1691,7 @@ body.menu-open .menu-toggle:focus-visible,
 
   .site-summary {
     min-height: 64vh;
-    padding: 14vh 7vw 16vh;
+    padding: 14vh 1.15rem 16vh;
   }
 
   .site-summary p {
