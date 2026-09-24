@@ -19,47 +19,187 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxIndex = 0;
 
   // ========== Panel Navigation ==========
-  const links = document.querySelectorAll('.nav-link');
-  const backButtons = document.querySelectorAll('.back-btn');
+  // Personal stays an overlay. Professional and Passion scroll with the page.
+  const links = document.querySelectorAll('[data-panel]');
+  const personal = document.getElementById('personal');
 
-  function showPanel(id, direction = null) {
-    const current = document.querySelector('.panel.active');
-    const next = document.getElementById(id);
-    if (!next || current === next) return;
+  function motion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  }
 
-    next.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
-    current.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
+  function pageSections() {
+    return document.querySelectorAll('#landing, #professional, #passion, #personal');
+  }
 
-    if (direction === 'left') {
-      next.classList.add('from-right');
-      current.classList.add('to-left');
-    } else if (direction === 'right') {
-      next.classList.add('from-left');
-      current.classList.add('to-right');
-    } else if (direction === 'bottom') {
-      next.classList.add('from-top');
-      current.classList.add('to-bottom');
-    } else if (direction === 'top') {
-      next.classList.add('from-bottom');
-      current.classList.add('to-top');
+  function syncInert() {
+    const menuOpen = isMenuOpen();
+    const personalOpen = !!(personal && personal.classList.contains('active'));
+    pageSections().forEach((el) => el.removeAttribute('inert'));
+    if (menuOpen) {
+      pageSections().forEach((el) => el.setAttribute('inert', ''));
+      return;
     }
+    if (personal && !personalOpen) personal.setAttribute('inert', '');
+    if (personalOpen) {
+      document.querySelectorAll('#landing, #professional, #passion').forEach((el) => {
+        el.setAttribute('inert', '');
+      });
+    }
+  }
 
-    void next.offsetWidth;
-    next.classList.add('active');
-    current.classList.remove('active');
+  function openPersonal() {
+    if (!personal || personal.classList.contains('active')) return;
+    personal.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
+    personal.classList.add('from-right');
+    personal.removeAttribute('aria-hidden');
+    void personal.offsetWidth;
+    personal.classList.add('active');
+    document.body.classList.add('personal-open');
+    document.body.classList.remove('on-landing');
+    syncInert();
+  }
+
+  function closePersonal() {
+    if (personal && personal.classList.contains('active')) {
+      personal.classList.remove('active');
+      personal.classList.add('to-right');
+      personal.setAttribute('aria-hidden', 'true');
+    }
+    document.body.classList.remove('personal-open');
+    document.body.classList.add('on-landing');
+    syncInert();
+  }
+
+  function showPanel(id, behavior) {
+    if (id === 'personal') {
+      openPersonal();
+      return;
+    }
+    closePersonal();
+    if (id === 'passion' || id === 'professional') {
+      const target = document.getElementById(id);
+      const scrollBehavior = behavior === 'smooth' ? 'smooth' : 'auto';
+      if (target) target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+    }
   }
 
   window.showSitePanel = showPanel;
 
+  const menuBtn = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('site-menu');
+  const logo = document.querySelector('.site-logo');
+
+  function isMenuOpen() {
+    return !!(menu && !menu.hasAttribute('hidden'));
+  }
+
+  function menuFocusables() {
+    if (!menu || !menuBtn) return [];
+    return [menuBtn, ...menu.querySelectorAll('a[href]')];
+  }
+
+  function fitMenuLinks() {
+    const nav = document.querySelector('.menu-nav');
+    if (!nav) return;
+    const items = [...nav.querySelectorAll('a')];
+    if (!items.length || nav.clientWidth < 10) return;
+    const probe = 160;
+    items.forEach((item) => { item.style.fontSize = probe + 'px'; });
+    const widest = Math.max(...items.map((item) => item.scrollWidth));
+    const fitted = Math.max(32, Math.min(probe * (nav.clientWidth / widest), window.innerHeight * 0.16));
+    items.forEach((item) => { item.style.fontSize = fitted + 'px'; });
+  }
+
+  function openMenu() {
+    if (!menu || !menuBtn) return;
+    menu.hidden = false;
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Close menu');
+    document.body.classList.add('menu-open');
+    syncInert();
+    fitMenuLinks();
+    const firstLink = menu.querySelector('a[href]');
+    if (firstLink) firstLink.focus();
+  }
+
+  function closeMenu({ restoreFocus = true } = {}) {
+    if (!menu || !menuBtn || !isMenuOpen()) return;
+    menu.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('menu-open');
+    syncInert();
+    if (restoreFocus) menuBtn.focus();
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      if (isMenuOpen()) closeMenu();
+      else openMenu();
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (!isMenuOpen()) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      closeMenu();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    const items = menuFocusables();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }, true);
+
+  window.addEventListener('popstate', () => {
+    if (isMenuOpen()) closeMenu({ restoreFocus: false });
+  });
+
+  window.addEventListener('resize', () => {
+    if (isMenuOpen()) fitMenuLinks();
+  });
+
+  if (logo) {
+    logo.addEventListener('click', (event) => {
+      event.preventDefault();
+      closeMenu({ restoreFocus: false });
+      const personalOpen = !!(personal && personal.classList.contains('active'));
+      const atTop = window.scrollY < 8;
+      if (!personalOpen && !location.hash && atTop) return;
+      const next = location.pathname + location.search;
+      if (location.pathname + location.search + location.hash !== next) {
+        history.pushState({ panel: 'landing' }, '', next);
+      }
+      closePersonal();
+      window.scrollTo({ top: 0, behavior: motion() });
+    });
+  }
+
   links.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      showPanel(link.getAttribute('href').substring(1), link.dataset.direction);
+      closeMenu({ restoreFocus: false });
+      const id = link.getAttribute('href').substring(1);
+      showPanel(id, motion());
+      const section = document.getElementById(id);
+      const back = section?.querySelector('.back-btn');
+      const heading = section?.querySelector('h1');
+      if (back) back.focus({ preventScroll: true });
+      else if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+      }
     });
-  });
-
-  backButtons.forEach(btn => {
-    btn.addEventListener('click', () => showPanel('landing', 'top'));
   });
 
   // ========== History management for overlays (mobile back button) ==========
@@ -104,7 +244,10 @@ window.addEventListener('popstate', () => {
   if (handsWrap) {
     const hands = handsWrap.querySelectorAll('.hand');
     function closeHands() {
-      hands.forEach(h => h.classList.remove('open'));
+      hands.forEach(h => {
+        h.classList.remove('open');
+        h.removeAttribute('inert');
+      });
       handsWrap.classList.remove('has-open');
     }
     hands.forEach(hand => {
@@ -125,8 +268,18 @@ window.addEventListener('popstate', () => {
         if (!alreadyOpen) {
           hand.classList.add('open');
           handsWrap.classList.add('has-open');
+          hands.forEach(h => {
+            if (h !== hand) h.setAttribute('inert', '');
+          });
         }
       });
+    });
+
+    document.addEventListener('click', e => {
+      if (!handsWrap.classList.contains('has-open')) return;
+      const open = handsWrap.querySelector('.hand.open');
+      if (open && open.contains(e.target)) return;
+      closeHands();
     });
 
     handsWrap.querySelectorAll('.playing-card--foil').forEach(card => {
@@ -171,40 +324,73 @@ window.addEventListener('popstate', () => {
     });
   }
 
-  // ========== Profile photo cycling ==========
-  const profilePhotos = [
-    "images/profilePics/navarre.jpg",
-    "images/profilePics/navarre01.jpg",
-    "images/profilePics/navarre02.jpg",
-    "images/profilePics/navarre03.jpg",
-    "images/profilePics/navarre04.jpg",
-    "images/profilePics/navarre05.jpg",
-    "images/profilePics/navarre06.jpg",
-    "images/profilePics/navarre07.jpg",
-    "images/profilePics/navarre08.jpg",
-    "images/profilePics/navarre09.jpg",
-    "images/profilePics/navarre10.jpg",
-    "images/profilePics/navarre11.png",
-    "images/profilePics/navarre12.jpg"
-  ];
-
-  const recentPhotos = [];
-  const BLOCK_COUNT = 6;
-  const profilePhoto = document.querySelector('.profile-photo');
-
-  if (profilePhoto) {
-    profilePhoto.style.cursor = 'pointer';
-    profilePhoto.addEventListener('click', () => {
-      let newIndex, attempts = 0;
-      do {
-        newIndex = Math.floor(Math.random() * profilePhotos.length);
-        attempts++;
-      } while (recentPhotos.includes(newIndex) && attempts < 20 && profilePhotos.length > BLOCK_COUNT);
-
-      recentPhotos.push(newIndex);
-      if (recentPhotos.length > BLOCK_COUNT) recentPhotos.shift();
-      profilePhoto.src = profilePhotos[newIndex];
+  function fitHeroName() {
+    document.querySelectorAll('.hero-name').forEach((name) => {
+      const style = getComputedStyle(name);
+      const pad = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+      // Leave a sliver so the last glyph is not clipped by the viewport edge.
+      const max = Math.max(10, (name.clientWidth - pad) * 0.96);
+      const lines = [...name.querySelectorAll('.line')];
+      lines.forEach((line) => {
+        const probe = 100;
+        line.style.fontSize = probe + 'px';
+        const range = document.createRange();
+        range.selectNodeContents(line);
+        const width = range.getBoundingClientRect().width || 1;
+        line.style.fontSize = (probe * max / width) + 'px';
+      });
+      const maxH = window.innerHeight * 0.58;
+      const total = lines.reduce((sum, line) => sum + line.getBoundingClientRect().height, 0);
+      if (total > maxH) {
+        const scale = maxH / total;
+        lines.forEach((line) => {
+          line.style.fontSize = (parseFloat(line.style.fontSize) * scale) + 'px';
+        });
+      }
     });
+  }
+
+  fitHeroName();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(fitHeroName);
+  }
+  window.addEventListener('resize', fitHeroName);
+
+  // Park a wheel/trackpad gesture on Professional, then let the next gesture through.
+  const professionalEdge = document.getElementById('professional');
+  if (professionalEdge) {
+    let holdEdge = false;
+    let gestureTimer = 0;
+    const gestureGap = 200;
+
+    window.addEventListener('wheel', (event) => {
+      if (event.ctrlKey) return;
+      if (document.body.classList.contains('menu-open') || document.body.classList.contains('personal-open')) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+
+      const edge = professionalEdge.getBoundingClientRect().top + window.scrollY;
+      const y = window.scrollY;
+      const next = y + event.deltaY;
+      const crossingDown = y < edge - 2 && next >= edge - 2;
+      const crossingUp = y > edge + 2 && next <= edge + 2;
+
+      clearTimeout(gestureTimer);
+      gestureTimer = setTimeout(() => { holdEdge = false; }, gestureGap);
+
+      if (holdEdge && Math.abs(y - edge) < 120) {
+        event.preventDefault();
+        window.scrollTo(0, edge);
+        return;
+      }
+      holdEdge = false;
+
+      if (crossingDown || crossingUp) {
+        event.preventDefault();
+        window.scrollTo(0, edge);
+        holdEdge = true;
+      }
+    }, { passive: false });
   }
 
   // ========== Timeline Data ==========
@@ -844,6 +1030,24 @@ window.addEventListener('popstate', () => {
     const lightboxImg = lightbox?.querySelector('.lightbox-image');
 
     if (lightbox && lightboxImg) {
+
+      const heroFrames = [...document.querySelectorAll('.hero-collage .flow-frame[data-full]')];
+      const heroPhotos = [];
+      heroFrames.forEach((frame) => {
+        const src = new URL(frame.getAttribute('data-full'), location.href).href;
+        if (!heroPhotos.includes(src)) heroPhotos.push(src);
+      });
+      heroFrames.forEach((frame) => {
+        frame.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const src = new URL(frame.getAttribute('data-full'), location.href).href;
+          lightboxImages = heroPhotos.slice();
+          lightboxIndex = Math.max(0, lightboxImages.indexOf(src));
+          lightboxImg.src = lightboxImages[lightboxIndex];
+          lightbox.classList.add('active');
+        });
+      });
 
       // Open lightbox and remember the full set of images
       document.addEventListener('click', e => {

@@ -3,62 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
   <title>J. Navarre Valdivieso</title>
-  <link rel="stylesheet" href="css/style.css?v=3.7">
-  <link rel="stylesheet" href="css/overrides.css?v=5.1">
+  <link rel="stylesheet" href="css/style.css?v=6.0">
+  <link rel="stylesheet" href="css/overrides.css?v=6.3">
 </head>
-<body>
+<body class="site-hub on-landing">
+
+  <header class="site-chrome">
+    <a class="site-logo" href="/" aria-label="Navarre Valdivieso, home">
+      <img src="assets/signature.png" alt="">
+    </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label="Open menu"
+    >
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <div id="site-menu" class="site-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <nav class="menu-nav" aria-label="Sections">
+      <a href="#professional" data-panel data-direction="bottom">Professional</a>
+      <a href="#passion" data-panel data-direction="right">Passion</a>
+      <a href="#personal" data-panel data-direction="left">Personal</a>
+    </nav>
+    <div class="menu-social">
+      <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
+        <img src="images/icons/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
+        <img src="images/icons/github.svg" alt="GitHub">
+      </a>
+      <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
+        <img src="images/icons/globe.svg" alt="Uintah Valley">
+      </a>
+    </div>
+  </div>
 
   <!-- ========== LANDING ========== -->
-  <section id="landing" class="panel active">
-    <div class="landing-wrapper">
-      <div class="intro">
-        <h1 class="name">J. Navarre Valdivieso</h1>
+  <main id="landing">
+    <div class="hero">
+      <h1 class="hero-name hero-name-back">
+        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
+        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
+      </h1>
 
-        <p class="bio">
-          Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
-          currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
-          clear thinking, and building things that last.
-        </p>
+      <div class="hero-veil" aria-hidden="true"></div>
+
+      <div class="hero-collage">
+        <div class="flow-row flow-row-top">
+          <div class="flow-track">
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-t oy-up" data-full="images/profilePics/navarre.jpg" aria-label="View photo"><img src="images/profilePics/navarre.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre02.jpg" aria-label="View photo"><img src="images/profilePics/navarre02.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-l oy-mid" data-full="images/profilePics/navarre05.jpg" aria-label="View photo"><img src="images/profilePics/navarre05.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-up" data-full="images/profilePics/navarre08.jpg" aria-label="View photo"><img src="images/profilePics/navarre08.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre11.png" aria-label="View photo"><img src="images/profilePics/navarre11.png" alt="" draggable="false"></button>
+            </div>
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-t oy-up" data-full="images/profilePics/navarre.jpg" aria-label="View photo"><img src="images/profilePics/navarre.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre02.jpg" aria-label="View photo"><img src="images/profilePics/navarre02.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-l oy-mid" data-full="images/profilePics/navarre05.jpg" aria-label="View photo"><img src="images/profilePics/navarre05.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-up" data-full="images/profilePics/navarre08.jpg" aria-label="View photo"><img src="images/profilePics/navarre08.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-dn" data-full="images/profilePics/navarre11.png" aria-label="View photo"><img src="images/profilePics/navarre11.png" alt="" draggable="false"></button>
+            </div>
+          </div>
+        </div>
+        <div class="flow-row flow-row-mid">
+          <div class="flow-track">
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-l oy-up" data-full="images/profilePics/navarre01.jpg" aria-label="View photo"><img src="images/profilePics/navarre01.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre04.jpg" aria-label="View photo"><img src="images/profilePics/navarre04.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre07.jpg" aria-label="View photo"><img src="images/profilePics/navarre07.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre10.jpg" aria-label="View photo"><img src="images/profilePics/navarre10.jpg" alt="" draggable="false"></button>
+            </div>
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-l oy-up" data-full="images/profilePics/navarre01.jpg" aria-label="View photo"><img src="images/profilePics/navarre01.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre04.jpg" aria-label="View photo"><img src="images/profilePics/navarre04.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre07.jpg" aria-label="View photo"><img src="images/profilePics/navarre07.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre10.jpg" aria-label="View photo"><img src="images/profilePics/navarre10.jpg" alt="" draggable="false"></button>
+            </div>
+          </div>
+        </div>
+        <div class="flow-row flow-row-low">
+          <div class="flow-track">
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-l oy-dn" data-full="images/profilePics/navarre03.jpg" aria-label="View photo"><img src="images/profilePics/navarre03.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre06.jpg" aria-label="View photo"><img src="images/profilePics/navarre06.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre09.jpg" aria-label="View photo"><img src="images/profilePics/navarre09.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre12.jpg" aria-label="View photo"><img src="images/profilePics/navarre12.jpg" alt="" draggable="false"></button>
+            </div>
+            <div class="flow-set">
+              <button type="button" class="flow-frame sz-l oy-dn" data-full="images/profilePics/navarre03.jpg" aria-label="View photo"><img src="images/profilePics/navarre03.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-m oy-up" data-full="images/profilePics/navarre06.jpg" aria-label="View photo"><img src="images/profilePics/navarre06.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-t oy-mid" data-full="images/profilePics/navarre09.jpg" aria-label="View photo"><img src="images/profilePics/navarre09.jpg" alt="" draggable="false"></button>
+              <button type="button" class="flow-frame sz-s oy-dn" data-full="images/profilePics/navarre12.jpg" aria-label="View photo"><img src="images/profilePics/navarre12.jpg" alt="" draggable="false"></button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="photo-nav">
-        <a href="#personal" class="nav-link left" data-direction="left">
-          <span class="arrow">←</span>
-          <span class="label">Personal</span>
-        </a>
-
-        <img src="images/profilePics/navarre.jpg" alt="Navarre Valdivieso" class="profile-photo">
-
-        <a href="#passion" class="nav-link right" data-direction="right">
-          <span class="label">Passion</span>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-
-      <a href="#professional" class="nav-link bottom" data-direction="bottom">
-        <span class="arrow">↓</span>
-        <span class="label">Professional</span>
-      </a>
-
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" title="LinkedIn">
-          <img src="images/icons/linkedin.svg" alt="LinkedIn">
-        </a>
-        <a href="https://github.com/NavarreVal" target="_blank" rel="noopener" title="GitHub">
-          <img src="images/icons/github.svg" alt="GitHub">
-        </a>
-        <a href="https://uintahvalley.com" target="_blank" rel="noopener" title="Uintah Valley">
-          <img src="images/icons/globe.svg" alt="Uintah Valley">
-        </a>
+      <div class="hero-name hero-name-front" aria-hidden="true">
+        <span class="line"><span class="glyph prime">N</span><span class="glyph back">a</span><span class="glyph front">v</span><span class="glyph back">a</span><span class="glyph front">r</span><span class="glyph back">r</span><span class="glyph front">e</span></span>
+        <span class="line"><span class="glyph back">V</span><span class="glyph front">a</span><span class="glyph back">l</span><span class="glyph front">d</span><span class="glyph back">i</span><span class="glyph front">v</span><span class="glyph back">i</span><span class="glyph front">e</span><span class="glyph back">s</span><span class="glyph front">o</span></span>
       </div>
     </div>
-  </section>
+
+    <section class="site-summary" aria-label="Summary">
+      <p>
+        Husband, father, and lifelong learner. Senior Scrum Master and Project Manager
+        currently pursuing a Master’s in Secondary Social Studies Education. Passionate about teaching,
+        clear thinking, and building things that last.
+      </p>
+    </section>
+  </main>
 
   <!-- ========== PERSONAL ========== -->
-  <section id="personal" class="panel">
+  <section id="personal" class="panel" aria-hidden="true" inert>
     <div class="panel-inner">
-      <button class="back-btn">Back →</button>
+      <button class="back-btn">← Back</button>
       <h1>Personal</h1>
       <p>This is the Personal section. Family, values, and the things that matter most outside of work.</p>
 
@@ -71,19 +141,62 @@
           Religious talks and essays written and given by Navarre
         </span>
       </a>
+      <footer class="crew-footer">
+        <img class="crew-mark" src="assets/signature.png" alt="">
+        <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ========== PROFESSIONAL ========== -->
+  <section id="professional">
+    <div class="panel-inner professional-inner">
+      <h1>Professional & Educational Timeline</h1>
+      <p class="timeline-intro">
+        A timeline of my professional and educational journey.<br>
+        Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
+        Click an icon to see the highlights
+      </p>
+
+      <div class="prof-actions">
+        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" download class="action-btn">
+          <img src="images/icons/pdf.svg" alt="PDF" class="btn-icon">
+          Download Resume
+        </a>
+
+        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" target="_blank" rel="noopener" class="action-btn">
+          View Resume in Browser
+        </a>
+
+        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" class="action-btn linkedin-btn">
+          <img src="images/icons/linkedin.svg" alt="LinkedIn" class="btn-icon">
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="timeline-wrapper desktop-only">
+        <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
+        <div class="timeline-container">
+          <div class="timeline-track" id="timeline-track"></div>
+        </div>
+        <button class="timeline-arrow right" aria-label="Scroll right">›</button>
+      </div>
+
+      <div class="mobile-timeline" id="mobile-timeline"></div>
     </div>
   </section>
 
   <!-- ========== PASSION ========== -->
-  <section id="passion" class="panel">
+  <section id="passion">
     <div class="panel-inner passion-inner">
-      <button class="back-btn">← Back</button>
-      <h1>Passion</h1>
-      <p class="passion-lead">
-        Sometimes life deals you good hands.<br>
-        Click a hand to spread the cards.<br>
-        Click a card to open that page.
-      </p>
+      <div class="passion-head">
+        <h1>Passion</h1>
+        <p class="passion-lead">
+          Sometimes life deals you good hands.<br>
+          Click a hand to spread the cards.<br>
+          Click a card to open that page.
+        </p>
+      </div>
 
       <div class="passion-hands">
         <div class="hand" data-hand="maker">
@@ -158,45 +271,10 @@
           <button class="hand-label" type="button">Do-er</button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ========== PROFESSIONAL ========== -->
-  <section id="professional" class="panel">
-    <div class="panel-inner professional-inner">
-      <button class="back-btn">↑ Back</button>
-      <h1>Professional & Educational Timeline</h1>
-      <p class="timeline-intro">
-        A timeline of my professional and educational journey.<br>
-        Bringing over 10 years of Technical Agile and Project Management experience.<br><br>
-        Click an icon to see the highlights
-      </p>
-
-      <div class="prof-actions">
-        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" download class="action-btn">
-          <img src="images/icons/pdf.svg" alt="PDF" class="btn-icon">
-          Download Resume
-        </a>
-
-        <a href="assets/Resume%20-%20J%20Navarre%20Valdivieso.pdf" target="_blank" rel="noopener" class="action-btn">
-          View Resume in Browser
-        </a>
-
-        <a href="https://www.linkedin.com/in/NavarreVal" target="_blank" rel="noopener" class="action-btn linkedin-btn">
-          <img src="images/icons/linkedin.svg" alt="LinkedIn" class="btn-icon">
-          LinkedIn
-        </a>
-      </div>
-
-      <div class="timeline-wrapper desktop-only">
-        <button class="timeline-arrow left" aria-label="Scroll left">‹</button>
-        <div class="timeline-container">
-          <div class="timeline-track" id="timeline-track"></div>
-        </div>
-        <button class="timeline-arrow right" aria-label="Scroll right">›</button>
-      </div>
-
-      <div class="mobile-timeline" id="mobile-timeline"></div>
+      <footer class="crew-footer">
+        <img class="crew-mark" src="assets/signature.png" alt="">
+        <span>Built by <a href="#personal" data-panel data-direction="left">Navarre</a> and The Grok Bot crew of the SS Argus - Gad Kyrath XO</span>
+      </footer>
     </div>
   </section>
 
@@ -204,7 +282,7 @@
     <img src="" alt="" class="lightbox-image">
   </div>
 
-  <script src="js/main.js?v=3.8"></script>
-  <script src="js/hash-panel.js?v=3.8"></script>
+  <script src="js/main.js?v=4.6"></script>
+  <script src="js/hash-panel.js?v=4.1"></script>
 </body>
 </html>
