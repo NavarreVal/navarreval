@@ -461,6 +461,45 @@ window.addEventListener('popstate', () => {
     }
   ];
 
+  const timelineDisplay = {
+    "/images/timeline/200400.jpg": "/images/timeline/display/200400.jpg",
+    "/images/timeline/201500.jpg": "/images/timeline/display/201500.jpg",
+    "/images/timeline/201600.jpg": "/images/timeline/display/201600.jpg",
+    "/images/timeline/ACSM_Cert.jpg": "/images/timeline/display/ACSM_Cert.jpg",
+    "/images/timeline/CSM_Cert.jpg": "/images/timeline/display/CSM_Cert.jpg",
+    "/images/timeline/CSPO_Cert.jpg": "/images/timeline/display/CSPO_Cert.jpg",
+    "/images/timeline/boost01.jpg": "/images/timeline/display/boost01.jpg",
+    "/images/timeline/gravity01.jpg": "/images/timeline/display/gravity01.jpg",
+    "/images/timeline/ihc04.jpg": "/images/timeline/display/ihc04.jpg",
+    "/images/timeline/medici01.jpg": "/images/timeline/display/medici01.jpg",
+    "/images/timeline/medici04.jpg": "/images/timeline/display/medici04.jpg",
+    "/images/timeline/mission01.jpg": "/images/timeline/display/mission01.jpg",
+    "/images/timeline/mission03.jpg": "/images/timeline/display/mission03.jpg",
+    "/images/timeline/mission04.jpg": "/images/timeline/display/mission04.jpg",
+    "/images/timeline/mission05.jpg": "/images/timeline/display/mission05.jpg",
+    "/images/timeline/tripleCert.jpg": "/images/timeline/display/tripleCert.jpg",
+    "/images/timeline/usu01.jpg": "/images/timeline/display/usu01.jpg",
+    "/images/timeline/wgu01.jpg": "/images/timeline/display/wgu01.jpg"
+  };
+
+  function shownSrc(path) {
+    return timelineDisplay[path] || path;
+  }
+
+  function webpSrc(jpgPath) {
+    return jpgPath.replace(/\.jpe?g$/i, ".webp");
+  }
+
+  function iconHtml(src, alt, className) {
+    const display = shownSrc(src);
+    const safeAlt = String(alt).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    const cls = className ? ` class="${className}"` : "";
+    if (display === src) {
+      return `<img src="${src}" alt="${safeAlt}"${cls}>`;
+    }
+    return `<picture><source type="image/webp" srcset="${webpSrc(display)}"><img src="${display}" alt="${safeAlt}"${cls}></picture>`;
+  }
+
   function getEventsForYear(year) {
     const entry = timelineEvents.find(e => e.year === year);
     return entry ? entry.events : [];
@@ -504,7 +543,7 @@ window.addEventListener('popstate', () => {
         ${events.map(ev => `
           <button class="selection-card" data-id="${ev.id}">
             ${ev.thumb
-              ? `<img src="${ev.thumb}" alt="${ev.label}">`
+              ? iconHtml(ev.thumb, ev.label, "")
               : `<div class="selection-placeholder">${ev.label.charAt(0)}</div>`}
             <span>${ev.label}</span>
           </button>
@@ -551,7 +590,7 @@ window.addEventListener('popstate', () => {
       <p class="desc">${event.desc}</p>
       ${event.images && event.images.length ? `
         <div class="tooltip-gallery" data-images='${JSON.stringify(event.images)}'>
-          <img src="${event.images[0]}" alt="" class="gallery-image">
+          <picture><source type="image/webp" srcset="${shownSrc(event.images[0]) === event.images[0] ? "" : webpSrc(shownSrc(event.images[0]))}"><img src="${shownSrc(event.images[0])}" alt="" class="gallery-image" data-index="0"></picture>
           ${event.images.length > 1 ? `
             <button class="gallery-prev">‹</button>
             <button class="gallery-next">›</button>
@@ -600,7 +639,14 @@ window.addEventListener('popstate', () => {
     function showImage(index) {
       if (!img || !event.images) return;
       currentImage = index;
-      img.src = event.images[currentImage];
+      const path = event.images[currentImage];
+      const display = shownSrc(path);
+      img.dataset.index = String(currentImage);
+      img.src = display;
+      const source = img.parentElement && img.parentElement.tagName === "PICTURE"
+        ? img.parentElement.querySelector("source")
+        : null;
+      if (source) source.srcset = display === path ? "" : webpSrc(display);
       if (dotsContainer) {
         dotsContainer.querySelectorAll('span').forEach((dot, i) => {
           dot.classList.toggle('active', i === currentImage);
@@ -692,7 +738,7 @@ window.addEventListener('popstate', () => {
           <div class="timeline-content">
             <div class="timeline-icon-wrapper">
               ${iconSrc
-                ? `<img src="${iconSrc}" alt="${year}" class="timeline-icon">`
+                ? iconHtml(iconSrc, year, "timeline-icon")
                 : `<div class="timeline-icon-placeholder">${String(year).slice(-2)}</div>`}
               <span class="year-label">${year}</span>
             </div>
@@ -785,7 +831,7 @@ window.addEventListener('popstate', () => {
         <div class="hud-in mobile-card-in">
         <div class="mobile-card-icon">
           ${iconSrc
-            ? `<img src="${iconSrc}" alt="${entry.year}">`
+            ? iconHtml(iconSrc, entry.year, "")
             : `<div class="mobile-placeholder">${String(entry.year).slice(-2)}</div>`}
         </div>
         <div class="mobile-card-content">
@@ -847,9 +893,14 @@ window.addEventListener('popstate', () => {
           const gallery = e.target.closest('.tooltip-gallery');
           if (gallery && gallery.dataset.images) {
             lightboxImages = JSON.parse(gallery.dataset.images);
-            lightboxIndex = lightboxImages.indexOf(e.target.src) >= 0
-              ? lightboxImages.indexOf(e.target.src)
-              : 0;
+            const parsed = Number.parseInt(e.target.dataset.index, 10);
+            if (Number.isInteger(parsed) && parsed >= 0 && parsed < lightboxImages.length) {
+              lightboxIndex = parsed;
+            } else {
+              const abs = lightboxImages.map(p => new URL(p, location.href).href);
+              const found = abs.indexOf(e.target.currentSrc || e.target.src);
+              lightboxIndex = found >= 0 ? found : 0;
+            }
           } else {
             lightboxImages = [e.target.src];
             lightboxIndex = 0;

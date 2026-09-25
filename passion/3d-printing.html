@@ -102,6 +102,7 @@
       min-width: 0;
     }
     .print-timelapses img,
+    .print-timelapses video,
     .print-rig-photo img {
       width: 100%;
       height: auto;
@@ -109,7 +110,9 @@
       background: #111;
       border: 1px solid #2a2a2a;
     }
-    .print-timelapses img { aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
+    .print-timelapses img,
+    .print-timelapses video { aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
+    .print-timelapses video { pointer-events: none; }
     .print-rig {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -157,6 +160,7 @@
       color: #777;
     }
     .print-timelapses button.print-zoom:hover img,
+    .print-timelapses button.print-zoom:hover video,
     .print-rig-photo button.print-zoom:hover img { border-color: #4a6a7a; }
     .print-photos {
       display: grid;
@@ -397,7 +401,7 @@
   <link rel="stylesheet" href="/css/dossier.css?v=1.20">
 </head>
 <body>
-  <script src="/js/dossier-chrome.js?v=1"></script>
+  <script src="/js/dossier-chrome.js?v=2"></script>
   <div class="print-page" id="top">
     <div class="print-top">
       <h1>3D Printing</h1>
@@ -412,14 +416,20 @@
 
     <div class="print-timelapses">
       <figure>
-        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-1.gif">
-          <img src="../images/passion/3d-printing/print-timelapse-1.gif" alt="Timelapse inside the P1S chamber as the first layers of a flat base build up" width="800" height="450">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-1.mp4" data-webm="../images/passion/3d-printing/print-timelapse-1.webm">
+          <video autoplay muted loop playsinline poster="../images/passion/3d-printing/print-timelapse-1-poster.jpg" width="800" height="450" aria-label="Timelapse inside the P1S chamber as the first layers of a flat base build up">
+            <source src="../images/passion/3d-printing/print-timelapse-1.webm" type="video/webm">
+            <source src="../images/passion/3d-printing/print-timelapse-1.mp4" type="video/mp4">
+          </video>
         </button>
         <figcaption>Print timelapse</figcaption>
       </figure>
       <figure>
-        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-2.gif">
-          <img src="../images/passion/3d-printing/print-timelapse-2.gif" alt="Timelapse inside the P1S chamber of a taller white cylindrical print" width="800" height="450">
+        <button type="button" class="print-zoom" data-full="../images/passion/3d-printing/print-timelapse-2.mp4" data-webm="../images/passion/3d-printing/print-timelapse-2.webm">
+          <video autoplay muted loop playsinline poster="../images/passion/3d-printing/print-timelapse-2-poster.jpg" width="800" height="450" aria-label="Timelapse inside the P1S chamber of a taller white cylindrical print">
+            <source src="../images/passion/3d-printing/print-timelapse-2.webm" type="video/webm">
+            <source src="../images/passion/3d-printing/print-timelapse-2.mp4" type="video/mp4">
+          </video>
         </button>
         <figcaption>Print timelapse</figcaption>
       </figure>
@@ -856,21 +866,65 @@
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo">
     <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">‹</button>
     <img src="" alt="" class="lightbox-image">
+    <video class="lightbox-image" autoplay muted loop playsinline hidden></video>
     <button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">›</button>
   </div>
 
   <script>
     const shots = [...document.querySelectorAll("button.print-frame[data-full], button.print-zoom[data-full]")];
     const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector(".lightbox-image");
+    const lightboxImg = lightbox.querySelector("img.lightbox-image");
+    const lightboxVideo = lightbox.querySelector("video.lightbox-image");
     let current = 0;
+
+    function mediaLabel(btn) {
+      const img = btn.querySelector("img");
+      if (img) return img.alt || "";
+      const video = btn.querySelector("video");
+      return video ? (video.getAttribute("aria-label") || "") : "";
+    }
+
+    function stopLightboxVideo() {
+      lightboxVideo.pause();
+      lightboxVideo.hidden = true;
+      lightboxVideo.removeAttribute("src");
+      lightboxVideo.removeAttribute("poster");
+      lightboxVideo.innerHTML = "";
+      lightboxVideo.load();
+    }
 
     function openLightbox(index) {
       current = (index + shots.length) % shots.length;
       const btn = shots[current];
-      const img = btn.querySelector("img");
-      lightboxImg.src = btn.dataset.full;
-      lightboxImg.alt = img ? img.alt : "";
+      const full = btn.dataset.full || "";
+      const label = mediaLabel(btn);
+      if (/\.(mp4|webm)(\?|$)/i.test(full)) {
+        lightboxImg.hidden = true;
+        lightboxImg.removeAttribute("src");
+        lightboxImg.alt = "";
+        const inline = btn.querySelector("video");
+        lightboxVideo.hidden = false;
+        lightboxVideo.setAttribute("aria-label", label);
+        lightboxVideo.poster = inline ? inline.getAttribute("poster") || "" : "";
+        lightboxVideo.innerHTML = "";
+        if (btn.dataset.webm) {
+          const webm = document.createElement("source");
+          webm.src = btn.dataset.webm;
+          webm.type = "video/webm";
+          lightboxVideo.appendChild(webm);
+        }
+        const mp4 = document.createElement("source");
+        mp4.src = full;
+        mp4.type = "video/mp4";
+        lightboxVideo.appendChild(mp4);
+        lightboxVideo.load();
+        lightboxVideo.play().catch(function () {});
+      } else {
+        stopLightboxVideo();
+        lightboxImg.hidden = false;
+        lightboxImg.src = full;
+        lightboxImg.alt = label;
+      }
       lightbox.classList.add("active");
     }
 
@@ -878,6 +932,7 @@
       lightbox.classList.remove("active");
       lightboxImg.src = "";
       lightboxImg.alt = "";
+      stopLightboxVideo();
     }
 
     shots.forEach((btn, i) => btn.addEventListener("click", () => openLightbox(i)));
