@@ -1723,8 +1723,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   display: grid;
   grid-template-columns: var(--crew-tile) minmax(0, 1fr);
   gap: 1rem 1.2rem;
-  align-items: center;
-  margin-bottom: 1rem;
+  align-items: start;
 }
 
 #personal .manifest-intro .manifest-lead {
@@ -1915,9 +1914,14 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 
 /* Personal: Argus - Ship's Namesake (inside Ship's manifest) */
 #personal .namesake {
-  margin: 0 0 1.1rem;
-  padding: 0.85rem 0 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
   border-top: 1px solid rgba(61, 255, 122, 0.22);
+}
+
+#personal .namesake-more {
+  margin: 0.85rem 0 1.1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid rgba(61, 255, 122, 0.22);
 }
 
@@ -1931,19 +1935,13 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   color: #3dff7a;
 }
 
-#personal .namesake-lead,
 #personal .namesake-origin {
   max-width: 46rem;
-}
-
-body.dossier-tabbed #personal .personal-file .namesake-origin {
-  margin-top: 0.85rem;
 }
 
 #personal .namesake-specs {
   display: flex;
   flex-direction: column;
-  max-width: 46rem;
   margin: 0.85rem 0 0;
   border: 1px solid rgba(61, 255, 122, 0.32);
 }
@@ -1976,19 +1974,6 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   line-height: 1.45;
 }
 
-#personal .namesake-top {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.9rem 1.2rem;
-  align-items: center;
-}
-
-#personal .namesake-feature .namesake-shot img {
-  width: calc((var(--crew-tile) - 2px) * 4 / 3);
-  height: calc(var(--crew-tile) - 2px);
-  aspect-ratio: auto;
-}
-
 @media (max-width: 900px) {
   #personal .manifest-intro {
     display: flow-root;
@@ -1999,24 +1984,6 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
     width: 7rem;
     margin: 0.15rem 1rem 0.3rem 0;
   }
-
-  #personal .namesake-top {
-    grid-template-columns: 1fr;
-  }
-
-  #personal .namesake-feature {
-    max-width: 30rem;
-  }
-
-  #personal .namesake-feature .namesake-shot img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-}
-
-#personal .namesake-top .namesake-specs {
-  max-width: none;
 }
 
 #personal .namesake-gallery {
@@ -2024,11 +1991,11 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   margin: 0.9rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
 
-#personal .namesake figure {
+#personal .namesake-more figure {
   margin: 0;
   min-width: 0;
 }
@@ -2078,7 +2045,7 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   outline: none;
 }
 
-#personal .namesake figcaption {
+#personal .namesake-more figcaption {
   margin-top: 0.35rem;
   color: var(--ph-dim);
   font-size: 0.72rem;
@@ -2093,8 +2060,7 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   }
 
   #personal .namesake-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.45rem;
+    gap: 0.35rem;
   }
 
   #personal .manifest-emblem {
@@ -2102,7 +2068,7 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
     margin: 0.2rem 0.75rem 0.2rem 0;
   }
 
-  #personal .namesake figcaption {
+  #personal .namesake-more figcaption {
     margin-top: 0.25rem;
     font-size: clamp(9px, 2.6vw, 0.72rem);
     letter-spacing: 0;
