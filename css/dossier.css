@@ -1976,6 +1976,12 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   margin-top: 1rem;
 }
 
+body.dossier-tabbed #personal .personal-file .namesake-more {
+  margin-top: 0.75rem;
+  color: var(--ph-dim);
+  font-size: 0.85rem;
+}
+
 #personal .namesake-argo .namesake-shot img {
   aspect-ratio: 767 / 1000;
 }
