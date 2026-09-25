@@ -72,6 +72,12 @@
       overflow: hidden;
     }
 
+    .photo-wall picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     .photo-wall img {
       display: block;
       width: 100%;
@@ -163,7 +169,7 @@
   <link rel="stylesheet" href="/css/dossier.css?v=1.20">
 </head>
 <body>
-  <script src="/js/dossier-chrome.js?v=1"></script>
+  <script src="/js/dossier-chrome.js?v=2"></script>
    <div class="photo-page" id="top">
     <div class="photo-top">
       <span></span>
@@ -182,7 +188,7 @@
 
   <img
     class="photo-signature"
-    src="../assets/signature.png"
+    src="../assets/signature.png?v=2"
     alt="Navarre"
   >
 
@@ -248,14 +254,36 @@
     const lightboxImg = lightbox.querySelector(".lightbox-image");
     let current = 0;
 
+    const photoDisplay = new Set([
+      "chileVerde.jpg",
+      "eggs.jpg",
+      "peruvianTestDish.jpg",
+      "potatoSalad.jpg",
+      "robinHoodMeal.jpg",
+      "salsaHabanero.jpg",
+    ]);
+
     photos.forEach((src, i) => {
       const btn = document.createElement("button");
       btn.type = "button";
+      const name = src.split("/").pop();
       const img = document.createElement("img");
-      img.src = src;
       img.alt = "";
       img.loading = "lazy";
-      btn.appendChild(img);
+      if (photoDisplay.has(name)) {
+        const stem = name.replace(/\.[^.]+$/, "");
+        const base = src.replace(/[^/]+$/, "display/" + stem);
+        const picture = document.createElement("picture");
+        const source = document.createElement("source");
+        source.type = "image/webp";
+        source.srcset = base + ".webp";
+        img.src = base + ".jpg";
+        picture.append(source, img);
+        btn.appendChild(picture);
+      } else {
+        img.src = src;
+        btn.appendChild(img);
+      }
       btn.addEventListener("click", () => openLightbox(i));
       wall.appendChild(btn);
     });

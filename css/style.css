@@ -418,7 +418,21 @@ body.site-hub {
   transform: scale(1.07);
 }
 
+.timeline-icon-wrapper picture,
+.mobile-card-icon picture,
+.selection-card picture,
+.tooltip-gallery picture {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.mobile-card-icon picture {
+  height: 100%;
+}
+
 .timeline-icon {
+  display: block;
   width: 100px;
   height: 80px;
   object-fit: cover;
