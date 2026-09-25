@@ -1978,7 +1978,15 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   }
 
   #personal .namesake-gallery {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  #personal .namesake figcaption {
+    margin-top: 0.25rem;
+    font-size: clamp(8px, 2.3vw, 0.72rem);
+    letter-spacing: 0;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
   }
 }
