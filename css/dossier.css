@@ -1720,8 +1720,9 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 #personal .manifest-intro {
+  --emblem-size: clamp(20rem, 34cqi, 26rem);
   display: grid;
-  grid-template-columns: var(--crew-tile) minmax(0, 1fr);
+  grid-template-columns: var(--emblem-size) minmax(0, 1fr);
   gap: 1rem 1.2rem;
   align-items: start;
 }
@@ -1920,7 +1921,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 #personal .namesake-more {
-  margin: 0.85rem 0 1.1rem;
+  margin: 1rem 0 1.1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(61, 255, 122, 0.22);
 }
@@ -1935,8 +1936,8 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   color: #3dff7a;
 }
 
-#personal .namesake-origin {
-  max-width: 46rem;
+body.dossier-tabbed #personal .personal-file .namesake-origin {
+  margin-top: 0.85rem;
 }
 
 #personal .namesake-specs {
@@ -1988,7 +1989,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 
 #personal .namesake-gallery {
   list-style: none;
-  margin: 0.9rem 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
