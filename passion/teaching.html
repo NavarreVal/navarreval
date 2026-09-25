@@ -222,7 +222,111 @@
     }
 
     .study-sounds figure {
+      position: relative;
       margin: 0 0 1.15rem;
+    }
+
+    .hip-hotspot {
+      position: absolute;
+      left: 15%;
+      top: 85%;
+      width: 10%;
+      height: 14.5%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .hip-hotspot:hover,
+    .hip-hotspot:focus,
+    .hip-hotspot:focus-visible {
+      outline: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    html.hip-lock,
+    html.hip-lock body {
+      overflow: hidden;
+    }
+
+    .hip-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.92);
+      cursor: zoom-out;
+    }
+
+    .hip-modal[hidden] {
+      display: none;
+    }
+
+    .hip-dialog {
+      position: relative;
+      width: min(600px, 100%);
+      max-height: calc(100dvh - 2.5rem);
+      overflow: auto;
+      padding: 2.5rem 0.9rem 0.95rem;
+      background: #0d0d0d;
+      border: 1px solid rgba(201, 162, 39, 0.45);
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      cursor: default;
+    }
+
+    .hip-dialog video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 70dvh;
+      background: #000;
+      border-radius: 4px;
+    }
+
+    .hip-credit {
+      margin: 0.8rem 0 0.1rem;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .hip-credit a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .hip-credit a:hover,
+    .hip-credit a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .hip-close {
+      position: absolute;
+      top: 0.45rem;
+      right: 0.45rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font: inherit;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .hip-close:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     .study-sounds figure img {
@@ -351,6 +455,7 @@
               width="1712"
               height="1152"
             >
+            <button type="button" class="hip-hotspot" aria-label="History in Parallel"></button>
           </figure>
           <div class="study-sounds-actions">
             <button type="button" class="study-sounds-btn" id="study-sounds">Study Sounds Mix</button>
@@ -430,6 +535,14 @@
     </div>
   </article>
 
+  <div id="hip-modal" class="hip-modal" hidden>
+    <div class="hip-dialog" role="dialog" aria-modal="true" aria-labelledby="hip-credit">
+      <button type="button" class="hip-close" aria-label="Close">×</button>
+      <video id="hip-video" controls playsinline preload="none" src="/assets/video/prometheus.mp4"></video>
+      <p class="hip-credit" id="hip-credit"><a href="https://x.com/IterIntellectus/status/2103212539895017864" target="_blank" rel="noopener noreferrer">Video: @IterIntellectus on X</a></p>
+    </div>
+  </div>
+
   <script src="../js/page-enter.js"></script>
   <script>
     (function () {
@@ -444,6 +557,48 @@
         urls.forEach(function (url) {
           window.open(url, "_blank", "noopener,noreferrer");
         });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var hotspot = document.querySelector(".hip-hotspot");
+      var modal = document.getElementById("hip-modal");
+      var video = document.getElementById("hip-video");
+      var closeBtn = modal.querySelector(".hip-close");
+      if (!hotspot || !modal || !video || !closeBtn) return;
+
+      function openModal() {
+        modal.hidden = false;
+        document.documentElement.classList.add("hip-lock");
+        video.currentTime = 0;
+        var pending = video.play();
+        if (pending && pending.catch) pending.catch(function () {});
+        closeBtn.focus();
+      }
+
+      function closeModal() {
+        video.pause();
+        try { video.currentTime = 0; } catch (err) {}
+        modal.hidden = true;
+        document.documentElement.classList.remove("hip-lock");
+        hotspot.focus();
+      }
+
+      hotspot.addEventListener("click", openModal);
+      closeBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        closeModal();
+      });
+      modal.addEventListener("click", function (event) {
+        if (event.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (modal.hidden) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeModal();
+        }
       });
     })();
   </script>
