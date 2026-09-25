@@ -1684,13 +1684,90 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   margin-bottom: 1rem;
 }
 
+/* One tile size for the manifest: the crew grid columns set --crew-tile,
+   and the emblem and the namesake feature photo reuse it. */
+#personal .manifest-body {
+  container: manifest / inline-size;
+}
+
+#personal .manifest-body > * {
+  --crew-cols: 1;
+  --crew-gap: 0.7rem;
+  --crew-tile: calc((100cqi - (var(--crew-cols) - 1) * var(--crew-gap)) / var(--crew-cols));
+}
+
+@container manifest (min-width: 31.7rem) {
+  #personal .manifest-body > * { --crew-cols: 2; }
+}
+
+@container manifest (min-width: 47.9rem) {
+  #personal .manifest-body > * { --crew-cols: 3; }
+}
+
+@container manifest (min-width: 64.1rem) {
+  #personal .manifest-body > * { --crew-cols: 4; }
+}
+
+@container manifest (min-width: 80.3rem) {
+  #personal .manifest-body > * { --crew-cols: 5; }
+}
+
+@media (max-width: 900px) {
+  #personal .manifest-body > * {
+    --crew-cols: 2;
+    --crew-gap: 0.4rem;
+  }
+}
+
+#personal .manifest-intro {
+  --emblem-size: clamp(20rem, 34cqi, 26rem);
+  display: grid;
+  grid-template-columns: var(--emblem-size) minmax(0, 1fr);
+  gap: 1rem 1.2rem;
+  align-items: start;
+}
+
+#personal .manifest-intro .manifest-lead {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+#personal .manifest-emblem {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(61, 255, 122, 0.45);
+  background: #04110c;
+}
+
+#personal .manifest-emblem img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#personal .manifest-emblem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.22) 0 1px,
+    transparent 1px 3px
+  );
+}
+
 #personal .crew-roster {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
-  gap: 0.7rem;
+  grid-template-columns: repeat(var(--crew-cols), minmax(0, 1fr));
+  gap: var(--crew-gap);
 }
 
 #personal .crew-card {
@@ -1804,11 +1881,6 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 @media (max-width: 900px) {
-  #personal .crew-roster {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.4rem;
-  }
-
   #personal .crew-meta {
     gap: 0.08rem;
     padding: 0.32rem 0.32rem 0.4rem;
@@ -1843,9 +1915,14 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 
 /* Personal: Argus - Ship's Namesake (inside Ship's manifest) */
 #personal .namesake {
-  margin: 0 0 1.1rem;
-  padding: 0.85rem 0 1rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
   border-top: 1px solid rgba(61, 255, 122, 0.22);
+}
+
+#personal .namesake-more {
+  margin: 1rem 0 1.1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid rgba(61, 255, 122, 0.22);
 }
 
@@ -1859,11 +1936,6 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   color: #3dff7a;
 }
 
-#personal .namesake-lead,
-#personal .namesake-origin {
-  max-width: 46rem;
-}
-
 body.dossier-tabbed #personal .personal-file .namesake-origin {
   margin-top: 0.85rem;
 }
@@ -1871,7 +1943,6 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
 #personal .namesake-specs {
   display: flex;
   flex-direction: column;
-  max-width: 46rem;
   margin: 0.85rem 0 0;
   border: 1px solid rgba(61, 255, 122, 0.32);
 }
@@ -1904,16 +1975,28 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   line-height: 1.45;
 }
 
+@media (max-width: 900px) {
+  #personal .manifest-intro {
+    display: flow-root;
+  }
+
+  #personal .manifest-emblem {
+    float: left;
+    width: 7rem;
+    margin: 0.15rem 1rem 0.3rem 0;
+  }
+}
+
 #personal .namesake-gallery {
   list-style: none;
-  margin: 0.9rem 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
 
-#personal .namesake figure {
+#personal .namesake-more figure {
   margin: 0;
   min-width: 0;
 }
@@ -1963,7 +2046,7 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   outline: none;
 }
 
-#personal .namesake figcaption {
+#personal .namesake-more figcaption {
   margin-top: 0.35rem;
   color: var(--ph-dim);
   font-size: 0.72rem;
@@ -1978,13 +2061,17 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
   }
 
   #personal .namesake-gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.35rem;
   }
 
-  #personal .namesake figcaption {
+  #personal .manifest-emblem {
+    width: 4.25rem;
+    margin: 0.2rem 0.75rem 0.2rem 0;
+  }
+
+  #personal .namesake-more figcaption {
     margin-top: 0.25rem;
-    font-size: clamp(8px, 2.3vw, 0.72rem);
+    font-size: clamp(9px, 2.6vw, 0.72rem);
     letter-spacing: 0;
     line-height: 1.3;
     overflow-wrap: anywhere;
