@@ -5,14 +5,6 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "Archivo Black";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/archivo-black-latin.woff2") format("woff2");
-}
-
 html,
 body {
   max-width: 100%;
@@ -29,7 +21,6 @@ body {
 
 :root {
   --gold: #3dff7a;
-  --chrome-h: 5.5rem;
 }
 
 /* Hub page scrolls. Passion subpages never get .site-hub. */
@@ -39,46 +30,6 @@ body.site-hub {
   overflow-x: hidden;
   overflow-y: auto;
 }
-
-html:has(body.site-hub.personal-open),
-body.site-hub.personal-open {
-  overflow: hidden;
-}
-
-/* ===== Panels ===== */
-.panel {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-  z-index: 1;
-  background: #0d0d0d;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.panel.active {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 10;
-  transform: translate(0, 0) !important;
-}
-
-.panel.from-left   { transform: translateX(-100%); }
-.panel.from-right  { transform: translateX(100%); }
-.panel.from-bottom { transform: translateY(100%); }
-.panel.from-top    { transform: translateY(-100%); }
-
-.panel.to-left   { transform: translateX(100%); }
-.panel.to-right  { transform: translateX(-100%); }
-.panel.to-bottom { transform: translateY(-100%); }
-.panel.to-top    { transform: translateY(100%); }
-
-/* Landing hero, chrome, and menu live at the end of this file. */
 
 /* ===== Content panels ===== */
 .panel-inner {
@@ -870,14 +821,6 @@ body.site-hub.personal-open {
     min-height: 100vh;
   }
 
-  .panel {
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-
   #passion .panel-inner,
   #personal .panel-inner {
     width: 100%;
@@ -1242,13 +1185,6 @@ body.page-enter-active {
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#personal.panel {
-  align-items: flex-start;
-  justify-content: flex-start;
-  z-index: 40;
-  background: #0d0d0d;
-}
-
 #passion,
 #professional {
   position: relative;
@@ -1270,239 +1206,11 @@ body.page-enter-active {
   color: #f0f0f0;
 }
 
+/* Shooting's full-bleed header uses .hero and does not set height itself. */
 .hero {
   position: relative;
   height: 100dvh;
   min-height: 100dvh;
   overflow: hidden;
   background: #0d0d0d;
-}
-
-.hero-name {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0 1.2vw;
-  text-align: center;
-  pointer-events: none;
-  user-select: none;
-  transform: none;
-}
-
-.hero-name-back { z-index: 1; }
-.hero-name-front { z-index: 5; }
-
-.hero-name-back .glyph.front,
-.hero-name-back .glyph.prime {
-  color: transparent;
-  text-shadow: none;
-}
-
-.hero-name-front .glyph.back {
-  color: transparent;
-  text-shadow: none;
-}
-
-.hero-veil {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 46%, rgba(13, 13, 13, 0.28) 0%, transparent 62%);
-}
-
-.hero-name .line {
-  display: block;
-  width: max-content;
-  max-width: none;
-  margin-inline: auto;
-  font-family: "Archivo Black", "Arial Black", Impact, sans-serif;
-  font-weight: 400;
-  line-height: 0.78;
-  letter-spacing: -0.045em;
-  color: var(--gold);
-  white-space: nowrap;
-}
-
-.glyph {
-  position: relative;
-  display: inline;
-  text-shadow:
-    0 0 14px rgba(13, 13, 13, 0.95),
-    0 2px 22px rgba(13, 13, 13, 0.9);
-}
-
-.glyph.back { z-index: 1; }
-.glyph.front { z-index: 4; }
-.glyph.prime { z-index: 6; }
-
-.hero-collage {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.flow-row {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.flow-row-top {
-  top: calc(var(--chrome-h) * 0.28);
-}
-
-.flow-row-mid {
-  top: 31vh;
-}
-
-.flow-row-low {
-  top: 56vh;
-}
-
-.flow-track {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  width: max-content;
-  animation-name: flow-ltr;
-  animation-duration: 13s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-play-state: running;
-  will-change: transform;
-}
-
-.flow-set {
-  display: flex;
-  align-items: flex-start;
-  flex: 0 0 auto;
-  --flow-gap: clamp(22rem, 44vw, 52rem);
-  gap: var(--flow-gap);
-  padding-right: var(--flow-gap);
-}
-
-.flow-row-mid .flow-track {
-  animation-duration: 19s;
-  animation-delay: -6s;
-}
-
-.flow-row-mid .flow-set {
-  --flow-gap: clamp(28rem, 60vw, 68rem);
-}
-
-.flow-row-low .flow-track {
-  animation-duration: 26s;
-  animation-delay: -11s;
-}
-
-.flow-row-low .flow-set {
-  --flow-gap: clamp(24rem, 49.6vw, 58rem);
-}
-
-@keyframes flow-ltr {
-  from { transform: translate3d(-50%, 0, 0); }
-  to { transform: translate3d(0, 0, 0); }
-}
-
-.flow-frame {
-  flex: 0 0 auto;
-  width: var(--fw, 18vw);
-  height: var(--fh, 26vh);
-  margin-top: var(--oy, 0vh);
-  overflow: hidden;
-  background: #1a1a1a;
-  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.45);
-  border: 0;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  cursor: zoom-in;
-  pointer-events: auto;
-  appearance: none;
-}
-
-.flow-frame:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-
-.flow-frame.sz-s { --fw: 12vw; --fh: 17vh; }
-.flow-frame.sz-m { --fw: 17vw; --fh: 25vh; }
-.flow-frame.sz-l { --fw: 23vw; --fh: 33vh; }
-.flow-frame.sz-t { --fw: 14vw; --fh: 38vh; }
-.flow-frame.oy-up { --oy: 0vh; }
-.flow-frame.oy-mid { --oy: 6vh; }
-.flow-frame.oy-dn { --oy: 13vh; }
-
-.flow-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-  display: block;
-}
-
-.site-summary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 72vh;
-  padding: 16vh clamp(1.25rem, 2.5vw, 2.75rem) 18vh;
-  background: #0d0d0d;
-}
-
-.site-summary p {
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  color: var(--gold);
-  font-size: clamp(1.55rem, 2.7vw, 2.35rem);
-  line-height: 1.45;
-  font-weight: 500;
-}
-
-/* Section navigation is the dossier tab bar. The hamburger menu is gone. */
-
-@media (max-width: 820px) {
-  .hero-name {
-    padding: 0 2vw;
-  }
-
-  .site-summary {
-    min-height: 64vh;
-    padding: 14vh 1.15rem 16vh;
-  }
-
-  .site-summary p {
-    font-size: 1.35rem;
-    line-height: 1.45;
-  }
-
-  .flow-frame.sz-s { --fw: 32vw; --fh: 16vh; }
-  .flow-frame.sz-m { --fw: 42vw; --fh: 21vh; }
-  .flow-frame.sz-l { --fw: 54vw; --fh: 27vh; }
-  .flow-frame.sz-t { --fw: 36vw; --fh: 32vh; }
-  .flow-frame.oy-mid { --oy: 3vh; }
-  .flow-frame.oy-dn { --oy: 7vh; }
-
-  .flow-row-mid { top: 30vh; }
-  .flow-row-low { top: 54vh; }
-}
-
-@media (max-height: 700px) and (min-width: 821px) {
-  .flow-frame.sz-s { --fh: 15vh; }
-  .flow-frame.sz-m { --fh: 20vh; }
-  .flow-frame.sz-l { --fh: 26vh; }
-  .flow-frame.sz-t { --fh: 30vh; }
-  .site-summary { min-height: 56vh; }
 }
