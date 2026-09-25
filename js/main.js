@@ -18,68 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxImages = [];
   let lightboxIndex = 0;
 
-  // Personal, Professional, and Passion are their own pages.
-  // This overlay path only runs if a #personal panel is still on the page.
-  const links = document.querySelectorAll('[data-panel]');
-  const personal = document.getElementById('personal');
-
-  function motion() {
-    return 'smooth';
-  }
-
-  function pageSections() {
-    return document.querySelectorAll('#landing, #professional, #passion, #personal');
-  }
-
-  function syncInert() {
-    const personalOpen = !!(personal && personal.classList.contains('active'));
-    pageSections().forEach((el) => el.removeAttribute('inert'));
-    if (personal && !personalOpen) personal.setAttribute('inert', '');
-    if (personalOpen) {
-      document.querySelectorAll('#landing, #professional, #passion').forEach((el) => {
-        el.setAttribute('inert', '');
-      });
-    }
-  }
-
-  function openPersonal() {
-    if (!personal || personal.classList.contains('active')) return;
-    personal.classList.remove('from-left','from-right','from-bottom','from-top','to-left','to-right','to-bottom','to-top');
-    personal.classList.add('from-right');
-    personal.removeAttribute('aria-hidden');
-    void personal.offsetWidth;
-    personal.classList.add('active');
-    document.body.classList.add('personal-open');
-    document.body.classList.remove('on-landing');
-    syncInert();
-  }
-
-  function closePersonal() {
-    if (personal && personal.classList.contains('active')) {
-      personal.classList.remove('active');
-      personal.classList.add('to-right');
-      personal.setAttribute('aria-hidden', 'true');
-    }
-    document.body.classList.remove('personal-open');
-    document.body.classList.add('on-landing');
-    syncInert();
-  }
-
-  function showPanel(id, behavior) {
-    if (id === 'personal') {
-      openPersonal();
-      return;
-    }
-    closePersonal();
-    if (id === 'passion' || id === 'professional') {
-      const target = document.getElementById(id);
-      const scrollBehavior = behavior === 'smooth' ? 'smooth' : 'auto';
-      if (target) target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
-    }
-  }
-
-  window.showSitePanel = showPanel;
-
   const logo = document.querySelector('.dossier-mark');
 
   if (logo) {
@@ -88,15 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const onHome = path === '/' || path === '/index.html';
       if (!onHome) return;
       event.preventDefault();
-      const personalOpen = !!(personal && personal.classList.contains('active'));
       const atTop = window.scrollY < 8;
-      if (!personalOpen && !location.hash && atTop) return;
+      if (!location.hash && atTop) return;
       const next = location.pathname + location.search;
       if (location.pathname + location.search + location.hash !== next) {
         history.pushState({ panel: 'landing' }, '', next);
       }
-      closePersonal();
-      window.scrollTo({ top: 0, behavior: motion() });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -120,24 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
       recordStrip.scrollLeft += event.key === 'ArrowRight' ? 120 : -120;
     });
   }
-
-  links.forEach(link => {
-    link.addEventListener('click', e => {
-      const href = link.getAttribute('href') || '';
-      if (!href.startsWith('#')) return;
-      e.preventDefault();
-      const id = href.substring(1);
-      showPanel(id, motion());
-      const section = document.getElementById(id);
-      const back = section?.querySelector('.back-btn');
-      const heading = section?.querySelector('h1');
-      if (back) back.focus({ preventScroll: true });
-      else if (heading) {
-        heading.setAttribute('tabindex', '-1');
-        heading.focus({ preventScroll: true });
-      }
-    });
-  });
 
   // ========== History management for overlays (mobile back button) ==========
 let overlayHistoryPushed = false;
@@ -259,43 +177,6 @@ window.addEventListener('popstate', () => {
       card.addEventListener('pointerup', () => card.classList.remove('is-pressed'));
       card.addEventListener('pointercancel', () => card.classList.remove('is-pressed'));
     });
-  }
-
-  // Park a wheel/trackpad gesture on Professional, then let the next gesture through.
-  const professionalEdge = document.getElementById('professional');
-  const landingEdge = document.getElementById('landing');
-  if (professionalEdge && landingEdge) {
-    let holdEdge = false;
-    let gestureTimer = 0;
-    const gestureGap = 200;
-
-    window.addEventListener('wheel', (event) => {
-      if (event.ctrlKey) return;
-      if (document.body.classList.contains('personal-open')) return;
-      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-
-      const edge = professionalEdge.getBoundingClientRect().top + window.scrollY;
-      const y = window.scrollY;
-      const next = y + event.deltaY;
-      const crossingDown = y < edge - 2 && next >= edge - 2;
-      const crossingUp = y > edge + 2 && next <= edge + 2;
-
-      clearTimeout(gestureTimer);
-      gestureTimer = setTimeout(() => { holdEdge = false; }, gestureGap);
-
-      if (holdEdge && Math.abs(y - edge) < 120) {
-        event.preventDefault();
-        window.scrollTo(0, edge);
-        return;
-      }
-      holdEdge = false;
-
-      if (crossingDown || crossingUp) {
-        event.preventDefault();
-        window.scrollTo(0, edge);
-        holdEdge = true;
-      }
-    }, { passive: false });
   }
 
   // ========== Timeline Data ==========
