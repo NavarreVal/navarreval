@@ -1684,8 +1684,46 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   margin-bottom: 1rem;
 }
 
+/* One tile size for the manifest: the crew grid columns set --crew-tile,
+   and the emblem and the namesake feature photo reuse it. */
+#personal .manifest-body {
+  container: manifest / inline-size;
+}
+
+#personal .manifest-body > * {
+  --crew-cols: 1;
+  --crew-gap: 0.7rem;
+  --crew-tile: calc((100cqi - (var(--crew-cols) - 1) * var(--crew-gap)) / var(--crew-cols));
+}
+
+@container manifest (min-width: 31.7rem) {
+  #personal .manifest-body > * { --crew-cols: 2; }
+}
+
+@container manifest (min-width: 47.9rem) {
+  #personal .manifest-body > * { --crew-cols: 3; }
+}
+
+@container manifest (min-width: 64.1rem) {
+  #personal .manifest-body > * { --crew-cols: 4; }
+}
+
+@container manifest (min-width: 80.3rem) {
+  #personal .manifest-body > * { --crew-cols: 5; }
+}
+
+@media (max-width: 900px) {
+  #personal .manifest-body > * {
+    --crew-cols: 2;
+    --crew-gap: 0.4rem;
+  }
+}
+
 #personal .manifest-intro {
-  display: flow-root;
+  display: grid;
+  grid-template-columns: var(--crew-tile) minmax(0, 1fr);
+  gap: 1rem 1.2rem;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
@@ -1696,10 +1734,9 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 
 #personal .manifest-emblem {
   position: relative;
-  float: left;
-  width: 4.25rem;
+  box-sizing: border-box;
+  width: 100%;
   aspect-ratio: 1 / 1;
-  margin: 0.15rem 1rem 0.3rem 0;
   overflow: hidden;
   border: 1px solid rgba(61, 255, 122, 0.45);
   background: #04110c;
@@ -1729,8 +1766,8 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
-  gap: 0.7rem;
+  grid-template-columns: repeat(var(--crew-cols), minmax(0, 1fr));
+  gap: var(--crew-gap);
 }
 
 #personal .crew-card {
@@ -1844,11 +1881,6 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 @media (max-width: 900px) {
-  #personal .crew-roster {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.4rem;
-  }
-
   #personal .crew-meta {
     gap: 0.08rem;
     padding: 0.32rem 0.32rem 0.4rem;
@@ -1946,9 +1978,41 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
 
 #personal .namesake-top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(12rem, 17rem);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.9rem 1.2rem;
   align-items: center;
+}
+
+#personal .namesake-feature .namesake-shot img {
+  width: calc((var(--crew-tile) - 2px) * 4 / 3);
+  height: calc(var(--crew-tile) - 2px);
+  aspect-ratio: auto;
+}
+
+@media (max-width: 900px) {
+  #personal .manifest-intro {
+    display: flow-root;
+  }
+
+  #personal .manifest-emblem {
+    float: left;
+    width: 7rem;
+    margin: 0.15rem 1rem 0.3rem 0;
+  }
+
+  #personal .namesake-top {
+    grid-template-columns: 1fr;
+  }
+
+  #personal .namesake-feature {
+    max-width: 30rem;
+  }
+
+  #personal .namesake-feature .namesake-shot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
 }
 
 #personal .namesake-top .namesake-specs {
@@ -2028,16 +2092,13 @@ body.dossier-tabbed #personal .personal-file .namesake-origin {
     gap: 0.2rem;
   }
 
-  #personal .namesake-top {
-    grid-template-columns: 1fr;
-  }
-
   #personal .namesake-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.45rem;
   }
 
   #personal .manifest-emblem {
+    width: 4.25rem;
     margin: 0.2rem 0.75rem 0.2rem 0;
   }
 
