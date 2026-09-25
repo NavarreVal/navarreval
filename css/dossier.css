@@ -1860,8 +1860,12 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 #personal .namesake-lead,
-#personal .namesake-origin p {
+#personal .namesake-origin {
   max-width: 46rem;
+}
+
+body.dossier-tabbed #personal .personal-file .namesake-origin {
+  margin-top: 0.85rem;
 }
 
 #personal .namesake-specs {
@@ -1937,6 +1941,10 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   object-position: 50% 32%;
 }
 
+#personal .namesake-shot-painting img {
+  object-position: 50% 42%;
+}
+
 #personal .namesake-shot::after {
   content: "";
   position: absolute;
@@ -1963,29 +1971,6 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   line-height: 1.4;
 }
 
-#personal .namesake figcaption cite {
-  font-style: italic;
-}
-
-#personal .namesake-origin {
-  display: grid;
-  grid-template-columns: minmax(0, 30rem) minmax(9rem, 13rem);
-  justify-content: start;
-  gap: 0.9rem 1.2rem;
-  align-items: start;
-  margin-top: 1rem;
-}
-
-body.dossier-tabbed #personal .personal-file .namesake-more {
-  margin-top: 0.75rem;
-  color: var(--ph-dim);
-  font-size: 0.85rem;
-}
-
-#personal .namesake-argo .namesake-shot img {
-  aspect-ratio: 767 / 1000;
-}
-
 @media (max-width: 640px) {
   #personal .namesake-spec {
     grid-template-columns: 1fr;
@@ -1995,13 +1980,5 @@ body.dossier-tabbed #personal .personal-file .namesake-more {
   #personal .namesake-gallery {
     grid-template-columns: 1fr;
     gap: 0.6rem;
-  }
-
-  #personal .namesake-origin {
-    grid-template-columns: 1fr;
-  }
-
-  #personal .namesake-argo {
-    max-width: 14rem;
   }
 }
