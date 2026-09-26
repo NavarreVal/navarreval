@@ -170,6 +170,22 @@
       object-fit: cover;
     }
 
+    /* AlyssaVal: her 16x26 pixel sprite, not a photo. Integer-scaled and
+       centred on the site's near-black, never smoothed. */
+    .wd-project-thumb.is-sprite {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d0d0d;
+    }
+
+    .wd-project-thumb.is-sprite img {
+      width: 48px;               /* 3x */
+      height: 78px;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+
     .wd-project-body {
       min-width: 0;
       flex: 1;
@@ -271,6 +287,11 @@
         width: 72px;
         height: 72px;
       }
+
+      .wd-project-thumb.is-sprite img {
+        width: 32px;             /* 2x */
+        height: 52px;
+      }
     }
 
       .wd-github-btn {
@@ -330,6 +351,16 @@
             <div class="wd-project-body">
               <h3><a href="https://uintahvalley.com/" target="_blank" rel="noopener">UintahValley.com</a></h3>
               <p>I’m serious about Vanilla Extract. I make and bottle my own extract, and sometimes I even sell it! This website was built as a sales portal.</p>
+            </div>
+          </div>
+
+          <div class="wd-project">
+            <div class="wd-project-thumb is-sprite">
+              <img src="../images/passion/web-design/alyssaval-sprite-v8.png?v=1" alt="" width="16" height="26">
+            </div>
+            <div class="wd-project-body">
+              <h3><a href="https://alyssaval.com/" target="_blank" rel="noopener">AlyssaVal.com</a></h3>
+              <p>This is a personal site for my wife. She wanted a site where she could also showcase her career and interests. She is a big fan of the show Murder She Wrote and the game Stardew Valley, so we went with a mixed motif across the site. There are a couple of fun easter eggs hidden across the site, see how many you can find!</p>
             </div>
           </div>
 
