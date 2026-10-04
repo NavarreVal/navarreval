@@ -38,6 +38,11 @@
   var drag = null;
   var pinch = null;
   var lastClick = null;
+  var pins = [];
+  var pinSeq = 1;
+  var pinLayer = document.createElement("div");
+  pinLayer.className = "pin-layer";
+  viewer.appendChild(pinLayer);
 
   function viewSize() {
     return { w: viewer.clientWidth, h: viewer.clientHeight };
@@ -54,6 +59,7 @@
     image.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px) scale(" + scale + ")";
     var v = viewSize();
     anchor = { x: (v.w / 2 - x) / scale, y: (v.h / 2 - y) / scale };
+    positionPins();
   }
 
   function clampPan() {
@@ -148,24 +154,99 @@
     };
   }
 
-  // A second click on the same town icon or label opens it. One click does not.
+  function mapKey() {
+    return mode === "town" && town ? town.src : REGION_SRC;
+  }
+
+  function positionPins() {
+    var key = mapKey();
+    var visible = image.style.visibility !== "hidden";
+    pinLayer.hidden = !visible;
+    for (var i = 0; i < pins.length; i++) {
+      var pin = pins[i];
+      var show = visible && pin.mapKey === key;
+      pin.el.hidden = !show;
+      if (!show) continue;
+      pin.el.style.left = (x + pin.px * scale) + "px";
+      pin.el.style.top = (y + pin.py * scale) + "px";
+    }
+  }
+
+  function addPin(px, py) {
+    var pin = { id: pinSeq++, mapKey: mapKey(), px: px, py: py };
+    var el = document.createElement("button");
+    el.type = "button";
+    el.className = "map-pin";
+    el.setAttribute("aria-label", "Remove pin");
+    el.innerHTML = '<svg viewBox="0 0 22 32" aria-hidden="true" focusable="false"><path fill="#8f2433" stroke="#fff8ee" stroke-width="1.5" stroke-linejoin="round" d="M11 31.2C11 31.2 2.6 19.6 2.6 12.4a8.4 8.4 0 1 1 16.8 0c0 7.2-8.4 18.8-8.4 18.8z"/><circle cx="11" cy="12.2" r="2.7" fill="#fff8ee"/></svg>';
+    pin.el = el;
+    pins.push(pin);
+    pinLayer.appendChild(el);
+    positionPins();
+    return pin;
+  }
+
+  function removePin(id) {
+    for (var i = 0; i < pins.length; i++) {
+      if (pins[i].id !== id) continue;
+      pins[i].el.remove();
+      pins.splice(i, 1);
+      return;
+    }
+  }
+
+  function pinAtEvent(event) {
+    var key = mapKey();
+    for (var i = pins.length - 1; i >= 0; i--) {
+      var pin = pins[i];
+      if (pin.mapKey !== key || pin.el.hidden) continue;
+      var rect = pin.el.getBoundingClientRect();
+      if (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+      ) return pin;
+    }
+    return null;
+  }
+
+  // A second click on the same town icon or label opens it. One click drops a pin.
   function noteClick(event) {
-    if (mode !== "region" || loading || !imgW) return;
+    if (loading || !imgW) return;
     var point = imagePoint(event.clientX, event.clientY);
-    var hit = townAt(point.x, point.y);
+    if (point.x < 0 || point.y < 0 || point.x > imgW || point.y > imgH) {
+      lastClick = null;
+      return;
+    }
+    var hit = mode === "region" ? townAt(point.x, point.y) : null;
     var now = Date.now();
-    if (
-      hit &&
-      lastClick &&
-      lastClick.town === hit &&
-      now - lastClick.time < 450 &&
-      Math.hypot(event.clientX - lastClick.x, event.clientY - lastClick.y) < 24
-    ) {
+    var quick = lastClick
+      && now - lastClick.time < 450
+      && Math.hypot(event.clientX - lastClick.x, event.clientY - lastClick.y) < 24;
+    if (quick && hit && lastClick.town === hit) {
+      if (lastClick.pinId) removePin(lastClick.pinId);
       lastClick = null;
       enterTown(hit);
       return;
     }
-    lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY };
+    var pin = pinAtEvent(event);
+    // A double-click on open map keeps the pin the first click just placed.
+    if (pin && quick && lastClick && lastClick.pinId === pin.id) {
+      lastClick = null;
+      return;
+    }
+    if (pin) {
+      removePin(pin.id);
+      lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY, pinId: null, removedPin: true };
+      return;
+    }
+    if (quick && lastClick && lastClick.removedPin) {
+      lastClick = null;
+      return;
+    }
+    var placed = addPin(point.x, point.y);
+    lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY, pinId: placed.id, removedPin: false };
   }
 
   function enterTown(next) {
@@ -174,6 +255,7 @@
     mode = "town";
     town = next;
     image.style.visibility = "hidden";
+    pinLayer.hidden = true;
     loadMap(next.src, next.name + " town map", function () {
       loading = false;
       label.hidden = false;
@@ -193,6 +275,7 @@
     drag = null;
     viewer.classList.remove("is-panning");
     image.style.visibility = "hidden";
+    pinLayer.hidden = true;
     loadMap(REGION_SRC, REGION_ALT, function () {
       loading = false;
       var v = viewSize();

@@ -34,6 +34,46 @@ body.map-viewer {
   -webkit-user-drag: none;
 }
 
+.pin-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pin-layer[hidden] {
+  display: none;
+}
+
+.map-pin {
+  position: absolute;
+  width: 22px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+  transform: translate(-50%, -100%);
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+}
+
+.map-pin svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map-pin[hidden] {
+  display: none;
+}
+
+.viewer.is-panning .map-pin {
+  cursor: grabbing;
+}
+
 .viewer-back {
   position: fixed;
   z-index: 2;
