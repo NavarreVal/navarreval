@@ -25,7 +25,7 @@ a:hover {
 }
 
 .reference {
-  max-width: 40rem;
+  max-width: 44rem;
   margin: 0 auto;
   padding: 2.75rem 1.25rem 4rem;
 }
@@ -55,4 +55,48 @@ a:hover {
   margin: 0.35rem 0;
   font-size: 1.15rem;
   line-height: 1.45;
+}
+
+.party {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem 0.7rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.party li {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.party a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+
+.party img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #e4dfd2;
+}
+
+.party a:hover span,
+.party a:focus-visible span {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .party {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
