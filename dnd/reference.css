@@ -1,0 +1,167 @@
+/* Campaign reference. Scoped to /dnd so the public site is unchanged. */
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f4f1e8;
+  color: #1c1914;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+a {
+  color: #1a4f34;
+}
+
+a:hover {
+  color: #0e3322;
+}
+
+.reference {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2.75rem 1.25rem 4rem;
+}
+
+.reference h1 {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.reference h2 {
+  margin: 2rem 0 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a645a;
+}
+
+.reference ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.reference li {
+  margin: 0.35rem 0;
+  font-size: 1.15rem;
+  line-height: 1.45;
+}
+
+.map-page {
+  padding: 1rem 1rem 2.5rem;
+}
+
+.map-back {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.map-page h1 {
+  margin: 0 0 0.85rem;
+  font-size: 1.45rem;
+  font-weight: 650;
+}
+
+.map-stage {
+  position: relative;
+  width: min(1440px, 100%);
+  margin: 0 auto;
+}
+
+.map-stage > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hotspot {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  min-width: 0;
+  min-height: 0;
+  font-size: 0;
+  line-height: 0;
+  appearance: none;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible {
+  background: rgba(255, 248, 220, 0.38);
+  outline: 1px solid rgba(36, 28, 12, 0.55);
+  outline-offset: 0;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: auto;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 1.25rem;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-sheet {
+  width: min(1600px, 100%);
+  margin: 0 auto;
+}
+
+.lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.55rem;
+  color: #f4f1e8;
+}
+
+.lightbox-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.lightbox-close {
+  flex: none;
+  border: 1px solid rgba(244, 241, 232, 0.45);
+  background: transparent;
+  color: #f4f1e8;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+  background: rgba(244, 241, 232, 0.12);
+}
+
+.lightbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

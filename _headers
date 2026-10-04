@@ -31,3 +31,7 @@
 /assets/Resume - J Navarre Valdivieso.pdf
   ! Cache-Control
   Cache-Control: public, max-age=3600
+
+# Campaign reference. Not linked from the public site.
+/dnd/*
+  X-Robots-Tag: noindex, nofollow
