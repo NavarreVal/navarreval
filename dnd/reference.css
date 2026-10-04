@@ -71,14 +71,24 @@ a:hover {
   font-size: 0.98rem;
 }
 
-.party a {
+.party a,
+.party button {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.45rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
   color: inherit;
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.3;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .party img {
@@ -91,8 +101,70 @@ a:hover {
 }
 
 .party a:hover span,
-.party a:focus-visible span {
+.party a:focus-visible span,
+.party button:hover span,
+.party button:focus-visible span {
   text-decoration: underline;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.portrait-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: auto;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 1.25rem;
+}
+
+.portrait-lightbox[hidden] {
+  display: none;
+}
+
+.portrait-lightbox-sheet {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.portrait-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.55rem;
+  color: #f4f1e8;
+}
+
+.portrait-lightbox-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.portrait-lightbox-close {
+  flex: none;
+  border: 1px solid rgba(244, 241, 232, 0.45);
+  background: transparent;
+  color: #f4f1e8;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.portrait-lightbox-close:hover,
+.portrait-lightbox-close:focus-visible {
+  background: rgba(244, 241, 232, 0.12);
+}
+
+.portrait-lightbox img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 640px) {

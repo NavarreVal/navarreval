@@ -48,6 +48,18 @@
       </ul>
     </section>
 
+    <section aria-labelledby="npcs-heading">
+      <h2 id="npcs-heading">NPC's</h2>
+      <ul class="party">
+        <li>
+          <button type="button" class="portrait" data-full="npcs/alden-crowe.jpg" data-title="Guard Captain Alden Crowe">
+            <img src="npcs/alden-crowe-thumb.jpg" alt="" width="498" height="498">
+            <span>Guard Captain Alden Crowe</span>
+          </button>
+        </li>
+      </ul>
+    </section>
+
     <section aria-labelledby="references-heading">
       <h2 id="references-heading">References</h2>
       <ul>
@@ -56,5 +68,16 @@
       </ul>
     </section>
   </main>
+
+  <div id="portrait-lightbox" class="portrait-lightbox" hidden>
+    <div class="portrait-lightbox-sheet">
+      <div class="portrait-lightbox-bar">
+        <p id="portrait-lightbox-title" class="portrait-lightbox-title"></p>
+        <button type="button" class="portrait-lightbox-close">Close</button>
+      </div>
+      <img id="portrait-lightbox-image" alt="">
+    </div>
+  </div>
+  <script src="reference.js"></script>
 </body>
 </html>
