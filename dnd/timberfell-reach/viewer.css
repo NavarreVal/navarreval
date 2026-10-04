@@ -1,0 +1,130 @@
+html,
+body.map-viewer {
+  height: 100%;
+  overflow: hidden;
+  background: #d8dcc3;
+}
+
+body.map-viewer {
+  user-select: none;
+}
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  background: #d8dcc3;
+}
+
+.viewer.is-panning {
+  cursor: grabbing;
+}
+
+.viewer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  visibility: hidden;
+  transform-origin: 0 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.pin-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.pin-layer[hidden] {
+  display: none;
+}
+
+.map-pin {
+  position: absolute;
+  width: 22px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 0;
+  transform: translate(-50%, -100%);
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+}
+
+.map-pin svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map-pin[hidden] {
+  display: none;
+}
+
+.viewer.is-panning .map-pin {
+  cursor: grabbing;
+}
+
+.viewer-back {
+  position: fixed;
+  z-index: 2;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  background: rgba(244, 241, 232, 0.94);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.viewer-label {
+  position: fixed;
+  z-index: 2;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  background: rgba(244, 241, 232, 0.94);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  font-size: 1rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.viewer-label[hidden] {
+  display: none;
+}
+
+.town-back {
+  position: fixed;
+  z-index: 2;
+  top: 0.75rem;
+  right: 0.75rem;
+  margin: 0;
+  padding: 0.4rem 0.85rem;
+  border: 0;
+  border-radius: 4px;
+  background: rgba(244, 241, 232, 0.94);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.town-back[hidden] {
+  display: none;
+}

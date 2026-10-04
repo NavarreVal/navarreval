@@ -1,0 +1,174 @@
+/* Campaign reference. Scoped to /dnd so the public site is unchanged. */
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f4f1e8;
+  color: #1c1914;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+a {
+  color: #1a4f34;
+}
+
+a:hover {
+  color: #0e3322;
+}
+
+.reference {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2.75rem 1.25rem 4rem;
+}
+
+.reference h1 {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.reference h2 {
+  margin: 2rem 0 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a645a;
+}
+
+.reference ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.reference li {
+  margin: 0.35rem 0;
+  font-size: 1.15rem;
+  line-height: 1.45;
+}
+
+.party {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem 0.7rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.party li {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.party a,
+.party button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.party img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #e4dfd2;
+}
+
+.party a:hover span,
+.party a:focus-visible span,
+.party button:hover span,
+.party button:focus-visible span {
+  text-decoration: underline;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.portrait-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: auto;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 1.25rem;
+}
+
+.portrait-lightbox[hidden] {
+  display: none;
+}
+
+.portrait-lightbox-sheet {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.portrait-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.55rem;
+  color: #f4f1e8;
+}
+
+.portrait-lightbox-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.portrait-lightbox-close {
+  flex: none;
+  border: 1px solid rgba(244, 241, 232, 0.45);
+  background: transparent;
+  color: #f4f1e8;
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.portrait-lightbox-close:hover,
+.portrait-lightbox-close:focus-visible {
+  background: rgba(244, 241, 232, 0.12);
+}
+
+.portrait-lightbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .party {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

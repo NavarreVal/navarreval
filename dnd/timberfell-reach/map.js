@@ -1,0 +1,496 @@
+(function () {
+  // Zoom this many times past the fitted region map, with the view center
+  // inside a town's area, and that town map replaces the region.
+  var ENTER = 3.2;
+  // Town maps can zoom out only until this share of the shorter viewport side
+  // is padding on every edge. The wheel never leaves the town.
+  var TOWN_PAD = 0.08;
+  var REGION_SRC = "../maps/timberfell-reach.jpg";
+  var REGION_ALT = "Region map of Timberfell Reach";
+  var TOWNS = [
+    { name: "Wardholm", src: "../maps/wardholm.jpg", area: [250, 420, 530, 630] },
+    { name: "Deepwood", src: "../maps/deepwood.jpg", area: [180, 880, 430, 1060] },
+    { name: "Sister's Rest", src: "../maps/sisters-rest.jpg", area: [460, 730, 720, 910] },
+    { name: "Adara", src: "../maps/adara.jpg", area: [1400, 390, 1700, 610] },
+    { name: "Gort", src: "../maps/gort.jpg", area: [1600, 640, 1800, 820] },
+    { name: "Mullagh", src: "../maps/mullagh.jpg", area: [1280, 700, 1540, 910] },
+    { name: "Silverfield", src: "../maps/silverfield.jpg", area: [1460, 940, 1820, 1180] },
+    { name: "Greatstump", src: "../maps/greatstump.jpg", area: [800, 1120, 1120, 1360] },
+    { name: "Wolfden", src: "../maps/wolfden.jpg", area: [1160, 1240, 1480, 1480] },
+    { name: "Skymill", src: "../maps/skymill.jpg", area: [2000, 1400, 2340, 1660] },
+    { name: "Kinbrace", src: "../maps/kinbrace.jpg", area: [1500, 1540, 1820, 1780] },
+    { name: "Abbots Cove", src: "../maps/abbots-cove.jpg", area: [920, 1860, 1220, 2160] }
+  ];
+
+  var viewer = document.getElementById("viewer");
+  var image = document.getElementById("map-image");
+  var label = document.getElementById("viewer-label");
+  var townBack = document.getElementById("town-back");
+  var regionView = null;
+
+  var mode = "region";
+  var town = null;
+  var loading = false;
+  var loadToken = 0;
+  var imgW = 0;
+  var imgH = 0;
+  var scale = 1;
+  var x = 0;
+  var y = 0;
+  var fitted = true;
+  var anchor = null;
+  var active = new Map();
+  var drag = null;
+  var pinch = null;
+  var lastClick = null;
+  var pins = [];
+  var pinSeq = 1;
+  var pinLayer = document.createElement("div");
+  pinLayer.className = "pin-layer";
+  viewer.appendChild(pinLayer);
+
+  function viewSize() {
+    return { w: viewer.clientWidth, h: viewer.clientHeight };
+  }
+
+  function fitScale() {
+    var v = viewSize();
+    return Math.min(v.w / imgW, v.h / imgH);
+  }
+
+  function townMinScale() {
+    var v = viewSize();
+    var pad = Math.min(v.w, v.h) * TOWN_PAD;
+    var innerW = v.w - pad * 2;
+    var innerH = v.h - pad * 2;
+    if (innerW < 1) innerW = 1;
+    if (innerH < 1) innerH = 1;
+    return Math.min(innerW / imgW, innerH / imgH);
+  }
+
+  function zoomLimits() {
+    var fit = fitScale();
+    if (mode === "town") return { min: townMinScale(), max: fit * 5 };
+    return { min: fit, max: fit * 8 };
+  }
+
+  function apply() {
+    image.style.width = imgW + "px";
+    image.style.height = imgH + "px";
+    image.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px) scale(" + scale + ")";
+    var v = viewSize();
+    anchor = { x: (v.w / 2 - x) / scale, y: (v.h / 2 - y) / scale };
+    positionPins();
+  }
+
+  function clampPan() {
+    var v = viewSize();
+    var dw = imgW * scale;
+    var dh = imgH * scale;
+    // Fitted zoom stays centered. Past that, keep the focal point and still
+    // let edge towns reach the middle of a wide window.
+    if (scale <= fitScale() * 1.001) {
+      x = (v.w - dw) / 2;
+      y = (v.h - dh) / 2;
+      return;
+    }
+    if (dw <= v.w) {
+      if (x < 0) x = 0;
+      if (x > v.w - dw) x = v.w - dw;
+    } else {
+      var minX = v.w - dw - v.w * 0.35;
+      var maxX = v.w * 0.35;
+      if (x < minX) x = minX;
+      if (x > maxX) x = maxX;
+    }
+    if (dh <= v.h) {
+      if (y < 0) y = 0;
+      if (y > v.h - dh) y = v.h - dh;
+    } else {
+      var minY = v.h - dh - v.h * 0.35;
+      var maxY = v.h * 0.35;
+      if (y < minY) y = minY;
+      if (y > maxY) y = maxY;
+    }
+  }
+
+  function fitImage() {
+    var v = viewSize();
+    scale = fitScale();
+    x = (v.w - imgW * scale) / 2;
+    y = (v.h - imgH * scale) / 2;
+    fitted = true;
+    image.style.visibility = "visible";
+    apply();
+  }
+
+  function loadMap(src, alt, done) {
+    var token = ++loadToken;
+    image.alt = alt;
+    image.onload = function () {
+      if (token !== loadToken) return;
+      imgW = image.naturalWidth;
+      imgH = image.naturalHeight;
+      done();
+    };
+    image.src = src;
+    if (image.complete && image.naturalWidth && token === loadToken) {
+      image.onload = null;
+      imgW = image.naturalWidth;
+      imgH = image.naturalHeight;
+      done();
+    }
+  }
+
+  function viewCenter() {
+    var v = viewSize();
+    return { x: (v.w / 2 - x) / scale, y: (v.h / 2 - y) / scale };
+  }
+
+  function townAt(px, py) {
+    for (var i = 0; i < TOWNS.length; i++) {
+      var area = TOWNS[i].area;
+      if (px >= area[0] && px <= area[2] && py >= area[1] && py <= area[3]) return TOWNS[i];
+    }
+    return null;
+  }
+
+  function considerTownAt(px, py) {
+    if (mode !== "region" || loading) return;
+    if (scale < fitScale() * ENTER) return;
+    var hit = townAt(px, py);
+    if (hit) enterTown(hit);
+  }
+
+  function considerTown() {
+    var c = viewCenter();
+    considerTownAt(c.x, c.y);
+  }
+
+  function imagePoint(clientX, clientY) {
+    var rect = viewer.getBoundingClientRect();
+    return {
+      x: (clientX - rect.left - x) / scale,
+      y: (clientY - rect.top - y) / scale
+    };
+  }
+
+  function mapKey() {
+    return mode === "town" && town ? town.src : REGION_SRC;
+  }
+
+  function positionPins() {
+    var key = mapKey();
+    var visible = image.style.visibility !== "hidden";
+    pinLayer.hidden = !visible;
+    for (var i = 0; i < pins.length; i++) {
+      var pin = pins[i];
+      var show = visible && pin.mapKey === key;
+      pin.el.hidden = !show;
+      if (!show) continue;
+      pin.el.style.left = (x + pin.px * scale) + "px";
+      pin.el.style.top = (y + pin.py * scale) + "px";
+    }
+  }
+
+  function addPin(px, py) {
+    var pin = { id: pinSeq++, mapKey: mapKey(), px: px, py: py };
+    var el = document.createElement("button");
+    el.type = "button";
+    el.className = "map-pin";
+    el.setAttribute("aria-label", "Remove pin");
+    el.innerHTML = '<svg viewBox="0 0 22 32" aria-hidden="true" focusable="false"><path fill="#8f2433" stroke="#fff8ee" stroke-width="1.5" stroke-linejoin="round" d="M11 31.2C11 31.2 2.6 19.6 2.6 12.4a8.4 8.4 0 1 1 16.8 0c0 7.2-8.4 18.8-8.4 18.8z"/><circle cx="11" cy="12.2" r="2.7" fill="#fff8ee"/></svg>';
+    pin.el = el;
+    pins.push(pin);
+    pinLayer.appendChild(el);
+    positionPins();
+    return pin;
+  }
+
+  function removePin(id) {
+    for (var i = 0; i < pins.length; i++) {
+      if (pins[i].id !== id) continue;
+      pins[i].el.remove();
+      pins.splice(i, 1);
+      return;
+    }
+  }
+
+  function pinAtEvent(event) {
+    var key = mapKey();
+    for (var i = pins.length - 1; i >= 0; i--) {
+      var pin = pins[i];
+      if (pin.mapKey !== key || pin.el.hidden) continue;
+      var rect = pin.el.getBoundingClientRect();
+      if (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+      ) return pin;
+    }
+    return null;
+  }
+
+  // A second click on the same town icon or label opens it. One click drops a pin.
+  function noteClick(event) {
+    if (loading || !imgW) return;
+    var point = imagePoint(event.clientX, event.clientY);
+    if (point.x < 0 || point.y < 0 || point.x > imgW || point.y > imgH) {
+      lastClick = null;
+      return;
+    }
+    var hit = mode === "region" ? townAt(point.x, point.y) : null;
+    var now = Date.now();
+    var quick = lastClick
+      && now - lastClick.time < 450
+      && Math.hypot(event.clientX - lastClick.x, event.clientY - lastClick.y) < 24;
+    if (quick && hit && lastClick.town === hit) {
+      if (lastClick.pinId) removePin(lastClick.pinId);
+      lastClick = null;
+      enterTown(hit);
+      return;
+    }
+    var pin = pinAtEvent(event);
+    // A double-click on open map keeps the pin the first click just placed.
+    if (pin && quick && lastClick && lastClick.pinId === pin.id) {
+      lastClick = null;
+      return;
+    }
+    if (pin) {
+      removePin(pin.id);
+      lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY, pinId: null, removedPin: true };
+      return;
+    }
+    if (quick && lastClick && lastClick.removedPin) {
+      lastClick = null;
+      return;
+    }
+    var placed = addPin(point.x, point.y);
+    lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY, pinId: placed.id, removedPin: false };
+  }
+
+  function rememberRegion() {
+    var v = viewSize();
+    regionView = {
+      scale: scale,
+      x: x,
+      y: y,
+      fitted: fitted,
+      anchor: { x: (v.w / 2 - x) / scale, y: (v.h / 2 - y) / scale },
+      fit: fitScale(),
+      vw: v.w,
+      vh: v.h
+    };
+  }
+
+  function enterTown(next) {
+    if (loading || mode === "town") return;
+    rememberRegion();
+    loading = true;
+    mode = "town";
+    town = next;
+    image.style.visibility = "hidden";
+    pinLayer.hidden = true;
+    loadMap(next.src, next.name + " town map", function () {
+      loading = false;
+      label.hidden = false;
+      label.textContent = next.name;
+      townBack.hidden = false;
+      fitImage();
+    });
+  }
+
+  function exitTown() {
+    if (mode !== "town" || loading) return;
+    var saved = regionView;
+    mode = "region";
+    town = null;
+    label.hidden = true;
+    townBack.hidden = true;
+    loading = true;
+    pinch = null;
+    drag = null;
+    viewer.classList.remove("is-panning");
+    image.style.visibility = "hidden";
+    pinLayer.hidden = true;
+    loadMap(REGION_SRC, REGION_ALT, function () {
+      loading = false;
+      var v = viewSize();
+      if (!saved) {
+        fitImage();
+        return;
+      }
+      if (saved.vw === v.w && saved.vh === v.h) {
+        scale = saved.scale;
+        x = saved.x;
+        y = saved.y;
+        fitted = saved.fitted;
+      } else {
+        var fitNow = fitScale();
+        scale = saved.fitted ? fitNow : saved.scale * (fitNow / saved.fit);
+        if (scale < fitNow) scale = fitNow;
+        if (scale > fitNow * 8) scale = fitNow * 8;
+        x = v.w / 2 - saved.anchor.x * scale;
+        y = v.h / 2 - saved.anchor.y * scale;
+        fitted = !!saved.fitted;
+      }
+      clampPan();
+      image.style.visibility = "visible";
+      apply();
+    });
+  }
+
+  function zoomAt(cx, cy, next) {
+    if (loading || !imgW) return;
+    var limits = zoomLimits();
+    var min = limits.min;
+    var max = limits.max;
+    if (next < min) next = min;
+    if (next > max) next = max;
+    var wx = (cx - x) / scale;
+    var wy = (cy - y) / scale;
+    scale = next;
+    x = cx - wx * scale;
+    y = cy - wy * scale;
+    fitted = false;
+    clampPan();
+    apply();
+    if (mode === "region") considerTownAt(wx, wy);
+  }
+
+  function pinchZoom(midX, midY, next, wx, wy) {
+    if (loading || !imgW) return;
+    var limits = zoomLimits();
+    var min = limits.min;
+    var max = limits.max;
+    if (next < min) next = min;
+    if (next > max) next = max;
+    scale = next;
+    x = midX - wx * scale;
+    y = midY - wy * scale;
+    fitted = false;
+    clampPan();
+    apply();
+  }
+
+  document.addEventListener("wheel", function (event) {
+    if (event.target.closest && event.target.closest("a, .town-back")) return;
+    event.preventDefault();
+    var rect = viewer.getBoundingClientRect();
+    var dy = event.deltaY;
+    if (event.deltaMode === 1) dy *= 16;
+    if (event.deltaMode === 2) dy *= viewSize().h;
+    zoomAt(event.clientX - rect.left, event.clientY - rect.top, scale * Math.exp(-dy * 0.0016));
+  }, { passive: false });
+
+  viewer.addEventListener("pointerdown", function (event) {
+    if (loading) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    event.preventDefault();
+    try { viewer.setPointerCapture(event.pointerId); } catch (err) { /* already released */ }
+    active.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (active.size >= 2) {
+      pinch = startPinch();
+      drag = null;
+      viewer.classList.remove("is-panning");
+      return;
+    }
+    drag = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      ox: x,
+      oy: y,
+      moved: false
+    };
+    viewer.classList.add("is-panning");
+  });
+
+  function startPinch() {
+    var pts = Array.from(active.values());
+    var rect = viewer.getBoundingClientRect();
+    var mx = (pts[0].x + pts[1].x) / 2 - rect.left;
+    var my = (pts[0].y + pts[1].y) / 2 - rect.top;
+    return {
+      dist: Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1,
+      scale: scale,
+      wx: (mx - x) / scale,
+      wy: (my - y) / scale
+    };
+  }
+
+  viewer.addEventListener("pointermove", function (event) {
+    if (!active.has(event.pointerId)) return;
+    active.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (active.size >= 2 && pinch) {
+      var pts = Array.from(active.values());
+      var rect = viewer.getBoundingClientRect();
+      var mx = (pts[0].x + pts[1].x) / 2 - rect.left;
+      var my = (pts[0].y + pts[1].y) / 2 - rect.top;
+      var dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      pinchZoom(mx, my, pinch.scale * (dist / pinch.dist), pinch.wx, pinch.wy);
+      return;
+    }
+    if (!drag || drag.id !== event.pointerId) return;
+    var dx = event.clientX - drag.x;
+    var dy = event.clientY - drag.y;
+    if (dx * dx + dy * dy > 64) drag.moved = true;
+    x = drag.ox + dx;
+    y = drag.oy + dy;
+    fitted = false;
+    clampPan();
+    apply();
+  });
+
+  function endPointer(event) {
+    var wasDrag = drag && drag.id === event.pointerId;
+    var moved = wasDrag && drag.moved;
+    var wasPinch = active.size >= 2;
+    active.delete(event.pointerId);
+    if (wasDrag) {
+      drag = null;
+      viewer.classList.remove("is-panning");
+      if (!moved) noteClick(event);
+      else if (mode === "region") considerTown();
+    }
+    if (active.size < 2) {
+      if (wasPinch && pinch && mode === "region") considerTownAt(pinch.wx, pinch.wy);
+      pinch = null;
+    }
+    if (active.size === 1) {
+      var id = active.keys().next().value;
+      var point = active.get(id);
+      drag = { id: id, x: point.x, y: point.y, ox: x, oy: y, moved: true };
+      viewer.classList.add("is-panning");
+    }
+  }
+
+  viewer.addEventListener("pointerup", endPointer);
+  viewer.addEventListener("pointercancel", endPointer);
+
+  window.addEventListener("resize", function () {
+    if (loading || !imgW) return;
+    if (fitted) {
+      fitImage();
+      return;
+    }
+    if (!anchor) return;
+    var v = viewSize();
+    var limits = zoomLimits();
+    if (scale < limits.min) scale = limits.min;
+    if (scale > limits.max) scale = limits.max;
+    x = v.w / 2 - anchor.x * scale;
+    y = v.h / 2 - anchor.y * scale;
+    clampPan();
+    apply();
+  });
+
+  townBack.addEventListener("click", function () {
+    exitTown();
+  });
+
+  loadMap(REGION_SRC, REGION_ALT, function () {
+    fitImage();
+  });
+})();
