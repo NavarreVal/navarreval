@@ -2,6 +2,9 @@
   // Zoom this many times past the fitted region map, with the view center
   // inside a town's area, and that town map replaces the region.
   var ENTER = 3.2;
+  // Town maps can zoom out only until this share of the shorter viewport side
+  // is padding on every edge. The wheel never leaves the town.
+  var TOWN_PAD = 0.08;
   var REGION_SRC = "../maps/timberfell-reach.jpg";
   var REGION_ALT = "Region map of Timberfell Reach";
   var TOWNS = [
@@ -22,6 +25,8 @@
   var viewer = document.getElementById("viewer");
   var image = document.getElementById("map-image");
   var label = document.getElementById("viewer-label");
+  var townBack = document.getElementById("town-back");
+  var regionView = null;
 
   var mode = "region";
   var town = null;
@@ -51,6 +56,22 @@
   function fitScale() {
     var v = viewSize();
     return Math.min(v.w / imgW, v.h / imgH);
+  }
+
+  function townMinScale() {
+    var v = viewSize();
+    var pad = Math.min(v.w, v.h) * TOWN_PAD;
+    var innerW = v.w - pad * 2;
+    var innerH = v.h - pad * 2;
+    if (innerW < 1) innerW = 1;
+    if (innerH < 1) innerH = 1;
+    return Math.min(innerW / imgW, innerH / imgH);
+  }
+
+  function zoomLimits() {
+    var fit = fitScale();
+    if (mode === "town") return { min: townMinScale(), max: fit * 5 };
+    return { min: fit, max: fit * 8 };
   }
 
   function apply() {
@@ -249,8 +270,23 @@
     lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY, pinId: placed.id, removedPin: false };
   }
 
+  function rememberRegion() {
+    var v = viewSize();
+    regionView = {
+      scale: scale,
+      x: x,
+      y: y,
+      fitted: fitted,
+      anchor: { x: (v.w / 2 - x) / scale, y: (v.h / 2 - y) / scale },
+      fit: fitScale(),
+      vw: v.w,
+      vh: v.h
+    };
+  }
+
   function enterTown(next) {
     if (loading || mode === "town") return;
+    rememberRegion();
     loading = true;
     mode = "town";
     town = next;
@@ -260,16 +296,18 @@
       loading = false;
       label.hidden = false;
       label.textContent = next.name;
+      townBack.hidden = false;
       fitImage();
     });
   }
 
   function exitTown() {
     if (mode !== "town" || loading) return;
-    var back = town;
+    var saved = regionView;
     mode = "region";
     town = null;
     label.hidden = true;
+    townBack.hidden = true;
     loading = true;
     pinch = null;
     drag = null;
@@ -279,12 +317,24 @@
     loadMap(REGION_SRC, REGION_ALT, function () {
       loading = false;
       var v = viewSize();
-      scale = fitScale() * ENTER * 0.82;
-      var cx = (back.area[0] + back.area[2]) / 2;
-      var cy = (back.area[1] + back.area[3]) / 2;
-      x = v.w / 2 - cx * scale;
-      y = v.h / 2 - cy * scale;
-      fitted = false;
+      if (!saved) {
+        fitImage();
+        return;
+      }
+      if (saved.vw === v.w && saved.vh === v.h) {
+        scale = saved.scale;
+        x = saved.x;
+        y = saved.y;
+        fitted = saved.fitted;
+      } else {
+        var fitNow = fitScale();
+        scale = saved.fitted ? fitNow : saved.scale * (fitNow / saved.fit);
+        if (scale < fitNow) scale = fitNow;
+        if (scale > fitNow * 8) scale = fitNow * 8;
+        x = v.w / 2 - saved.anchor.x * scale;
+        y = v.h / 2 - saved.anchor.y * scale;
+        fitted = !!saved.fitted;
+      }
       clampPan();
       image.style.visibility = "visible";
       apply();
@@ -293,12 +343,9 @@
 
   function zoomAt(cx, cy, next) {
     if (loading || !imgW) return;
-    var min = fitScale();
-    if (mode === "town" && next < min * 0.995) {
-      exitTown();
-      return;
-    }
-    var max = min * (mode === "town" ? 5 : 8);
+    var limits = zoomLimits();
+    var min = limits.min;
+    var max = limits.max;
     if (next < min) next = min;
     if (next > max) next = max;
     var wx = (cx - x) / scale;
@@ -314,12 +361,9 @@
 
   function pinchZoom(midX, midY, next, wx, wy) {
     if (loading || !imgW) return;
-    var min = fitScale();
-    if (mode === "town" && next < min * 0.995) {
-      exitTown();
-      return;
-    }
-    var max = min * (mode === "town" ? 5 : 8);
+    var limits = zoomLimits();
+    var min = limits.min;
+    var max = limits.max;
     if (next < min) next = min;
     if (next > max) next = max;
     scale = next;
@@ -331,7 +375,7 @@
   }
 
   document.addEventListener("wheel", function (event) {
-    if (event.target.closest && event.target.closest("a")) return;
+    if (event.target.closest && event.target.closest("a, .town-back")) return;
     event.preventDefault();
     var rect = viewer.getBoundingClientRect();
     var dy = event.deltaY;
@@ -433,12 +477,17 @@
     }
     if (!anchor) return;
     var v = viewSize();
-    var min = fitScale();
-    if (scale < min) scale = min;
+    var limits = zoomLimits();
+    if (scale < limits.min) scale = limits.min;
+    if (scale > limits.max) scale = limits.max;
     x = v.w / 2 - anchor.x * scale;
     y = v.h / 2 - anchor.y * scale;
     clampPan();
     apply();
+  });
+
+  townBack.addEventListener("click", function () {
+    exitTown();
   });
 
   loadMap(REGION_SRC, REGION_ALT, function () {
