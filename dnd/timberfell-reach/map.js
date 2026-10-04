@@ -37,6 +37,7 @@
   var active = new Map();
   var drag = null;
   var pinch = null;
+  var lastClick = null;
 
   function viewSize() {
     return { w: viewer.clientWidth, h: viewer.clientHeight };
@@ -137,6 +138,34 @@
   function considerTown() {
     var c = viewCenter();
     considerTownAt(c.x, c.y);
+  }
+
+  function imagePoint(clientX, clientY) {
+    var rect = viewer.getBoundingClientRect();
+    return {
+      x: (clientX - rect.left - x) / scale,
+      y: (clientY - rect.top - y) / scale
+    };
+  }
+
+  // A second click on the same town icon or label opens it. One click does not.
+  function noteClick(event) {
+    if (mode !== "region" || loading || !imgW) return;
+    var point = imagePoint(event.clientX, event.clientY);
+    var hit = townAt(point.x, point.y);
+    var now = Date.now();
+    if (
+      hit &&
+      lastClick &&
+      lastClick.town === hit &&
+      now - lastClick.time < 450 &&
+      Math.hypot(event.clientX - lastClick.x, event.clientY - lastClick.y) < 24
+    ) {
+      lastClick = null;
+      enterTown(hit);
+      return;
+    }
+    lastClick = { time: now, town: hit, x: event.clientX, y: event.clientY };
   }
 
   function enterTown(next) {
@@ -279,7 +308,7 @@
     if (!drag || drag.id !== event.pointerId) return;
     var dx = event.clientX - drag.x;
     var dy = event.clientY - drag.y;
-    if (dx * dx + dy * dy > 16) drag.moved = true;
+    if (dx * dx + dy * dy > 64) drag.moved = true;
     x = drag.ox + dx;
     y = drag.oy + dy;
     fitted = false;
@@ -295,7 +324,8 @@
     if (wasDrag) {
       drag = null;
       viewer.classList.remove("is-panning");
-      if (moved && mode === "region") considerTown();
+      if (!moved) noteClick(event);
+      else if (mode === "region") considerTown();
     }
     if (active.size < 2) {
       if (wasPinch && pinch && mode === "region") considerTownAt(pinch.wx, pinch.wy);
