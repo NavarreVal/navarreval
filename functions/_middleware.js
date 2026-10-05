@@ -16,5 +16,17 @@ export async function onRequest(context) {
 
   url.pathname = "/dnd" + (url.pathname === "/" ? "/" : url.pathname);
   var request = new Request(url.toString(), context.request);
-  return context.env.ASSETS.fetch(request);
+  var response = await context.env.ASSETS.fetch(request);
+  var headers = new Headers(response.headers);
+  // Function responses otherwise keep a multi-hour browser TTL, so a new
+  // list can render against a cached stylesheet that still blows the icons up.
+  headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+  if (!headers.has("X-Robots-Tag")) {
+    headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: headers,
+  });
 }
