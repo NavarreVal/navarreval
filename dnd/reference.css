@@ -67,6 +67,10 @@ a:hover {
 }
 
 .party li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
   margin: 0;
   font-size: 0.98rem;
 }
@@ -105,6 +109,50 @@ a:hover {
 .party button:hover span,
 .party button:focus-visible span {
   text-decoration: underline;
+}
+
+.caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.28rem;
+  width: 100%;
+}
+
+.caption a {
+  display: inline;
+  flex: 0 1 auto;
+  width: auto;
+}
+
+.caption a:hover,
+.caption a:focus-visible {
+  text-decoration: underline;
+}
+
+.party button.portrait-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.08rem;
+  padding: 0;
+  gap: 0;
+  border-radius: 3px;
+  color: #1a4f34;
+}
+
+.party button.portrait-icon svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.party button.portrait-icon:hover,
+.party button.portrait-icon:focus-visible {
+  background: rgba(26, 79, 52, 0.12);
 }
 
 body.lightbox-open {
