@@ -358,7 +358,7 @@
         })
         .then(function (data) {
           var videos = data && Array.isArray(data.videos) ? data.videos.slice(0, 3) : [];
-          if (videos.length < 3) throw new Error("short");
+          if (!videos.length) throw new Error("empty");
           videos.forEach(function (video) {
             if (!video || !video.videoId) return;
             var card = document.createElement("a");

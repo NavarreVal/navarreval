@@ -53,6 +53,20 @@ function json(body, status, cacheControl) {
   });
 }
 
+async function lastGood(context, url) {
+  try {
+    var res = context.env && context.env.ASSETS
+      ? await context.env.ASSETS.fetch(new Request(url.origin + "/data/youtube-fallback.json"))
+      : await fetch(url.origin + "/data/youtube-fallback.json");
+    if (!res.ok) return null;
+    var data = await res.json();
+    if (!data || !Array.isArray(data.videos) || !data.videos.length) return null;
+    return { ok: true, stale: true, videos: data.videos.slice(0, 3) };
+  } catch (err) {
+    return null;
+  }
+}
+
 export async function onRequest(context) {
   var method = context.request.method;
   if (method !== "GET" && method !== "HEAD") {
@@ -72,12 +86,18 @@ export async function onRequest(context) {
         accept: "application/atom+xml, application/xml, text/xml",
         "user-agent": "navarreval-pages"
       },
-      cf: { cacheTtl: WEEK, cacheEverything: true }
+      // Cache only successful upstream responses; a cached 404/500 from YouTube
+      // would otherwise pin this colo to the error for a week.
+      cf: { cacheTtlByStatus: { "200-299": 3600, "300-599": 0 }, cacheEverything: true }
     });
     if (!upstream.ok) throw new Error(String(upstream.status));
     videos = latestVideos(await upstream.text());
     if (!videos.length) throw new Error("empty");
   } catch (err) {
+    // YouTube's feed intermittently fails for Cloudflare egress IPs. Serve the
+    // last-good copy committed in the repo instead of an empty error; never cache it.
+    var fallback = await lastGood(context, url);
+    if (fallback) return json(fallback, 200, "no-store");
     return json({ ok: false, videos: [] }, 502, "no-store");
   }
 
