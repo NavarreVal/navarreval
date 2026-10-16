@@ -351,42 +351,61 @@
         if (Number.isNaN(date.getTime())) return "";
         return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
       }
-      fetch("/api/youtube-latest")
-        .then(function (res) {
-          if (!res.ok) throw new Error(String(res.status));
-          return res.json();
-        })
-        .then(function (data) {
-          var videos = data && Array.isArray(data.videos) ? data.videos.slice(0, 3) : [];
-          if (!videos.length) throw new Error("empty");
-          videos.forEach(function (video) {
-            if (!video || !video.videoId) return;
-            var card = document.createElement("a");
-            card.className = "yt-card";
-            card.href = "https://www.youtube.com/watch?v=" + encodeURIComponent(video.videoId);
-            card.target = "_blank";
-            card.rel = "noopener";
-            var img = document.createElement("img");
-            img.src = video.thumbnail || ("https://i.ytimg.com/vi/" + video.videoId + "/hqdefault.jpg");
-            img.alt = "";
-            img.width = 480;
-            img.height = 360;
-            var title = document.createElement("span");
-            title.className = "yt-title";
-            title.textContent = video.title || "Untitled";
-            card.append(img, title);
-            var when = formatDate(video.published);
-            if (when) {
-              var time = document.createElement("time");
-              time.dateTime = video.published;
-              time.textContent = when;
-              card.append(time);
-            }
-            grid.appendChild(card);
+      function getVideos(path, ms) {
+        var controller = typeof AbortController === "function" ? new AbortController() : null;
+        var timer = controller ? setTimeout(function () { controller.abort(); }, ms) : 0;
+        return fetch(path, controller ? { signal: controller.signal } : {})
+          .then(function (res) {
+            if (!res.ok) throw new Error(String(res.status));
+            return res.json();
+          })
+          .then(function (data) {
+            clearTimeout(timer);
+            var videos = data && Array.isArray(data.videos) ? data.videos.slice(0, 3) : [];
+            if (!videos.length) throw new Error("empty");
+            return videos;
+          }, function (err) {
+            clearTimeout(timer);
+            throw err;
           });
-          if (!grid.children.length) throw new Error("empty");
-          grid.hidden = false;
+      }
+      function renderVideos(videos) {
+        if (!grid) throw new Error("no grid");
+        videos.forEach(function (video) {
+          if (!video || !video.videoId) return;
+          var card = document.createElement("a");
+          card.className = "yt-card";
+          card.href = "https://www.youtube.com/watch?v=" + encodeURIComponent(video.videoId);
+          card.target = "_blank";
+          card.rel = "noopener";
+          var img = document.createElement("img");
+          img.src = video.thumbnail || ("https://i.ytimg.com/vi/" + video.videoId + "/hqdefault.jpg");
+          img.alt = "";
+          img.width = 480;
+          img.height = 360;
+          img.onerror = function () { img.style.visibility = "hidden"; };
+          var title = document.createElement("span");
+          title.className = "yt-title";
+          title.textContent = video.title || "Untitled";
+          card.append(img, title);
+          var when = formatDate(video.published);
+          if (when) {
+            var time = document.createElement("time");
+            time.dateTime = video.published;
+            time.textContent = when;
+            card.append(time);
+          }
+          grid.appendChild(card);
+        });
+        if (!grid.children.length) throw new Error("empty");
+        grid.hidden = false;
+      }
+      // Live list first; if that fails, the committed last-good list.
+      getVideos("/api/youtube-latest", 8000)
+        .catch(function () {
+          return getVideos("/data/youtube-fallback.json", 8000);
         })
+        .then(renderVideos)
         .catch(showFallback);
 
       var playing = document.querySelector('[data-now="playing"]');
