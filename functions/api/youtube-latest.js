@@ -1,9 +1,13 @@
 // Newest three videos from https://www.youtube.com/@navarreval_
 // Channel ID UC-RWOoHTh6z5UDYatL8_6Gg. Parsed result is cached for 7 days.
+// If the feed fails or is empty, /data/youtube-fallback.json (last good list,
+// committed by hand) is served with no-store so the failure is never cached.
 
 const CHANNEL_ID = "UC-RWOoHTh6z5UDYatL8_6Gg";
 const FEED = "https://www.youtube.com/feeds/videos.xml?channel_id=" + CHANNEL_ID;
+const FALLBACK = "/data/youtube-fallback.json";
 const WEEK = 604800;
+const TIMEOUT_MS = 5000;
 
 function decodeXml(value) {
   return String(value || "")
@@ -53,6 +57,20 @@ function json(body, status, cacheControl) {
   });
 }
 
+async function fallbackVideos(context, origin) {
+  try {
+    var req = new Request(origin + FALLBACK, { method: "GET" });
+    var res = context.env && context.env.ASSETS
+      ? await context.env.ASSETS.fetch(req)
+      : await fetch(req);
+    if (!res.ok) return [];
+    var data = await res.json();
+    return data && Array.isArray(data.videos) ? data.videos.slice(0, 3) : [];
+  } catch (err) {
+    return [];
+  }
+}
+
 export async function onRequest(context) {
   var method = context.request.method;
   if (method !== "GET" && method !== "HEAD") {
@@ -66,19 +84,28 @@ export async function onRequest(context) {
   if (hit) return hit;
 
   var videos;
+  var timer;
   try {
+    var controller = new AbortController();
+    timer = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
     var upstream = await fetch(FEED, {
       headers: {
         accept: "application/atom+xml, application/xml, text/xml",
         "user-agent": "navarreval-pages"
       },
-      cf: { cacheTtl: WEEK, cacheEverything: true }
+      signal: controller.signal,
+      // Only cache good feed responses at the edge; never cache YouTube errors.
+      cf: { cacheEverything: true, cacheTtlByStatus: { "200-299": WEEK, "300-599": 0 } }
     });
     if (!upstream.ok) throw new Error(String(upstream.status));
     videos = latestVideos(await upstream.text());
     if (!videos.length) throw new Error("empty");
   } catch (err) {
-    return json({ ok: false, videos: [] }, 502, "no-store");
+    var backup = await fallbackVideos(context, url.origin);
+    if (!backup.length) return json({ ok: false, videos: [] }, 502, "no-store");
+    return json({ ok: true, fallback: true, videos: backup }, 200, "no-store");
+  } finally {
+    clearTimeout(timer);
   }
 
   var response = json(
