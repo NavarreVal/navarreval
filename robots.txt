@@ -1,0 +1,11 @@
+# Keep self-hosted video files out of search and AI crawler indexes.
+# Everything else on the site stays crawlable.
+User-agent: *
+Disallow: /assets/video/
+Disallow: /images/passion/3d-printing/print-timelapse-1.mp4
+Disallow: /images/passion/3d-printing/print-timelapse-1.webm
+Disallow: /images/passion/3d-printing/print-timelapse-2.mp4
+Disallow: /images/passion/3d-printing/print-timelapse-2.webm
+Disallow: /images/shooting/suppressor-demo.mp4
+Disallow: /*.mp4$
+Disallow: /*.webm$
