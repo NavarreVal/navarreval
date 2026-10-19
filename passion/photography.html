@@ -261,7 +261,23 @@
       "potatoSalad.jpg",
       "robinHoodMeal.jpg",
       "salsaHabanero.jpg",
+      "2019FallPics.jpg",
     ]);
+
+    // Display images that also ship AVIF and an 800w variant (stem-800.ext).
+    const photoResponsive = new Set([
+      "2019FallPics.jpg",
+    ]);
+    // Tiles are square crops (object-fit: cover) of 3:2 photos, so the
+    // rendered image is ~1.5x the tile width: 4 / 2 / 1 columns.
+    const tileSizes = "(max-width: 520px) 150vw, (max-width: 900px) 75vw, 37.5vw";
+
+    function lightboxSrc(src) {
+      const name = src.split("/").pop();
+      return photoResponsive.has(name)
+        ? src.replace(/[^/]+$/, "display/" + name)
+        : src;
+    }
 
     photos.forEach((src, i) => {
       const btn = document.createElement("button");
@@ -274,11 +290,26 @@
         const stem = name.replace(/\.[^.]+$/, "");
         const base = src.replace(/[^/]+$/, "display/" + stem);
         const picture = document.createElement("picture");
-        const source = document.createElement("source");
-        source.type = "image/webp";
-        source.srcset = base + ".webp";
+        if (photoResponsive.has(name)) {
+          for (const [type, ext] of [["image/avif", "avif"], ["image/webp", "webp"]]) {
+            const source = document.createElement("source");
+            source.type = type;
+            source.srcset = `${base}-800.${ext} 800w, ${base}.${ext} 1600w`;
+            source.sizes = tileSizes;
+            picture.append(source);
+          }
+          img.srcset = `${base}-800.jpg 800w, ${base}.jpg 1600w`;
+          img.sizes = tileSizes;
+          img.width = 1600;
+          img.height = 1067;
+        } else {
+          const source = document.createElement("source");
+          source.type = "image/webp";
+          source.srcset = base + ".webp";
+          picture.append(source);
+        }
         img.src = base + ".jpg";
-        picture.append(source, img);
+        picture.append(img);
         btn.appendChild(picture);
       } else {
         img.src = src;
@@ -290,7 +321,7 @@
 
     function openLightbox(index) {
       current = index;
-      lightboxImg.src = photos[current];
+      lightboxImg.src = lightboxSrc(photos[current]);
       lightbox.classList.add("active");
     }
 
