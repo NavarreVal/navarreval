@@ -10,7 +10,7 @@
  *   Item        -> name
  *   Location    -> city
  *   Category    -> category
- *   Status      -> status      ("Not yet", "Visited", or whatever the sheet says)
+ *   Status      -> status      ("Not yet", "Visited", "Done", or whatever the sheet says)
  *   Date done   -> dateDone    ("" until the sheet has a date; never invent one)
  *   Notes       -> notes       (kept so the row matches the sheet; never shown)
  *
@@ -266,6 +266,151 @@
         licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
         sourceUrl: "https://commons.wikimedia.org/wiki/File:Sverd_i_fjell.jpg"
       }
+    },
+    {
+      name: "Nauvoo Temple",
+      city: "Nauvoo, IL",
+      category: "Temple",
+      status: "Done",
+      dateDone: "2004",
+      notes: "",
+      tagline: "Limestone on the bluff, raised again where the first temple stood.",
+      facts: [
+        "William Weeks was the architect, working under Joseph Smith. Cornerstones were laid on 6 April 1841. A private dedication was held on 30 April 1846, and Orson Hyde offered a public dedicatory prayer on 1 May. Endowments had already started in the attic in December 1845, before the main body of the Church left Nauvoo in February 1846.",
+        "On the night of 8-9 October 1848 an arson fire gutted the building. A tornado on 27 May 1850 brought down a remaining wall. In February 1865 the city ordered the last fragment of the west facade taken down.",
+        "In April 1999 Gordon B. Hinckley announced a temple on the original site. He dedicated the Nauvoo Illinois Temple on 27 June 2002, the anniversary of the deaths of Joseph and Hyrum Smith at Carthage. The exterior recalls the first temple. The interior follows the plan of a modern temple."
+      ],
+      image: {
+        webp: "/images/bucket-list/nauvoo-temple-afternoon.webp",
+        jpeg: "/images/bucket-list/nauvoo-temple-afternoon.jpg",
+        alt: "Nauvoo Illinois Temple on a sunny afternoon, limestone walls and a tall spire above a green lawn",
+        width: 1600,
+        height: 1064,
+        focus: "center"
+      },
+      credit: {
+        author: "Nyttend",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:Nyttend",
+        license: "Public domain",
+        licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Sunny_afternoon_view_of_Nauvoo_Illinois_Temple.jpg"
+      }
+    },
+    {
+      name: "Kirtland Temple",
+      city: "Kirtland, OH",
+      category: "Church history site",
+      status: "Done",
+      dateDone: "2004",
+      notes: "",
+      tagline: "Two stacked halls, and a tower over the Ohio woods.",
+      facts: [
+        "Work began in June 1833. The temple was dedicated on 27 March 1836. On 3 April, Joseph Smith and Oliver Cowdery recorded a vision of Jesus Christ in the building, and then of Moses, Elias, and Elijah.",
+        "Two assembly halls sit one above the other, each with pulpits at both ends. The exterior mixes Federal, Greek Revival, and Gothic details. It was the first temple the Latter-day Saints finished.",
+        "A court awarded the building to the Reorganized Church of Jesus Christ of Latter Day Saints in 1880. That church, later Community of Christ, kept it until March 2024, when the Church of Jesus Christ of Latter-day Saints purchased it. It is a National Historic Landmark."
+      ],
+      image: {
+        webp: "/images/bucket-list/kirtland-temple.webp",
+        jpeg: "/images/bucket-list/kirtland-temple.jpg",
+        alt: "Kirtland Temple in Kirtland, Ohio, a pale meetinghouse with a square tower, arched windows, and a columned porch",
+        width: 1600,
+        height: 1200,
+        focus: "center"
+      },
+      credit: {
+        author: "JonRidinger",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:JonRidinger",
+        license: "CC BY 3.0",
+        licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Kirtland_Temple_1.jpg"
+      }
+    },
+    {
+      name: "Return to the Nauvoo Temple",
+      city: "Nauvoo, IL",
+      category: "Temple",
+      status: "Not yet",
+      dateDone: "",
+      notes: "",
+      tagline: "The same temple, on the same bluff. This stop is the return.",
+      facts: [
+        "This stop is a return to the Nauvoo Illinois Temple, the building named on the Nauvoo Temple entry. It is one temple, not a second.",
+        "It stands on the footprint of the 1840s temple, above the Mississippi. The walls are limestone. Sunstones, moonstones, and starstones are cut into the exterior, as on the first building.",
+        "Gordon B. Hinckley dedicated it on 27 June 2002. The day was the anniversary of the deaths of Joseph and Hyrum Smith at Carthage Jail."
+      ],
+      image: {
+        webp: "/images/bucket-list/nauvoo-temple-side.webp",
+        jpeg: "/images/bucket-list/nauvoo-temple-side.jpg",
+        alt: "Side of the Nauvoo Illinois Temple, a stone spire and sunstone pilasters against a blue sky",
+        width: 1200,
+        height: 1600,
+        focus: "center 40%"
+      },
+      credit: {
+        author: "Connelly Brown",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:Connellypb",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Nauvoo_Temple02.jpg"
+      }
+    },
+    {
+      name: "Sacred Grove",
+      city: "Palmyra, NY",
+      category: "Church history site",
+      status: "Done",
+      dateDone: "2004",
+      notes: "",
+      tagline: "A farm woodlot near Palmyra, with paths kept through the trees.",
+      facts: [
+        "In the spring of 1820 Joseph Smith, then 14, said he walked into the woods on his family's farm and prayed about which church to join. He reported a vision of God the Father and Jesus Christ. Latter-day Saints call that the First Vision.",
+        "The Smiths took up the farm in 1818. By the spring of 1820 they had cleared fields and left standing woods. The grove is that remaining woodland, near the site of the family's log home.",
+        "The Church of Jesus Christ of Latter-day Saints keeps the site and maintains paths through the trees. The name Sacred Grove was already in use by the early twentieth century."
+      ],
+      image: {
+        webp: "/images/bucket-list/sacred-grove-palmyra.webp",
+        jpeg: "/images/bucket-list/sacred-grove-palmyra.jpg",
+        alt: "A leaf-covered path through the trees of the Sacred Grove near Palmyra, New York",
+        width: 1089,
+        height: 1600,
+        focus: "center"
+      },
+      credit: {
+        author: "Ashleywood3",
+        authorUrl: "",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:The_%22Sacred_Grove%22.jpg"
+      }
+    },
+    {
+      name: "Carthage Jail",
+      city: "Carthage, IL",
+      category: "Church history site",
+      status: "Done",
+      dateDone: "2004",
+      notes: "",
+      tagline: "A limestone county jail, and the afternoon of 27 June 1844.",
+      facts: [
+        "Hancock County built the jail in 1839, a two-story limestone building at Walnut and Fayette in Carthage. Joseph and Hyrum Smith were held in the upstairs room, the jailer's bedroom.",
+        "On 27 June 1844 a mob rushed the jail. Joseph and Hyrum were shot and killed. John Taylor was wounded and survived. Willard Richards, also in the room, survived.",
+        "They had surrendered in Carthage on a charge of treason, after the Nauvoo City Council ordered the Nauvoo Expositor press destroyed. The Church of Jesus Christ of Latter-day Saints bought the jail in 1903. It was listed on the National Register of Historic Places in 1973."
+      ],
+      image: {
+        webp: "/images/bucket-list/carthage-jail-southwest.webp",
+        jpeg: "/images/bucket-list/carthage-jail-southwest.jpg",
+        alt: "Carthage Jail, a two-story limestone building with green shutters, seen from the southwest",
+        width: 1600,
+        height: 1064,
+        focus: "center"
+      },
+      credit: {
+        author: "Nyttend",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:Nyttend",
+        license: "Public domain",
+        licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Carthage_Jail_from_southwest.jpg"
+      }
     }
   ];
 
@@ -343,13 +488,16 @@
     var s = status.trim().toLowerCase();
     if (s === "not yet") return "not-yet";
     if (s === "visited") return "visited";
+    /* The sheet says Done, not Visited. Keep that word as its own slug. */
+    if (s === "done") return "done";
     var slug = s.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     return slug || "other";
   }
 
   function stampClass(status) {
     var slug = statusSlug(status);
-    if (slug === "visited") return "stamp is-visited";
+    /* Done and Visited share the green passport stamp. Not yet stays red. */
+    if (slug === "visited" || slug === "done") return "stamp is-visited";
     if (slug === "not-yet") return "stamp is-open";
     return "stamp is-other";
   }
@@ -500,7 +648,14 @@
     }
     var stamp = "";
     if (filled(item.status)) {
-      stamp = '<p class="' + stampClass(item.status) + '" data-status="' + esc(statusSlug(item.status)) + '" aria-label="Status: ' + esc(item.status.trim()) + '"><span>' + esc(item.status.trim()) + "</span></p>";
+      var slug = statusSlug(item.status);
+      var label = "Status: " + item.status.trim();
+      var mark = '<span class="stamp-word">' + esc(item.status.trim()) + "</span>";
+      if ((slug === "visited" || slug === "done") && filled(item.dateDone)) {
+        mark += '<span class="stamp-year">' + esc(item.dateDone.trim()) + "</span>";
+        label += ", " + item.dateDone.trim();
+      }
+      stamp = '<p class="' + stampClass(item.status) + '" data-status="' + esc(slug) + '" aria-label="' + esc(label) + '">' + mark + "</p>";
     }
     if (!rows && !stamp) return "";
     return (
