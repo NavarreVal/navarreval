@@ -463,7 +463,7 @@
   letter-spacing: inherit;
   text-shadow: inherit;
   text-decoration: none;
-  cursor: inherit;
+  cursor: text;
   background: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
