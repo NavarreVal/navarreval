@@ -35,3 +35,7 @@
 # Campaign reference. Not linked from the public site.
 /dnd/*
   X-Robots-Tag: noindex, nofollow
+
+# Personal bucket list. Not linked from the public site.
+/bucket-list/*
+  X-Robots-Tag: noindex, nofollow
