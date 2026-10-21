@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <!--
+    Hidden timetable. Not in the nav or the sitemap.
+    One link, from the Personal page.
+    Stops live in destinations.js. That file explains how to add one,
+    and that the array mirrors the CAPT Bucket List sheet.
+  -->
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+  <title>Destinations Ahead</title>
+  <link rel="stylesheet" href="poster.css">
+</head>
+<body>
+  <a class="skip" href="#route">Skip to the line</a>
+  <div class="brochure">
+    <header class="hero">
+      <div class="hero-rule">
+        <span>NavarreVal Lines</span>
+        <span>Private timetable</span>
+      </div>
+      <p class="hero-kicker" id="hero-kicker">Open departures</p>
+      <h1>Destinations<br>Ahead</h1>
+      <p class="hero-deck" id="hero-deck">Things to do before we die.</p>
+      <p class="hero-name">J. Navarre Valdivieso</p>
+      <div class="cropmarks" aria-hidden="true"></div>
+    </header>
+
+    <noscript>
+      <p class="noscript">This timetable is drawn by destinations.js. With scripts off, the stops stay in that file.</p>
+    </noscript>
+
+    <section class="route reveal" id="route" aria-labelledby="route-title"></section>
+    <div id="stops"></div>
+
+    <footer class="legal-footer" style="text-align:center;font-size:0.75rem;line-height:1.5;opacity:0.75;padding:1.5rem 1rem 2rem;margin:0;"><a href="/privacy">Privacy</a> · <a href="/copyright">Copyright</a></footer>
+  </div>
+  <script src="destinations.js"></script>
+</body>
+</html>
