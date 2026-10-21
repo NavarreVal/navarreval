@@ -45,6 +45,12 @@
   font-display: swap;
 }
 
+@property --rail-count {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 1;
+}
+
 :root {
   --brochure: #f3e6c8;
   --ink: #1c1712;
@@ -238,7 +244,7 @@ a { color: inherit; }
 .rail {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--rail-count, 1), minmax(0, 1fr));
   gap: 0.8rem 0.45rem;
   margin: 1.35rem 0 0;
   padding: 0.35rem 0 0;

@@ -25,7 +25,8 @@
  *
  * Adding a stop
  *   1. Add the row to the sheet.
- *   2. Append an object here, in the same order.
+ *   2. Append an object here, in the same order. Do not reorder this array
+ *      to change what the page shows. Render mixes categories on its own.
  *   3. Put a freely licensed photo in /images/bucket-list/ as WebP and JPEG.
  *      Use a new filename. That folder is cached for a year.
  *   4. Log the photo in IMAGE-LICENSES.md (source URL, author, license).
@@ -207,6 +208,64 @@
         licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
         sourceUrl: "https://commons.wikimedia.org/wiki/File:Washington_National_Cathedral_-_9.jpg"
       }
+    },
+    {
+      name: "Camino de Santiago pilgrimage to Santiago de Compostela",
+      city: "Galicia, Spain",
+      category: "Pilgrimage",
+      status: "Not yet",
+      dateDone: "",
+      notes: "Passport needed",
+      tagline: "Not one church. A road that ends at a shrine.",
+      facts: [
+        "The Camino de Santiago is a network of pilgrimage roads ending at the shrine of St. James in Santiago de Compostela. The entry is the walk, not a single building.",
+        "Tradition dates the finding of the tomb to the early ninth century. Alfonso II of Asturias is counted as the first pilgrim, and he ordered a chapel on the site. The cathedral that closes the road was begun in 1075 and consecrated in 1211.",
+        "The French Way is set down in the 12th-century Codex Calixtinus. UNESCO listed that route in 1993. In 1987 the Council of Europe named the Camino its first European Cultural Route."
+      ],
+      image: {
+        webp: "/images/bucket-list/camino-de-santiago-waymarker-erro.webp",
+        jpeg: "/images/bucket-list/camino-de-santiago-waymarker-erro.jpg",
+        alt: "A stone Camino de Santiago waymarker beside a dirt track in open country near Erro, Navarre",
+        width: 1600,
+        height: 1200,
+        focus: "center"
+      },
+      credit: {
+        author: "Hayden Soloviev",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:Hayden_Soloviev",
+        license: "CC BY 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Waymarker_of_the_Camino_de_Santiago_near_Erro,_Navarre,_Spain.jpg"
+      }
+    },
+    {
+      name: "Sverd i fjell (Swords in Rock)",
+      city: "Hafrsfjord, Stavanger, Norway",
+      category: "Monument",
+      status: "Not yet",
+      dateDone: "",
+      notes: "Passport needed",
+      tagline: "Three swords in the rock. None of them coming out.",
+      facts: [
+        "Three bronze swords stand in the rock at Møllebukta, on the shore of Hafrsfjord in Stavanger. Fritz Røed made them. King Olav V unveiled the monument in 1983.",
+        "They commemorate the Battle of Hafrsfjord, traditionally dated to 872, when Harald Fairhair is said to have brought Norway under one crown.",
+        "The tallest sword stands for Harald. The two shorter ones stand for the petty kings he defeated. They are planted so they cannot be drawn again: a peace monument about ten metres high."
+      ],
+      image: {
+        webp: "/images/bucket-list/sverd-i-fjell-hafrsfjord.webp",
+        jpeg: "/images/bucket-list/sverd-i-fjell-hafrsfjord.jpg",
+        alt: "Sverd i fjell, three bronze swords planted in the rock beside Hafrsfjord",
+        width: 1600,
+        height: 1137,
+        focus: "center"
+      },
+      credit: {
+        author: "Mia1964",
+        authorUrl: "https://commons.wikimedia.org/wiki/User:Mia1964",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Sverd_i_fjell.jpg"
+      }
     }
   ];
 
@@ -219,6 +278,20 @@
       gold: "#c6a15a",
       paper: "#f7f0df",
       stamp: "#9d2430"
+    },
+    "Pilgrimage": {
+      ink: "#3d5c3a",
+      deep: "#1c2e22",
+      gold: "#c4a15a",
+      paper: "#f4efe2",
+      stamp: "#3d5c3a"
+    },
+    "Monument": {
+      ink: "#243044",
+      deep: "#141c28",
+      gold: "#b7c4ce",
+      paper: "#eef1f4",
+      stamp: "#243044"
     }
   };
 
@@ -286,20 +359,71 @@
     return cats;
   }
 
-  function deck(items) {
-    var n = items.length;
-    var notYet = 0;
-    var visited = 0;
-    items.forEach(function (item) {
-      var s = filled(item.status) ? item.status.trim() : "";
-      if (/^not yet$/i.test(s)) notYet += 1;
-      else if (/^visited$/i.test(s)) visited += 1;
+  var HERO_LINE = "Things to do before we die.";
+
+  function categoryOf(item) {
+    return filled(item.category) ? item.category.trim() : "Uncategorized";
+  }
+
+  /*
+   * Mix sheet order for display. Categories are taken round-robin, and a
+   * larger category is spread so it does not form a longer run than the
+   * counts require. ceil(count / (everything else + 1)) is the shortest
+   * maximum run that can still hold that category. The next place goes to
+   * whichever category still has the most entries left without breaking
+   * that limit. Ties follow the order categories first appear on the sheet.
+   * Inside a category, sheet order is kept. Same input, same order.
+   */
+  function interleaveByCategory(items) {
+    var order = [];
+    var queues = {};
+    items.forEach(function (item, index) {
+      var cat = categoryOf(item);
+      if (!queues[cat]) {
+        queues[cat] = [];
+        order.push(cat);
+      }
+      queues[cat].push({ item: item, sheetIndex: index });
     });
-    var count = n + (n === 1 ? " stop on the line." : " stops on the line.");
-    if (n && notYet === n) return count + " The posters are printed. The dates are not.";
-    if (n && visited === n) return count + " Every stamp has a date.";
-    if (visited) return count + " " + visited + " stamped. The rest of the line is still open.";
-    return count;
+    var total = items.length;
+    var counts = {};
+    var maxRun = {};
+    var remaining = {};
+    order.forEach(function (cat) {
+      counts[cat] = queues[cat].length;
+      remaining[cat] = counts[cat];
+      maxRun[cat] = Math.ceil(counts[cat] / (total - counts[cat] + 1));
+    });
+
+    function choose(respectLimit, lastCat, run) {
+      var best = null;
+      var bestLeft = -1;
+      var bestIdx = Infinity;
+      order.forEach(function (cat, idx) {
+        if (remaining[cat] <= 0) return;
+        if (respectLimit && cat === lastCat && run >= maxRun[cat]) return;
+        var left = remaining[cat];
+        if (left > bestLeft || (left === bestLeft && idx < bestIdx)) {
+          best = cat;
+          bestLeft = left;
+          bestIdx = idx;
+        }
+      });
+      return best;
+    }
+
+    var result = [];
+    var lastCat = null;
+    var run = 0;
+    while (result.length < total) {
+      var pick = choose(true, lastCat, run) || choose(false, lastCat, run);
+      var entry = queues[pick].shift();
+      remaining[pick] -= 1;
+      run = pick === lastCat ? run + 1 : 1;
+      lastCat = pick;
+      result.push(entry);
+    }
+    return result;
   }
 
   function kicker(items) {
@@ -404,9 +528,9 @@
         '<div class="poster-sheet' + (photo ? "" : " no-photo") + '">' +
           photo +
           '<div class="poster-copy">' +
-            '<p class="poster-index">Stop ' + pad(index + 1) + "</p>" +
+            '<p class="poster-index">No. ' + pad(index + 1) + "</p>" +
             klass +
-            "<h3>" + esc(filled(item.name) ? item.name.trim() : "Untitled stop") + "</h3>" +
+            "<h3>" + esc(filled(item.name) ? item.name.trim() : "Untitled") + "</h3>" +
             city +
             tagline +
             passHtml(item) +
@@ -425,21 +549,23 @@
     if (!stopsEl) return;
 
     if (kickerEl) kickerEl.textContent = kicker(DESTINATIONS);
-    if (deckEl) deckEl.textContent = deck(DESTINATIONS);
+    if (deckEl) deckEl.textContent = HERO_LINE;
 
+    var display = interleaveByCategory(DESTINATIONS);
     var seen = {};
     var groups = [];
-    DESTINATIONS.forEach(function (item, index) {
-      var category = filled(item.category) ? item.category.trim() : "Uncategorized";
+    display.forEach(function (entry, index) {
+      entry.displayIndex = index;
+      var category = categoryOf(entry.item);
       var last = groups[groups.length - 1];
       if (!last || last.category !== category) {
         groups.push({ category: category, livery: liveryFor(category, seen), items: [] });
         last = groups[groups.length - 1];
       }
-      last.items.push({ item: item, index: index });
+      last.items.push(entry);
     });
 
-    var route = '<div class="route-head"><p class="route-kicker">Schematic</p><h2 id="route-title">The line</h2><p class="route-note">In the order written down. Not to scale.</p></div>';
+    var route = '<div class="route-head"><p class="route-kicker">Schematic</p><h2 id="route-title">The line</h2><p class="route-note">Mixed by kind. Not to scale.</p></div>';
     if (groups.length) {
       route += '<ul class="legend">';
       var legendSeen = {};
@@ -450,12 +576,14 @@
       });
       route += "</ul>";
     }
-    route += '<ol class="rail">';
-    DESTINATIONS.forEach(function (item, index) {
-      var category = filled(item.category) ? item.category.trim() : "Uncategorized";
+    route += '<ol class="rail" style="--rail-count:' + display.length + '">';
+    display.forEach(function (entry) {
+      var item = entry.item;
+      var index = entry.displayIndex;
+      var category = categoryOf(item);
       var livery = liveryFor(category, seen);
       var id = slug(item.name, index);
-      var place = filled(item.name) ? item.name.trim() : "Stop";
+      var place = filled(item.name) ? item.name.trim() : "Untitled";
       var city = filled(item.city) ? item.city.trim() : "";
       route +=
         '<li style="' + styleAttr(livery) + '">' +
@@ -479,7 +607,7 @@
             "<h2>" + esc(group.category) + "</h2>" +
           "</header>";
       group.items.forEach(function (entry) {
-        html += posterHtml(entry.item, entry.index, group.livery);
+        html += posterHtml(entry.item, entry.displayIndex, group.livery);
       });
       html += "</section>";
     });

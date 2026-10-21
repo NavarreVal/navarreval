@@ -62,6 +62,8 @@ Hidden page. Photos are freely licensed Wikimedia Commons files, downloaded, res
 | `images/bucket-list/cathedral-saint-paul-mn-selby.webp`, `.jpg` | [The Cathedral of Saint Paul, Selby Avenue](https://commons.wikimedia.org/wiki/File:The_Cathedral_of_Saint_Paul,_Selby_Avenue_and_Summit_Avenue,_Cathedral_Hill,_Saint_Paul,_MN_-_51707923220.jpg) | w_lemay | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
 | `images/bucket-list/national-shrine-immaculate-conception.webp`, `.jpg` | [Basilica of the National Shrine of the Immaculate Conception](https://commons.wikimedia.org/wiki/File:Basilica_of_the_National_Shrine_of_the_Immaculate_Conception.jpg) | AgnosticPreachersKid | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 | `images/bucket-list/washington-national-cathedral-west.webp`, `.jpg` | [Washington National Cathedral - 9](https://commons.wikimedia.org/wiki/File:Washington_National_Cathedral_-_9.jpg) | APK | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `images/bucket-list/camino-de-santiago-waymarker-erro.webp`, `.jpg` | [Waymarker of the Camino de Santiago near Erro, Navarre, Spain](https://commons.wikimedia.org/wiki/File:Waymarker_of_the_Camino_de_Santiago_near_Erro,_Navarre,_Spain.jpg) | Hayden Soloviev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `images/bucket-list/sverd-i-fjell-hafrsfjord.webp`, `.jpg` | [Sverd i fjell](https://commons.wikimedia.org/wiki/File:Sverd_i_fjell.jpg) | Mia1964 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
 ## Not covered
 
