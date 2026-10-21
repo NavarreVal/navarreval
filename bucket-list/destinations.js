@@ -409,8 +409,8 @@
             "<h3>" + esc(filled(item.name) ? item.name.trim() : "Untitled stop") + "</h3>" +
             city +
             tagline +
-            hooksHtml(item.facts) +
             passHtml(item) +
+            hooksHtml(item.facts) +
           "</div>" +
         "</div>" +
       "</article>"

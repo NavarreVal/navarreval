@@ -290,6 +290,15 @@ a { color: inherit; }
   font-weight: 700;
 }
 
+@media (min-width: 861px) {
+  .rail-place {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 .rail-city {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.68rem;
@@ -420,7 +429,7 @@ a { color: inherit; }
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.75rem;
   align-items: center;
-  margin-top: auto;
+  margin-top: 0.85rem;
   padding: 0.8rem 0.75rem 0.8rem 1rem;
   background:
     radial-gradient(circle at 0.42rem 0.7rem, transparent 0.28rem, #fffaf0 0.32rem) 0 0 / 0.85rem 1.15rem repeat-y,
