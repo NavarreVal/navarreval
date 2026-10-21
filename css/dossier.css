@@ -452,6 +452,28 @@
   text-shadow: 0 0 14px rgba(61, 255, 122, 0.22);
 }
 
+#landing .id-body h1 a,
+#landing .id-body h1 a:link,
+#landing .id-body h1 a:visited,
+#landing .id-body h1 a:hover,
+#landing .id-body h1 a:active,
+#landing .id-body h1 a:focus {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-shadow: inherit;
+  text-decoration: none;
+  cursor: text;
+  background: transparent;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#landing .id-body h1 a:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
 .id-about {
   margin: 0.4rem 0 0.85rem;
   color: var(--ph);
