@@ -339,10 +339,18 @@
     return seen[key];
   }
 
+  function statusSlug(status) {
+    var s = status.trim().toLowerCase();
+    if (s === "not yet") return "not-yet";
+    if (s === "visited") return "visited";
+    var slug = s.replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return slug || "other";
+  }
+
   function stampClass(status) {
-    var s = status.trim();
-    if (/^visited$/i.test(s)) return "stamp is-visited";
-    if (/^not yet$/i.test(s)) return "stamp is-open";
+    var slug = statusSlug(status);
+    if (slug === "visited") return "stamp is-visited";
+    if (slug === "not-yet") return "stamp is-open";
     return "stamp is-other";
   }
 
@@ -492,7 +500,7 @@
     }
     var stamp = "";
     if (filled(item.status)) {
-      stamp = '<p class="' + stampClass(item.status) + '" aria-label="Status: ' + esc(item.status.trim()) + '"><span>' + esc(item.status.trim()) + "</span></p>";
+      stamp = '<p class="' + stampClass(item.status) + '" data-status="' + esc(statusSlug(item.status)) + '" aria-label="Status: ' + esc(item.status.trim()) + '"><span>' + esc(item.status.trim()) + "</span></p>";
     }
     if (!rows && !stamp) return "";
     return (

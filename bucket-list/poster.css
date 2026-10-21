@@ -499,6 +499,14 @@ a { color: inherit; }
   --stamp: #1f6b45;
 }
 
+/* One rule for every open departure. Poster palette does not recolor this ink. */
+.stamp[data-status="not-yet"] {
+  --stamp: #c0392b;
+  color: #c0392b;
+  border-color: #c0392b;
+  box-shadow: inset 0 0 0 2px #c0392b;
+}
+
 .legal-footer a { color: inherit; }
 
 @media (max-width: 860px) {
