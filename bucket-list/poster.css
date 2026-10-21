@@ -477,6 +477,7 @@ a { color: inherit; }
   margin: 0.15rem 0.1rem;
   display: grid;
   place-items: center;
+  align-content: center;
   border: 3px solid var(--stamp);
   border-radius: 50%;
   color: var(--stamp);
@@ -493,6 +494,15 @@ a { color: inherit; }
   display: block;
   max-width: 4.6rem;
   font-size: 1.35rem;
+}
+
+.stamp .stamp-year {
+  max-width: none;
+  margin-top: 0.12rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
 }
 
 .stamp.is-visited {

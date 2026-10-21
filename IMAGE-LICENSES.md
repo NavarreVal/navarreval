@@ -64,6 +64,11 @@ Hidden page. Photos are freely licensed Wikimedia Commons files, downloaded, res
 | `images/bucket-list/washington-national-cathedral-west.webp`, `.jpg` | [Washington National Cathedral - 9](https://commons.wikimedia.org/wiki/File:Washington_National_Cathedral_-_9.jpg) | APK | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | `images/bucket-list/camino-de-santiago-waymarker-erro.webp`, `.jpg` | [Waymarker of the Camino de Santiago near Erro, Navarre, Spain](https://commons.wikimedia.org/wiki/File:Waymarker_of_the_Camino_de_Santiago_near_Erro,_Navarre,_Spain.jpg) | Hayden Soloviev | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | `images/bucket-list/sverd-i-fjell-hafrsfjord.webp`, `.jpg` | [Sverd i fjell](https://commons.wikimedia.org/wiki/File:Sverd_i_fjell.jpg) | Mia1964 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `images/bucket-list/nauvoo-temple-afternoon.webp`, `.jpg` | [Sunny afternoon view of Nauvoo Illinois Temple](https://commons.wikimedia.org/wiki/File:Sunny_afternoon_view_of_Nauvoo_Illinois_Temple.jpg) | Nyttend | Public domain (released by the photographer). [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/) |
+| `images/bucket-list/kirtland-temple.webp`, `.jpg` | [Kirtland Temple 1](https://commons.wikimedia.org/wiki/File:Kirtland_Temple_1.jpg) | JonRidinger | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) |
+| `images/bucket-list/nauvoo-temple-side.webp`, `.jpg` | [Nauvoo Temple02](https://commons.wikimedia.org/wiki/File:Nauvoo_Temple02.jpg) | Connelly Brown | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `images/bucket-list/sacred-grove-palmyra.webp`, `.jpg` | [The "Sacred Grove"](https://commons.wikimedia.org/wiki/File:The_%22Sacred_Grove%22.jpg) | Ashleywood3 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `images/bucket-list/carthage-jail-southwest.webp`, `.jpg` | [Carthage Jail from southwest](https://commons.wikimedia.org/wiki/File:Carthage_Jail_from_southwest.jpg) | Nyttend | Public domain (released by the photographer). [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/) |
 
 ## Not covered
 
