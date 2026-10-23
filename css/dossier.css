@@ -1727,7 +1727,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 @container manifest (min-width: 64.1rem) {
-  #personal .manifest-body > * { --crew-cols: 4; }
+  #personal .manifest-body > * { --crew-cols: 5; }
 }
 
 @container manifest (min-width: 80.3rem) {
@@ -1736,7 +1736,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 
 @media (max-width: 900px) {
   #personal .manifest-body > * {
-    --crew-cols: 2;
+    --crew-cols: 3;
     --crew-gap: 0.4rem;
   }
 }
