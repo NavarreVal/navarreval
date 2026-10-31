@@ -3,8 +3,18 @@
 # rule drops the HTML Cache-Control before setting its own.
 # These rules do not apply to Pages Functions, including /api/youtube-latest.
 
+# HSTS is one year, without includeSubDomains and without preload.
+# dnd.navarreval.com is a real subdomain and answers on HTTPS, but this
+# repo does not list every DNS name. includeSubDomains would force HTTPS
+# on any other host under navarreval.com, and preload requires that flag
+# and is hard to undo. The policy below is report-only: it names the
+# hosts the pages actually request and does not block anything.
 /*
   Cache-Control: public, max-age=0, must-revalidate
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com https://i.scdn.co https://shared.cloudflare.steamstatic.com https://i.gr-assets.com https://images-na.ssl-images-amazon.com https://m.media-amazon.com; font-src 'self'; connect-src 'self' https://goodreads-shelves.navarreval.workers.dev https://spotify-shelves.navarreval.workers.dev https://steam-shelves.navarreval.workers.dev; frame-src https://www.youtube-nocookie.com; media-src 'self'
 
 /images/*
   ! Cache-Control
