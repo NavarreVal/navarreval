@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/css/dossier.css?v=1.36">
 </head>
 <body class="site-hub dossier-tabbed">
-  <script src="/js/dossier-chrome.js?v=2"></script>
+  <script src="/js/dossier-chrome.js?v=3"></script>
 
   <main id="personal">
     <div class="panel-inner personal-file">
@@ -96,7 +96,12 @@
             <span>@navarreval_</span>
           </div>
           <div class="file-body">
-            <div class="yt-grid" id="yt-grid" hidden></div>
+            <!-- From Uiverse.io by Deri-Kurniawan -->
+            <div class="yt-grid" id="yt-grid" aria-busy="true">
+              <div class="yt-skeleton" aria-hidden="true"><span class="yt-skeleton-thumb"></span><span class="yt-skeleton-line"></span><span class="yt-skeleton-line short"></span></div>
+              <div class="yt-skeleton" aria-hidden="true"><span class="yt-skeleton-thumb"></span><span class="yt-skeleton-line"></span><span class="yt-skeleton-line short"></span></div>
+              <div class="yt-skeleton" aria-hidden="true"><span class="yt-skeleton-thumb"></span><span class="yt-skeleton-line"></span><span class="yt-skeleton-line short"></span></div>
+            </div>
             <p class="yt-fallback" id="yt-fallback" hidden>
               <a href="https://www.youtube.com/@navarreval_" target="_blank" rel="noopener">Watch on YouTube</a>
             </p>
@@ -110,7 +115,7 @@
       <section class="hud file-block" aria-labelledby="manifest-label">
         <div class="hud-in">
           <div class="hud-head">
-            <h2 id="manifest-label">Ship's manifest</h2>
+            <h2 id="manifest-label" data-scramble aria-label="Ship's manifest">Ship's manifest</h2>
             <span>SS Argus</span>
           </div>
           <div class="file-body manifest-body">
@@ -340,7 +345,10 @@
       var grid = document.getElementById("yt-grid");
       var fallback = document.getElementById("yt-fallback");
       function showFallback() {
-        if (grid) grid.hidden = true;
+        if (grid) {
+          grid.hidden = true;
+          grid.setAttribute("aria-busy", "false");
+        }
         if (fallback) fallback.hidden = false;
       }
       function formatDate(iso) {
@@ -368,6 +376,8 @@
       }
       function renderVideos(videos) {
         if (!grid) throw new Error("no grid");
+        grid.replaceChildren();
+        grid.setAttribute("aria-busy", "false");
         videos.forEach(function (video) {
           if (!video || !video.videoId) return;
           var card = document.createElement("a");
