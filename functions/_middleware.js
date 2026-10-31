@@ -4,9 +4,28 @@
 
 var DND_HOST = "dnd.navarreval.com";
 
+// Pages _redirects cannot match on hostname. These two hosts are the only
+// ones that should 301 to the apex. Branch and hash preview hosts
+// (*.navarreval.pages.dev) are not listed, so a pull-request preview stays
+// on its own host. Every other host, including /api/*, falls through.
+var APEX_ORIGIN = "https://navarreval.com";
+var APEX_REDIRECT_HOSTS = {
+  "www.navarreval.com": true,
+  "navarreval.pages.dev": true
+};
+
 export async function onRequest(context) {
   var url = new URL(context.request.url);
-  if (url.hostname !== DND_HOST) {
+  var host = url.hostname.toLowerCase();
+  if (APEX_REDIRECT_HOSTS[host]) {
+    var dest = new URL(url.pathname + url.search, APEX_ORIGIN);
+    return new Response(null, {
+      status: 301,
+      headers: { Location: dest.toString() }
+    });
+  }
+
+  if (host !== DND_HOST) {
     return context.next();
   }
 
