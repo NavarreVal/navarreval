@@ -9,3 +9,5 @@ Disallow: /images/passion/3d-printing/print-timelapse-2.webm
 Disallow: /images/shooting/suppressor-demo.mp4
 Disallow: /*.mp4$
 Disallow: /*.webm$
+
+Sitemap: https://navarreval.com/sitemap.xml
