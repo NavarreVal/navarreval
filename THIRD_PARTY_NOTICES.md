@@ -4,7 +4,14 @@ This site stays vanilla HTML, CSS, and JavaScript. The pieces below are used und
 
 ## MiniSearch
 
-Search is powered by [MiniSearch](https://github.com/lucaong/minisearch) v7.2.0, vendored at `js/vendor/minisearch-7.2.0.min.js`.
+Search is powered by [MiniSearch](https://github.com/lucaong/minisearch) 7.2.0. The file in this repo is the unmodified ESM build from the official npm package, copied from `dist/es/index.js` (no local minify or bundle step). It is stored at `js/vendor/minisearch-7.2.0/dist/es/index.js`.
+
+- Package version: 7.2.0
+- Path within the package: `dist/es/index.js`
+- Registry tarball: `https://registry.npmjs.org/minisearch/-/minisearch-7.2.0.tgz`
+- npm package integrity: `sha512-dqT2XBYUOZOiC5t2HRnwADjhNS2cecp9u+TJRiJ1Qp/f5qjkeT5APcGPjHw+bz89Ms8Jp+cG4AlE+QZ/QnDglg==`
+- SHA-256 of `dist/es/index.js`: `0393b3ba253b809d5e55707c7b0875ef9b518a296a006c6739b28876e154edb3`
+- npm integrity of that file: `sha512-zPR9a62LVHjPR4UkDRjWeHnRy93dnjdMCeufRmQYygsqxZzlm/OVLwaw0M2+7CvXqxoz0QOW/J2/stss5kLjtw==`
 
 ```
 MIT License

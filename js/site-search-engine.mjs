@@ -6,7 +6,7 @@ function libs() {
   if (!pending) {
     pending = Promise.all([
       import("/js/search-shared.mjs?v=1"),
-      import("/js/vendor/minisearch-7.2.0.min.js"),
+      import("/js/vendor/minisearch-7.2.0/dist/es/index.js"),
       fetch("/search-index.json?v=1").then(function (res) {
         if (!res.ok) throw new Error(String(res.status));
         return res.text();

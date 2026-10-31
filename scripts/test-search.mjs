@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import MiniSearch from "../js/vendor/minisearch-7.2.0.min.js";
+import MiniSearch from "../js/vendor/minisearch-7.2.0/dist/es/index.js";
 import { miniSearchOptions, runSearch } from "../js/search-shared.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
