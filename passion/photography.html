@@ -170,7 +170,7 @@
   <link rel="stylesheet" href="/css/dossier.css?v=1.20">
 </head>
 <body>
-  <script src="/js/dossier-chrome.js?v=2"></script>
+  <script src="/js/dossier-chrome.js?v=4"></script>
    <div class="photo-page" id="top">
     <div class="photo-top">
       <span></span>
@@ -197,25 +197,36 @@
     <a class="back-btn stub-back" href="#top">↑ Top</a>
   </div>
 
-  <div id="lightbox" class="lightbox">
-    <img src="" alt="" class="lightbox-image">
-  </div>
+  <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-dialog-caption">
+    <div class="photo-dialog-stage">
+      <div class="photo-dialog-top">
+        <p id="photo-dialog-count" class="photo-dialog-count" aria-live="polite"></p>
+        <button type="button" class="photo-dialog-close" aria-label="Close">×</button>
+      </div>
+      <div class="photo-dialog-frame">
+        <button type="button" class="photo-dialog-nav photo-dialog-prev" aria-label="Previous photograph">‹</button>
+        <img class="photo-dialog-img" alt="">
+        <button type="button" class="photo-dialog-nav photo-dialog-next" aria-label="Next photograph">›</button>
+      </div>
+      <p id="photo-dialog-caption" class="photo-dialog-caption"></p>
+    </div>
+  </dialog>
 
   <script>
         const photos = [
-      "../images/photography/marekStudy.jpg",
+      "../images/photography/study.jpg",
       "../images/photography/greenRiver01.jpg",
-      "../images/photography/alyssaWhiteShirt.jpg",
+      "../images/photography/white-shirt.jpg",
       "../images/photography/salsaHabanero.jpg",
       "../images/photography/idyllsEndLosOsos.jpg",
       "../images/photography/USUOldMain.jpg",
       "../images/photography/gramaBabyBlackDragon.jpg",
-      "../images/photography/porterPilot.jpg",
-      "../images/photography/marekFuzzyHat.jpg",
+      "../images/photography/pilot.jpg",
+      "../images/photography/fuzzy-hat.jpg",
       "../images/photography/peruvianTestDish.jpg",
       "../images/photography/vineyardGodRays.jpg",
       "../images/photography/thanksgivingRenaissance.jpg",
-      "../images/photography/2021Marek.jpg",
+      "../images/photography/portrait-2021.jpg",
       "../images/photography/boysFight01.jpg",
       "../images/photography/rFamilyPic.jpg",
       "../images/photography/catalinaSunset.jpg",
@@ -223,7 +234,7 @@
       "../images/photography/springvilleMountains.jpg",
       "../images/photography/coffeCake.jpg",
       "../images/photography/cacheStairs.JPG",
-      "../images/photography/jacen.jpg",
+      "../images/photography/boxer.jpg",
       "../images/photography/boyLake.jpg",
       "../images/photography/boyTux.jpg",
       "../images/photography/bakcOfTimp.JPG",
@@ -231,29 +242,93 @@
       "../images/photography/gramaBaby.JPG",
       "../images/photography/robinHoodMeal.jpg",
       "../images/photography/mistedMountains.JPG",
-      "../images/photography/bAndM.jpg",
-      "../images/photography/elleVector.jpg",
-      "../images/photography/marlinGreenRiver.jpg",
-      "../images/photography/2014Marek.jpg",
-      "../images/photography/johyevening.jpg",
+      "../images/photography/grandma-grandson.jpg",
+      "../images/photography/americana-range.jpg",
+      "../images/photography/green-river-2.jpg",
+      "../images/photography/portrait-2014.jpg",
+      "../images/photography/equestrian-dusk.jpg",
       "../images/photography/potatoSalad.jpg",
       "../images/photography/portrait_green_018859.jpg",
       "../images/photography/hawaiiSunrise.jpg",
       "../images/photography/silver_deer_bokeh.jpg",
-      "../images/photography/donPorterUtahLake.jpg",
-      "../images/photography/porterShields.jpg",
+      "../images/photography/utah-lake.jpg",
+      "../images/photography/shields-1.jpg",
       "../images/photography/chileVerde.jpg",
-      "../images/photography/marekShields.jpg",
+      "../images/photography/hero-pose.jpg",
       "../images/photography/2019FallPics.jpg",
       "../images/photography/2020FallPics.jpg",
       "../images/photography/2021FallPics.jpg",
       "../images/photography/eggs.jpg",
     ];
 
+    const captions = {
+      "study.jpg": "Studying",
+      "greenRiver01.jpg": "Green River",
+      "white-shirt.jpg": "In a white shirt",
+      "salsaHabanero.jpg": "Habanero salsa",
+      "idyllsEndLosOsos.jpg": "Idyll's End in Los Osos",
+      "USUOldMain.jpg": "Utah State University Old Main",
+      "gramaBabyBlackDragon.jpg": "Great Grandma and great grandson",
+      "pilot.jpg": "Warming up by the river",
+      "fuzzy-hat.jpg": "In a fuzzy hat",
+      "peruvianTestDish.jpg": "A Peruvian test dish",
+      "vineyardGodRays.jpg": "God rays over a vineyard",
+      "thanksgivingRenaissance.jpg": "Thanksgiving, renaissance style",
+      "portrait-2021.jpg": "School starts 2021",
+      "boysFight01.jpg": "Boys play-fighting",
+      "rFamilyPic.jpg": "Family picture",
+      "catalinaSunset.jpg": "Sunset at Catalina",
+      "lakeLaughs.png": "Laughing at the lake",
+      "springvilleMountains.jpg": "Mountains above Springville",
+      "coffeCake.jpg": "Coffee cake",
+      "cacheStairs.JPG": "Stairs in Cache Valley",
+      "boxer.jpg": "A boxer named Jacen",
+      "boyLake.jpg": "At the Lake",
+      "boyTux.jpg": "In a tuxedo",
+      "bakcOfTimp.JPG": "The back side of Mount Timpanogos",
+      "skullTree.JPG": "A skull in a tree near Strawberry",
+      "gramaBaby.JPG": "Great Grandma meets her great grandson",
+      "robinHoodMeal.jpg": "A Robin Hood meal",
+      "mistedMountains.JPG": "Misted mountains",
+      "grandma-grandson.jpg": "Grandma and grandson",
+      "americana-range.jpg": "Americana at the range",
+      "green-river-2.jpg": "On the Green River",
+      "portrait-2014.jpg": "In 2014",
+      "equestrian-dusk.jpg": "Statues of Joseph and Hyrum Smith in Nauvoo",
+      "potatoSalad.jpg": "Potato salad",
+      "portrait_green_018859.jpg": "Portrait at Dusk",
+      "hawaiiSunrise.jpg": "Sunrise in Hawaii",
+      "silver_deer_bokeh.jpg": "A silver deer in soft focus",
+      "utah-lake.jpg": "At Utah Lake",
+      "shields-1.jpg": "King of the hill",
+      "chileVerde.jpg": "Chile verde",
+      "hero-pose.jpg": "Hero Posing",
+      "2019FallPics.jpg": "Fall pictures, 2019",
+      "2020FallPics.jpg": "Fall pictures, 2020",
+      "2021FallPics.jpg": "Fall pictures, 2021",
+      "eggs.jpg": "Eggs"
+    };
+
+    function captionFor(src) {
+      const name = src.split("/").pop();
+      if (captions[name]) return captions[name];
+      const stem = name
+        .replace(/\.[^.]+$/, "")
+        .replace(/[_-]?\d{5,}/g, "")
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/[_-]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      return stem.charAt(0).toUpperCase() + stem.slice(1);
+    }
+
     const wall = document.getElementById("photo-wall");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = lightbox.querySelector(".lightbox-image");
+    const dialog = document.getElementById("photo-dialog");
+    const dialogImg = dialog.querySelector(".photo-dialog-img");
+    const captionEl = document.getElementById("photo-dialog-caption");
+    const countEl = document.getElementById("photo-dialog-count");
     let current = 0;
+    let opener = null;
 
     const photoDisplay = new Set([
       "chileVerde.jpg",
@@ -284,9 +359,11 @@
       const btn = document.createElement("button");
       btn.type = "button";
       const name = src.split("/").pop();
+      const caption = captionFor(src);
       const img = document.createElement("img");
-      img.alt = "";
+      img.alt = caption;
       img.loading = "lazy";
+      btn.setAttribute("aria-label", "View photograph: " + caption);
       if (photoDisplay.has(name)) {
         const stem = name.replace(/\.[^.]+$/, "");
         const base = src.replace(/[^/]+$/, "display/" + stem);
@@ -316,28 +393,60 @@
         img.src = src;
         btn.appendChild(img);
       }
-      btn.addEventListener("click", () => openLightbox(i));
+      btn.addEventListener("click", () => openLightbox(i, btn));
       wall.appendChild(btn);
     });
 
-    function openLightbox(index) {
-      current = index;
-      lightboxImg.src = lightboxSrc(photos[current]);
-      lightbox.classList.add("active");
+    function show(index) {
+      current = (index + photos.length) % photos.length;
+      const caption = captionFor(photos[current]);
+      dialogImg.src = lightboxSrc(photos[current]);
+      dialogImg.alt = caption;
+      captionEl.textContent = caption;
+      countEl.textContent = (current + 1) + " of " + photos.length;
     }
 
-    function closeLightbox() {
-      lightbox.classList.remove("active");
-      lightboxImg.src = "";
+    function openLightbox(index, btn) {
+      opener = btn || document.activeElement;
+      show(index);
+      if (!dialog.open) dialog.showModal();
     }
 
-    lightbox.addEventListener("click", closeLightbox);
-    document.addEventListener("keydown", (e) => {
-      if (!lightbox.classList.contains("active")) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") openLightbox((current + 1) % photos.length);
-      if (e.key === "ArrowLeft") openLightbox((current - 1 + photos.length) % photos.length);
+    dialog.querySelector(".photo-dialog-close").addEventListener("click", () => dialog.close());
+    dialog.querySelector(".photo-dialog-next").addEventListener("click", () => show(current + 1));
+    dialog.querySelector(".photo-dialog-prev").addEventListener("click", () => show(current - 1));
+    dialog.addEventListener("click", (event) => {
+      const el = event.target && event.target.closest ? event.target : event.target.parentElement;
+      if (el && el.closest("button, img, .photo-dialog-caption, .photo-dialog-count")) return;
+      dialog.close();
     });
+    dialog.addEventListener("close", () => {
+      dialogImg.removeAttribute("src");
+      if (opener && opener.focus) opener.focus();
+    });
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        show(current + 1);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        show(current - 1);
+      }
+    });
+    let touchX = 0;
+    let touchY = 0;
+    dialog.addEventListener("touchstart", (event) => {
+      if (event.touches.length !== 1) return;
+      touchX = event.touches[0].clientX;
+      touchY = event.touches[0].clientY;
+    }, { passive: true });
+    dialog.addEventListener("touchend", (event) => {
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchX;
+      const dy = touch.clientY - touchY;
+      if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+      show(current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
   </script>
 
   <script src="../js/page-enter.js"></script>

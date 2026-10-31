@@ -1,0 +1,68 @@
+{
+  "inherit": [
+    {
+      "prefix": "/talks/",
+      "keywords": "faith gospel religion religious church jesus christ scripture sermon sacrament talk covenant discipleship belief god prayer worship testimony latter-day saint"
+    }
+  ],
+  "pages": {
+    "/": {
+      "lead": "home record bio identity portrait navarre valdivieso husband father utah education learner dossier"
+    },
+    "/professional": {
+      "lead": "job jobs resume cv career work employment scrum agile project manager hiring professional timeline education linkedin experience"
+    },
+    "/passion": {
+      "lead": "passion hobbies maker thinker photography printing games music shooting writing teaching reading religion"
+    },
+    "/personal": {
+      "lead": "personal family wife children crew ship manifest home life videos youtube"
+    },
+    "/talks": {
+      "lead": "talks talk sermon sacrament religion religious church scripture jesus christ speaking ward",
+      "keywords": "faith gospel"
+    },
+    "/passion/3d-printing": {
+      "lead": "3d printer printers printing filament bambu makerworld model models shop parts toy"
+    },
+    "/passion/vanilla": {
+      "lead": "vanilla bean beans extract baking flavor madagascar bottle hobby"
+    },
+    "/passion/photography": {
+      "lead": "camera cameras picture pictures photo photos photography photograph photographs portrait portraits image images snapshot gallery pics"
+    },
+    "/passion/teaching": {
+      "lead": "teach teaching teacher education classroom lesson school history social studies license degree wgu"
+    },
+    "/passion/religious": {
+      "lead": "faith gospel religion religious church jesus christ atonement scripture belief god prayer discipleship covenant mission lds latter-day saint worship testimony sacrament bible book of mormon"
+    },
+    "/passion/reading": {
+      "lead": "reading read books book novel novels goodreads library shelf author"
+    },
+    "/passion/writing": {
+      "lead": "writing write writer author books essays prose"
+    },
+    "/passion/nas": {
+      "lead": "nas server storage homelab network drive plex media files"
+    },
+    "/passion/web-design": {
+      "lead": "web design website css html frontend sites pages interface"
+    },
+    "/passion/music": {
+      "lead": "music song songs spotify listening album playlist audio track"
+    },
+    "/passion/shooting": {
+      "lead": "shooting shoot gun guns firearm firearms rifle hunting suppressor handloading range"
+    },
+    "/passion/video-games": {
+      "lead": "games game gaming video games steam play playing controller pc console"
+    },
+    "/privacy": {
+      "lead": "privacy policy data"
+    },
+    "/copyright": {
+      "lead": "copyright license notice"
+    }
+  }
+}
