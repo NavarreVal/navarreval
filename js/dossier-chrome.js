@@ -11,7 +11,7 @@
     document.documentElement.classList.add("js");
   }
 
-  document.write('<link rel="stylesheet" href="/css/ui-extras.css?v=1">');
+  document.write('<link rel="stylesheet" href="/css/ui-extras.css?v=2">');
 
   var path = (location.pathname || "/").replace(/\/+$/, "") || "/";
   var section = "record";

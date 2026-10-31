@@ -493,14 +493,23 @@ h2[data-scramble] {
 
 .photo-dialog-frame {
   position: relative;
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
   min-height: 0;
-  place-items: center;
+  height: 100%;
+  overflow: hidden;
 }
 
 .photo-dialog-img {
-  max-width: min(92vw, 1100px);
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
   max-height: 100%;
+  min-width: 0;
+  min-height: 0;
   object-fit: contain;
 }
 
@@ -514,8 +523,13 @@ h2[data-scramble] {
 .photo-dialog-next { right: 0.25rem; }
 
 .photo-dialog-caption {
-  margin: 0.75rem auto 0;
-  max-width: 40rem;
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.75rem 1rem 0.15rem;
+  max-width: none;
+  background: #090909;
   text-align: center;
   font-family: "Segoe UI", system-ui, sans-serif;
   font-size: 1rem;
