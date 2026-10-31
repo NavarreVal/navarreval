@@ -180,6 +180,22 @@
       return el ? el.textContent.trim() : "";
     }
 
+    function httpUrl(value) {
+      if (typeof value !== "string" || !value) return "";
+      try {
+        const url = new URL(value, window.location.origin);
+        if (url.protocol !== "http:" && url.protocol !== "https:") return "";
+        return url.href;
+      } catch (err) {
+        return "";
+      }
+    }
+
+    function starSuffix(rating) {
+      if (!/^[1-5]$/.test(rating || "")) return "";
+      return " · " + "★".repeat(Number(rating));
+    }
+
     function parseShelf(xml) {
       return Array.from(xml.getElementsByTagName("item")).map(item => ({
         title: tagText(item, "title"),
@@ -206,26 +222,43 @@
         const books = parseShelf(xml);
         status.remove();
         if (!books.length) {
-          section.insertAdjacentHTML("beforeend", '<p class="shelf-status">Nothing on this shelf right now.</p>');
+          const empty = document.createElement("p");
+          empty.className = "shelf-status";
+          empty.textContent = "Nothing on this shelf right now.";
+          section.append(empty);
           return;
         }
         books.forEach(book => {
           const a = document.createElement("a");
           a.className = "book";
-          a.href = book.link;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.innerHTML =
-            '<img src="' + book.image + '" alt="">' +
-            "<strong>" + book.title + "</strong>" +
-            "<span>" + book.author +
-            (book.rating && book.rating !== "0" ? " · " + "★".repeat(Number(book.rating)) : "") +
-            "</span>";
+          const link = httpUrl(book.link);
+          if (link) {
+            a.href = link;
+            a.target = "_blank";
+            a.rel = "noopener";
+          }
+          const image = httpUrl(book.image);
+          if (image) {
+            const img = document.createElement("img");
+            img.src = image;
+            img.alt = "";
+            a.append(img);
+          }
+          const strong = document.createElement("strong");
+          strong.textContent = book.title;
+          const meta = document.createElement("span");
+          meta.textContent = book.author + starSuffix(book.rating);
+          a.append(strong, meta);
           grid.appendChild(a);
         });
       } catch (err) {
-        status.innerHTML = 'Could not load this shelf. <a href="https://www.goodreads.com/review/list/' +
-          USER_ID + "?shelf=" + shelf + '" target="_blank" rel="noopener">Open on Goodreads</a>.';
+        status.textContent = "Could not load this shelf. ";
+        const fallback = document.createElement("a");
+        fallback.href = "https://www.goodreads.com/review/list/" + USER_ID + "?shelf=" + encodeURIComponent(shelf);
+        fallback.target = "_blank";
+        fallback.rel = "noopener";
+        fallback.textContent = "Open on Goodreads";
+        status.append(fallback, ".");
       }
     }
 
