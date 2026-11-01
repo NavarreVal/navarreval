@@ -1955,6 +1955,31 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   box-shadow: 0 0 6px var(--ph-hot);
 }
 
+#personal .crew-demo-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+#personal .crew-demo-preview {
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(61, 255, 122, 0.35);
+  background: #041018;
+}
+
+#personal .crew-demo-preview picture,
+#personal .crew-demo-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 #personal .crew-demo-copy {
   display: flex;
   flex-direction: column;
@@ -2020,7 +2045,8 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 }
 
 @container crew-demo (min-width: 28rem) {
-  #personal .crew-demo-link {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link,
+  #personal .crew-demo[data-preview="off"] .crew-demo-link {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -2028,19 +2054,14 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
     padding: 0.95rem 1.15rem;
   }
 
-  #personal .crew-demo-board {
+  #personal .crew-demo:not([data-preview]) .crew-demo-board,
+  #personal .crew-demo[data-preview="off"] .crew-demo-board {
     align-self: center;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.45rem;
     min-width: 7.2rem;
     padding: 0.6rem 0.75rem;
-  }
-
-  #personal .crew-demo-copy {
-    flex: 1 1 0%;
-    min-width: 0;
-    max-width: 38rem;
   }
 
   #personal .crew-demo-title {
@@ -2053,6 +2074,95 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
     font-size: 0.84rem;
     line-height: 1.5;
   }
+}
+
+/* No script: the card is a full row, so its width matches the column count. */
+@container crew-demo (min-width: 32rem) {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-preview {
+    display: block;
+    width: 100%;
+    aspect-ratio: 840 / 512;
+    max-height: 11rem;
+  }
+}
+
+@container crew-demo (min-width: 48rem) {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-main {
+    flex: 1 1 0%;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-preview {
+    flex: 1.7 1 0%;
+    width: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    align-self: stretch;
+  }
+}
+
+#personal .crew-demo[data-preview="off"] .crew-demo-preview {
+  display: none;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-link {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.55rem;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 840 / 512;
+  max-height: 11rem;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-board {
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-link {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.9rem;
+  padding: 0.7rem;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-main {
+  flex: 1 1 0%;
+  justify-content: center;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-board {
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-preview {
+  display: flex;
+  flex: 1.7 1 0%;
+  align-self: stretch;
+  min-height: 0;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-preview picture {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
