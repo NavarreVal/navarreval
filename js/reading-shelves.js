@@ -104,12 +104,34 @@ function bookText(book) {
   };
 }
 
+export const COVER_COLOR_COUNT = 10;
+
+// Stable across reloads. The shelf walk nudges only when the previous book
+// already took this index, so neighbors in a row do not share a cloth.
+export function hashCoverIndex(title, author) {
+  const text = title + "\n" + author;
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0) % COVER_COLOR_COUNT;
+}
+
+export function assignCoverIndex(title, author, previousIndex) {
+  const index = hashCoverIndex(title, author);
+  if (previousIndex == null || index !== previousIndex) return index;
+  return (index + 1) % COVER_COLOR_COUNT;
+}
+
 // Same box as a real cover. The card already prints the title and author,
 // so this stand-in is decorative when both of those are present.
-export function coverPlaceholder(book) {
+export function coverPlaceholder(book, index) {
   const text = bookText(book);
   const cover = el("div");
   cover.className = "book-cover book-placeholder";
+  const chosen = Number.isInteger(index) ? index : hashCoverIndex(text.title, text.author);
+  cover.setAttribute("data-cover", String(chosen));
   const title = el("p");
   title.className = "book-placeholder-title";
   title.textContent = text.title;
@@ -128,6 +150,7 @@ export function coverPlaceholder(book) {
 }
 
 export function renderBooks(grid, books) {
+  let previousIndex = null;
   books.forEach(book => {
     const card = el("a");
     card.className = "book";
@@ -138,19 +161,23 @@ export function renderBooks(grid, books) {
       card.rel = "noopener";
     }
     const text = bookText(book);
+    const index = assignCoverIndex(text.title, text.author, previousIndex);
+    previousIndex = index;
     const image = httpUrl(typeof book.image === "string" ? book.image : "");
     if (image) {
       const img = el("img");
       img.alt = text.title || text.author ? "" : "Book";
+      img.setAttribute("data-cover", String(index));
       // Open Library answers 404 when default=false and it has no cover.
       // Append first so a synchronous error can swap the image in place.
       img.onerror = function () {
-        img.replaceWith(coverPlaceholder(book));
+        const stored = Number(img.getAttribute("data-cover"));
+        img.replaceWith(coverPlaceholder(book, stored));
       };
       card.append(img);
       img.src = image;
     } else {
-      card.append(coverPlaceholder(book));
+      card.append(coverPlaceholder(book, index));
     }
     const strong = el("strong");
     strong.textContent = text.title;

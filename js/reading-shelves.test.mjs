@@ -5,12 +5,16 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   BOOKS_URL,
+  COVER_COLOR_COUNT,
   PROFILE,
   WORKER,
+  assignCoverIndex,
   booksFromExport,
   booksFromRss,
+  hashCoverIndex,
   httpUrl,
   loadShelf,
+  renderBooks,
   resetBooksFileCache,
   starSuffix,
 } from "./reading-shelves.js";
@@ -445,11 +449,83 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.equal(source.includes("innerHTML"), false);
   assert.equal(html.includes("/review/list/"), false);
   assert.equal(source.includes("/review/list/"), false);
-  assert.match(html, /\/js\/reading-shelves\.js\?v=3/);
+  assert.match(html, /\/js\/reading-shelves\.js\?v=4/);
+  assert.match(html, /These shelves come from an export of my/);
+  assert.match(html, /updated from time to time/);
+  assert.match(html, /https:\/\/www\.goodreads\.com\/user\/show\/12968726-navarre-valdivieso/);
+  assert.equal(html.includes("public RSS"), false);
+  assert.equal(html.includes("official API"), false);
+  assert.match(source, /Shelves are temporarily unavailable\./);
   assert.match(html, /\.book-placeholder/);
   assert.match(html, /aspect-ratio:\s*2\s*\/\s*3/);
   assert.match(source, /coverPlaceholder/);
   assert.match(source, /replaceWith\(coverPlaceholder/);
   const csp = headers.split("\n").find(line => line.includes("Content-Security-Policy-Report-Only"));
   assert.match(csp, /img-src[^;]*https:\/\/covers\.openlibrary\.org/);
+});
+
+function channelLinear(hex, offset) {
+  const value = parseInt(hex.slice(offset, offset + 2), 16) / 255;
+  return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+}
+
+function luminance(hex) {
+  return 0.2126 * channelLinear(hex, 1)
+    + 0.7152 * channelLinear(hex, 3)
+    + 0.0722 * channelLinear(hex, 5);
+}
+
+function contrastRatio(foreground, background) {
+  const lighter = Math.max(luminance(foreground), luminance(background));
+  const darker = Math.min(luminance(foreground), luminance(background));
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+test("placeholder cloth colors stay stable and readable", () => {
+  assert.equal(COVER_COLOR_COUNT, 10);
+  assert.equal(hashCoverIndex("Alpha", "Ann"), hashCoverIndex("Alpha", "Ann"));
+  const index = hashCoverIndex("Alpha", "Ann");
+  assert.ok(index >= 0 && index < COVER_COLOR_COUNT);
+  assert.equal(assignCoverIndex("Alpha", "Ann", null), index);
+  assert.equal(assignCoverIndex("Alpha", "Ann", index), (index + 1) % COVER_COLOR_COUNT);
+  assert.equal(assignCoverIndex("Alpha", "Ann", (index + 3) % COVER_COLOR_COUNT), index);
+
+  let collision = "";
+  for (let n = 0; n < 400 && !collision; n++) {
+    const title = "Shelf book " + n;
+    if (hashCoverIndex(title, "Ann") === index) collision = title;
+  }
+  assert.ok(collision);
+
+  const previousDocument = globalThis.document;
+  globalThis.document = { createElement };
+  try {
+    const grid = createElement("div");
+    renderBooks(grid, [
+      { title: "Alpha", author: "Ann", image: "", link: "", rating: 0 },
+      { title: collision, author: "Ann", image: "", link: "", rating: 0 }
+    ]);
+    const first = grid.children[0].children[0];
+    const second = grid.children[1].children[0];
+    assert.equal(first.getAttribute("data-cover"), String(index));
+    assert.equal(second.getAttribute("data-cover"), String((index + 1) % COVER_COLOR_COUNT));
+    assert.notEqual(first.getAttribute("data-cover"), second.getAttribute("data-cover"));
+  } finally {
+    globalThis.document = previousDocument;
+  }
+
+  const html = fs.readFileSync(path.join(ROOT, "passion/reading.html"), "utf8");
+  const titleColor = html.match(/\.book-placeholder-title\s*\{[^}]*color:\s*(#[0-9a-fA-F]{6})/)[1];
+  const authorColor = html.match(/\.book-placeholder-author\s*\{[^}]*color:\s*(#[0-9a-fA-F]{6})/)[1];
+  const cloths = [...html.matchAll(/\.book-placeholder\[data-cover="(\d+)"\]\s*\{([^}]+)\}/g)];
+  assert.equal(cloths.length, COVER_COLOR_COUNT);
+  for (const match of cloths) {
+    const cover = match[2].match(/--cover:\s*(#[0-9a-fA-F]{6})/)[1];
+    const spine = match[2].match(/--cover-spine:\s*(#[0-9a-fA-F]{6})/)[1];
+    const light = match[2].match(/--cover-spine-light:\s*(#[0-9a-fA-F]{6})/)[1];
+    assert.ok(contrastRatio(titleColor, cover) >= 4.5, match[1] + " title");
+    assert.ok(contrastRatio(authorColor, cover) >= 4.5, match[1] + " author");
+    assert.ok(luminance(spine) < luminance(cover), match[1] + " spine");
+    assert.ok(luminance(light) > luminance(cover), match[1] + " spine light");
+  }
 });
