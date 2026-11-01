@@ -12,12 +12,23 @@ const indexPath = path.join(ROOT, "search-index.json");
 const raw = fs.readFileSync(indexPath, "utf8");
 const mini = MiniSearch.loadJSON(raw, miniSearchOptions());
 
-const forbidden = ["/passion/blog", "/bucket-list", "/dnd"];
+const forbidden = ["/passion/blog", "/dnd"];
 for (const bit of forbidden) {
   if (raw.includes(bit)) {
     console.error("Index contains excluded path " + bit);
     process.exit(1);
   }
+}
+
+if (!raw.includes("/bucket-list")) {
+  console.error("Index is missing /bucket-list");
+  process.exit(1);
+}
+
+const bucketHtml = fs.readFileSync(path.join(ROOT, "bucket-list/index.html"), "utf8");
+if (!bucketHtml.includes('<meta name="robots" content="noindex, nofollow">')) {
+  console.error("bucket-list noindex robots meta changed");
+  process.exit(1);
 }
 
 const cases = [
@@ -40,7 +51,10 @@ const cases = [
   { q: "scrum", top: ["/professional"] },
   { q: "atonement", top: ["/talks/an-infinite-atonement"] },
   { q: "vanilla", top: ["/passion/vanilla"] },
-  { q: "music", top: ["/passion/music"] }
+  { q: "music", top: ["/passion/music"] },
+  { q: "bucket list", top: ["/bucket-list"] },
+  { q: "camino", top: ["/bucket-list"] },
+  { q: "norway", top: ["/bucket-list"] }
 ];
 
 function urls(hits) {

@@ -1790,6 +1790,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   display: grid;
   grid-template-columns: repeat(var(--crew-cols), minmax(0, 1fr));
   gap: var(--crew-gap);
+  min-width: 0;
 }
 
 #personal .crew-card {
@@ -1850,6 +1851,326 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
 #personal .crew-assign {
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* Bridge demo sits after the last crew card. Without JS it occupies one
+   full row. The roster script sets the remainder span so the card fills
+   the empty slots on the last row, or a full row of its own when the
+   crew already divides evenly. */
+#personal .crew-demo {
+  container: crew-demo / inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid rgba(61, 255, 122, 0.45);
+  background: #07140f;
+  grid-column: 1 / -1;
+}
+
+#personal .crew-demo-link {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 0;
+  height: 100%;
+  padding: 0.65rem 0.7rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+#personal .crew-demo-link:hover {
+  background: rgba(61, 255, 122, 0.08);
+}
+
+#personal .crew-demo-link:focus-visible {
+  outline: 2px solid var(--ph-hot);
+  outline-offset: -3px;
+}
+
+#personal .crew-demo:has(.crew-demo-link:hover),
+#personal .crew-demo:has(.crew-demo-link:focus-visible) {
+  border-color: var(--ph-hot);
+}
+
+#personal .crew-demo-board {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(61, 255, 122, 0.35);
+  background: #04110c;
+  overflow: hidden;
+}
+
+#personal .crew-demo-board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.22) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+#personal .crew-demo-station {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--ph-dim);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#personal .crew-demo-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--ph-dim);
+  box-shadow: 0 0 6px rgba(61, 255, 122, 0.35);
+}
+
+#personal .crew-demo-dot.is-work {
+  background: var(--ph);
+  box-shadow: 0 0 8px var(--ph);
+  animation: led-blink 1.6s infinite;
+}
+
+#personal .crew-demo-dot.is-wait {
+  background: var(--ph-dim);
+  opacity: 0.45;
+  animation: load-pulse 2.4s infinite;
+}
+
+#personal .crew-demo-dot.is-done {
+  background: var(--ph-hot);
+  box-shadow: 0 0 6px var(--ph-hot);
+}
+
+#personal .crew-demo-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+#personal .crew-demo-preview {
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(61, 255, 122, 0.35);
+  background: #041018;
+}
+
+#personal .crew-demo-preview picture,
+#personal .crew-demo-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#personal .crew-demo-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+#personal .crew-demo-title {
+  color: var(--ph-hot);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+#personal .crew-demo-text {
+  color: var(--ph-dim);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+#personal .crew-demo-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+  padding: 0.22rem 0.5rem;
+  border: 1px solid rgba(61, 255, 122, 0.55);
+  color: var(--ph);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#personal .crew-demo-open::after {
+  content: "↗";
+  letter-spacing: 0;
+}
+
+@container crew-demo (max-width: 18rem) {
+  #personal .crew-demo-link {
+    gap: 0.35rem;
+    padding: 0.45rem 0.5rem;
+  }
+
+  #personal .crew-demo-title {
+    font-size: 0.82rem;
+  }
+
+  #personal .crew-demo-text {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  #personal .crew-demo-station {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+@container crew-demo (min-width: 28rem) {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link,
+  #personal .crew-demo[data-preview="off"] .crew-demo-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.15rem;
+    padding: 0.95rem 1.15rem;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-board,
+  #personal .crew-demo[data-preview="off"] .crew-demo-board {
+    align-self: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    min-width: 7.2rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  #personal .crew-demo-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+  }
+
+  #personal .crew-demo-text {
+    max-width: 38rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+}
+
+/* No script: the card is a full row, so its width matches the column count. */
+@container crew-demo (min-width: 32rem) {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-preview {
+    display: block;
+    width: 100%;
+    aspect-ratio: 840 / 512;
+    max-height: 11rem;
+  }
+}
+
+@container crew-demo (min-width: 48rem) {
+  #personal .crew-demo:not([data-preview]) .crew-demo-link {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-main {
+    flex: 1 1 0%;
+  }
+
+  #personal .crew-demo:not([data-preview]) .crew-demo-preview {
+    flex: 1.7 1 0%;
+    width: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    align-self: stretch;
+  }
+}
+
+#personal .crew-demo[data-preview="off"] .crew-demo-preview {
+  display: none;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-link {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.55rem;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 840 / 512;
+  max-height: 11rem;
+}
+
+#personal .crew-demo[data-preview="stack"] .crew-demo-board {
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-link {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.9rem;
+  padding: 0.7rem;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-main {
+  flex: 1 1 0%;
+  justify-content: center;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-board {
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-preview {
+  display: flex;
+  flex: 1.7 1 0%;
+  align-self: stretch;
+  min-height: 0;
+}
+
+#personal .crew-demo[data-preview="side"] .crew-demo-preview picture {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #personal .crew-demo-dot.is-work,
+  #personal .crew-demo-dot.is-wait {
+    animation: none;
+  }
 }
 
 #personal .now-rows {

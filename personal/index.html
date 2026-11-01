@@ -11,7 +11,7 @@
   <title>Personal | J. Navarre Valdivieso</title>
   <link rel="stylesheet" href="/css/style.css?v=6.3">
   <link rel="stylesheet" href="/css/overrides.css?v=6.6">
-  <link rel="stylesheet" href="/css/dossier.css?v=1.36">
+  <link rel="stylesheet" href="/css/dossier.css?v=1.38">
 </head>
 <body class="site-hub dossier-tabbed">
   <script src="/js/dossier-chrome.js?v=4"></script>
@@ -311,7 +311,83 @@
                   <p class="crew-assign">ASSIGNMENT: CLASSIFIED</p>
                 </div>
               </li>
+              <li class="crew-demo">
+                <a class="crew-demo-link" href="https://demo.navarreval.com" target="_blank" rel="noopener">
+                  <span class="crew-demo-preview">
+                    <picture>
+                      <source media="(prefers-reduced-motion: reduce)" srcset="/images/personal/bridge-board-still.webp" type="image/webp">
+                      <source srcset="/images/personal/bridge-board.webp" type="image/webp">
+                      <img src="/images/personal/bridge-board-still.webp" alt="Animated preview of the SS Argus bridge demo board" width="840" height="512" loading="lazy" decoding="async">
+                    </picture>
+                  </span>
+                  <span class="crew-demo-main">
+                    <span class="crew-demo-board" aria-hidden="true">
+                      <span class="crew-demo-station"><span class="crew-demo-dot is-work"></span>Work</span>
+                      <span class="crew-demo-station"><span class="crew-demo-dot is-wait"></span>Wait</span>
+                      <span class="crew-demo-station"><span class="crew-demo-dot is-done"></span>Done</span>
+                    </span>
+                    <span class="crew-demo-copy">
+                      <span class="crew-demo-title">SS Argus · Bridge Demo</span>
+                      <span class="crew-demo-text">Live, view-only bridge. Watch the crew bots at their stations work, wait, and finish tasks in real time. Fully simulated. No real data.</span>
+                      <span class="crew-demo-open">Open demo</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
             </ol>
+            <script>
+              (function () {
+                var grid = document.querySelector("#personal .crew-roster");
+                var card = grid && grid.querySelector(".crew-demo");
+                if (!grid || !card) return;
+
+                function columnCount() {
+                  var template = getComputedStyle(grid).gridTemplateColumns;
+                  if (!template || template === "none") return 1;
+                  var repeat = /^repeat\((\d+)/.exec(template);
+                  if (repeat) return Math.max(1, Number(repeat[1]));
+                  var count = template.split(/\s+/).filter(function (part) {
+                    return part && part !== "0px";
+                  }).length;
+                  return Math.max(1, count);
+                }
+
+                function crewCount() {
+                  var n = 0;
+                  var kids = grid.children;
+                  for (var i = 0; i < kids.length; i++) {
+                    if (kids[i].classList.contains("crew-card")) n += 1;
+                  }
+                  return n;
+                }
+
+                function fit() {
+                  /* Drop the inline span before measuring. A span wider than
+                     the current template creates an implicit column, and the
+                     next measurement would lock onto that. The stylesheet
+                     fallback is one full row, which uses only explicit tracks. */
+                  card.style.gridColumn = "";
+                  var columns = columnCount();
+                  var crew = crewCount();
+                  var span = columns - (crew % columns);
+                  if (span < 1 || span > columns) span = columns;
+                  var preview = span <= 1 ? "off" : (span === 2 ? "stack" : "side");
+                  card.setAttribute("data-crew-span", String(span));
+                  card.setAttribute("data-preview", preview);
+                  card.style.gridColumn = "span " + span;
+                }
+
+                fit();
+                if (typeof ResizeObserver === "function") {
+                  new ResizeObserver(fit).observe(grid);
+                } else {
+                  window.addEventListener("resize", fit);
+                }
+                if (typeof MutationObserver === "function") {
+                  new MutationObserver(fit).observe(grid, { childList: true });
+                }
+              })();
+            </script>
           </div>
         </div>
       </section>

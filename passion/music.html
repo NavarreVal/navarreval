@@ -230,14 +230,24 @@
       return item.artists.filter(function (name) { return name; }).join(", ");
     }
 
-    function spotifyUrl(url) {
-      if (typeof url === "string" && url.indexOf("https://") === 0) return url;
-      return SPOTIFY;
+    function httpUrl(value) {
+      if (typeof value !== "string" || !value) return "";
+      try {
+        const url = new URL(value, window.location.origin);
+        if (url.protocol !== "http:" && url.protocol !== "https:") return "";
+        return url.href;
+      } catch (err) {
+        return "";
+      }
     }
 
-    function playlistUrl(url) {
-      if (typeof url === "string" && url.indexOf("https://") === 0) return url;
-      return PLAYLIST;
+    function shelfAnchor(href, label) {
+      const a = document.createElement("a");
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = label;
+      return a;
     }
 
     async function loadShelf(section) {
@@ -257,34 +267,37 @@
         if (!res.ok) throw new Error(res.status);
         const data = await res.json();
         const items = (Array.isArray(data.items) ? data.items : []).slice(0, count);
-        if (open) open.href = playlistUrl(data.playlist_url);
+        if (open) open.href = httpUrl(data.playlist_url) || PLAYLIST;
         status.remove();
         if (!items.length) {
           const emptyHref = open ? open.href : SPOTIFY;
           const emptyLabel = open ? "Open playlist" : "Open on Spotify";
-          section.insertAdjacentHTML(
-            "beforeend",
-            '<p class="shelf-status">Nothing on this shelf right now. <a href="' +
-              emptyHref + '" target="_blank" rel="noopener">' + emptyLabel + "</a>.</p>"
-          );
+          const empty = document.createElement("p");
+          empty.className = "shelf-status";
+          empty.append("Nothing on this shelf right now. ", shelfAnchor(emptyHref, emptyLabel), ".");
+          section.append(empty);
           return;
         }
         items.forEach(function (item) {
           const a = document.createElement("a");
           a.className = "listen";
-          a.href = spotifyUrl(item.url);
+          a.href = httpUrl(item.url) || SPOTIFY;
           a.target = "_blank";
           a.rel = "noopener";
 
-          const img = document.createElement("img");
-          img.src = item.img || "";
-          img.alt = item.name || "";
-          img.loading = "lazy";
+          const image = httpUrl(item.img);
+          if (image) {
+            const img = document.createElement("img");
+            img.src = image;
+            img.alt = item.name || "";
+            img.loading = "lazy";
+            a.append(img);
+          }
 
           const strong = document.createElement("strong");
           strong.textContent = item.name || "Untitled";
 
-          a.append(img, strong);
+          a.append(strong);
 
           const by = artistsLine(item);
           if (by) {
@@ -298,9 +311,8 @@
       } catch (err) {
         const failHref = open ? open.href : SPOTIFY;
         const failLabel = open ? "Open playlist" : "Open on Spotify";
-        status.innerHTML =
-          'Could not load this shelf. <a href="' + failHref +
-          '" target="_blank" rel="noopener">' + failLabel + "</a>.";
+        status.replaceChildren();
+        status.append("Could not load this shelf. ", shelfAnchor(failHref, failLabel), ".");
       }
     }
 

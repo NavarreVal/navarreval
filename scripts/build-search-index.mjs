@@ -3,9 +3,12 @@
    Run: node scripts/build-search-index.mjs
 
    Indexed: pages reached from the public nav (home, Professional,
-   Passion and its visible cards, Personal, Talks).
-   Excluded: /passion/blog/*, the blog listing, /bucket-list/,
-   noindex pages, and /dnd/. */
+   Passion and its visible cards, Personal, Talks), plus /bucket-list/.
+   The bucket-list page keeps its noindex robots meta (it stays out of
+   Google). Only this on-site index should find it. Its stops live in
+   destinations.js, so that visible copy is folded into the page body.
+   Excluded: /passion/blog/*, the blog listing, other noindex pages,
+   and /dnd/. */
 
 import fs from "node:fs";
 import path from "node:path";
@@ -35,17 +38,22 @@ const SECTIONS = {
   "/passion/shooting": "Shooting",
   "/passion/video-games": "Video Games",
   "/privacy": "Privacy",
-  "/copyright": "Copyright"
+  "/copyright": "Copyright",
+  "/bucket-list": "Bucket List"
 };
 
 function isBlocked(urlPath) {
   const p = urlPath.length > 1 && urlPath.endsWith("/") ? urlPath.slice(0, -1) : urlPath;
   if (p === "/passion/blog" || p.startsWith("/passion/blog/")) return true;
   if (p === "/passion/blog-archive" || p.startsWith("/passion/blog-archive")) return true;
-  if (p === "/bucket-list" || p.startsWith("/bucket-list/")) return true;
   if (p === "/dnd" || p.startsWith("/dnd/")) return true;
   if (p === "/404") return true;
   return false;
+}
+
+function siteSearchDespiteNoindex(urlPath) {
+  const p = urlPath.length > 1 && urlPath.endsWith("/") ? urlPath.slice(0, -1) : urlPath;
+  return p === "/bucket-list";
 }
 
 function isNoindex(html) {
@@ -154,6 +162,53 @@ function resolveHref(href, fromFile) {
   }
 }
 
+function unescapeJsString(value) {
+  return value
+    .replace(/\\n/g, " ")
+    .replace(/\\r/g, " ")
+    .replace(/\\t/g, " ")
+    .replace(/\\"/g, "\"")
+    .replace(/\\\\/g, "\\");
+}
+
+function quotedField(block, key) {
+  const re = new RegExp("(?:^|[\\n,{])\\s*" + key + "\\s*:\\s*\"((?:\\\\.|[^\"\\\\])*)\"", "m");
+  const match = block.match(re);
+  return match ? unescapeJsString(match[1]) : "";
+}
+
+function quotedList(block, key) {
+  const re = new RegExp("(?:^|[\\n,{])\\s*" + key + "\\s*:\\s*\\[([\\s\\S]*?)\\]", "m");
+  const match = block.match(re);
+  if (!match) return [];
+  const bits = [];
+  const str = /"((?:\\.|[^"\\])*)"/g;
+  let item;
+  while ((item = str.exec(match[1]))) bits.push(unescapeJsString(item[1]));
+  return bits;
+}
+
+/* Stops are rendered from destinations.js, not the HTML shell.
+   Index the copy a visitor actually sees. Skip notes: that field
+   mirrors the sheet and is never shown. */
+function bucketListText() {
+  const js = fs.readFileSync(path.join(ROOT, "bucket-list/destinations.js"), "utf8");
+  const start = js.indexOf("var DESTINATIONS = [");
+  const end = js.indexOf("var LIVERIES", start);
+  if (start < 0 || end < 0) return "";
+  const bits = [];
+  const hero = js.match(/var HERO_LINE = "((?:\\.|[^"\\])*)"/);
+  if (hero) bits.push(unescapeJsString(hero[1]));
+  for (const obj of js.slice(start, end).split(/\n    \{/)) {
+    for (const key of ["name", "city", "category", "tagline", "alt"]) {
+      const value = quotedField(obj, key);
+      if (value) bits.push(value);
+    }
+    bits.push(...quotedList(obj, "facts"));
+  }
+  return bits.join(" ");
+}
+
 function timelineText() {
   const js = fs.readFileSync(path.join(ROOT, "js/main.js"), "utf8");
   const start = js.indexOf("const timelineEvents");
@@ -183,7 +238,7 @@ function conceptFor(url) {
 }
 
 function discover() {
-  const queue = ["/", "/professional", "/passion", "/personal"];
+  const queue = ["/", "/professional", "/passion", "/personal", "/bucket-list"];
   const seenFiles = new Set();
   const pages = [];
   const seenUrls = new Set();
@@ -195,7 +250,7 @@ function discover() {
     if (!file || seenFiles.has(file)) continue;
     const html = fs.readFileSync(path.join(ROOT, file), "utf8");
     seenFiles.add(file);
-    if (isNoindex(html)) continue;
+    if (isNoindex(html) && !siteSearchDespiteNoindex(startUrl)) continue;
     const url = canonicalPath(html, startUrl);
     if (isBlocked(url) || seenUrls.has(url)) continue;
     seenUrls.add(url);
@@ -216,6 +271,7 @@ function discover() {
     while ((heading = headingRe.exec(plain))) headings.push(stripTags(heading[2]));
     let body = stripTags(plain).slice(0, 14000);
     if (url === "/professional") body = (body + " " + timelineText()).slice(0, 18000);
+    if (url === "/bucket-list") body = (body + " " + bucketListText()).slice(0, 18000);
     const description = metaContent(html, "description") || ogDescription(html);
     const concept = conceptFor(url);
     pages.push({

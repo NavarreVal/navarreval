@@ -258,6 +258,26 @@
       return h.toLocaleString() + (h === 1 ? " hr" : " hrs");
     }
 
+    function httpUrl(value) {
+      if (typeof value !== "string" || !value) return "";
+      try {
+        const url = new URL(value, window.location.origin);
+        if (url.protocol !== "http:" && url.protocol !== "https:") return "";
+        return url.href;
+      } catch (err) {
+        return "";
+      }
+    }
+
+    function shelfAnchor(href, label) {
+      const a = document.createElement("a");
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = label;
+      return a;
+    }
+
     async function loadShelf(section) {
       const shelf = section.dataset.shelf;
       const count = section.dataset.count || 20;
@@ -272,24 +292,27 @@
         const games = Array.isArray(data.games) ? data.games : [];
         status.remove();
         if (!games.length) {
-          section.insertAdjacentHTML(
-            "beforeend",
-            '<p class="shelf-status">Nothing on this shelf right now. <a href="' +
-              PROFILE + '" target="_blank" rel="noopener">Open on Steam</a>.</p>'
-          );
+          const empty = document.createElement("p");
+          empty.className = "shelf-status";
+          empty.append("Nothing on this shelf right now. ", shelfAnchor(PROFILE, "Open on Steam"), ".");
+          section.append(empty);
           return;
         }
         games.forEach(function (game) {
           const a = document.createElement("a");
           a.className = "game";
-          a.href = game.store || game.community || PROFILE;
+          a.href = httpUrl(game.store) || httpUrl(game.community) || PROFILE;
           a.target = "_blank";
           a.rel = "noopener";
 
-          const img = document.createElement("img");
-          img.src = game.img || "";
-          img.alt = game.name || "";
-          img.loading = "lazy";
+          const image = httpUrl(game.img);
+          if (image) {
+            const img = document.createElement("img");
+            img.src = image;
+            img.alt = game.name || "";
+            img.loading = "lazy";
+            a.append(img);
+          }
 
           const strong = document.createElement("strong");
           strong.textContent = game.name || "Untitled";
@@ -297,13 +320,12 @@
           const meta = document.createElement("span");
           meta.textContent = hoursLabel(game.playtime_forever);
 
-          a.append(img, strong, meta);
+          a.append(strong, meta);
           grid.appendChild(a);
         });
       } catch (err) {
-        status.innerHTML =
-          'Could not load this shelf. <a href="' + PROFILE +
-          '" target="_blank" rel="noopener">Open on Steam</a>.';
+        status.replaceChildren();
+        status.append("Could not load this shelf. ", shelfAnchor(PROFILE, "Open on Steam"), ".");
       }
     }
 
