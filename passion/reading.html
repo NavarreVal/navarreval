@@ -171,99 +171,11 @@
     </div>
   </div>
 
+  <script type="module">
+    import { startReadingShelves } from "/js/reading-shelves.js?v=1";
+    startReadingShelves();
+  </script>
   <script>
-    const USER_ID = "12968726";
-    const WORKER = "https://goodreads-shelves.navarreval.workers.dev";
-
-    function tagText(parent, name) {
-      const el = parent.getElementsByTagName(name)[0];
-      return el ? el.textContent.trim() : "";
-    }
-
-    function httpUrl(value) {
-      if (typeof value !== "string" || !value) return "";
-      try {
-        const url = new URL(value, window.location.origin);
-        if (url.protocol !== "http:" && url.protocol !== "https:") return "";
-        return url.href;
-      } catch (err) {
-        return "";
-      }
-    }
-
-    function starSuffix(rating) {
-      if (!/^[1-5]$/.test(rating || "")) return "";
-      return " · " + "★".repeat(Number(rating));
-    }
-
-    function parseShelf(xml) {
-      return Array.from(xml.getElementsByTagName("item")).map(item => ({
-        title: tagText(item, "title"),
-        author: tagText(item, "author_name"),
-        image: tagText(item, "book_large_image_url")
-          || tagText(item, "book_medium_image_url")
-          || tagText(item, "book_image_url"),
-        link: tagText(item, "link"),
-        rating: tagText(item, "user_rating")
-      }));
-    }
-
-    async function loadShelf(section) {
-      const shelf = section.dataset.shelf;
-      const count = section.dataset.count || 20;
-      const status = section.querySelector(".shelf-status");
-      const grid = section.querySelector(".shelf-grid");
-      const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + count;
-
-      try {
-        const res = await fetch(feed);
-        if (!res.ok) throw new Error(res.status);
-        const xml = new DOMParser().parseFromString(await res.text(), "text/xml");
-        const books = parseShelf(xml);
-        status.remove();
-        if (!books.length) {
-          const empty = document.createElement("p");
-          empty.className = "shelf-status";
-          empty.textContent = "Nothing on this shelf right now.";
-          section.append(empty);
-          return;
-        }
-        books.forEach(book => {
-          const a = document.createElement("a");
-          a.className = "book";
-          const link = httpUrl(book.link);
-          if (link) {
-            a.href = link;
-            a.target = "_blank";
-            a.rel = "noopener";
-          }
-          const image = httpUrl(book.image);
-          if (image) {
-            const img = document.createElement("img");
-            img.src = image;
-            img.alt = "";
-            a.append(img);
-          }
-          const strong = document.createElement("strong");
-          strong.textContent = book.title;
-          const meta = document.createElement("span");
-          meta.textContent = book.author + starSuffix(book.rating);
-          a.append(strong, meta);
-          grid.appendChild(a);
-        });
-      } catch (err) {
-        status.textContent = "Could not load this shelf. ";
-        const fallback = document.createElement("a");
-        fallback.href = "https://www.goodreads.com/review/list/" + USER_ID + "?shelf=" + encodeURIComponent(shelf);
-        fallback.target = "_blank";
-        fallback.rel = "noopener";
-        fallback.textContent = "Open on Goodreads";
-        status.append(fallback, ".");
-      }
-    }
-
-    document.querySelectorAll(".shelf").forEach(loadShelf);
-
     document.documentElement.classList.add("page-slide");
     document.body.classList.add("page-enter");
     requestAnimationFrame(function () {

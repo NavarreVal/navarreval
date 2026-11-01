@@ -25,3 +25,15 @@ jobs:
           node-version: 22
       - name: Open-redirect tests
         run: node --test functions/_middleware.test.mjs
+
+  reading:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Reading shelf tests
+        run: node --test js/reading-shelves.test.mjs
+      - name: Goodreads CSV converter
+        run: python3 -m unittest tools/test_goodreads_csv_to_json.py
