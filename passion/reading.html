@@ -60,12 +60,145 @@
       flex-direction: column;
       gap: 0.55rem;
     }
-    .book img {
+    .book-cover-frame {
+      position: relative;
       width: 100%;
       aspect-ratio: 2 / 3;
-      object-fit: cover;
-      background: #1a1a1a;
+    }
+    .book-cover-frame > .book-placeholder,
+    .book-cover-frame > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
       border: 1px solid #2a2a2a;
+    }
+    .book-cover-frame > img {
+      object-fit: cover;
+      background: transparent;
+      z-index: 1;
+    }
+    .book-placeholder {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 0.4rem;
+      overflow: hidden;
+      padding: 0.9rem 0.7rem 0.75rem 1.05rem;
+      border-color: var(--cover-edge, #54485d);
+      background: var(--cover, #3a3240);
+      color: #f4f1ea;
+    }
+    .book-placeholder::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(
+        90deg,
+        var(--cover-spine, #241f28) 0%,
+        var(--cover-spine-light, #54485d) 48%,
+        var(--cover-spine, #241f28) 100%
+      );
+    }
+    /* Deep book-cloth colors. Title and author text stay at WCAG AA on each. */
+    .book-placeholder[data-cover="0"] { /* plum */
+      --cover: #4a3450;
+      --cover-spine: #2e2032;
+      --cover-spine-light: #6b4b74;
+      --cover-edge: #6b4b74;
+    }
+    .book-placeholder[data-cover="1"] { /* dark evergreen */
+      --cover: #1c3a2c;
+      --cover-spine: #11241b;
+      --cover-spine-light: #295440;
+      --cover-edge: #295440;
+    }
+    .book-placeholder[data-cover="2"] { /* olive drab */
+      --cover: #45462e;
+      --cover-spine: #2b2b1d;
+      --cover-spine-light: #646643;
+      --cover-edge: #646643;
+    }
+    .book-placeholder[data-cover="3"] { /* oxblood */
+      --cover: #5c2c30;
+      --cover-spine: #391b1e;
+      --cover-spine-light: #854046;
+      --cover-edge: #854046;
+    }
+    .book-placeholder[data-cover="4"] { /* slate navy */
+      --cover: #2a3a4c;
+      --cover-spine: #1a242f;
+      --cover-spine-light: #3d546e;
+      --cover-edge: #3d546e;
+    }
+    .book-placeholder[data-cover="5"] { /* deep teal */
+      --cover: #1c4044;
+      --cover-spine: #11282a;
+      --cover-spine-light: #295d63;
+      --cover-edge: #295d63;
+    }
+    .book-placeholder[data-cover="6"] { /* umber */
+      --cover: #4a3826;
+      --cover-spine: #2e2318;
+      --cover-spine-light: #6b5137;
+      --cover-edge: #6b5137;
+    }
+    .book-placeholder[data-cover="7"] { /* charcoal plum */
+      --cover: #3a3240;
+      --cover-spine: #241f28;
+      --cover-spine-light: #54485d;
+      --cover-edge: #54485d;
+    }
+    .book-placeholder[data-cover="8"] { /* dusty burgundy */
+      --cover: #5a343c;
+      --cover-spine: #382025;
+      --cover-spine-light: #824b57;
+      --cover-edge: #824b57;
+    }
+    .book-placeholder[data-cover="9"] { /* moss */
+      --cover: #314428;
+      --cover-spine: #1e2a19;
+      --cover-spine-light: #47633a;
+      --cover-edge: #47633a;
+    }
+    .book-placeholder-title,
+    .book-placeholder-author {
+      margin: 0;
+      min-height: 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+    .book-placeholder-title {
+      font: 600 0.78rem/1.25 inherit;
+      color: #f4f1ea;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+    }
+    .book-placeholder-author {
+      position: relative;
+      padding-top: 0.45rem;
+      font: 500 0.68rem/1.3 inherit;
+      color: #e4d7c2;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+    .book-placeholder-author:empty {
+      display: none;
+    }
+    .book-placeholder-author::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.1rem;
+      height: 2px;
+      background: var(--cover-spine-light, #54485d);
     }
     .book strong {
       font-size: 0.84rem;
@@ -161,9 +294,9 @@
       </section>
 
     <p class="read-note">
-      Shelves are pulled from
-      <a href="https://www.goodreads.com/user/show/12968726-navarre-valdivieso" target="_blank" rel="noopener">Goodreads</a>.
-      The official API is gone, so this uses the public RSS feed and can lag a day or two.
+      These shelves come from an export of my
+      <a href="https://www.goodreads.com/user/show/12968726-navarre-valdivieso" target="_blank" rel="noopener">Goodreads</a>
+      library and are updated from time to time.
     </p>
 
     <div class="read-footer">
@@ -171,99 +304,11 @@
     </div>
   </div>
 
+  <script type="module">
+    import { startReadingShelves } from "/js/reading-shelves.js?v=5";
+    startReadingShelves();
+  </script>
   <script>
-    const USER_ID = "12968726";
-    const WORKER = "https://goodreads-shelves.navarreval.workers.dev";
-
-    function tagText(parent, name) {
-      const el = parent.getElementsByTagName(name)[0];
-      return el ? el.textContent.trim() : "";
-    }
-
-    function httpUrl(value) {
-      if (typeof value !== "string" || !value) return "";
-      try {
-        const url = new URL(value, window.location.origin);
-        if (url.protocol !== "http:" && url.protocol !== "https:") return "";
-        return url.href;
-      } catch (err) {
-        return "";
-      }
-    }
-
-    function starSuffix(rating) {
-      if (!/^[1-5]$/.test(rating || "")) return "";
-      return " · " + "★".repeat(Number(rating));
-    }
-
-    function parseShelf(xml) {
-      return Array.from(xml.getElementsByTagName("item")).map(item => ({
-        title: tagText(item, "title"),
-        author: tagText(item, "author_name"),
-        image: tagText(item, "book_large_image_url")
-          || tagText(item, "book_medium_image_url")
-          || tagText(item, "book_image_url"),
-        link: tagText(item, "link"),
-        rating: tagText(item, "user_rating")
-      }));
-    }
-
-    async function loadShelf(section) {
-      const shelf = section.dataset.shelf;
-      const count = section.dataset.count || 20;
-      const status = section.querySelector(".shelf-status");
-      const grid = section.querySelector(".shelf-grid");
-      const feed = WORKER + "?shelf=" + encodeURIComponent(shelf) + "&count=" + count;
-
-      try {
-        const res = await fetch(feed);
-        if (!res.ok) throw new Error(res.status);
-        const xml = new DOMParser().parseFromString(await res.text(), "text/xml");
-        const books = parseShelf(xml);
-        status.remove();
-        if (!books.length) {
-          const empty = document.createElement("p");
-          empty.className = "shelf-status";
-          empty.textContent = "Nothing on this shelf right now.";
-          section.append(empty);
-          return;
-        }
-        books.forEach(book => {
-          const a = document.createElement("a");
-          a.className = "book";
-          const link = httpUrl(book.link);
-          if (link) {
-            a.href = link;
-            a.target = "_blank";
-            a.rel = "noopener";
-          }
-          const image = httpUrl(book.image);
-          if (image) {
-            const img = document.createElement("img");
-            img.src = image;
-            img.alt = "";
-            a.append(img);
-          }
-          const strong = document.createElement("strong");
-          strong.textContent = book.title;
-          const meta = document.createElement("span");
-          meta.textContent = book.author + starSuffix(book.rating);
-          a.append(strong, meta);
-          grid.appendChild(a);
-        });
-      } catch (err) {
-        status.textContent = "Could not load this shelf. ";
-        const fallback = document.createElement("a");
-        fallback.href = "https://www.goodreads.com/review/list/" + USER_ID + "?shelf=" + encodeURIComponent(shelf);
-        fallback.target = "_blank";
-        fallback.rel = "noopener";
-        fallback.textContent = "Open on Goodreads";
-        status.append(fallback, ".");
-      }
-    }
-
-    document.querySelectorAll(".shelf").forEach(loadShelf);
-
     document.documentElement.classList.add("page-slide");
     document.body.classList.add("page-enter");
     requestAnimationFrame(function () {
