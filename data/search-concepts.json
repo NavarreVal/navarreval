@@ -63,6 +63,10 @@
     },
     "/copyright": {
       "lead": "copyright license notice"
+    },
+    "/bucket-list": {
+      "lead": "bucket list travel destinations trip pilgrimage cathedral basilica camino norway",
+      "keywords": "bucket list travel cathedral basilica camino santiago compostela norway stavanger hafrsfjord"
     }
   }
 }
