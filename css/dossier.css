@@ -2161,7 +2161,7 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   min-height: 0;
 }
 
-#personal .crew-demo[data-preview="side"] .crew-demo-preview picture {
+#personal .crew-demo[data-preview="side"] .crew-demo-preview img {
   flex: 1 1 auto;
   min-height: 0;
 }

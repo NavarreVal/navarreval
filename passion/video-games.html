@@ -137,7 +137,8 @@
       gap: 0.55rem;
       max-width: 231px;
     }
-    .game img {
+    .game img,
+    .game-art {
       width: 100%;
       aspect-ratio: 231 / 87;
       object-fit: cover;
@@ -145,7 +146,19 @@
       border: 1px solid #2a2a2a;
       display: block;
     }
-    .game:hover img {
+    .game-art {
+      display: flex;
+      align-items: flex-end;
+      padding: 0.35rem 0.45rem;
+      color: #9aa7b2;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+      overflow: hidden;
+    }
+    .game:hover img,
+    .game:hover .game-art {
       border-color: #4a6a7a;
     }
     .game strong {
@@ -278,6 +291,58 @@
       return a;
     }
 
+    function steamAppId(game) {
+      const raw = game && game.appid != null ? String(game.appid) : "";
+      if (/^\d+$/.test(raw)) return raw;
+      const img = game && typeof game.img === "string" ? game.img : "";
+      const match = img.match(/\/apps\/(\d+)(?:\/|$)/);
+      return match ? match[1] : "";
+    }
+
+    /* Newer apps 404 on the unhashed capsule. header.jpg on the same
+       legacy path still resolves. Anything else becomes a text stand-in. */
+    function artChain(game) {
+      const urls = [];
+      function push(value) {
+        const safe = httpUrl(value);
+        if (safe && urls.indexOf(safe) === -1) urls.push(safe);
+      }
+      push(game && game.img);
+      const id = steamAppId(game);
+      if (id) {
+        const base = "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/" + id + "/";
+        push(base + "capsule_231x87.jpg");
+        push(base + "header.jpg");
+      }
+      return urls;
+    }
+
+    function artPlaceholder(game) {
+      const box = document.createElement("div");
+      box.className = "game-art";
+      box.textContent = (game && game.name) || "Untitled";
+      return box;
+    }
+
+    function gameArt(game) {
+      const urls = artChain(game);
+      if (!urls.length) return artPlaceholder(game);
+      const img = document.createElement("img");
+      img.alt = (game && game.name) || "";
+      img.loading = "lazy";
+      let step = 0;
+      img.addEventListener("error", function () {
+        step += 1;
+        if (step < urls.length) {
+          img.src = urls[step];
+          return;
+        }
+        img.replaceWith(artPlaceholder(game));
+      });
+      img.src = urls[0];
+      return img;
+    }
+
     async function loadShelf(section) {
       const shelf = section.dataset.shelf;
       const count = section.dataset.count || 20;
@@ -305,14 +370,7 @@
           a.target = "_blank";
           a.rel = "noopener";
 
-          const image = httpUrl(game.img);
-          if (image) {
-            const img = document.createElement("img");
-            img.src = image;
-            img.alt = game.name || "";
-            img.loading = "lazy";
-            a.append(img);
-          }
+          a.append(gameArt(game));
 
           const strong = document.createElement("strong");
           strong.textContent = game.name || "Untitled";
