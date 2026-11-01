@@ -14,6 +14,26 @@ var APEX_REDIRECT_HOSTS = {
   "navarreval.pages.dev": true
 };
 
+// Retired photo file names. Pages can still serve a deleted file at its
+// exact path after a zone purge, and this middleware runs before the asset
+// lookup. The Set is built once; each request is one lookup.
+var RETIRED_PHOTO_PATHS = new Set([
+  "/images/photography/elleVector.jpg",
+  "/images/photography/jacen.jpg",
+  "/images/photography/johyevening.jpg",
+  "/images/photography/marekFuzzyHat.jpg",
+  "/images/photography/bAndM.jpg",
+  "/images/photography/marlinGreenRiver.jpg",
+  "/images/photography/marekShields.jpg",
+  "/images/photography/porterPilot.jpg",
+  "/images/photography/2014Marek.jpg",
+  "/images/photography/2021Marek.jpg",
+  "/images/photography/porterShields.jpg",
+  "/images/photography/marekStudy.jpg",
+  "/images/photography/donPorterUtahLake.jpg",
+  "/images/photography/alyssaWhiteShirt.jpg"
+]);
+
 // A leading run of "/", "\", "%2F", or "%5C" is one slash. `new URL("//host", origin)`
 // is a protocol-relative URL, so the path has to be collapsed before it is
 // assigned onto the fixed origin.
@@ -72,6 +92,18 @@ export async function onRequest(context) {
   }
 
   if (host !== DND_HOST) {
+    // After the alias-host 301, and before the asset lookup. The dnd host
+    // keeps its own rewrite below.
+    if (RETIRED_PHOTO_PATHS.has(url.pathname)) {
+      return new Response("Gone", {
+        status: 410,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Cache-Control": "no-store",
+          "X-Robots-Tag": "noindex"
+        }
+      });
+    }
     return context.next();
   }
 
