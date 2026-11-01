@@ -1853,9 +1853,10 @@ body.dossier-tabbed #personal a.inline-link:focus-visible {
   letter-spacing: 0.08em;
 }
 
-/* Bridge demo sits in front of the crew. Without JS it occupies one full
-   row. The roster script replaces that with the exact remainder span so
-   the last row stays full at any column count and any crew count. */
+/* Bridge demo sits after the last crew card. Without JS it occupies one
+   full row. The roster script sets the remainder span so the card fills
+   the empty slots on the last row, or a full row of its own when the
+   crew already divides evenly. */
 #personal .crew-demo {
   container: crew-demo / inline-size;
   position: relative;
