@@ -60,15 +60,24 @@
       flex-direction: column;
       gap: 0.55rem;
     }
-    .book img,
-    .book-cover {
+    .book-cover-frame {
+      position: relative;
       width: 100%;
       aspect-ratio: 2 / 3;
-      background: #1a1a1a;
+    }
+    .book-cover-frame > .book-placeholder,
+    .book-cover-frame > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
       border: 1px solid #2a2a2a;
     }
-    .book img {
+    .book-cover-frame > img {
       object-fit: cover;
+      background: transparent;
+      z-index: 1;
     }
     .book-placeholder {
       position: relative;
@@ -296,7 +305,7 @@
   </div>
 
   <script type="module">
-    import { startReadingShelves } from "/js/reading-shelves.js?v=4";
+    import { startReadingShelves } from "/js/reading-shelves.js?v=5";
     startReadingShelves();
   </script>
   <script>

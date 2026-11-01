@@ -105,9 +105,10 @@ function bookText(book) {
 }
 
 export const COVER_COLOR_COUNT = 10;
+const COVER_MIN_TRACK = 140;
 
-// Stable across reloads. The shelf walk nudges only when the previous book
-// already took this index, so neighbors in a row do not share a cloth.
+// FNV-1a over the title plus the author. The same book keeps the same
+// preferred cloth across reloads.
 export function hashCoverIndex(title, author) {
   const text = title + "\n" + author;
   let hash = 2166136261;
@@ -118,10 +119,86 @@ export function hashCoverIndex(title, author) {
   return (hash >>> 0) % COVER_COLOR_COUNT;
 }
 
-export function assignCoverIndex(title, author, previousIndex) {
-  const index = hashCoverIndex(title, author);
-  if (previousIndex == null || index !== previousIndex) return index;
-  return (index + 1) % COVER_COLOR_COUNT;
+export function chooseCoverIndex(preferred, used) {
+  if (!used || !used.has(preferred)) return preferred;
+  for (let step = 1; step < COVER_COLOR_COUNT; step++) {
+    const next = (preferred + step) % COVER_COLOR_COUNT;
+    if (!used.has(next)) return next;
+  }
+  return preferred;
+}
+
+// columnCount is how many cards fit in one row. Every card in that row
+// reserves a cloth, so a placeholder will not match another placeholder
+// earlier in the same row, not only the card directly before it.
+export function assignShelfColors(entries, columnCount) {
+  const columns = Math.max(1, columnCount || entries.length || 1);
+  const colors = new Array(entries.length);
+  for (let i = 0; i < entries.length; i++) {
+    const rowStart = i - (i % columns);
+    const used = new Set();
+    for (let j = rowStart; j < i; j++) used.add(colors[j]);
+    colors[i] = chooseCoverIndex(
+      hashCoverIndex(entries[i].title, entries[i].author),
+      used
+    );
+  }
+  return colors;
+}
+
+function columnCountFor(grid, cardCount) {
+  const width = Number(grid && grid.clientWidth) || 0;
+  if (!width) return Math.max(1, cardCount || 1);
+  let gap = 16;
+  if (typeof getComputedStyle === "function") {
+    const parsed = parseFloat(getComputedStyle(grid).columnGap);
+    if (Number.isFinite(parsed)) gap = parsed;
+  }
+  return Math.max(1, Math.floor((width + gap) / (COVER_MIN_TRACK + gap)));
+}
+
+function nodeList(node) {
+  if (!node || !node.children) return [];
+  return Array.from(node.children);
+}
+
+function coverParts(card) {
+  const frame = nodeList(card).find(child => (
+    child && String(child.className || "").includes("book-cover-frame")
+  ));
+  if (!frame) return null;
+  const placeholder = nodeList(frame).find(child => (
+    String(child.className || "").includes("book-placeholder")
+  ));
+  const img = nodeList(frame).find(child => child.tag === "img" || child.tagName === "IMG");
+  const titleEl = nodeList(placeholder).find(child => (
+    String(child.className || "").includes("book-placeholder-title")
+  ));
+  const authorEl = nodeList(placeholder).find(child => (
+    String(child.className || "").includes("book-placeholder-author")
+  ));
+  return { placeholder, img, titleEl, authorEl };
+}
+
+export function recolorGrid(grid) {
+  const cards = nodeList(grid).filter(child => (
+    child && String(child.className || "").split(" ").includes("book")
+  ));
+  if (!cards.length) return;
+  const entries = cards.map(card => {
+    const parts = coverParts(card);
+    return {
+      title: parts && parts.titleEl ? parts.titleEl.textContent : "",
+      author: parts && parts.authorEl ? parts.authorEl.textContent : ""
+    };
+  });
+  const colors = assignShelfColors(entries, columnCountFor(grid, cards.length));
+  cards.forEach((card, i) => {
+    const parts = coverParts(card);
+    if (parts && parts.placeholder) {
+      parts.placeholder.setAttribute("data-cover", String(colors[i]));
+    }
+  });
 }
 
 // Same box as a real cover. The card already prints the title and author,
@@ -149,8 +226,12 @@ export function coverPlaceholder(book, index) {
   return cover;
 }
 
+function dropFailedCover(img, grid) {
+  img.remove();
+  recolorGrid(grid);
+}
+
 export function renderBooks(grid, books) {
-  let previousIndex = null;
   books.forEach(book => {
     const card = el("a");
     card.className = "book";
@@ -161,31 +242,36 @@ export function renderBooks(grid, books) {
       card.rel = "noopener";
     }
     const text = bookText(book);
-    const index = assignCoverIndex(text.title, text.author, previousIndex);
-    previousIndex = index;
+    const frame = el("div");
+    frame.className = "book-cover-frame";
+    // The cloth sits under the image, so a slow or missing cover is never a blank box.
+    frame.append(coverPlaceholder(book));
     const image = httpUrl(typeof book.image === "string" ? book.image : "");
     if (image) {
       const img = el("img");
       img.alt = text.title || text.author ? "" : "Book";
-      img.setAttribute("data-cover", String(index));
-      // Open Library answers 404 when default=false and it has no cover.
-      // Append first so a synchronous error can swap the image in place.
       img.onerror = function () {
-        const stored = Number(img.getAttribute("data-cover"));
-        img.replaceWith(coverPlaceholder(book, stored));
+        dropFailedCover(img, grid);
       };
-      card.append(img);
+      img.onload = function () {
+        if (!img.naturalWidth) dropFailedCover(img, grid);
+      };
+      frame.append(img);
       img.src = image;
-    } else {
-      card.append(coverPlaceholder(book, index));
     }
     const strong = el("strong");
     strong.textContent = text.title;
     const meta = el("span");
     meta.textContent = text.author + starSuffix(book.rating);
-    card.append(strong, meta);
+    card.append(frame, strong, meta);
     grid.appendChild(card);
   });
+  recolorGrid(grid);
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(function () {
+      recolorGrid(grid);
+    });
+  }
 }
 
 function paint(section, status, grid, books) {
@@ -246,8 +332,21 @@ export async function loadShelf(section) {
   await loadWorker(section, status, grid, shelf, count);
 }
 
+let resizeBound = false;
+
+function bindCoverResize() {
+  if (resizeBound || typeof window === "undefined") return;
+  resizeBound = true;
+  window.addEventListener("resize", function () {
+    const root = globalThis.document;
+    if (!root || typeof root.querySelectorAll !== "function") return;
+    root.querySelectorAll(".shelf-grid").forEach(recolorGrid);
+  });
+}
+
 export function startReadingShelves() {
   const root = globalThis.document;
   if (!root || typeof root.querySelectorAll !== "function") return;
+  bindCoverResize();
   root.querySelectorAll(".shelf").forEach(loadShelf);
 }

@@ -8,7 +8,7 @@ import {
   COVER_COLOR_COUNT,
   PROFILE,
   WORKER,
-  assignCoverIndex,
+  assignShelfColors,
   booksFromExport,
   booksFromRss,
   hashCoverIndex,
@@ -298,7 +298,12 @@ test("a present JSON shelf renders up to data-count and skips the worker", async
     assert.equal(shelf.grid.children.length, 2);
     assert.equal(shelf.grid.children[0].children[1].textContent, "First");
     assert.equal(shelf.grid.children[0].children[2].textContent, "Ada · ★★★★★");
-    const cover = shelf.grid.children[0].children[0];
+    const frame = shelf.grid.children[0].children[0];
+    assert.equal(frame.className, "book-cover-frame");
+    const underlay = frame.children[0];
+    const cover = frame.children[1];
+    assert.equal(underlay.className, "book-cover book-placeholder");
+    assert.equal(underlay.children[0].textContent, "First");
     assert.equal(
       cover.attrs.src,
       "https://covers.openlibrary.org/b/isbn/9780451524935-M.jpg?default=false"
@@ -306,15 +311,15 @@ test("a present JSON shelf renders up to data-count and skips the worker", async
     assert.equal(typeof cover.onerror, "function");
     assert.equal(cover.attrs.alt, "");
     cover.onerror();
-    const failed = shelf.grid.children[0].children[0];
-    assert.equal(shelf.grid.children[0].children.some(child => child.tag === "img"), false);
+    assert.equal(frame.children.some(child => child.tag === "img"), false);
+    const failed = frame.children[0];
     assert.equal(failed.className, "book-cover book-placeholder");
     assert.equal(failed.attrs["aria-hidden"], "true");
     assert.equal(failed.children[0].textContent, "First");
     assert.equal(failed.children[1].textContent, "Ada");
     assert.equal(shelf.grid.children[0].children[1].textContent, "First");
     assert.equal(shelf.grid.children[0].children[2].textContent, "Ada · ★★★★★");
-    const missing = shelf.grid.children[1].children[0];
+    const missing = shelf.grid.children[1].children[0].children[0];
     assert.equal(missing.className, "book-cover book-placeholder");
     assert.equal(missing.attrs["aria-hidden"], "true");
     assert.equal(missing.children[0].textContent, "Second");
@@ -344,15 +349,17 @@ test("a placeholder names a book when the card text is incomplete", async () => 
   }, class {}, async () => {
     const shelf = section("favorites", 20);
     await loadShelf(shelf.node);
-    const named = shelf.grid.children[0].children[0];
+    const named = shelf.grid.children[0].children[0].children[0];
     assert.equal(named.className, "book-cover book-placeholder");
     assert.equal(named.attrs["aria-hidden"], undefined);
     assert.equal(named.attrs.role, "img");
     assert.equal(named.attrs["aria-label"], "Only Title");
-    const blank = shelf.grid.children[1].children[0];
+    const blank = shelf.grid.children[1].children[0].children[0];
     assert.equal(blank.attrs.role, "img");
     assert.equal(blank.attrs["aria-label"], "Book");
-    assert.equal(shelf.grid.children.some(card => card.children.some(child => child.tag === "img")), false);
+    assert.equal(shelf.grid.children.some(card => (
+      card.children.some(child => child.tag === "img" || (child.children || []).some(node => node.tag === "img"))
+    )), false);
   });
 });
 
@@ -449,7 +456,8 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.equal(source.includes("innerHTML"), false);
   assert.equal(html.includes("/review/list/"), false);
   assert.equal(source.includes("/review/list/"), false);
-  assert.match(html, /\/js\/reading-shelves\.js\?v=4/);
+  assert.match(html, /\/js\/reading-shelves\.js\?v=5/);
+  assert.match(html, /\.book-cover-frame/);
   assert.match(html, /These shelves come from an export of my/);
   assert.match(html, /updated from time to time/);
   assert.match(html, /https:\/\/www\.goodreads\.com\/user\/show\/12968726-navarre-valdivieso/);
@@ -459,7 +467,8 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.match(html, /\.book-placeholder/);
   assert.match(html, /aspect-ratio:\s*2\s*\/\s*3/);
   assert.match(source, /coverPlaceholder/);
-  assert.match(source, /replaceWith\(coverPlaceholder/);
+  assert.match(source, /book-cover-frame/);
+  assert.match(source, /FNV-1a/);
   const csp = headers.split("\n").find(line => line.includes("Content-Security-Policy-Report-Only"));
   assert.match(csp, /img-src[^;]*https:\/\/covers\.openlibrary\.org/);
 });
@@ -486,16 +495,35 @@ test("placeholder cloth colors stay stable and readable", () => {
   assert.equal(hashCoverIndex("Alpha", "Ann"), hashCoverIndex("Alpha", "Ann"));
   const index = hashCoverIndex("Alpha", "Ann");
   assert.ok(index >= 0 && index < COVER_COLOR_COUNT);
-  assert.equal(assignCoverIndex("Alpha", "Ann", null), index);
-  assert.equal(assignCoverIndex("Alpha", "Ann", index), (index + 1) % COVER_COLOR_COUNT);
-  assert.equal(assignCoverIndex("Alpha", "Ann", (index + 3) % COVER_COLOR_COUNT), index);
 
-  let collision = "";
-  for (let n = 0; n < 400 && !collision; n++) {
-    const title = "Shelf book " + n;
-    if (hashCoverIndex(title, "Ann") === index) collision = title;
+  let same = "";
+  let other = "";
+  for (let n = 0; n < 800 && (!same || !other); n++) {
+    const title = "Row book " + n;
+    const hashed = hashCoverIndex(title, "Ann");
+    if (!same && hashed === index) same = title;
+    if (!other && hashed !== index) other = title;
   }
-  assert.ok(collision);
+  assert.ok(same);
+  assert.ok(other);
+  const row = assignShelfColors([
+    { title: "Alpha", author: "Ann" },
+    { title: other, author: "Ann" },
+    { title: same, author: "Ann" }
+  ], 3);
+  assert.equal(row[0], index);
+  assert.notEqual(row[2], row[0]);
+  assert.notEqual(row[2], row[1]);
+  assert.equal(new Set(row).size, 3);
+
+  const library = JSON.parse(fs.readFileSync(path.join(ROOT, "passion/books.json"), "utf8"));
+  const sample = [
+    ...library.shelves["currently-reading"],
+    ...library.shelves.read.slice(0, 24),
+    ...library.shelves.favorites
+  ];
+  const hashed = new Set(sample.map(book => hashCoverIndex(book.title, book.author)));
+  assert.ok(hashed.size >= 6, "sample colors " + [...hashed].join(","));
 
   const previousDocument = globalThis.document;
   globalThis.document = { createElement };
@@ -503,12 +531,11 @@ test("placeholder cloth colors stay stable and readable", () => {
     const grid = createElement("div");
     renderBooks(grid, [
       { title: "Alpha", author: "Ann", image: "", link: "", rating: 0 },
-      { title: collision, author: "Ann", image: "", link: "", rating: 0 }
+      { title: same, author: "Ann", image: "", link: "", rating: 0 }
     ]);
-    const first = grid.children[0].children[0];
-    const second = grid.children[1].children[0];
+    const first = grid.children[0].children[0].children[0];
+    const second = grid.children[1].children[0].children[0];
     assert.equal(first.getAttribute("data-cover"), String(index));
-    assert.equal(second.getAttribute("data-cover"), String((index + 1) % COVER_COLOR_COUNT));
     assert.notEqual(first.getAttribute("data-cover"), second.getAttribute("data-cover"));
   } finally {
     globalThis.document = previousDocument;
