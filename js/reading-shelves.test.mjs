@@ -119,12 +119,32 @@ function createElement(tag) {
     node.children.push(kid);
     return kid;
   };
+  node.setAttribute = (name, value) => {
+    node.attrs[name] = String(value);
+  };
+  node.getAttribute = (name) => (
+    Object.prototype.hasOwnProperty.call(node.attrs, name) ? node.attrs[name] : null
+  );
   node.remove = () => {
     node.removed = true;
     const parent = node.parent;
     if (!parent) return;
     const index = parent.children.indexOf(node);
     if (index !== -1) parent.children.splice(index, 1);
+    node.parent = null;
+  };
+  node.replaceWith = (...kids) => {
+    const parent = node.parent;
+    node.removed = true;
+    const next = kids.map(kid => {
+      if (kid && typeof kid === "object") kid.parent = parent || null;
+      return kid;
+    });
+    if (!parent) return;
+    const index = parent.children.indexOf(node);
+    if (index === -1) parent.children.push(...next);
+    else parent.children.splice(index, 1, ...next);
+    node.parent = null;
   };
   return node;
 }
@@ -280,13 +300,55 @@ test("a present JSON shelf renders up to data-count and skips the worker", async
       "https://covers.openlibrary.org/b/isbn/9780451524935-M.jpg?default=false"
     );
     assert.equal(typeof cover.onerror, "function");
+    assert.equal(cover.attrs.alt, "");
     cover.onerror();
+    const failed = shelf.grid.children[0].children[0];
     assert.equal(shelf.grid.children[0].children.some(child => child.tag === "img"), false);
-    assert.equal(shelf.grid.children[0].children[0].textContent, "First");
-    assert.equal(shelf.grid.children[0].children[1].textContent, "Ada · ★★★★★");
+    assert.equal(failed.className, "book-cover book-placeholder");
+    assert.equal(failed.attrs["aria-hidden"], "true");
+    assert.equal(failed.children[0].textContent, "First");
+    assert.equal(failed.children[1].textContent, "Ada");
+    assert.equal(shelf.grid.children[0].children[1].textContent, "First");
+    assert.equal(shelf.grid.children[0].children[2].textContent, "Ada · ★★★★★");
+    const missing = shelf.grid.children[1].children[0];
+    assert.equal(missing.className, "book-cover book-placeholder");
+    assert.equal(missing.attrs["aria-hidden"], "true");
+    assert.equal(missing.children[0].textContent, "Second");
+    assert.equal(missing.children[1].textContent, "Bea");
     assert.equal(shelf.grid.children[1].attrs.href, undefined);
-    assert.equal(shelf.grid.children[1].children[0].textContent, "Second");
-    assert.equal(shelf.grid.children[1].children[1].textContent, "Bea");
+    assert.equal(shelf.grid.children[1].children[1].textContent, "Second");
+    assert.equal(shelf.grid.children[1].children[2].textContent, "Bea");
+  });
+});
+
+test("a placeholder names a book when the card text is incomplete", async () => {
+  await withPage(async (url) => {
+    if (url !== BOOKS_URL) throw new Error("worker should not be called");
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        shelves: {
+          favorites: [
+            { title: "Only Title", author: "", image: "", link: "", rating: 0 },
+            { title: "", author: "", image: "", link: "", rating: 0 }
+          ]
+        }
+      }),
+      text: async () => "{}"
+    };
+  }, class {}, async () => {
+    const shelf = section("favorites", 20);
+    await loadShelf(shelf.node);
+    const named = shelf.grid.children[0].children[0];
+    assert.equal(named.className, "book-cover book-placeholder");
+    assert.equal(named.attrs["aria-hidden"], undefined);
+    assert.equal(named.attrs.role, "img");
+    assert.equal(named.attrs["aria-label"], "Only Title");
+    const blank = shelf.grid.children[1].children[0];
+    assert.equal(blank.attrs.role, "img");
+    assert.equal(blank.attrs["aria-label"], "Book");
+    assert.equal(shelf.grid.children.some(card => card.children.some(child => child.tag === "img")), false);
   });
 });
 
@@ -383,7 +445,11 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.equal(source.includes("innerHTML"), false);
   assert.equal(html.includes("/review/list/"), false);
   assert.equal(source.includes("/review/list/"), false);
-  assert.match(html, /\/js\/reading-shelves\.js\?v=2/);
+  assert.match(html, /\/js\/reading-shelves\.js\?v=3/);
+  assert.match(html, /\.book-placeholder/);
+  assert.match(html, /aspect-ratio:\s*2\s*\/\s*3/);
+  assert.match(source, /coverPlaceholder/);
+  assert.match(source, /replaceWith\(coverPlaceholder/);
   const csp = headers.split("\n").find(line => line.includes("Content-Security-Policy-Report-Only"));
   assert.match(csp, /img-src[^;]*https:\/\/covers\.openlibrary\.org/);
 });

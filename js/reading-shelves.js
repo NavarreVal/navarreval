@@ -97,6 +97,36 @@ function showEmpty(section) {
   section.append(empty);
 }
 
+function bookText(book) {
+  return {
+    title: typeof book.title === "string" ? book.title : "",
+    author: typeof book.author === "string" ? book.author : ""
+  };
+}
+
+// Same box as a real cover. The card already prints the title and author,
+// so this stand-in is decorative when both of those are present.
+export function coverPlaceholder(book) {
+  const text = bookText(book);
+  const cover = el("div");
+  cover.className = "book-cover book-placeholder";
+  const title = el("p");
+  title.className = "book-placeholder-title";
+  title.textContent = text.title;
+  const author = el("p");
+  author.className = "book-placeholder-author";
+  author.textContent = text.author;
+  cover.append(title, author);
+  if (text.title && text.author) {
+    cover.setAttribute("aria-hidden", "true");
+  } else {
+    const label = [text.title, text.author].filter(Boolean).join(", ") || "Book";
+    cover.setAttribute("role", "img");
+    cover.setAttribute("aria-label", label);
+  }
+  return cover;
+}
+
 export function renderBooks(grid, books) {
   books.forEach(book => {
     const card = el("a");
@@ -107,22 +137,25 @@ export function renderBooks(grid, books) {
       card.target = "_blank";
       card.rel = "noopener";
     }
+    const text = bookText(book);
     const image = httpUrl(typeof book.image === "string" ? book.image : "");
     if (image) {
       const img = el("img");
-      img.alt = "";
+      img.alt = text.title || text.author ? "" : "Book";
       // Open Library answers 404 when default=false and it has no cover.
+      // Append first so a synchronous error can swap the image in place.
       img.onerror = function () {
-        img.remove();
+        img.replaceWith(coverPlaceholder(book));
       };
-      img.src = image;
       card.append(img);
+      img.src = image;
+    } else {
+      card.append(coverPlaceholder(book));
     }
     const strong = el("strong");
-    strong.textContent = typeof book.title === "string" ? book.title : "";
+    strong.textContent = text.title;
     const meta = el("span");
-    const author = typeof book.author === "string" ? book.author : "";
-    meta.textContent = author + starSuffix(book.rating);
+    meta.textContent = text.author + starSuffix(book.rating);
     card.append(strong, meta);
     grid.appendChild(card);
   });
