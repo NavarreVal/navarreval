@@ -46,6 +46,6 @@
 /dnd/*
   X-Robots-Tag: noindex, nofollow
 
-# Personal bucket list. Not linked from the public site.
+# Personal bucket list. It is in site search and stays noindex.
 /bucket-list/*
   X-Robots-Tag: noindex, nofollow
