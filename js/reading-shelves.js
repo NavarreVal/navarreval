@@ -110,8 +110,12 @@ export function renderBooks(grid, books) {
     const image = httpUrl(typeof book.image === "string" ? book.image : "");
     if (image) {
       const img = el("img");
-      img.src = image;
       img.alt = "";
+      // Open Library answers 404 when default=false and it has no cover.
+      img.onerror = function () {
+        img.remove();
+      };
+      img.src = image;
       card.append(img);
     }
     const strong = el("strong");

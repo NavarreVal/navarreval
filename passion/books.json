@@ -1,0 +1,1754 @@
+{
+  "generated": "2026-11-01",
+  "shelves": {
+    "currently-reading": [
+      {
+        "title": "Running with the Demon (Word & Void, #1)",
+        "author": "Terry Brooks",
+        "image": "https://covers.openlibrary.org/b/isbn/9780345379627-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/187124",
+        "rating": 0
+      },
+      {
+        "title": "Little House in the Big Woods (Little House, #1)",
+        "author": "Laura Ingalls Wilder",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060885373-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8337",
+        "rating": 0
+      },
+      {
+        "title": "Jehovah and the World of the Old Testament: An Illustrated Reference for Latter-Day Saints",
+        "author": "Richard Neitzel Holzapfel",
+        "image": "https://covers.openlibrary.org/b/isbn/9781606411360-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/6929607",
+        "rating": 0
+      },
+      {
+        "title": "The New Testament History, Culture, and Society: A Background to the texts of the New Testament",
+        "author": "Lincoln H. Blumell",
+        "image": "https://covers.openlibrary.org/b/isbn/9781944394769-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/45727442",
+        "rating": 0
+      }
+    ],
+    "read": [
+      {
+        "title": "Paradise (Expeditionary Force, #3)",
+        "author": "Craig Alanson",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/32723950",
+        "rating": 2
+      },
+      {
+        "title": "In the Language of Adam: Reading Scripture Like The Book of Mormon's Visionary Men",
+        "author": "D. John Butler",
+        "image": "https://covers.openlibrary.org/b/isbn/9798990412026-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/212227034",
+        "rating": 4
+      },
+      {
+        "title": "SpecOps (Expeditionary Force, #2)",
+        "author": "Craig Alanson",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/30342581",
+        "rating": 3
+      },
+      {
+        "title": "Columbus Day (Expeditionary Force, #1)",
+        "author": "Craig Alanson",
+        "image": "https://covers.openlibrary.org/b/isbn/9781520126241-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/36449535",
+        "rating": 4
+      },
+      {
+        "title": "The Third Thousand Years",
+        "author": "W. Cleon Skousen",
+        "image": "https://covers.openlibrary.org/b/isbn/9780884941224-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1483049",
+        "rating": 4
+      },
+      {
+        "title": "Master and Commander (Aubrey & Maturin, #1)",
+        "author": "Patrick O'Brian",
+        "image": "https://covers.openlibrary.org/b/isbn/9780393541588-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/53597791",
+        "rating": 5
+      },
+      {
+        "title": "Tennis Shoes Among the Nephites (Tennis Shoes, #1)",
+        "author": "Chris Heimerdinger",
+        "image": "https://covers.openlibrary.org/b/isbn/9781577344674-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/121809",
+        "rating": 0
+      },
+      {
+        "title": "Out of the Silent Planet (The Space Trilogy, #1)",
+        "author": "C.S. Lewis",
+        "image": "https://covers.openlibrary.org/b/isbn/9780007157150-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/25350",
+        "rating": 4
+      },
+      {
+        "title": "The First 2,000 Years: From Adam to Abraham (The Thousand Years Book 1)",
+        "author": "W. Cleon Skousen",
+        "image": "https://covers.openlibrary.org/b/isbn/9780934364430-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/12968029",
+        "rating": 4
+      },
+      {
+        "title": "The Cold Start Problem: How to Start and Scale Network Effects ― A Venture Capitalist on Building Startups",
+        "author": "Andrew Chen",
+        "image": "https://covers.openlibrary.org/b/isbn/9780062969743-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/55338968",
+        "rating": 0
+      },
+      {
+        "title": "Wyrd Sisters (Discworld, #6; Witches, #2)",
+        "author": "Terry Pratchett",
+        "image": "https://covers.openlibrary.org/b/isbn/9780061020667-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/34504",
+        "rating": 2
+      },
+      {
+        "title": "Project Hail Mary",
+        "author": "Andy Weir",
+        "image": "https://covers.openlibrary.org/b/isbn/9780593135204-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/54493401",
+        "rating": 4
+      },
+      {
+        "title": "Piranesi",
+        "author": "Susanna Clarke",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/52702097",
+        "rating": 4
+      },
+      {
+        "title": "To Green Angel Tower (Memory, Sorrow, and Thorn, #3)",
+        "author": "Tad Williams",
+        "image": "https://covers.openlibrary.org/b/isbn/9780756402983-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/28691",
+        "rating": 5
+      },
+      {
+        "title": "Stone of Farewell (Memory, Sorrow, and Thorn, #2)",
+        "author": "Tad Williams",
+        "image": "https://covers.openlibrary.org/b/isbn/9780756402976-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/28689",
+        "rating": 4
+      },
+      {
+        "title": "The Dragonbone Chair (Memory, Sorrow, and Thorn, #1)",
+        "author": "Tad Williams",
+        "image": "https://covers.openlibrary.org/b/isbn/9780756402693-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/91981",
+        "rating": 4
+      },
+      {
+        "title": "Starship Troopers",
+        "author": "Robert A. Heinlein",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/17214",
+        "rating": 4
+      },
+      {
+        "title": "The Way of the Superior Man: A Spiritual Guide to Mastering the Challenges of Women, Work, and Sexual Desire",
+        "author": "David Deida",
+        "image": "https://covers.openlibrary.org/b/isbn/9781591792574-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/79424",
+        "rating": 1
+      },
+      {
+        "title": "Corsair",
+        "author": "Henrik  Sorensen",
+        "image": "https://covers.openlibrary.org/b/isbn/9798991368308-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/219056697",
+        "rating": 4
+      },
+      {
+        "title": "Eragon (The Inheritance Cycle #1)",
+        "author": "Christopher Paolini",
+        "image": "https://covers.openlibrary.org/b/isbn/9780375826696-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/113436",
+        "rating": 3
+      },
+      {
+        "title": "Undaunted Courage: The Pioneering First Mission to Explore America's Wild Frontier",
+        "author": "Stephen E. Ambrose",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743477888-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/45546",
+        "rating": 3
+      },
+      {
+        "title": "Drive: The Surprising Truth About What Motivates Us",
+        "author": "Daniel H. Pink",
+        "image": "https://covers.openlibrary.org/b/isbn/9781594488849-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/6452796",
+        "rating": 3
+      },
+      {
+        "title": "The Fall of Hyperion (Hyperion Cantos, #2)",
+        "author": "Dan Simmons",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553288209-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/77565",
+        "rating": 4
+      },
+      {
+        "title": "Hyperion (Hyperion Cantos, #1)",
+        "author": "Dan Simmons",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553283686-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/77566",
+        "rating": 5
+      },
+      {
+        "title": "Storm Front (The Dresden Files, #1)",
+        "author": "Jim  Butcher",
+        "image": "https://covers.openlibrary.org/b/isbn/9780451457813-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/47212",
+        "rating": 3
+      },
+      {
+        "title": "Shōgun: Part Two (Asian Saga, #2)",
+        "author": "James Clavell",
+        "image": "https://covers.openlibrary.org/b/isbn/9798212910972-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/201918732",
+        "rating": 4
+      },
+      {
+        "title": "Shōgun, Part 1 (Asian Saga, #1)",
+        "author": "James Clavell",
+        "image": "https://covers.openlibrary.org/b/isbn/9798212911009-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/201918744",
+        "rating": 4
+      },
+      {
+        "title": "Tactical Barbell 2: Conditioning",
+        "author": "K. Black",
+        "image": "https://covers.openlibrary.org/b/isbn/9781537710440-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/32683019",
+        "rating": 3
+      },
+      {
+        "title": "Musashi: An Epic Novel of the Samurai Era",
+        "author": "Eiji Yoshikawa",
+        "image": "https://covers.openlibrary.org/b/isbn/9781568364513-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17909476",
+        "rating": 4
+      },
+      {
+        "title": "The Brain that Changes Itself: Stories of Personal Triumph from the Frontiers of Brain Science",
+        "author": "Norman Doidge",
+        "image": "https://covers.openlibrary.org/b/isbn/9780670038305-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/570172",
+        "rating": 4
+      },
+      {
+        "title": "The Storm Before the Calm: America's Discord, the Coming Crisis of the 2020s, and the Triumph Beyond",
+        "author": "George Friedman",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/49587256",
+        "rating": 4
+      },
+      {
+        "title": "The Rape of the Mind: The Psychology of Thought Control, Menticide, and Brainwashing",
+        "author": "Joost A.M. Meerloo",
+        "image": "https://covers.openlibrary.org/b/isbn/9781615773763-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/6736285",
+        "rating": 0
+      },
+      {
+        "title": "The Comfort Crisis: Embrace Discomfort To Reclaim Your Wild, Happy, Healthy Self",
+        "author": "Michael Easter",
+        "image": "https://covers.openlibrary.org/b/isbn/9780593138762-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/55120630",
+        "rating": 5
+      },
+      {
+        "title": "None Dare Call It Conspiracy",
+        "author": "Gary Allen",
+        "image": "https://covers.openlibrary.org/b/isbn/9780944379530-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/811022",
+        "rating": 3
+      },
+      {
+        "title": "How to Think Like a Roman Emperor: The Stoic Philosophy of Marcus Aurelius",
+        "author": "Donald J. Robertson",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/39863499",
+        "rating": 5
+      },
+      {
+        "title": "Endure: How to Work Hard, Outlast, and Keep Hammering",
+        "author": "Cameron R. Hanes",
+        "image": "https://covers.openlibrary.org/b/isbn/9781250279293-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/58578769",
+        "rating": 3
+      },
+      {
+        "title": "Joseph Smith and the Mormons: A Graphic Biography",
+        "author": "Noah Van Sciver",
+        "image": "https://covers.openlibrary.org/b/isbn/9781419749650-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/58667424",
+        "rating": 2
+      },
+      {
+        "title": "My Side of the Mountain",
+        "author": "Jean Craighead George",
+        "image": "https://covers.openlibrary.org/b/isbn/9780593115008-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/45363788",
+        "rating": 0
+      },
+      {
+        "title": "Transformed: A Navy SEAL’s Unlikely Journey from the Throne of Africa, to the Streets of the Bronx, to Defying All Odds",
+        "author": "Remi Adeleke",
+        "image": "https://covers.openlibrary.org/b/isbn/9780785241669-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/54287751",
+        "rating": 4
+      },
+      {
+        "title": "The Devil's Hand (Terminal List, #4)",
+        "author": "Jack Carr",
+        "image": "https://covers.openlibrary.org/b/isbn/9781982123741-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/54265145",
+        "rating": 4
+      },
+      {
+        "title": "Heroes Don't Run: A Novel of the Pacific War (Adam Pelko, #3)",
+        "author": "Harry Mazer",
+        "image": "https://covers.openlibrary.org/b/isbn/9781416933946-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/948534",
+        "rating": 0
+      },
+      {
+        "title": "Wild at Heart: Discovering the Secret of a Man's Soul",
+        "author": "John Eldredge",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/40881942",
+        "rating": 4
+      },
+      {
+        "title": "Savage Son (Terminal List #3)",
+        "author": "Jack Carr",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/49700206",
+        "rating": 4
+      },
+      {
+        "title": "True Believer (Terminal List, #2)",
+        "author": "Jack Carr",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/51812465",
+        "rating": 4
+      },
+      {
+        "title": "The Terminal List (Terminal List, #1)",
+        "author": "Jack Carr",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/51812516",
+        "rating": 4
+      },
+      {
+        "title": "The Return of the King (The Lord of the Rings, #3)",
+        "author": "J.R.R. Tolkien",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/18512",
+        "rating": 5
+      },
+      {
+        "title": "The Two Towers (The Lord of the Rings, #2)",
+        "author": "J.R.R. Tolkien",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/6428447",
+        "rating": 4
+      },
+      {
+        "title": "The Iliad and The Odyssey",
+        "author": "Homer",
+        "image": "https://covers.openlibrary.org/b/isbn/9781839406966-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/51134631",
+        "rating": 4
+      },
+      {
+        "title": "The Dictionary of Obscure Sorrows",
+        "author": "John Koenig",
+        "image": "https://covers.openlibrary.org/b/isbn/9781501153648-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/56897474",
+        "rating": 0
+      },
+      {
+        "title": "Rich Dad Poor Dad: What the Rich Teach Their Kids About Money—That the Poor and Middle Class Do Not!",
+        "author": "Robert T. Kiyosaki",
+        "image": "https://covers.openlibrary.org/b/isbn/9780751532715-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/69571",
+        "rating": 0
+      },
+      {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/44293307",
+        "rating": 4
+      },
+      {
+        "title": "All You Need Is Kill (All You Need Is Kill Manga, #1-2)",
+        "author": "Ryōsuke Takeuchi",
+        "image": "https://covers.openlibrary.org/b/isbn/9781421576015-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/22545976",
+        "rating": 4
+      },
+      {
+        "title": "75 HARD CHALLENGE BOOK: A TACTICAL GUIDE TO WINNING THE WAR WITH YOURSELF, A HEALTH AND FITNESS BOOK TRACKER AND GUIDED CHECKLIST | EDITION 1",
+        "author": "75 hard frisella",
+        "image": "https://covers.openlibrary.org/b/isbn/9798425807458-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/60636971",
+        "rating": 4
+      },
+      {
+        "title": "Catchee Monkey (Rex & Eddie Mysteries #1)",
+        "author": "Sean  Cameron",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/23854608",
+        "rating": 3
+      },
+      {
+        "title": "Locked On (Jack Ryan Jr, #3; Jack Ryan Universe, #14)",
+        "author": "Tom Clancy",
+        "image": "https://covers.openlibrary.org/b/isbn/9780399157318-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/12687461",
+        "rating": 2
+      },
+      {
+        "title": "Over Sea, Under Stone (The Dark is Rising, #1)",
+        "author": "Susan Cooper",
+        "image": "https://covers.openlibrary.org/b/isbn/9780689871214-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/11312",
+        "rating": 0
+      },
+      {
+        "title": "Point of Impact (Bob Lee Swagger, #1)",
+        "author": "Stephen  Hunter",
+        "image": "https://covers.openlibrary.org/b/isbn/9780099453451-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/127712",
+        "rating": 4
+      },
+      {
+        "title": "Tribal Leadership: Leveraging Natural Groups to Build a Thriving Organization",
+        "author": "Dave Logan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780061251320-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/9723317",
+        "rating": 2
+      },
+      {
+        "title": "The Chronicles of Narnia Complete 7-Book Collection: All 7 Books Plus Bonus Book: Boxen",
+        "author": "C.S. Lewis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/18769280",
+        "rating": 0
+      },
+      {
+        "title": "Mistborn Trilogy (Mistborn, #1-3)",
+        "author": "Brandon Sanderson",
+        "image": "https://covers.openlibrary.org/b/isbn/9781429989817-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/10267807",
+        "rating": 5
+      },
+      {
+        "title": "The Mother Tongue: English and How It Got That Way",
+        "author": "Bill  Bryson",
+        "image": "https://covers.openlibrary.org/b/isbn/9780380715435-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/29",
+        "rating": 3
+      },
+      {
+        "title": "Extreme Ownership: How U.S. Navy SEALs Lead and Win",
+        "author": "Jocko Willink",
+        "image": "https://covers.openlibrary.org/b/isbn/9781250067050-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/23848190",
+        "rating": 5
+      },
+      {
+        "title": "12 Rules for Life: An Antidote to Chaos",
+        "author": "Jordan B. Peterson",
+        "image": "https://covers.openlibrary.org/b/isbn/9780345816047-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/33792742",
+        "rating": 4
+      },
+      {
+        "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+        "author": "James Clear",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/40121378",
+        "rating": 5
+      },
+      {
+        "title": "Casino Royale (James Bond, #1)",
+        "author": "Ian Fleming",
+        "image": "https://covers.openlibrary.org/b/isbn/9780142002025-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/3758",
+        "rating": 4
+      },
+      {
+        "title": "The War of Art",
+        "author": "Steven Pressfield",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/1319",
+        "rating": 3
+      },
+      {
+        "title": "How to Eat Fried Worms",
+        "author": "Thomas Rockwell",
+        "image": "https://covers.openlibrary.org/b/isbn/9780440421856-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/322351",
+        "rating": 0
+      },
+      {
+        "title": "The Battle for the Castle (The Castle in the Attic, #2)",
+        "author": "Elizabeth Winthrop",
+        "image": "https://covers.openlibrary.org/b/isbn/9780440409427-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/252205",
+        "rating": 0
+      },
+      {
+        "title": "The Little Black Book of Workout Motivation (The Bigger Leaner Stronger Series 5)",
+        "author": "Michael  Matthews",
+        "image": "https://covers.openlibrary.org/b/isbn/9781938895395-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/40801835",
+        "rating": 3
+      },
+      {
+        "title": "The Castle in the Attic (The Castle in the Attic, #1)",
+        "author": "Elizabeth Winthrop",
+        "image": "https://covers.openlibrary.org/b/isbn/9780823426843-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17972857",
+        "rating": 0
+      },
+      {
+        "title": "Parasitic Mind: How Infectious Ideas Are Killing Common Sense",
+        "author": "Gad Saad",
+        "image": "https://covers.openlibrary.org/b/isbn/9789369521951-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/49680197",
+        "rating": 4
+      },
+      {
+        "title": "Never Split the Difference: Negotiating As If Your Life Depended On It",
+        "author": "Chris Voss",
+        "image": "https://covers.openlibrary.org/b/isbn/9780062407801-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/26156469",
+        "rating": 3
+      },
+      {
+        "title": "Can't Hurt Me: Master Your Mind and Defy the Odds",
+        "author": "David Goggins",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/43160250",
+        "rating": 5
+      },
+      {
+        "title": "Mort (Discworld, #4)",
+        "author": "Terry Pratchett",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/8862633",
+        "rating": 4
+      },
+      {
+        "title": "Irreversible Damage: The Transgender Craze Seducing Our Daughters",
+        "author": "Abigail Shrier",
+        "image": "https://covers.openlibrary.org/b/isbn/9781684512287-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/56269790",
+        "rating": 4
+      },
+      {
+        "title": "The Blade Itself (The First Law, #1)",
+        "author": "Joe Abercrombie",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316387330-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/50009069",
+        "rating": 4
+      },
+      {
+        "title": "Beyond the Shadows (Night Angel, #3)",
+        "author": "Brent Weeks",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/6569573",
+        "rating": 2
+      },
+      {
+        "title": "Shadow's Edge (Night Angel, #2)",
+        "author": "Brent Weeks",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/8153214",
+        "rating": 2
+      },
+      {
+        "title": "The Way of Shadows (Night Angel, #1)",
+        "author": "Brent Weeks",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/6070107",
+        "rating": 4
+      },
+      {
+        "title": "The Keys of the Kingdom",
+        "author": "A.J. Cronin",
+        "image": "https://covers.openlibrary.org/b/isbn/9780795345487-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/41885536",
+        "rating": 4
+      },
+      {
+        "title": "The Martian",
+        "author": "Andy Weir",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/18401393",
+        "rating": 5
+      },
+      {
+        "title": "The Journey to the East",
+        "author": "Hermann Hesse",
+        "image": "https://covers.openlibrary.org/b/isbn/9781773232973-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/42619940",
+        "rating": 2
+      },
+      {
+        "title": "The Magician's Nephew (Chronicles of Narnia, #1)",
+        "author": "C.S. Lewis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/7806728",
+        "rating": 5
+      },
+      {
+        "title": "True Grit",
+        "author": "Charles Portis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/43612456",
+        "rating": 5
+      },
+      {
+        "title": "On Killing: The Psychological Cost of Learning to Kill in War and Society",
+        "author": "Dave Grossman",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316191449-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/78127",
+        "rating": 3
+      },
+      {
+        "title": "Code of the Samurai: A Modern Translation of the Bushido Shoshinshu of Taira Shigesuke",
+        "author": "Daidōji Yūzan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780804831901-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/44950",
+        "rating": 0
+      },
+      {
+        "title": "All Tomorrows: The Myriad Species and Mixed Fortunes of Man",
+        "author": "C.M. Kosemen",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/16143402",
+        "rating": 5
+      },
+      {
+        "title": "Solutions and Other Problems",
+        "author": "Allie Brosh",
+        "image": "https://covers.openlibrary.org/b/isbn/9781982156947-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/51323365",
+        "rating": 3
+      },
+      {
+        "title": "Unfettered (Unfettered #1)",
+        "author": "Shawn Speakman",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/18110576",
+        "rating": 5
+      },
+      {
+        "title": "The Dragonet Prophecy (Wings of Fire Graphic Novel, #1)",
+        "author": "Tui T. Sutherland",
+        "image": "https://covers.openlibrary.org/b/isbn/9780545942157-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/35238083",
+        "rating": 2
+      },
+      {
+        "title": "The Stonekeeper (Amulet, #1)",
+        "author": "Kazu Kibuishi",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439846806-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1238684",
+        "rating": 5
+      },
+      {
+        "title": "Paradise Lost",
+        "author": "John Milton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780140424393-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/15997",
+        "rating": 3
+      },
+      {
+        "title": "War Is a Racket",
+        "author": "Smedley D. Butler",
+        "image": "https://covers.openlibrary.org/b/isbn/9780922915866-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/198259",
+        "rating": 5
+      },
+      {
+        "title": "Meditations",
+        "author": "Marcus Aurelius",
+        "image": "https://covers.openlibrary.org/b/isbn/9780140449334-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/30659",
+        "rating": 3
+      },
+      {
+        "title": "Jurassic Park / The Lost World",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385366007-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/54661600",
+        "rating": 4
+      },
+      {
+        "title": "Jim Henson's The Dark Crystal: Creation Myths, Volume 2",
+        "author": "Brian Froud",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/15038253",
+        "rating": 3
+      },
+      {
+        "title": "Jim Henson's The Dark Crystal: Creation Myths, Volume 1",
+        "author": "Brian Froud",
+        "image": "https://covers.openlibrary.org/b/isbn/9781936393008-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/11880612",
+        "rating": 3
+      },
+      {
+        "title": "Dune (Dune Chronicles, #1)",
+        "author": "Frank Herbert",
+        "image": "https://covers.openlibrary.org/b/isbn/9781435140745-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17662622",
+        "rating": 5
+      },
+      {
+        "title": "Discipline Equals Freedom: Field Manual",
+        "author": "Jocko Willink",
+        "image": "https://covers.openlibrary.org/b/isbn/9781250156945-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/34452535",
+        "rating": 5
+      },
+      {
+        "title": "Meathead: The Science of Great Barbecue and Grilling – An NYT Bestselling BBQ Cookbook and Smoker Guide",
+        "author": "Meathead Goldwyn",
+        "image": "https://covers.openlibrary.org/b/isbn/9780544018464-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/25897965",
+        "rating": 5
+      },
+      {
+        "title": "Quiet: The Power of Introverts in a World That Can't Stop Talking",
+        "author": "Susan Cain",
+        "image": "https://covers.openlibrary.org/b/isbn/9780307352149-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8520610",
+        "rating": 3
+      },
+      {
+        "title": "Magician: Master (The Riftwar Saga, #2)",
+        "author": "Raymond E. Feist",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553564938-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/13810",
+        "rating": 4
+      },
+      {
+        "title": "Magician: Apprentice (The Riftwar Saga, #1)",
+        "author": "Raymond E. Feist",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553564945-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/13812",
+        "rating": 4
+      },
+      {
+        "title": "The Law",
+        "author": "Frédéric Bastiat",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/22756563",
+        "rating": 5
+      },
+      {
+        "title": "The Infinite Atonement",
+        "author": "Tad R. Callister",
+        "image": "https://covers.openlibrary.org/b/isbn/9781573456234-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/9948",
+        "rating": 2
+      },
+      {
+        "title": "The Five Languages of Apology: How to Experience Healing in All Your Relationships",
+        "author": "Gary Chapman",
+        "image": "https://covers.openlibrary.org/b/isbn/9781881273578-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/107515",
+        "rating": 3
+      },
+      {
+        "title": "Gatefather (Mither Mages #3)",
+        "author": "Orson Scott Card",
+        "image": "https://covers.openlibrary.org/b/isbn/9780765326591-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/23847922",
+        "rating": 4
+      },
+      {
+        "title": "The Call of the Wild",
+        "author": "Jack London",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/1852",
+        "rating": 3
+      },
+      {
+        "title": "Bigger Leaner Stronger: The Simple Science of Building the Ultimate Male Body",
+        "author": "Michael  Matthews",
+        "image": "https://covers.openlibrary.org/b/isbn/9781938895364-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/18622849",
+        "rating": 5
+      },
+      {
+        "title": "The Rise and Fall of the Third Reich: A History of Nazi Germany",
+        "author": "William L. Shirer",
+        "image": "https://covers.openlibrary.org/b/isbn/9780671728687-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/767171",
+        "rating": 5
+      },
+      {
+        "title": "The Gate Thief (Mither Mages, #2)",
+        "author": "Orson Scott Card",
+        "image": "https://covers.openlibrary.org/b/isbn/9780765326584-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/15793068",
+        "rating": 3
+      },
+      {
+        "title": "The Lost Gate (Mither Mages, #1)",
+        "author": "Orson Scott Card",
+        "image": "https://covers.openlibrary.org/b/isbn/9780765326577-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/9265891",
+        "rating": 5
+      },
+      {
+        "title": "Islam (Religion, Scriptures, and Spirituality)",
+        "author": "Charles Adams",
+        "image": "https://covers.openlibrary.org/b/isbn/9780786164820-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/11798876",
+        "rating": 3
+      },
+      {
+        "title": "The Bronze Bow",
+        "author": "Elizabeth George Speare",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/24408",
+        "rating": 3
+      },
+      {
+        "title": "Bury My Heart at Wounded Knee: An Indian History of the American West",
+        "author": "Dee Brown",
+        "image": "https://covers.openlibrary.org/b/isbn/9780805066692-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/76401",
+        "rating": 4
+      },
+      {
+        "title": "Give Me Back My Legions!",
+        "author": "Harry Turtledove",
+        "image": "https://covers.openlibrary.org/b/isbn/9780312371067-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/4190426",
+        "rating": 3
+      },
+      {
+        "title": "Unbroken: A World War II Story of Survival, Resilience and Redemption",
+        "author": "Laura Hillenbrand",
+        "image": "https://covers.openlibrary.org/b/isbn/9781400064168-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8664353",
+        "rating": 5
+      },
+      {
+        "title": "The Hitchhiker's Guide to the Galaxy (The Hitchhiker's Guide to the Galaxy, #1)",
+        "author": "Douglas Adams",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/11",
+        "rating": 2
+      },
+      {
+        "title": "Stardust",
+        "author": "Neil Gaiman",
+        "image": "https://covers.openlibrary.org/b/isbn/9780061142024-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/16793",
+        "rating": 3
+      },
+      {
+        "title": "Animal Farm",
+        "author": "George Orwell",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/7613",
+        "rating": 4
+      },
+      {
+        "title": "What Christians Believe",
+        "author": "C.S. Lewis",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060761530-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/30634",
+        "rating": 4
+      },
+      {
+        "title": "That's Not in My American History Book",
+        "author": "Thomas Ayres",
+        "image": "https://covers.openlibrary.org/b/isbn/9781589791077-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/223430",
+        "rating": 3
+      },
+      {
+        "title": "Man's Search for Meaning",
+        "author": "Viktor E. Frankl",
+        "image": "https://covers.openlibrary.org/b/isbn/9780807014295-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/4069",
+        "rating": 3
+      },
+      {
+        "title": "The Innocent Man: Murder and Injustice in a Small Town",
+        "author": "John Grisham",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385517232-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/5345",
+        "rating": 4
+      },
+      {
+        "title": "Heart of Darkness",
+        "author": "Joseph Conrad",
+        "image": "https://covers.openlibrary.org/b/isbn/9781892295491-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/4900",
+        "rating": 2
+      },
+      {
+        "title": "The National Parks: America's Best Idea",
+        "author": "Dayton Duncan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780307268969-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/6519311",
+        "rating": 3
+      },
+      {
+        "title": "The Screwtape Letters",
+        "author": "C.S. Lewis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/11149",
+        "rating": 5
+      },
+      {
+        "title": "Timeline",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780099244721-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7669",
+        "rating": 5
+      },
+      {
+        "title": "Eaters of the Dead",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060891565-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7673",
+        "rating": 4
+      },
+      {
+        "title": "Abraham Lincoln: Vampire Hunter (Abraham Lincoln: Vampire Hunter, #1)",
+        "author": "Seth Grahame-Smith",
+        "image": "https://covers.openlibrary.org/b/isbn/9780446563086-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7108001",
+        "rating": 3
+      },
+      {
+        "title": "Neverwhere (London Below, #1)",
+        "author": "Neil Gaiman",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060557812-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/14497",
+        "rating": 2
+      },
+      {
+        "title": "Constitutional Law",
+        "author": "Erwin Chemerinsky",
+        "image": "https://covers.openlibrary.org/b/isbn/9780735549463-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/273035",
+        "rating": 4
+      },
+      {
+        "title": "Love Sense: The Revolutionary New Science of Romantic Relationships (Dr. Sue Johnson Collection #2)",
+        "author": "Sue Johnson",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316133760-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17899355",
+        "rating": 5
+      },
+      {
+        "title": "The Lord of the Rings (The Lord of the Rings, #1-3)",
+        "author": "J.R.R. Tolkien",
+        "image": "https://covers.openlibrary.org/b/isbn/9780618640157-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/33",
+        "rating": 3
+      },
+      {
+        "title": "The Giver (Giver, #1)",
+        "author": "Lois Lowry",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385732550-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/3636",
+        "rating": 5
+      },
+      {
+        "title": "Jesus the Christ: A Study of the Messiah and His Mission According to Holy Scriptures, Both Ancient and Modern",
+        "author": "James E. Talmage",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875793269-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/481749",
+        "rating": 5
+      },
+      {
+        "title": "The Fellowship of the Ring (The Lord of the Rings, #1)",
+        "author": "J.R.R. Tolkien",
+        "image": "https://covers.openlibrary.org/b/isbn/9780618346257-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/34",
+        "rating": 4
+      },
+      {
+        "title": "The Hobbit, or There and Back Again",
+        "author": "J.R.R. Tolkien",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/5907",
+        "rating": 4
+      },
+      {
+        "title": "The Eye of the World",
+        "author": "Robert Jordan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780812511819-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/228665",
+        "rating": 4
+      },
+      {
+        "title": "Hyperbole and a Half: Unfortunate Situations, Flawed Coping Mechanisms, Mayhem, and Other Things That Happened",
+        "author": "Allie Brosh",
+        "image": "https://covers.openlibrary.org/b/isbn/9781451666175-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17571564",
+        "rating": 4
+      },
+      {
+        "title": "1984",
+        "author": "George Orwell",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/5470",
+        "rating": 4
+      },
+      {
+        "title": "Jane Eyre",
+        "author": "Charlotte Brontë",
+        "image": "https://covers.openlibrary.org/b/isbn/9780142437209-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/10210",
+        "rating": 2
+      },
+      {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "image": "https://covers.openlibrary.org/b/isbn/9781441341709-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1885",
+        "rating": 2
+      },
+      {
+        "title": "The Princess Bride",
+        "author": "William Goldman",
+        "image": "https://covers.openlibrary.org/b/isbn/9780345418265-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/21787",
+        "rating": 4
+      },
+      {
+        "title": "Sense and Sensibility",
+        "author": "Jane Austen",
+        "image": "https://covers.openlibrary.org/b/isbn/9780141439662-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/14935",
+        "rating": 2
+      },
+      {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743273565-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/4671",
+        "rating": 1
+      },
+      {
+        "title": "Where the Sidewalk Ends",
+        "author": "Shel Silverstein",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060513030-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/30119",
+        "rating": 4
+      },
+      {
+        "title": "The Adventures of Huckleberry Finn (Adventures of Tom and Huck, #2)",
+        "author": "Mark Twain",
+        "image": "https://covers.openlibrary.org/b/isbn/9780142437179-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/2956",
+        "rating": 2
+      },
+      {
+        "title": "Little Women (Little Women, #1)",
+        "author": "Louisa May Alcott",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/1934",
+        "rating": 2
+      },
+      {
+        "title": "The Diary of a Young Girl",
+        "author": "Anne Frank",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/48855",
+        "rating": 0
+      },
+      {
+        "title": "Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",
+        "author": "J.K. Rowling",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439554930-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/3",
+        "rating": 3
+      },
+      {
+        "title": "PostSecret: Extraordinary Confessions from Ordinary Lives (PostSecret)",
+        "author": "Frank Warren",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060899196-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/87640",
+        "rating": 4
+      },
+      {
+        "title": "Hamlet",
+        "author": "William Shakespeare",
+        "image": "https://covers.openlibrary.org/b/isbn/9780521618748-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1420",
+        "rating": 4
+      },
+      {
+        "title": "The Count of Monte Cristo",
+        "author": "Alexandre Dumas",
+        "image": "https://covers.openlibrary.org/b/isbn/9780140449266-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7126",
+        "rating": 4
+      },
+      {
+        "title": "A Tale of Two Cities",
+        "author": "Charles Dickens",
+        "image": "https://covers.openlibrary.org/b/isbn/9780141439600-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1953",
+        "rating": 2
+      },
+      {
+        "title": "The Scarlet Letter",
+        "author": "Nathaniel Hawthorne",
+        "image": "https://covers.openlibrary.org/b/isbn/9780142437261-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/12296",
+        "rating": 2
+      },
+      {
+        "title": "Lord of the Flies",
+        "author": "William Golding",
+        "image": "https://covers.openlibrary.org/b/isbn/9780140283334-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7624",
+        "rating": 2
+      },
+      {
+        "title": "Romeo and Juliet",
+        "author": "William Shakespeare",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743477116-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/18135",
+        "rating": 1
+      },
+      {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316769174-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/5107",
+        "rating": 1
+      },
+      {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060935467-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/2657",
+        "rating": 3
+      },
+      {
+        "title": "The Way of Kings (The Stormlight Archive, #1)",
+        "author": "Brandon Sanderson",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/7235533",
+        "rating": 5
+      },
+      {
+        "title": "A Game of Thrones (A Song of Ice and Fire, #1)",
+        "author": "George R.R. Martin",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553588484-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/13496",
+        "rating": 5
+      },
+      {
+        "title": "Angels & Demons (Robert Langdon, #1)",
+        "author": "Dan    Brown",
+        "image": "https://covers.openlibrary.org/b/isbn/9781416524793-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/960",
+        "rating": 1
+      },
+      {
+        "title": "The Kite Runner",
+        "author": "Khaled Hosseini",
+        "image": "https://covers.openlibrary.org/b/isbn/9781594631931-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/77203",
+        "rating": 2
+      },
+      {
+        "title": "Wolverine: Origin",
+        "author": "Paul Jenkins",
+        "image": "https://covers.openlibrary.org/b/isbn/9780785123286-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/22469",
+        "rating": 5
+      },
+      {
+        "title": "300",
+        "author": "Frank Miller",
+        "image": "https://covers.openlibrary.org/b/isbn/9781569714027-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/59952",
+        "rating": 4
+      },
+      {
+        "title": "The Walking Dead, Vol. 1: Days Gone Bye",
+        "author": "Robert Kirkman",
+        "image": "https://covers.openlibrary.org/b/isbn/9781582406725-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/138398",
+        "rating": 4
+      },
+      {
+        "title": "Les Misérables",
+        "author": "Victor Hugo",
+        "image": "https://covers.openlibrary.org/b/isbn/9780451525260-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/24280",
+        "rating": 4
+      },
+      {
+        "title": "Stone of Tears (Sword of Truth, #2)",
+        "author": "Terry Goodkind",
+        "image": "https://covers.openlibrary.org/b/isbn/9780312857066-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/234184",
+        "rating": 3
+      },
+      {
+        "title": "The Dragon Reborn (The Wheel of Time, #3)",
+        "author": "Robert Jordan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780765305114-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/34897",
+        "rating": 4
+      },
+      {
+        "title": "The Shadow Rising (The Wheel of Time, #4)",
+        "author": "Robert Jordan",
+        "image": "https://covers.openlibrary.org/b/isbn/9780812513738-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/9539",
+        "rating": 3
+      },
+      {
+        "title": "The Lion, the Witch and the Wardrobe (Chronicles of Narnia, #1)",
+        "author": "C.S. Lewis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/100915",
+        "rating": 3
+      },
+      {
+        "title": "Mossflower (Redwall, #2)",
+        "author": "Brian Jacques",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/201341",
+        "rating": 5
+      },
+      {
+        "title": "The Hunger Games (The Hunger Games, #1)",
+        "author": "Suzanne Collins",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439023481-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/2767052",
+        "rating": 4
+      },
+      {
+        "title": "A Wrinkle in Time (Time Quintet, #1)",
+        "author": "Madeleine L'Engle",
+        "image": "https://covers.openlibrary.org/b/isbn/9780440498056-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/18131",
+        "rating": 4
+      },
+      {
+        "title": "Wizard's First Rule (Sword of Truth, #1)",
+        "author": "Terry Goodkind",
+        "image": "https://covers.openlibrary.org/b/isbn/9780765346520-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/43889",
+        "rating": 3
+      },
+      {
+        "title": "The Cricket in Times Square (Chester Cricket and His Friends, #1)",
+        "author": "George Selden",
+        "image": "https://covers.openlibrary.org/b/isbn/9780440228899-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/24384",
+        "rating": 3
+      },
+      {
+        "title": "Artemis Fowl (Artemis Fowl, #1)",
+        "author": "Eoin Colfer",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/249747",
+        "rating": 4
+      },
+      {
+        "title": "Ella Enchanted (Ella Enchanted, #1)",
+        "author": "Gail Carson Levine",
+        "image": "https://covers.openlibrary.org/b/isbn/9780590920681-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/24337",
+        "rating": 3
+      },
+      {
+        "title": "Pride of Baghdad",
+        "author": "Brian K. Vaughan",
+        "image": "https://covers.openlibrary.org/b/isbn/9781401203146-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/105703",
+        "rating": 4
+      },
+      {
+        "title": "Number the Stars",
+        "author": "Lois Lowry",
+        "image": "https://covers.openlibrary.org/b/isbn/9780440227533-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/47281",
+        "rating": 5
+      },
+      {
+        "title": "The Midwife's Apprentice",
+        "author": "Karen Cushman",
+        "image": "https://covers.openlibrary.org/b/isbn/9780064406307-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/15595",
+        "rating": 3
+      },
+      {
+        "title": "The Clan of the Cave Bear (Earth's Children, #1)",
+        "author": "Jean M. Auel",
+        "image": "https://covers.openlibrary.org/b/isbn/9780553381672-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1295",
+        "rating": 3
+      },
+      {
+        "title": "Guns, Germs, and Steel: The Fates of Human Societies",
+        "author": "Jared Diamond",
+        "image": "https://covers.openlibrary.org/b/isbn/9780739467350-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1842",
+        "rating": 4
+      },
+      {
+        "title": "1776",
+        "author": "David McCullough",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743226721-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1067",
+        "rating": 4
+      },
+      {
+        "title": "Night",
+        "author": "Elie Wiesel",
+        "image": "https://covers.openlibrary.org/b/isbn/9780374500016-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1617",
+        "rating": 4
+      },
+      {
+        "title": "Of Mice and Men",
+        "author": "John Steinbeck",
+        "image": "https://covers.openlibrary.org/b/isbn/9780142000670-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/890",
+        "rating": 1
+      },
+      {
+        "title": "A Child Called \"It\" (Dave Pelzer, #1)",
+        "author": "Dave Pelzer",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/60748",
+        "rating": 3
+      },
+      {
+        "title": "The Miracle of Forgiveness",
+        "author": "Spencer W. Kimball",
+        "image": "https://covers.openlibrary.org/b/isbn/9780884944447-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1055617",
+        "rating": 4
+      },
+      {
+        "title": "Preach My Gospel: A Guide To Missionary Service",
+        "author": "The Church of Jesus Christ of Latter-day Saints",
+        "image": "https://covers.openlibrary.org/b/isbn/9780402366171-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/2350129",
+        "rating": 5
+      },
+      {
+        "title": "Gospel Principles",
+        "author": "The Church of Jesus Christ of Latter-day Saints",
+        "image": "https://covers.openlibrary.org/b/isbn/0877477167-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/12051147",
+        "rating": 3
+      },
+      {
+        "title": "A Marvelous Work and a Wonder",
+        "author": "LeGrand Richards",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875793276-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/596290",
+        "rating": 4
+      },
+      {
+        "title": "Mormon Doctrine",
+        "author": "Bruce R. McConkie",
+        "image": "https://covers.openlibrary.org/b/isbn/9780884940623-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/336895",
+        "rating": 2
+      },
+      {
+        "title": "Pearl of Great Price",
+        "author": "Joseph Smith Jr.",
+        "image": "https://covers.openlibrary.org/b/isbn/9781599869667-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/747060",
+        "rating": 3
+      },
+      {
+        "title": "Articles of Faith (Missionary Reference Library)",
+        "author": "James E. Talmage",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875793252-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/452392",
+        "rating": 5
+      },
+      {
+        "title": "Our Search for Happiness: An Invitation to Understand the Church of Jesus Christ of Latter-day Saints",
+        "author": "M. Russell Ballard",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875799179-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/535384",
+        "rating": 5
+      },
+      {
+        "title": "The Book of Mormon: Another Testament of Jesus Christ",
+        "author": "Joseph Smith Jr.",
+        "image": "https://covers.openlibrary.org/b/isbn/9780967686561-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/323355",
+        "rating": 4
+      },
+      {
+        "title": "Infidel",
+        "author": "Ayaan Hirsi Ali",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743289689-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/81227",
+        "rating": 4
+      },
+      {
+        "title": "Ender’s Game (Ender's Saga, #1)",
+        "author": "Orson Scott Card",
+        "image": "https://covers.openlibrary.org/b/isbn/9780812550702-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/375802",
+        "rating": 5
+      },
+      {
+        "title": "The Time Machine",
+        "author": "H.G. Wells",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/2493",
+        "rating": 2
+      },
+      {
+        "title": "Jurassic Park (Jurassic Park, #1)",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780307348135-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7677",
+        "rating": 5
+      },
+      {
+        "title": "Walk Two Moons",
+        "author": "Sharon Creech",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060739492-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/53496",
+        "rating": 3
+      },
+      {
+        "title": "Roll of Thunder, Hear My Cry (Logans, #4)",
+        "author": "Mildred D. Taylor",
+        "image": "https://covers.openlibrary.org/b/isbn/9780140348934-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/310459",
+        "rating": 3
+      },
+      {
+        "title": "The Andromeda Strain (Andromeda, #1)",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780060541811-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7670",
+        "rating": 5
+      },
+      {
+        "title": "The Firm (Penguin Readers, Level 5)",
+        "author": "Robin Waterfield",
+        "image": "https://covers.openlibrary.org/b/isbn/9780582418271-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/5358",
+        "rating": 3
+      },
+      {
+        "title": "The Pelican Brief",
+        "author": "John Grisham",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385339704-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/32499",
+        "rating": 3
+      },
+      {
+        "title": "The Client",
+        "author": "John Grisham",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385339087-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/5359",
+        "rating": 3
+      },
+      {
+        "title": "The Runaway Jury",
+        "author": "John Grisham",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385339698-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/24192",
+        "rating": 3
+      },
+      {
+        "title": "The Partner",
+        "author": "John Grisham",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385339100-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/5350",
+        "rating": 3
+      },
+      {
+        "title": "Holes (Holes, #1)",
+        "author": "Louis Sachar",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439244190-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/38709",
+        "rating": 4
+      },
+      {
+        "title": "Stargirl (Stargirl, #1)",
+        "author": "Jerry Spinelli",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439488402-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/22232",
+        "rating": 4
+      },
+      {
+        "title": "Love, Stargirl (Stargirl, #2)",
+        "author": "Jerry Spinelli",
+        "image": "https://covers.openlibrary.org/b/isbn/9780375913754-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/846984",
+        "rating": 4
+      },
+      {
+        "title": "Jonathan Livingston Seagull",
+        "author": "Richard Bach",
+        "image": "https://covers.openlibrary.org/b/isbn/9780743278904-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/71728",
+        "rating": 5
+      },
+      {
+        "title": "Tuck Everlasting",
+        "author": "Natalie Babbitt",
+        "image": "https://covers.openlibrary.org/b/isbn/9780374480097-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/84981",
+        "rating": 3
+      },
+      {
+        "title": "Where the Red Fern Grows",
+        "author": "Wilson Rawls",
+        "image": "https://covers.openlibrary.org/b/isbn/9780375806810-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/10365",
+        "rating": 5
+      },
+      {
+        "title": "Mockingjay (The Hunger Games, #3)",
+        "author": "Suzanne Collins",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439023511-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7260188",
+        "rating": 4
+      },
+      {
+        "title": "Catching Fire (The Hunger Games, #2)",
+        "author": "Suzanne Collins",
+        "image": "https://covers.openlibrary.org/b/isbn/9780439023498-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/6148028",
+        "rating": 3
+      },
+      {
+        "title": "Rising Sun",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780606298230-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7668",
+        "rating": 4
+      },
+      {
+        "title": "Moon Over Manifest",
+        "author": "Clare Vanderpool",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385907507-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8293938",
+        "rating": 2
+      },
+      {
+        "title": "The Fountain",
+        "author": "Darren Aronofsky",
+        "image": "https://covers.openlibrary.org/b/isbn/9781401200589-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/391413",
+        "rating": 4
+      },
+      {
+        "title": "100 Things Every Homeowner Must Know: How to save money, solve problems, and improve your home.",
+        "author": "Editors of The Family Handyman",
+        "image": "https://covers.openlibrary.org/b/isbn/9781621452201-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/22609562",
+        "rating": 3
+      },
+      {
+        "title": "Jim Henson's The Dark Crystal: Creation Myths, Volume 3",
+        "author": "Brian Froud",
+        "image": "https://covers.openlibrary.org/b/isbn/9781608864355-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/23492336",
+        "rating": 2
+      },
+      {
+        "title": "Crusoe of Lonesome Lake",
+        "author": "Leland Stowe",
+        "image": "https://covers.openlibrary.org/b/isbn/9780394420929-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1656210",
+        "rating": 5
+      },
+      {
+        "title": "World War Z: An Oral History of the Zombie War",
+        "author": "Max Brooks",
+        "image": "https://covers.openlibrary.org/b/isbn/9780307346605-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8908",
+        "rating": 5
+      },
+      {
+        "title": "Free to Learn: Why Unleashing the Instinct to Play Will Make Our Children Happier, More Self-Reliant, and Better Students for Life",
+        "author": "Peter O. Gray",
+        "image": "https://covers.openlibrary.org/b/isbn/9780465025992-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/15843125",
+        "rating": 5
+      },
+      {
+        "title": "Oh Crap! Potty Training: Everything Modern Parents Need to Know to Do It Once and Do It Right",
+        "author": "Jamie Glowacki",
+        "image": "https://covers.openlibrary.org/b/isbn/9781501122989-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/25205433",
+        "rating": 4
+      },
+      {
+        "title": "How Toddlers Thrive: What Parents Can Do Today for Children Ages 2-5 to Plant the Seeds of Lifelong Success",
+        "author": "Tovah P. Klein",
+        "image": "https://covers.openlibrary.org/b/isbn/9781476735139-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/18143770",
+        "rating": 4
+      },
+      {
+        "title": "The Art of Non-Conformity: Set Your Own Rules, Live the Life You Want, and Change the World",
+        "author": "Chris Guillebeau",
+        "image": "https://covers.openlibrary.org/b/isbn/9781101443088-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/8978488",
+        "rating": 3
+      },
+      {
+        "title": "Hold Me Tight",
+        "author": "Sue Johnson",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316113007-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/2153780",
+        "rating": 4
+      },
+      {
+        "title": "Beowulf",
+        "author": "Unknown",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/16041066",
+        "rating": 3
+      },
+      {
+        "title": "The Holy Bible: King James Version",
+        "author": "Anonymous",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/1923820",
+        "rating": 4
+      },
+      {
+        "title": "Teachings of the Prophet Joseph Smith",
+        "author": "Joseph Smith Jr.",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875792439-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/574361",
+        "rating": 5
+      },
+      {
+        "title": "Freakonomics: A Rogue Economist Explores the Hidden Side of Everything",
+        "author": "Steven D. Levitt",
+        "image": "https://covers.openlibrary.org/b/isbn/9780061234002-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/1202",
+        "rating": 5
+      }
+    ],
+    "favorites": [
+      {
+        "title": "To Green Angel Tower (Memory, Sorrow, and Thorn, #3)",
+        "author": "Tad Williams",
+        "image": "https://covers.openlibrary.org/b/isbn/9780756402983-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/28691",
+        "rating": 5
+      },
+      {
+        "title": "The Terminal List (Terminal List, #1)",
+        "author": "Jack Carr",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/51812516",
+        "rating": 4
+      },
+      {
+        "title": "Can't Hurt Me: Master Your Mind and Defy the Odds",
+        "author": "David Goggins",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/43160250",
+        "rating": 5
+      },
+      {
+        "title": "The Keys of the Kingdom",
+        "author": "A.J. Cronin",
+        "image": "https://covers.openlibrary.org/b/isbn/9780795345487-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/41885536",
+        "rating": 4
+      },
+      {
+        "title": "Discipline Equals Freedom: Field Manual",
+        "author": "Jocko Willink",
+        "image": "https://covers.openlibrary.org/b/isbn/9781250156945-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/34452535",
+        "rating": 5
+      },
+      {
+        "title": "Dune (Dune Chronicles, #1)",
+        "author": "Frank Herbert",
+        "image": "https://covers.openlibrary.org/b/isbn/9781435140745-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17662622",
+        "rating": 5
+      },
+      {
+        "title": "Love Sense: The Revolutionary New Science of Romantic Relationships (Dr. Sue Johnson Collection #2)",
+        "author": "Sue Johnson",
+        "image": "https://covers.openlibrary.org/b/isbn/9780316133760-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/17899355",
+        "rating": 5
+      },
+      {
+        "title": "The Screwtape Letters",
+        "author": "C.S. Lewis",
+        "image": "",
+        "link": "https://www.goodreads.com/book/show/11149",
+        "rating": 5
+      },
+      {
+        "title": "The Lord of the Rings (The Lord of the Rings, #1-3)",
+        "author": "J.R.R. Tolkien",
+        "image": "https://covers.openlibrary.org/b/isbn/9780618640157-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/33",
+        "rating": 3
+      },
+      {
+        "title": "Timeline",
+        "author": "Michael Crichton",
+        "image": "https://covers.openlibrary.org/b/isbn/9780099244721-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/7669",
+        "rating": 5
+      },
+      {
+        "title": "The Giver (Giver, #1)",
+        "author": "Lois Lowry",
+        "image": "https://covers.openlibrary.org/b/isbn/9780385732550-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/3636",
+        "rating": 5
+      },
+      {
+        "title": "Jesus the Christ: A Study of the Messiah and His Mission According to Holy Scriptures, Both Ancient and Modern",
+        "author": "James E. Talmage",
+        "image": "https://covers.openlibrary.org/b/isbn/9780875793269-M.jpg?default=false",
+        "link": "https://www.goodreads.com/book/show/481749",
+        "rating": 5
+      }
+    ]
+  }
+}

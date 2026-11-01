@@ -1,5 +1,6 @@
 import csv
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -143,6 +144,28 @@ class ConvertTests(unittest.TestCase):
         self.assertNotIn("My Review", encoded)
         self.assertNotIn("Private Notes", encoded)
 
+    def test_decimal_rating_is_a_whole_star(self):
+        payload = conv.convert_rows([
+            row(**{
+                "Book Id": "9",
+                "Title": "Decimal",
+                "Author": "Ann",
+                "My Rating": "4.0",
+                "Date Read": "2024/01/01",
+                "Exclusive Shelf": "read",
+            }),
+            row(**{
+                "Book Id": "10",
+                "Title": "Unrated",
+                "Author": "Bea",
+                "My Rating": "0",
+                "Exclusive Shelf": "currently-reading",
+            }),
+        ], "2026-11-01")
+        self.assertEqual(payload["shelves"]["read"][0]["rating"], 4)
+        self.assertIsInstance(payload["shelves"]["read"][0]["rating"], int)
+        self.assertEqual(payload["shelves"]["currently-reading"][0]["rating"], 0)
+
     def test_cli_round_trip_strips_excel_isbn_and_rejects_a_short_header(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
@@ -181,6 +204,34 @@ class ConvertTests(unittest.TestCase):
             short.write_text("Title,Author\nHi,Jo\n", encoding="utf-8")
             with self.assertRaises(SystemExit):
                 conv.load_csv(short)
+
+    def test_published_books_json_shape(self):
+        path = Path(__file__).resolve().parents[1] / "passion" / "books.json"
+        raw = path.read_text(encoding="utf-8")
+        payload = json.loads(raw)
+        self.assertEqual(set(payload), {"generated", "shelves"})
+        self.assertRegex(payload["generated"], r"^\d{4}-\d{2}-\d{2}$")
+        shelves = payload["shelves"]
+        self.assertEqual(list(shelves), ["currently-reading", "read", "favorites"])
+        self.assertEqual(len(shelves["currently-reading"]), 4)
+        self.assertEqual(len(shelves["read"]), 233)
+        self.assertEqual(len(shelves["favorites"]), 12)
+        for needle in ("My Review", "Private Notes", "Bookshelves", "Date Read", "Exclusive Shelf", "Date Added"):
+            self.assertNotIn(needle, raw)
+        for books in shelves.values():
+            for book in books:
+                self.assertEqual(list(book), ["title", "author", "image", "link", "rating"])
+                self.assertIsInstance(book["rating"], int)
+                self.assertGreaterEqual(book["rating"], 0)
+                self.assertLessEqual(book["rating"], 5)
+                self.assertRegex(book["link"], r"^https://www\.goodreads\.com/book/show/[0-9]+$")
+                self.assertTrue(
+                    book["image"] == ""
+                    or re.fullmatch(
+                        r"https://covers\.openlibrary\.org/b/isbn/[0-9X]{10,13}-M\.jpg\?default=false",
+                        book["image"],
+                    )
+                )
 
 
 if __name__ == "__main__":

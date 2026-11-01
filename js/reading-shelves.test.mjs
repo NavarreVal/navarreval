@@ -95,21 +95,36 @@ function createElement(tag) {
       set(value) { node.attrs[name] = String(value); },
     });
   }
+  function adopt(kid) {
+    if (kid && typeof kid === "object") kid.parent = node;
+  }
   node.append = (...kids) => {
     node._text = null;
-    node.children.push(...kids);
+    kids.forEach(kid => {
+      adopt(kid);
+      node.children.push(kid);
+    });
   };
   node.replaceChildren = (...kids) => {
     node._text = null;
-    node.children = [...kids];
+    node.children = [];
+    kids.forEach(kid => {
+      adopt(kid);
+      node.children.push(kid);
+    });
   };
   node.appendChild = (kid) => {
     node._text = null;
+    adopt(kid);
     node.children.push(kid);
     return kid;
   };
   node.remove = () => {
     node.removed = true;
+    const parent = node.parent;
+    if (!parent) return;
+    const index = parent.children.indexOf(node);
+    if (index !== -1) parent.children.splice(index, 1);
   };
   return node;
 }
@@ -259,10 +274,16 @@ test("a present JSON shelf renders up to data-count and skips the worker", async
     assert.equal(shelf.grid.children.length, 2);
     assert.equal(shelf.grid.children[0].children[1].textContent, "First");
     assert.equal(shelf.grid.children[0].children[2].textContent, "Ada · ★★★★★");
+    const cover = shelf.grid.children[0].children[0];
     assert.equal(
-      shelf.grid.children[0].children[0].attrs.src,
+      cover.attrs.src,
       "https://covers.openlibrary.org/b/isbn/9780451524935-M.jpg?default=false"
     );
+    assert.equal(typeof cover.onerror, "function");
+    cover.onerror();
+    assert.equal(shelf.grid.children[0].children.some(child => child.tag === "img"), false);
+    assert.equal(shelf.grid.children[0].children[0].textContent, "First");
+    assert.equal(shelf.grid.children[0].children[1].textContent, "Ada · ★★★★★");
     assert.equal(shelf.grid.children[1].attrs.href, undefined);
     assert.equal(shelf.grid.children[1].children[0].textContent, "Second");
     assert.equal(shelf.grid.children[1].children[1].textContent, "Bea");
@@ -362,7 +383,7 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.equal(source.includes("innerHTML"), false);
   assert.equal(html.includes("/review/list/"), false);
   assert.equal(source.includes("/review/list/"), false);
-  assert.match(html, /\/js\/reading-shelves\.js\?v=1/);
+  assert.match(html, /\/js\/reading-shelves\.js\?v=2/);
   const csp = headers.split("\n").find(line => line.includes("Content-Security-Policy-Report-Only"));
   assert.match(csp, /img-src[^;]*https:\/\/covers\.openlibrary\.org/);
 });

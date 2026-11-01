@@ -66,12 +66,13 @@ def rating_value(value: str) -> int:
     if not text:
         return 0
     try:
-        number = int(text)
+        number = float(text)
     except ValueError:
         return 0
     if number < 0:
         return 0
-    return number
+    # Goodreads writes whole stars as "4" or "4.0". 0 means unrated.
+    return int(number)
 
 
 def parse_read_date(value: str):
