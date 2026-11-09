@@ -1,3 +1,16 @@
+const STEAM_ART = "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/";
+
+export function steamArt(appid) {
+  const base = STEAM_ART + appid + "/";
+  return {
+    img: base + "header.jpg",
+    img_fallbacks: [
+      base + "capsule_231x87.jpg",
+      base + "capsule_184x69.jpg"
+    ]
+  };
+}
+
 export default {
   async fetch(request, env) {
     const cors = {
@@ -67,18 +80,19 @@ export default {
           .slice(0, count);
       }
 
-      const out = games.map((g) => ({
-        appid: g.appid,
-        name: g.name || `App ${g.appid}`,
-        playtime_forever: g.playtime_forever || 0,
-        playtime_2weeks: g.playtime_2weeks || 0,
-        img:
-          "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/" +
-          g.appid +
-          "/capsule_231x87.jpg",
-        store: "https://store.steampowered.com/app/" + g.appid + "/",
-        community: "https://steamcommunity.com/app/" + g.appid
-      }));
+      const out = games.map((g) => {
+        const art = steamArt(g.appid);
+        return {
+          appid: g.appid,
+          name: g.name || `App ${g.appid}`,
+          playtime_forever: g.playtime_forever || 0,
+          playtime_2weeks: g.playtime_2weeks || 0,
+          img: art.img,
+          img_fallbacks: art.img_fallbacks,
+          store: "https://store.steampowered.com/app/" + g.appid + "/",
+          community: "https://steamcommunity.com/app/" + g.appid
+        };
+      });
 
       return new Response(JSON.stringify({ shelf, count: out.length, games: out }), {
         headers: {

@@ -37,3 +37,13 @@ jobs:
         run: node --test js/reading-shelves.test.mjs
       - name: Goodreads CSV converter
         run: python3 -m unittest tools/test_goodreads_csv_to_json.py
+
+  steam-shelves:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Steam shelf art mapping
+        run: node --test workers/steam-shelves/worker.test.mjs
