@@ -73,6 +73,17 @@ export function locationOnOrigin(origin, pathname, search) {
 // "/passion/reading"), including for a path that starts with //. A preview
 // host returns 404 for //example.com and 308 to /passion/reading for
 // //passion/reading.html, so that normalization does not leave the host.
+// Old legal URLs. The fragment is part of the Location the browser follows.
+// A hash in Pages _redirects is a comment, so this stays in the middleware.
+export function legalFragmentRedirect(pathname) {
+  var path = collapseLeadingSlashes(pathname || "/");
+  if (path.length > 1) path = path.replace(/\/+$/, "");
+  path = path.replace(/\.html$/i, "");
+  if (path === "/privacy") return "/legal/#privacy";
+  if (path === "/copyright") return "/legal/#copyright";
+  return null;
+}
+
 export function canonicalRedirectTarget(requestUrl) {
   var url = new URL(requestUrl);
   var host = url.hostname.toLowerCase();
@@ -94,6 +105,16 @@ export async function onRequest(context) {
   if (host !== DND_HOST) {
     // After the alias-host 301, and before the asset lookup. The dnd host
     // keeps its own rewrite below.
+    var legal = legalFragmentRedirect(url.pathname);
+    if (legal) {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          Location: legal,
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
     if (RETIRED_PHOTO_PATHS.has(url.pathname)) {
       return new Response("Gone", {
         status: 410,
