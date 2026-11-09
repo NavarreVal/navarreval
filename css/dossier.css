@@ -1613,7 +1613,7 @@ body.dossier-tabbed #personal .personal-dossier .faith-line {
   margin: 0 0 0.75rem;
 }
 
-body.dossier-tabbed #personal .personal-dossier .faith-line:last-child {
+body.dossier-tabbed #personal .personal-dossier .faith-line + .faith-line {
   margin-bottom: 0;
 }
 
