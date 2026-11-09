@@ -456,7 +456,7 @@ test("the page and the CSP stay on text nodes and allow Open Library covers", ()
   assert.equal(source.includes("innerHTML"), false);
   assert.equal(html.includes("/review/list/"), false);
   assert.equal(source.includes("/review/list/"), false);
-  assert.match(html, /\/js\/reading-shelves\.js\?v=5/);
+  assert.match(html, /\/js\/reading-shelves\.js\?v=6/);
   assert.match(html, /\.book-cover-frame/);
   assert.match(html, /These shelves come from an export of my/);
   assert.match(html, /updated from time to time/);
