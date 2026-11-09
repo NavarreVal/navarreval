@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   canonicalRedirectTarget,
   collapseLeadingSlashes,
+  legalFragmentRedirect,
   locationOnOrigin,
   onRequest,
 } from "./_middleware.js";
@@ -207,4 +208,26 @@ test("the dnd host still rewrites instead of answering 410", async () => {
     "https://dnd.navarreval.com/dnd/images/photography/elleVector.jpg?x=1"
   );
   assert.equal(await res.text(), "campaign");
+});
+
+test("privacy and copyright 301 to the legal anchors", async () => {
+  const cases = [
+    ["https://navarreval.com/privacy", "/legal/#privacy"],
+    ["https://navarreval.com/privacy/", "/legal/#privacy"],
+    ["https://navarreval.com/privacy.html", "/legal/#privacy"],
+    ["https://abc123.navarreval.pages.dev/copyright", "/legal/#copyright"],
+    ["https://abc123.navarreval.pages.dev/copyright/", "/legal/#copyright"],
+    ["https://abc123.navarreval.pages.dev/copyright.html", "/legal/#copyright"],
+  ];
+  for (const [requestUrl, location] of cases) {
+    assert.equal(legalFragmentRedirect(new URL(requestUrl).pathname), location);
+    const res = await onRequest({
+      request: new Request(requestUrl),
+      next() {
+        throw new Error("next should not run");
+      },
+    });
+    assert.equal(res.status, 301);
+    assert.equal(res.headers.get("Location"), location);
+  }
 });

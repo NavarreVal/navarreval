@@ -37,8 +37,7 @@ const SECTIONS = {
   "/passion/music": "Music",
   "/passion/shooting": "Shooting",
   "/passion/video-games": "Video Games",
-  "/privacy": "Privacy",
-  "/copyright": "Copyright",
+  "/legal": "Legal",
   "/bucket-list": "Bucket List"
 };
 

@@ -58,15 +58,12 @@
     "/passion/video-games": {
       "lead": "games game gaming video games steam play playing controller pc console"
     },
-    "/privacy": {
-      "lead": "privacy policy data"
-    },
-    "/copyright": {
-      "lead": "copyright license notice"
-    },
     "/bucket-list": {
       "lead": "bucket list travel destinations trip pilgrimage cathedral basilica camino norway",
       "keywords": "bucket list travel cathedral basilica camino santiago compostela norway stavanger hafrsfjord"
+    },
+    "/legal": {
+      "lead": "legal terms privacy policy copyright license notice data"
     }
   }
 }

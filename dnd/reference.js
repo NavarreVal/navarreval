@@ -9,7 +9,7 @@
   function openPortrait(button) {
     var name = button.getAttribute("data-title");
     image.src = button.getAttribute("data-full");
-    image.alt = name;
+    image.alt = "Character portrait";
     title.textContent = name;
     lastTrigger = button;
     lightbox.hidden = false;

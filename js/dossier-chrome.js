@@ -43,7 +43,7 @@
       '<div class="dossier-mast">' +
         '<div class="mast-brand">' +
           '<a class="dossier-mark" href="/" aria-label="Navarre Valdivieso, home">' +
-            '<img src="/assets/signature.png?v=2" alt="">' +
+            '<img src="/assets/signature.png?v=2" alt="" role="presentation">' +
           "</a>" +
           '<div class="mast-title">' +
             '<p class="mast-system">NavarreVal Personal Record</p>' +
