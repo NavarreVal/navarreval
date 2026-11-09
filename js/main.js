@@ -590,7 +590,7 @@ window.addEventListener('popstate', () => {
       <p class="desc">${event.desc}</p>
       ${event.images && event.images.length ? `
         <div class="tooltip-gallery" data-images='${JSON.stringify(event.images)}'>
-          <picture><source type="image/webp" srcset="${shownSrc(event.images[0]) === event.images[0] ? "" : webpSrc(shownSrc(event.images[0]))}"><img src="${shownSrc(event.images[0])}" alt="" class="gallery-image" data-index="0"></picture>
+          <picture><source type="image/webp" srcset="${shownSrc(event.images[0]) === event.images[0] ? "" : webpSrc(shownSrc(event.images[0]))}"><img src="${shownSrc(event.images[0])}" alt="${String(event.title || event.label || "Timeline photo").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;")}" class="gallery-image" data-index="0"></picture>
           ${event.images.length > 1 ? `
             <button class="gallery-prev">‹</button>
             <button class="gallery-next">›</button>
@@ -879,6 +879,8 @@ window.addEventListener('popstate', () => {
           lightboxImages = heroPhotos.slice();
           lightboxIndex = Math.max(0, lightboxImages.indexOf(src));
           lightboxImg.src = lightboxImages[lightboxIndex];
+          const thumb = frame.querySelector("img");
+          lightboxImg.alt = thumb && thumb.alt ? thumb.alt : "";
           lightbox.classList.add('active');
         });
       });
@@ -907,6 +909,7 @@ window.addEventListener('popstate', () => {
           }
 
           lightboxImg.src = lightboxImages[lightboxIndex];
+          lightboxImg.alt = e.target.getAttribute("alt") || "";
           lightbox.classList.add('active');
         }
 
@@ -914,6 +917,7 @@ window.addEventListener('popstate', () => {
         if (e.target === lightbox) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImg.alt = '';
           lightboxImages = [];
         }
       });
@@ -923,6 +927,7 @@ window.addEventListener('popstate', () => {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImg.alt = '';
           lightboxImages = [];
         }
       });
@@ -946,6 +951,7 @@ window.addEventListener('popstate', () => {
         if (diffY > 80 && Math.abs(diffX) < 60) {
           lightbox.classList.remove('active');
           lightboxImg.src = '';
+          lightboxImg.alt = '';
           lightboxImages = [];
           return;
         }
@@ -960,6 +966,9 @@ window.addEventListener('popstate', () => {
             lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
           }
           lightboxImg.src = lightboxImages[lightboxIndex];
+          const frame = heroFrames.find((item) => new URL(item.getAttribute("data-full"), location.href).href === lightboxImages[lightboxIndex]);
+          const thumb = frame && frame.querySelector("img");
+          lightboxImg.alt = thumb && thumb.alt ? thumb.alt : "";
         }
       }, { passive: true });
     }

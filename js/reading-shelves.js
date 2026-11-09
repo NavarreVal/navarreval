@@ -250,6 +250,7 @@ export function renderBooks(grid, books) {
     if (image) {
       const img = el("img");
       img.alt = text.title || text.author ? "" : "Book";
+      if (!img.alt) img.setAttribute("role", "presentation");
       img.onerror = function () {
         dropFailedCover(img, grid);
       };
