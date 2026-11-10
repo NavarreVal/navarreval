@@ -411,6 +411,30 @@
         licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/",
         sourceUrl: "https://commons.wikimedia.org/wiki/File:Carthage_Jail_from_southwest.jpg"
       }
+    },
+    {
+      name: "Go on an elk hunt",
+      city: "",
+      category: "Hunt",
+      status: "Not yet",
+      dateDone: "",
+      notes: "",
+      tagline: "Not a building. A hunt for elk.",
+      facts: [],
+      image: {},
+      credit: {}
+    },
+    {
+      name: "Go on an archery hunt",
+      city: "",
+      category: "Hunt",
+      status: "Not yet",
+      dateDone: "",
+      notes: "",
+      tagline: "Not a rifle season. A hunt with a bow.",
+      facts: [],
+      image: {},
+      credit: {}
     }
   ];
 
