@@ -435,6 +435,18 @@
       facts: [],
       image: {},
       credit: {}
+    },
+    {
+      name: "Eat a baked Alaska",
+      city: "",
+      category: "Food",
+      status: "Not yet",
+      dateDone: "",
+      notes: "",
+      tagline: "Cake and ice cream under a torched meringue. Hot outside, cold inside.",
+      facts: [],
+      image: {},
+      credit: {}
     }
   ];
 
